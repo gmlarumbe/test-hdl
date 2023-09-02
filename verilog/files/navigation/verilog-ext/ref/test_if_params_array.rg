@@ -1,0 +1,1 @@
+("[0m[35m./instances.sv[0m:[0m[32m81[0m:    [0m[1m[31mtest_if_params_array[0m # (.param1(param1), .param2(param2)) ITEST_IF_PARAMS_ARRAY[5:0] (.clk(clk), .rst_n(rst_n));" "" "1 matches" "1 matched lines" "1 files contained matches" "17 files searched" "135 bytes printed")

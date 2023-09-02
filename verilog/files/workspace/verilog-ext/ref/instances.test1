@@ -1,0 +1,17 @@
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/block0.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/block1.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/block2.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/block3.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/block_gen.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/block_ws_0.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/block_ws_1.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/test_if.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/test_if_params.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/test_if_params_array.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/subblocks/test_if_params_empty.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/axi_demux.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/axi_test.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/instances.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/tb_program.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/ucontroller.sv
+/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/uvm_component.svh
