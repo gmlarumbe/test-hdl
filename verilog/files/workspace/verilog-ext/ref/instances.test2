@@ -1,6 +1,6 @@
-/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/axi_demux.sv
-/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/axi_test.sv
-/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/instances.sv
-/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/tb_program.sv
-/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/ucontroller.sv
-/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/uvm_component.svh
+verilog/files/common/axi_demux.sv
+verilog/files/common/axi_test.sv
+verilog/files/common/instances.sv
+verilog/files/common/tb_program.sv
+verilog/files/common/ucontroller.sv
+verilog/files/common/uvm_component.svh

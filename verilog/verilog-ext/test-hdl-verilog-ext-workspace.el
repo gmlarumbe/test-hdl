@@ -37,7 +37,10 @@
          (verilog-ext-workspace-ignore-dirs ignore-dirs)
          (verilog-ext-workspace-ignore-files ignore-files)
          (file-list (verilog-ext-workspace-files)))
-    (mapconcat #'identity file-list "\n")))
+    (mapconcat (lambda (file)
+                 (file-relative-name file test-hdl-test-dir))
+               file-list
+               "\n")))
 
 (defun test-hdl-verilog-ext-workspace-gen-expected-files ()
   "INFO: Result should be the same independently of the chosen file."
