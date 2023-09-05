@@ -162,10 +162,22 @@ Remove TEST-FILE if CLEAN is non-nil."
           (delete-file test-file))
         t)
     ;; Dump on error if enabled
-    (let ((cmd (concat "diff " ref-file " " test-file " > " (concat (file-name-sans-extension test-file)) ".diff")))
+    (let ((cmd (concat "diff " ref-file " " test-file " > " (file-name-sans-extension test-file) ".diff")))
       (when test-hdl-dump-diff-on-error
         (shell-command cmd))
       nil)))
+
+(defun test-hdl-files-equal-explainer (test-file ref-file &optional _clean)
+  (let ((test-file-list (with-temp-buffer
+                          (insert-file-contents test-file)
+                          (split-string (buffer-substring-no-properties (point-min) (point-max)) "\n")))
+        (ref-file-list (with-temp-buffer
+                         (insert-file-contents ref-file)
+                         (split-string (buffer-substring-no-properties (point-min) (point-max)) "\n"))))
+    `(,(seq-difference test-file-list ref-file-list)
+      ,(seq-difference ref-file-list test-file-list))))
+
+(put 'test-hdl-files-equal 'ert-explainer 'test-hdl-files-equal-explainer)
 
 
 ;;;; Helper test functions
