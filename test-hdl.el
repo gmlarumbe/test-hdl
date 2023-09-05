@@ -34,7 +34,8 @@
 
 ;; Allow loading of packages in Emacs interactive session
 (unless noninteractive
-  (dolist (dir `(,(file-name-concat test-hdl-test-dir "verilog")
+  (dolist (dir `(,test-hdl-test-dir
+                 ,(file-name-concat test-hdl-test-dir "verilog")
                  ,(file-name-concat test-hdl-test-dir "verilog/verilog-ext")
                  ,(file-name-concat test-hdl-test-dir "verilog/verilog-ts-mode")))
     (unless (member dir load-path)
