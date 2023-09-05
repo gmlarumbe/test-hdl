@@ -29,7 +29,8 @@
 (require 'faceup)
 
 (defun test-hdl-faceup-test-file (mode)
-  (funcall mode)
+  (test-hdl-no-messages
+    (funcall mode))
   ;; It is needed to explicitly fontify for batch-mode updates, since by
   ;; default batch mode does not enable font-lock.  Initially tried with
   ;; `font-lock-ensure' but gave different results for tree-sitter.  Plus,

@@ -1,4 +1,4 @@
-;;; test-hdl-navigation.el --- Verilog/VHDL Elisp Test Navigation Utils -*- lexical-binding: t -*-
+;;; test-hdl-vhdl-imenu.el --- VHDL ERT Imenu  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 
@@ -20,29 +20,17 @@
 
 ;;; Commentary:
 ;;
-;; Verilog/VHDL Elisp Test Navigation Utils
+;; VHDL ERT Imenu
 ;;
 ;;; Code:
 
 
-(cl-defun test-hdl-navigation-nav-file-fn (&key mode fn start-pos-max while-hook)
-  (test-hdl-no-messages
-    (funcall mode))
-  (let (var)
-    (save-excursion
-      (goto-char (if start-pos-max
-                     (point-max)
-                   (point-min)))
-      (while (funcall fn)
-        (push (point) var)
-        (when while-hook
-          (funcall while-hook))))
-    (reverse var)))
+(require 'test-hdl-vhdl-common)
 
 
-(provide 'test-hdl-navigation)
-
-;;; test-hdl-navigation.el ends here
+(defconst test-hdl-vhdl-imenu-file-list (test-hdl-directory-files test-hdl-vhdl-common-dir vhdl-ext-file-extension-re))
 
 
+(provide 'test-hdl-vhdl-imenu)
 
+;;; test-hdl-vhdl-imenu.el ends here

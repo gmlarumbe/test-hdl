@@ -1,0 +1,1 @@
+("[0m[35m./instances.vhd[0m:[0m[32m47[0m:[0m[1m[31m    I_BLOCK0_0 : block0[0m" "[0m[35m./instances.vhd[0m:[0m[32m54[0m:[0m[1m[31m    I_BLOCK0_1 : block0[0m" "[0m[35m./instances.vhd[0m:[0m[32m60[0m:[0m[1m[31m    I_BLOCK0_2 : block0[0m generic map (" "" "3 matches" "3 matched lines" "1 files contained matches" "11 files searched" "143 bytes printed")

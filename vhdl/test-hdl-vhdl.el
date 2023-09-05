@@ -1,4 +1,4 @@
-;;; test-hdl-navigation.el --- Verilog/VHDL Elisp Test Navigation Utils -*- lexical-binding: t -*-
+;;; test-hdl-vhdl.el --- VHDL ERT -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 
@@ -20,29 +20,21 @@
 
 ;;; Commentary:
 ;;
-;; Verilog/VHDL Elisp Test Navigation Utils
+;; VHDL ERT
 ;;
 ;;; Code:
 
 
-(cl-defun test-hdl-navigation-nav-file-fn (&key mode fn start-pos-max while-hook)
-  (test-hdl-no-messages
-    (funcall mode))
-  (let (var)
-    (save-excursion
-      (goto-char (if start-pos-max
-                     (point-max)
-                   (point-min)))
-      (while (funcall fn)
-        (push (point) var)
-        (when while-hook
-          (funcall while-hook))))
-    (reverse var)))
+;;;; Test utils
+(require 'test-hdl-vhdl-common)
+(require 'test-hdl-vhdl-faceup)
+(require 'test-hdl-vhdl-imenu)
+(require 'test-hdl-vhdl-beautify)
+(require 'test-hdl-vhdl-indent)
+(require 'test-hdl-vhdl-navigation)
+(require 'test-hdl-vhdl-utils)
 
 
-(provide 'test-hdl-navigation)
+(provide 'test-hdl-vhdl)
 
-;;; test-hdl-navigation.el ends here
-
-
-
+;;; test-hdl-vhdl.el ends here

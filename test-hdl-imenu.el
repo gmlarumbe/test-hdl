@@ -27,7 +27,8 @@
 
 (defun test-hdl-imenu-test-file (mode)
   "Test Imenu index for current buffer with major-mode MODE."
-  (funcall mode)
+  (test-hdl-no-messages
+    (funcall mode))
   (funcall imenu-create-index-function))
 
 

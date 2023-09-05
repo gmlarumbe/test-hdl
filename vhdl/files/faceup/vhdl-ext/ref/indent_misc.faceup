@@ -1,0 +1,61 @@
+«m:--------------------------------------------------------------------------------»«x:
+»«m:-- »«x:File header:
+»«m:--------------------------------------------------------------------------------»«x:
+»
+«m:-- »«x:1) Testing comments at unit space:
+»«k:library» «b:ieee»«:vhdl-ext-font-lock-punctuation-face:,» «b:work»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:use» «b:ieee»«:vhdl-ext-font-lock-operator-face:.»«b:std_logic_1164»«:vhdl-ext-font-lock-operator-face:.»«k:all»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:use ieee.std_logic_1164.all;
+»«m:-- »«x:use ieee.std_logic_1164.all;
+»
+«k:entity» «f:foo» «k:is»
+«k:end» «k:entity» «f:foo»«:vhdl-ext-font-lock-punctuation-face:;»
+
+
+
+«m:-- »«x:2) Testing case statements
+»«k:architecture» «f:indent» «k:of» «f:indent_test» «k:is»
+
+«k:begin»
+
+«k:process» «:vhdl-ext-font-lock-parenthesis-face:(»«k:all»«:vhdl-ext-font-lock-parenthesis-face:)»
+«k:begin»
+«k:case» var «k:is»
+«k:when» A «:vhdl-ext-font-lock-punctuation-face:=>»
+«k:out» «:vhdl-ext-font-lock-punctuation-face:<=» «k:in»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:when» B «:vhdl-ext-font-lock-punctuation-face:=>»
+«k:out» «:vhdl-ext-font-lock-punctuation-face:<=» «k:in»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:when» C «:vhdl-ext-font-lock-punctuation-face:=>»
+«k:out» «:vhdl-ext-font-lock-punctuation-face:<=» «k:in»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:when» «k:others» «:vhdl-ext-font-lock-punctuation-face:=>»
+«k:out» «:vhdl-ext-font-lock-punctuation-face:<=» «k:in»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:case»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:process»«:vhdl-ext-font-lock-punctuation-face:;»
+
+«k:end» «k:architecture» «f:indent»«:vhdl-ext-font-lock-punctuation-face:;»
+
+
+«m:-- »«x:3) Constant array initialization
+»«k:package» «k:body» «f:foo» «k:is»
+«k:constant» ARRAY_CONSTANT «:vhdl-ext-font-lock-punctuation-face::» array_type «:vhdl-ext-font-lock-punctuation-face::=»
+«:vhdl-ext-font-lock-parenthesis-face:(»
+VALUE_0«:vhdl-ext-font-lock-punctuation-face:,»
+VALUE_1«:vhdl-ext-font-lock-punctuation-face:,»
+VALUE_2«:vhdl-ext-font-lock-punctuation-face:,»
+VALUE_3«:vhdl-ext-font-lock-punctuation-face:,»
+VALUE_4
+«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:package» «k:body» «f:foo»«:vhdl-ext-font-lock-punctuation-face:;»
+
+
+«m:-- »«x:4) Multiline procedural expression
+»«k:package» «k:body» «f:foo» «k:is»
+«k:procedure» «f:test_multiline_expression» «k:is»
+«k:begin»  «m:-- »«x:procedure test_multiline_expression
+»signal_out «:vhdl-ext-font-lock-punctuation-face:<=» signal_in1 «k:and»
+signal_in2 «k:and»
+signal_in3 «k:and»
+signal_in4«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:procedure» «f:test_multiline_expression»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:package» «k:body» «f:foo»«:vhdl-ext-font-lock-punctuation-face:;»
+

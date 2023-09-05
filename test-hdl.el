@@ -37,7 +37,10 @@
   (dolist (dir `(,test-hdl-test-dir
                  ,(file-name-concat test-hdl-test-dir "verilog")
                  ,(file-name-concat test-hdl-test-dir "verilog/verilog-ext")
-                 ,(file-name-concat test-hdl-test-dir "verilog/verilog-ts-mode")))
+                 ,(file-name-concat test-hdl-test-dir "verilog/verilog-ts-mode")
+                 ,(file-name-concat test-hdl-test-dir "vhdl")
+                 ,(file-name-concat test-hdl-test-dir "vhdl/vhdl-ext")
+                 ,(file-name-concat test-hdl-test-dir "vhdl/vhdl-ts-mode")))
     (unless (member dir load-path)
       (add-to-list 'load-path dir))))
 

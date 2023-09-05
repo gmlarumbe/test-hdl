@@ -96,7 +96,8 @@ Byte-compile otherwise."
            (pp ret-val (current-buffer)))))
       ;; Insert the evaluated value of FN into DUMP-FILE without temp buffers (ff = find-file)
       ('eval-ff
-       (find-file file)
+       (test-hdl-no-messages
+         (find-file file))
        (setq ret-val (apply fn args))
        (with-temp-file out-file
          (if (stringp ret-val)
@@ -190,7 +191,8 @@ Remove TEST-FILE if CLEAN is non-nil."
 ;;;; Helper test functions
 (cl-defun test-hdl-pos-list-fn (&key mode fn pos-list)
   (let (fn-ret-value ret-alist)
-    (funcall mode)
+    (test-hdl-no-messages
+      (funcall mode))
     (dolist (pos pos-list)
       (goto-char pos)
       (setq fn-ret-value (funcall fn))
@@ -199,7 +201,8 @@ Remove TEST-FILE if CLEAN is non-nil."
 
 (cl-defun test-hdl-pos-and-match-alist-fn (&key mode fn pos-and-match-alist)
   (let (fn-ret-value ret-alist)
-    (funcall mode)
+    (test-hdl-no-messages
+      (funcall mode))
     (dolist (pos-and-match pos-and-match-alist)
       (let ((pos (car pos-and-match))
             (match (cdr pos-and-match)))
