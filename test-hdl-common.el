@@ -68,16 +68,18 @@
   "Compile DIR.
 Native compile if native compilation is available.
 Byte-compile otherwise."
-  (let ((file-ext "\\.el\\'"))
-    (if (native-comp-available-p)
-        (dolist (file (if recursive
-                          (directory-files-recursively dir file-ext)
-                        (test-hdl-directory-files dir file-ext)))
-          (message "Native compiling %s" file)
-          (native-compile file))
-      ;; Nix Emacs images might still lack native compilation support, so byte-compile them
-      (message "Byte-compiling %s" dir)
-      (byte-recompile-directory dir 0))))
+  (let* ((file-ext "\\.el\\'")
+         (file-list (if recursive
+                        (directory-files-recursively dir file-ext)
+                      (test-hdl-directory-files dir file-ext))))
+    (dolist (file file-list)
+      (if (native-comp-available-p)
+          (progn
+            (message "Native compiling %s" file)
+            (native-compile file))
+        ;; Nix Emacs images might still lack native compilation support, so byte-compile them
+        (message "Byte-compiling %s" dir)
+        (byte-compile-file)))))
 
 
 ;;;; Functions

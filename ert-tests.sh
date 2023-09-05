@@ -70,10 +70,13 @@ run_tests () {
 
 clean() {
     PACKAGE=$1
+    local STRAIGHT_DIR="../../build/$PACKAGE"
 
     echo "Removing .elc files"
     find . -name "*.elc" -exec rm -v {} \;
-    find ../../build/$PACKAGE -name "*.elc" -exec rm -v {} \;
+    if [[ -d "$STRAIGHT_DIR" ]]; then
+        find "$STRAIGHT_DIR" -name "*.elc" -exec rm -v {} \;
+    fi
     echo ""
 }
 
