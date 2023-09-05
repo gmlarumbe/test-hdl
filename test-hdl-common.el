@@ -79,7 +79,7 @@ Byte-compile otherwise."
             (native-compile file))
         ;; Nix Emacs images might still lack native compilation support, so byte-compile them
         (message "Byte-compiling %s" dir)
-        (byte-compile-file)))))
+        (byte-compile-file file)))))
 
 
 ;;;; Functions
