@@ -3,7 +3,7 @@
 	       (:items
 		("i")
 		:locs
-		((:type "module" :desc "module instances;" :file "/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/instances.sv" :line 20)))
+		((:type "module" :desc "module instances;" :file "verilog/files/common/instances.sv" :line 20)))
 	       "i"
 	       (:items nil :locs
-		       ((:type "genvar" :desc "for (genvar i=0; i<VALUE; i++) begin : gen_test" :file "/home/gonz/.emacs.d/straight/repos/verilog-ext/test-hdl/verilog/files/common/instances.sv" :line 60)))))
+		       ((:type "genvar" :desc "for (genvar i=0; i<VALUE; i++) begin : gen_test" :file "verilog/files/common/instances.sv" :line 60)))))

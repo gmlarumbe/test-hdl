@@ -46,29 +46,33 @@
      (delete-trailing-whitespace (point-min) (point-max))
      ,@body))
 
-(cl-defun test-hdl-verilog-ext-tags-builtin-defs-file-fn (&key table file tag-type)
+(cl-defun test-hdl-verilog-ext-tags-builtin-defs-file-fn (&key table tag-type file)
   (test-hdl-verilog-ext-tags-clean
-    (verilog-mode)
-    (verilog-ext-tags-table-push-defs :tag-type tag-type :table table :file file)
-    table))
+    (let ((file (file-relative-name file test-hdl-test-dir)))
+      (verilog-mode)
+      (verilog-ext-tags-table-push-defs :tag-type tag-type :table table :file file)
+      table)))
 
 (cl-defun test-hdl-verilog-ext-tags-builtin-refs-file-fn (&key table defs-table file)
   (test-hdl-verilog-ext-tags-clean
-    (verilog-mode)
-    (verilog-ext-tags-table-push-refs :table table :defs-table defs-table :file file)
-    table))
+    (let ((file (file-relative-name file test-hdl-test-dir)))
+      (verilog-mode)
+      (verilog-ext-tags-table-push-refs :table table :defs-table defs-table :file file)
+      table)))
 
 (cl-defun test-hdl-verilog-ext-tags-ts-defs-file-fn (&key table inst-table file)
   (test-hdl-verilog-ext-tags-clean
-    (verilog-ts-mode)
-    (verilog-ext-tags-table-push-defs-ts :table table :inst-table inst-table :file file)
-    table))
+    (let ((file (file-relative-name file test-hdl-test-dir)))
+      (verilog-ts-mode)
+      (verilog-ext-tags-table-push-defs-ts :table table :inst-table inst-table :file file)
+      table)))
 
 (cl-defun test-hdl-verilog-ext-tags-ts-refs-file-fn (&key table defs-table file)
   (test-hdl-verilog-ext-tags-clean
-    (verilog-ts-mode)
-    (verilog-ext-tags-table-push-refs-ts :table table :defs-table defs-table :file file)
-    table))
+    (let ((file (file-relative-name file test-hdl-test-dir)))
+      (verilog-ts-mode)
+      (verilog-ext-tags-table-push-refs-ts :table table :defs-table defs-table :file file)
+      table)))
 
 (defun test-hdl-verilog-ext-tags-gen-expected-files ()
   ;; Builtin
