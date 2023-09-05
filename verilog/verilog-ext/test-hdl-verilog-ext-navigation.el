@@ -177,8 +177,7 @@ It did work locally though."
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode verilog-mode
                                                                  :fn verilog-ext-find-module-instance-fwd))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "inst.fwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "inst.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-navigation-dir "dump" (test-hdl-basename file "inst.bwd.el"))
@@ -187,8 +186,7 @@ It did work locally though."
                                                          :args '(:mode verilog-mode
                                                                  :fn verilog-ext-find-module-instance-bwd
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "inst.bwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "inst.bwd.el"))))
     ;; Forward interactive
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-navigation-dir "dump" (test-hdl-basename file "inst_int.fwd.el"))
@@ -197,8 +195,7 @@ It did work locally though."
                                                          :args '(:mode verilog-mode
                                                                  :fn test-hdl-verilog-ext-navigation-interactive-fwd-fn
                                                                  :while-hook forward-char))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "inst_int.fwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "inst_int.fwd.el"))))
     ;; Backward interactive
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-navigation-dir "dump" (test-hdl-basename file "inst_int.bwd.el"))
@@ -207,8 +204,7 @@ It did work locally though."
                                                          :args '(:mode verilog-mode
                                                                  :fn test-hdl-verilog-ext-navigation-interactive-bwd-fn
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "inst_int.bwd.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "inst_int.bwd.el"))))))
 
 
 (ert-deftest verilog-ext::navigation::classes ()
@@ -220,8 +216,7 @@ It did work locally though."
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode verilog-mode
                                                                  :fn verilog-ext-find-class-fwd))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "class.fwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "class.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-navigation-dir "dump" (test-hdl-basename file "class.bwd.el"))
@@ -230,8 +225,7 @@ It did work locally though."
                                                          :args '(:mode verilog-mode
                                                                  :fn verilog-ext-find-class-bwd
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "class.bwd.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "class.bwd.el"))))))
 
 
 (ert-deftest verilog-ext::navigation::task-functions ()
@@ -243,8 +237,7 @@ It did work locally though."
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode verilog-mode
                                                                  :fn verilog-ext-find-function-task-fwd))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "tf.fwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "tf.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-navigation-dir "dump" (test-hdl-basename file "tf.bwd.el"))
@@ -253,8 +246,7 @@ It did work locally though."
                                                          :args '(:mode verilog-mode
                                                                  :fn verilog-ext-find-function-task-bwd
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "tf.bwd.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "tf.bwd.el"))))))
 
 
 (ert-deftest verilog-ext::navigation::jump-to-parent-module-ag ()
@@ -266,8 +258,7 @@ It did work locally though."
                                                          :fn #'test-hdl-verilog-ext-jump-to-parent-module
                                                          :args '(:mode verilog-mode
                                                                  :engine "ag"))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "ag"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "ag"))))))
 
 
 (ert-deftest verilog-ext::navigation::jump-to-parent-module-rg ()
@@ -279,8 +270,7 @@ It did work locally though."
                                                          :fn #'test-hdl-verilog-ext-jump-to-parent-module
                                                          :args '(:mode verilog-mode
                                                                  :engine "rg"))
-                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "rg"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "rg"))))))
 
 
 (ert-deftest verilog-ext::navigation::defun-level-up ()
@@ -294,8 +284,7 @@ It did work locally though."
                                                            :args `(:mode verilog-mode
                                                                    :fn verilog-ext-defun-level-up
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "defun.up.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "defun.up.el")))))))
 
 
 (ert-deftest verilog-ext::navigation::defun-level-down ()
@@ -309,8 +298,7 @@ It did work locally though."
                                                            :args `(:mode verilog-mode
                                                                    :fn verilog-ext-defun-level-down
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "defun.down.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ext-navigation-dir "ref" (test-hdl-basename file "defun.down.el")))))))
 
 
 

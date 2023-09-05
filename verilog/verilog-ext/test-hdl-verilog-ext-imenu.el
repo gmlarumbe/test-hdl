@@ -42,8 +42,7 @@
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-imenu-test-file
                                                          :args '(verilog-mode))
-                                  (file-name-concat test-hdl-verilog-ext-imenu-dir "ref" (test-hdl-basename file "el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-imenu-dir "ref" (test-hdl-basename file "el"))))))
 
 
 (provide 'test-hdl-verilog-ext-imenu)

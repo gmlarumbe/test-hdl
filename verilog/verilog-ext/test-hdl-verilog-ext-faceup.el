@@ -44,8 +44,7 @@
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-faceup-dir "dump" (test-hdl-basename file "faceup"))
                                                          :fn #'test-hdl-verilog-faceup-file
                                                          :args '(verilog-mode))
-                                  (file-name-concat test-hdl-verilog-ext-faceup-dir "ref" (test-hdl-basename file "faceup"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-faceup-dir "ref" (test-hdl-basename file "faceup"))))))
 
 
 (provide 'test-hdl-verilog-ext-faceup)

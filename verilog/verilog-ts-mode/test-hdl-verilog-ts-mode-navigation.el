@@ -132,8 +132,7 @@
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode verilog-ts-mode
                                                                  :fn verilog-ts-find-module-instance-fwd))
-                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "inst.fwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "inst.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "dump" (test-hdl-basename file "inst.bwd.el"))
@@ -142,8 +141,7 @@
                                                          :args '(:mode verilog-ts-mode
                                                                  :fn verilog-ts-find-module-instance-bwd
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "inst.bwd.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "inst.bwd.el"))))))
 
 
 (ert-deftest verilog-ts-mode::navigation::classes ()
@@ -155,8 +153,7 @@
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode verilog-ts-mode
                                                                  :fn verilog-ts-find-class-fwd))
-                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "class.fwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "class.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "dump" (test-hdl-basename file "class.bwd.el"))
@@ -165,8 +162,7 @@
                                                          :args '(:mode verilog-ts-mode
                                                                  :fn verilog-ts-find-class-bwd
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "class.bwd.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "class.bwd.el"))))))
 
 
 (ert-deftest verilog-ts-mode::navigation::task-functions ()
@@ -178,8 +174,7 @@
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode verilog-ts-mode
                                                                  :fn verilog-ts-find-function-task-fwd))
-                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "tf.fwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "tf.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "dump" (test-hdl-basename file "tf.bwd.el"))
@@ -188,8 +183,7 @@
                                                          :args '(:mode verilog-ts-mode
                                                                  :fn verilog-ts-find-function-task-bwd
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "tf.bwd.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "tf.bwd.el"))))))
 
 
 (ert-deftest verilog-ts-mode::navigation::blocks ()
@@ -201,8 +195,7 @@
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode verilog-ts-mode
                                                                  :fn verilog-ts-find-block-fwd))
-                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "block.fwd.el"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "block.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "dump" (test-hdl-basename file "block.bwd.el"))
@@ -211,8 +204,7 @@
                                                          :args '(:mode verilog-ts-mode
                                                                  :fn verilog-ts-find-block-bwd
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "block.bwd.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "block.bwd.el"))))))
 
 
 (ert-deftest verilog-ts-mode::navigation::defun-level-up ()
@@ -226,8 +218,7 @@
                                                            :args `(:mode verilog-ts-mode
                                                                    :fn verilog-ts-defun-level-up
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "defun.up.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "defun.up.el")))))))
 
 
 (ert-deftest verilog-ts-mode::navigation::defun-level-down ()
@@ -241,8 +232,7 @@
                                                            :args `(:mode verilog-ts-mode
                                                                    :fn verilog-ts-defun-level-down
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "defun.down.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ts-mode-navigation-dir "ref" (test-hdl-basename file "defun.down.el")))))))
 
 
 

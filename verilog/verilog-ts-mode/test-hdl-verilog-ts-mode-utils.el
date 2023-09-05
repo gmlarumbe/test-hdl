@@ -100,8 +100,7 @@
                                                            :args `(:mode verilog-ts-mode
                                                                    :fn test-hdl-verilog-ts-mode-utils-block-at-point-fn
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ts-mode-utils-dir "ref" (test-hdl-basename file "block.at.point.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ts-mode-utils-dir "ref" (test-hdl-basename file "block.at.point.el")))))))
 
 (ert-deftest verilog-ts-mode::instance-at-point ()
   (dolist (file-and-pos test-hdl-verilog-utils-instance-at-point-file-and-pos)
@@ -114,8 +113,7 @@
                                                            :args `(:mode verilog-ts-mode
                                                                    :fn test-hdl-verilog-ts-mode-utils-instance-at-point-fn
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ts-mode-utils-dir "ref" (test-hdl-basename file "inst.point.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ts-mode-utils-dir "ref" (test-hdl-basename file "inst.point.el")))))))
 
 
 (ert-deftest verilog-ts-mode::module-at-point ()
@@ -129,8 +127,7 @@
                                                            :args `(:mode verilog-ts-mode
                                                                    :fn test-hdl-verilog-ts-mode-utils-module-at-point-fn
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ts-mode-utils-dir "ref" (test-hdl-basename file "mod.point.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ts-mode-utils-dir "ref" (test-hdl-basename file "mod.point.el")))))))
 
 
 

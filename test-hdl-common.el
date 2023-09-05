@@ -148,7 +148,7 @@ Process them with FN and ARGS."
                               :args args)
     dump-file))
 
-(defun test-hdl-files-equal (test-file ref-file &optional clean)
+(defun test-hdl-files-equal (test-file ref-file)
   "Compare if TEST-FILE and REF-FILE are equal.
 Remove TEST-FILE if CLEAN is non-nil."
   (if (equal (with-temp-buffer
@@ -158,8 +158,7 @@ Remove TEST-FILE if CLEAN is non-nil."
                (insert-file-contents ref-file)
                (buffer-substring-no-properties (point-min) (point-max))))
       (progn
-        (when clean
-          (delete-file test-file))
+        (delete-file test-file)
         t)
     ;; Dump on error if enabled
     (let ((cmd (concat "diff " ref-file " " test-file " > " (file-name-sans-extension test-file) ".diff")))
@@ -167,15 +166,26 @@ Remove TEST-FILE if CLEAN is non-nil."
         (shell-command cmd))
       nil)))
 
-(defun test-hdl-files-equal-explainer (test-file ref-file &optional _clean)
-  (let ((test-file-list (with-temp-buffer
-                          (insert-file-contents test-file)
-                          (split-string (buffer-substring-no-properties (point-min) (point-max)) "\n")))
-        (ref-file-list (with-temp-buffer
-                         (insert-file-contents ref-file)
-                         (split-string (buffer-substring-no-properties (point-min) (point-max)) "\n"))))
-    `(,(seq-difference test-file-list ref-file-list)
-      ,(seq-difference ref-file-list test-file-list))))
+(defun test-hdl-files-equal-explainer--loop (file-list)
+  (cl-loop for i from 1 to (length file-list)
+           collect (concat "Line " (format "%s" i)  ": " (nth (1- i) file-list))))
+
+(defun test-hdl-files-equal-explainer (test-file ref-file)
+  (when (file-exists-p test-file)
+    (let* ((test-file-list (with-temp-buffer
+                             (insert-file-contents test-file)
+                             (split-string (buffer-substring-no-properties (point-min) (point-max)) "\n")))
+           (ref-file-list (with-temp-buffer
+                            (insert-file-contents ref-file)
+                            (split-string (buffer-substring-no-properties (point-min) (point-max)) "\n")))
+           (test-file-list-lines (test-hdl-files-equal-explainer--loop test-file-list))
+           (ref-file-list-lines (test-hdl-files-equal-explainer--loop ref-file-list)))
+      `(,(mapcar (lambda (line-string)
+                   (concat "[dump] " line-string))
+                 (seq-difference test-file-list-lines ref-file-list-lines))
+        ,(mapcar (lambda (line-string)
+                   (concat "[ref] " line-string))
+                 (seq-difference ref-file-list-lines test-file-list-lines))))))
 
 (put 'test-hdl-files-equal 'ert-explainer 'test-hdl-files-equal-explainer)
 

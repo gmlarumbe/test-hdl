@@ -230,8 +230,7 @@
                                                                  :frontend hierarchy
                                                                  :vhier-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
                                                                  :vhier-files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv"))))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.hier.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.hier.el"))))))
 
 (ert-deftest verilog-ext::hierarchy::vhier-outshine ()
   (dolist (file test-hdl-verilog-ext-hierarchy-vhier-file-list)
@@ -244,8 +243,7 @@
                                                                  :frontend outshine
                                                                  :vhier-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
                                                                  :vhier-files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv"))))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.outshine.sv"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.outshine.sv"))))))
 
 (ert-deftest verilog-ext::hierarchy::builtin-hierarchy ()
   (dolist (file test-hdl-verilog-ext-hierarchy-file-list)
@@ -257,8 +255,7 @@
                                                                  :backend builtin
                                                                  :frontend hierarchy
                                                                  :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.hier.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.hier.el"))))))
 
 (ert-deftest verilog-ext::hierarchy::builtin-outshine ()
   (dolist (file test-hdl-verilog-ext-hierarchy-file-list)
@@ -270,8 +267,7 @@
                                                                  :backend builtin
                                                                  :frontend outshine
                                                                  :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.outshine.sv"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.outshine.sv"))))))
 
 (ert-deftest verilog-ext::hierarchy::tree-sitter-hierarchy ()
   (dolist (file test-hdl-verilog-ext-hierarchy-file-list)
@@ -283,8 +279,7 @@
                                                                  :backend tree-sitter
                                                                  :frontend hierarchy
                                                                  :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.hier.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.hier.el"))))))
 
 (ert-deftest verilog-ext::hierarchy::tree-sitter-outshine ()
   (dolist (file test-hdl-verilog-ext-hierarchy-file-list)
@@ -296,8 +291,7 @@
                                                                  :backend tree-sitter
                                                                  :frontend outshine
                                                                  :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.sv"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.sv"))))))
 
 
 (provide 'test-hdl-verilog-ext-hierarchy)

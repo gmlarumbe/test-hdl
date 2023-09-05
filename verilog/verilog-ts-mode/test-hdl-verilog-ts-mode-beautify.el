@@ -107,16 +107,14 @@
                                                          :dump-file (file-name-concat test-hdl-verilog-ts-mode-beautify-dir "dump" (test-hdl-basename file "beauty.sv"))
                                                          :fn #'test-hdl-verilog-beautify-file
                                                          :args '(verilog-ts-mode verilog-ts-beautify-current-buffer))
-                                  (file-name-concat test-hdl-verilog-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.sv"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.sv"))))))
 
 (ert-deftest verilog-ts-mode::prettify ()
   (dolist (file test-hdl-verilog-ts-mode-prettify-file-list)
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ts-mode-beautify-dir "dump" (test-hdl-basename file "pretty.sv"))
                                                          :fn #'test-hdl-verilog-ts-mode-prettify-file)
-                                  (file-name-concat test-hdl-verilog-ts-mode-beautify-dir "ref" (test-hdl-basename file "pretty.sv"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ts-mode-beautify-dir "ref" (test-hdl-basename file "pretty.sv"))))))
 
 
 (provide 'test-hdl-verilog-ts-mode-beautify)

@@ -90,8 +90,7 @@
                                                            :args `(:mode verilog-mode
                                                                    :fn verilog-ext-point-inside-block
                                                                    :pos-and-match-alist ,pos-and-match-alist))
-                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "point.inside.block.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "point.inside.block.el")))))))
 
 
 (ert-deftest verilog-ext::block-at-point ()
@@ -105,8 +104,7 @@
                                                            :args `(:mode verilog-mode
                                                                    :fn verilog-ext-block-at-point
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "block.at.point.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "block.at.point.el")))))))
 
 
 (ert-deftest verilog-ext::instance-at-point ()
@@ -120,8 +118,7 @@
                                                            :args `(:mode verilog-mode
                                                                    :fn verilog-ext-instance-at-point
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "inst.point.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "inst.point.el")))))))
 
 
 (ert-deftest verilog-ext::scan-buffer-modules ()
@@ -130,8 +127,7 @@
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "scan.modules.el"))
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-verilog-ext-utils-scan-modules-fn)
-                                  (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "scan.modules.el"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "scan.modules.el"))))))
 
 
 

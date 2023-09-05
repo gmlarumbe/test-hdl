@@ -134,8 +134,7 @@
                                                            :args `(:table ,table-defs
                                                                    :tag-type ,tag-type
                                                                    :file ,file))
-                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "defs.el"))
-                                    :clean))
+                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "defs.el"))))
       ;; Refs
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                            :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "refs.el"))
@@ -144,8 +143,7 @@
                                                            :args `(:table ,table-refs
                                                                    :defs-table ,table-defs
                                                                    :file ,file))
-                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "refs.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "refs.el")))))))
 
 
 (ert-deftest verilog-ext::tags::tree-sitter ()
@@ -161,8 +159,7 @@
                                                            :args `(:table ,table-defs
                                                                    :inst-table ,table-inst
                                                                    :file ,file))
-                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "ts.defs.el"))
-                                    :clean))
+                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "ts.defs.el"))))
       ;; Refs
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                            :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "ts.refs.el"))
@@ -171,8 +168,7 @@
                                                            :args `(:table ,table-refs
                                                                    :defs-table ,table-defs
                                                                    :file ,file))
-                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "ts.refs.el"))
-                                    :clean)))))
+                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "ts.refs.el")))))))
 
 
 (provide 'test-hdl-verilog-ext-tags)

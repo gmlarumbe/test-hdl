@@ -39,8 +39,7 @@
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-beautify-dir "dump" (test-hdl-basename file))
                                                          :fn #'test-hdl-verilog-beautify-file
                                                          :args '(verilog-mode verilog-ext-beautify-current-buffer))
-                                  (file-name-concat test-hdl-verilog-ext-beautify-dir "ref" (test-hdl-basename file))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-beautify-dir "ref" (test-hdl-basename file))))))
 
 
 (provide 'test-hdl-verilog-ext-beautify)

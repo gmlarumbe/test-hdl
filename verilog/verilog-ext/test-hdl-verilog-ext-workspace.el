@@ -76,8 +76,7 @@
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-verilog-ext-workspace-fn
                                                          :args `(:root-dir ,test-hdl-verilog-common-dir))
-                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test1"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test1"))))
     ;; Test2: Set `verilog-ext-workspace-root-dir' and `verilog-ext-workspace-ignore-dirs'
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-workspace-dir "dump" (test-hdl-basename file "test2"))
@@ -85,8 +84,7 @@
                                                          :fn #'test-hdl-verilog-ext-workspace-fn
                                                          :args `(:root-dir ,test-hdl-verilog-common-dir
                                                                  :ignore-dirs (,test-hdl-verilog-subblocks-dir)))
-                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test2"))
-                                  :clean))
+                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test2"))))
     ;; Test3: Set `verilog-ext-workspace-root-dir', `verilog-ext-workspace-ignore-dirs' and `verilog-ext-workspace-ignore-files'
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-workspace-dir "dump" (test-hdl-basename file "test3"))
@@ -96,8 +94,7 @@
                                                                  :ignore-dirs (,test-hdl-verilog-subblocks-dir)
                                                                  :ignore-files (,(file-name-concat test-hdl-verilog-common-dir "ucontroller.sv")
                                                                                 ,(file-name-concat test-hdl-verilog-common-dir "instances.sv"))))
-                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test3"))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test3"))))))
 
 
 

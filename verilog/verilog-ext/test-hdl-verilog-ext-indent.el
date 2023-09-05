@@ -43,8 +43,7 @@
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-indent-dir "dump" (test-hdl-basename file))
                                                          :fn #'test-hdl-indent-buffer
                                                          :args '(verilog-mode test-hdl-verilog-ext-indent-fn))
-                                  (file-name-concat test-hdl-verilog-ext-indent-dir "ref" (test-hdl-basename file))
-                                  :clean))))
+                                  (file-name-concat test-hdl-verilog-ext-indent-dir "ref" (test-hdl-basename file))))))
 
 
 (provide 'test-hdl-verilog-ext-indent)
