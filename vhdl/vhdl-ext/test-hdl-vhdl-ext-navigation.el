@@ -115,7 +115,7 @@
 
 ;; TODO: GitHub Actions finds the binary (no `executable-find' errors) but doesn't run the command well
 ;; If there was no matches it would show ("" "0 matches" "0 matched lines" "0 files contained matches" "17 files searched" "0 bytes printed") instad of nil
-;; (unless (getenv "GITHUB_WORKSPACE")
+(unless (getenv "GITHUB_WORKSPACE")
   (ert-deftest vhdl-ext::navigation::jump-to-parent-entity-rg ()
     (dolist (file test-hdl-vhdl-ext-navigation-jump-to-parent-file-list)
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
@@ -124,8 +124,7 @@
                                                            :fn #'test-hdl-vhdl-ext-jump-to-parent-entity
                                                            :args '(:mode vhdl-mode
                                                                    :engine "rg"))
-                                    (file-name-concat test-hdl-vhdl-ext-navigation-dir "ref" (test-hdl-basename file "rg"))))))
-;; )
+                                    (file-name-concat test-hdl-vhdl-ext-navigation-dir "ref" (test-hdl-basename file "rg")))))))
 
 
 
