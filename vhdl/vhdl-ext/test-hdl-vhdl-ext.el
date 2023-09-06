@@ -34,8 +34,8 @@
 (require 'test-hdl-vhdl-ext-navigation)
 (require 'test-hdl-vhdl-ext-imenu)
 (require 'test-hdl-vhdl-ext-beautify)
-;; TODO:
-;; (require 'test-hdl-vhdl-ext-hierarchy)
+(require 'test-hdl-vhdl-ext-hierarchy)
+;; TODO
 ;; (require 'test-hdl-vhdl-ext-tags)
 
 
@@ -46,8 +46,8 @@
   (test-hdl-vhdl-ext-navigation-gen-expected-files)
   (test-hdl-vhdl-ext-imenu-gen-expected-files)
   (test-hdl-vhdl-ext-beautify-gen-expected-files)
+  (test-hdl-vhdl-ext-hierarchy-gen-expected-files)
   ;; TODO
-  ;; (test-hdl-vhdl-ext-hierarchy-gen-expected-files)
   ;; (test-hdl-vhdl-ext-tags-gen-expected-files)
   )
 

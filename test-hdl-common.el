@@ -116,7 +116,7 @@ Byte-compile otherwise."
          (insert-file-contents file)
          (apply fn args))))))
 
-(cl-defun test-hdl-gen-expected-files (&key file-list dest-dir out-file-ext process-fn fn args)
+(cl-defun test-hdl-gen-expected-files (&key file-list dest-dir out-file-ext process-fn fn args clean-fn)
   "Process input files in FILE-LIST and generate expected ones into DEST-DIR.
 
 OUT-FILE-EXT determines the extension of the output file.
@@ -133,7 +133,9 @@ Process them with FN and ARGS."
                                 :process-fn process-fn
                                 :fn fn
                                 :args args)
-      (message "Generated %s" out-file))))
+      (message "Generated %s" out-file)
+      (when clean-fn
+        (funcall clean-fn)))))
 
 (cl-defun test-hdl-process-file (&key test-file dump-file process-fn fn args)
   (let ((dump-dir (file-name-directory dump-file)))
@@ -146,9 +148,10 @@ Process them with FN and ARGS."
                               :args args)
     dump-file))
 
-(defun test-hdl-files-equal (test-file ref-file)
+(defun test-hdl-files-equal (test-file ref-file &optional clean-fn)
   "Compare if TEST-FILE and REF-FILE are equal.
-Remove TEST-FILE if CLEAN is non-nil."
+
+Call CLEAN-FN after comparison if arg is provided."
   (if (equal (with-temp-buffer
                (insert-file-contents test-file)
                (buffer-substring-no-properties (point-min) (point-max)))
@@ -157,18 +160,22 @@ Remove TEST-FILE if CLEAN is non-nil."
                (buffer-substring-no-properties (point-min) (point-max))))
       (progn
         (delete-file test-file)
+        (when clean-fn
+          (funcall clean-fn))
         t)
     ;; Dump on error if enabled
     (let ((cmd (concat "diff " ref-file " " test-file " > " (file-name-sans-extension test-file) ".diff")))
       (when test-hdl-dump-diff-on-error
         (shell-command cmd))
+      (when clean-fn
+        (funcall clean-fn))
       nil)))
 
 (defun test-hdl-files-equal-explainer--loop (file-list)
   (cl-loop for i from 1 to (length file-list)
            collect (concat "Line " (format "%s" i)  ": " (nth (1- i) file-list))))
 
-(defun test-hdl-files-equal-explainer (test-file ref-file)
+(defun test-hdl-files-equal-explainer (test-file ref-file &optional _clean-fn)
   (when (file-exists-p test-file)
     (let* ((test-file-list (with-temp-buffer
                              (insert-file-contents test-file)

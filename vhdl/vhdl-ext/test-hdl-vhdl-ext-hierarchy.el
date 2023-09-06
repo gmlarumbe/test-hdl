@@ -27,21 +27,55 @@
 (require 'test-hdl-vhdl-ext-common)
 
 
+(defconst test-hdl-vhdl-ext-hierarchy-axi-converter-rtl-file-list
+  (test-hdl-directory-files test-hdl-vhdl-axi-converter-rtl-dir vhdl-ext-file-extension-re))
+(defconst test-hdl-vhdl-ext-hierarchy-axi-converter-tb-file-list
+  (test-hdl-directory-files test-hdl-vhdl-axi-converter-tb-dir vhdl-ext-file-extension-re))
+
 (defconst test-hdl-vhdl-ext-hierarchy-file-list (mapcar (lambda (file)
                                                          (file-name-concat test-hdl-vhdl-common-dir file))
-                                                       '("instances.sv"
-                                                         "ucontroller.sv")))
+                                                       '("instances.vhd"
+                                                         "axi_if_converter.vhd"
+                                                         "tb_axi_if_converter.vhd")))
 
-(defconst test-hdl-vhdl-ext-hierarchy-vhier-file-list
-  `(,(file-name-concat test-hdl-vhdl-common-dir "instances.sv")
-    ;; INFO: For some reason, the one ucontroller.sv in `test-hdl-vhdl-common-dir'
-    ;; had the package line removed and didn't work as expected
-    ,(file-name-concat test-hdl-vhdl-ucontroller-rtl-dir "ucontroller.sv")))
+(defconst test-hdl-vhdl-ext-hierarchy-sources-list
+  (append (test-hdl-directory-files test-hdl-vhdl-subblocks-dir vhdl-ext-file-extension-re)
+          test-hdl-vhdl-ext-hierarchy-file-list
+          test-hdl-vhdl-ext-hierarchy-axi-converter-rtl-file-list
+          test-hdl-vhdl-ext-hierarchy-axi-converter-tb-file-list))
 
-(defconst test-hdl-vhdl-ext-hierarchy-include-dirs
-  `(,test-hdl-vhdl-common-dir
-    ,test-hdl-vhdl-ucontroller-rtl-dir
-    ,test-hdl-vhdl-subblocks-dir))
+(defconst test-hdl-vhdl-ext-hierarchy-ghdl-instances-sources-list
+  `(,(file-name-concat test-hdl-vhdl-subblocks-dir "block0.vhd")
+    ,(file-name-concat test-hdl-vhdl-subblocks-dir "block1.vhd")
+    ,(file-name-concat test-hdl-vhdl-common-dir "instances.vhd"))
+  "Ordered filelist for \"instances.vhd\" GHDL hierarchy extraction.")
+
+(defconst test-hdl-vhdl-ext-hierarchy-ghdl-axi-converter-sources-list
+  `(;; RTL sources
+    ,@(mapcar (lambda (file)
+                (file-name-concat test-hdl-vhdl-axi-converter-rtl-dir file))
+              '("global_pkg.vhd"
+                "input_buffer_pkg.vhd"
+                "BUFG.vhd"
+                "clk_div.vhd"
+                "clk_sync.vhd"
+                "axi_lite_master.vhd"
+                "axi_lite_regs.vhd"
+                "core_converter.vhd"
+                "core_fsm.vhd"
+                "input_buffer.vhd"
+                "pattern_counter.vhd"
+                "axi_if_converter.vhd"))
+    ;; TB sources
+    ,@(mapcar (lambda (file)
+                (file-name-concat test-hdl-vhdl-axi-converter-tb-dir file))
+              '("axil_slave_bfm.vhd"
+                "axil_master_bfm.vhd"
+                "axif_master_bfm.vhd"
+                "global_sim.vhd"
+                "s_axi_model.vhd"
+                "tb_axi_if_converter.vhd")))
+  "Ordered filelist for \"tb_axi_if_converter.vhd\" GHDL hierarchy extraction.")
 
 
 (defun test-hdl-vhdl-ext-hierarchy--hierarchy-fn ()
@@ -55,55 +89,73 @@
   (buffer-substring-no-properties (point-min) (point-max)))
 
 
-(cl-defun test-hdl-vhdl-ext-hierarchy-buffer (&key mode backend frontend vhier-dirs vhier-files workspace-dirs module)
-  (let* ((vhdl-ext-hierarchy-backend backend)
+(cl-defun test-hdl-vhdl-ext-hierarchy-buffer (&key mode backend frontend sources proj-dir lib-name lib-dir entity)
+  (let* (;; Backend selection
+         (vhdl-ext-hierarchy-backend backend)
          (vhdl-ext-hierarchy-frontend frontend)
-         ;; Builtin/tree-sitter
-         (vhdl-ext-workspace-root-dir test-hdl-vhdl-common-dir)
-         (vhdl-ext-workspace-dirs workspace-dirs)
-         ;; Vhier
-         (vhdl-ext-hierarchy-vhier-use-open-buffers nil)
-         (vhdl-ext-hierarchy-vhier-dirs vhier-dirs)
-         (vhdl-ext-hierarchy-vhier-files vhier-files))
+         ;; Do not use cached hierarchies
+         (vhdl-ext-hierarchy-ghdl-alist nil)
+         ;; If using std93, ghdl will not detect block0 instances
+         (vhdl-standard '(8 nil))
+         ;; `vhdl-project-alist' settings
+         (proj-name "test-hdl-vhdl-ext-hierarchy")
+         (proj-title "vhdl-ext ERT hierarchy tests")
+         (exclude-regexp "")
+         (compile-options nil)
+         (compile-directory "./")
+         (makefile-name "")
+         (description "")
+         (vhdl-project-alist `((,proj-name
+                                ,proj-title
+                                ,(or proj-dir test-hdl-vhdl-common-dir proj-dir)    ; Project default-directory
+                                ,sources                                            ; Project sources
+                                ,exclude-regexp ,compile-options ,compile-directory ; Non-relevant options
+                                ,(or lib-name "work")                               ; Library name (key arg)
+                                ,(or lib-dir "lib/")                                ; Library directory wrt proj-dir (key arg)
+                                ,makefile-name ,description))))                     ; Other options
     ;; Mock functions
     (cl-letf (((symbol-function 'vhdl-ext-hierarchy-twidget-display)
-               (lambda (hierarchy &optional module)
+               (lambda (hierarchy)
                  hierarchy))
-              ((symbol-function 'vhdl-ext-select-file-module)
+              ((symbol-function 'vhdl-ext-select-file-entity)
                (lambda (&optional file)
-                 (or module
-                     (car (mapcar #'car (vhdl-ext-read-file-modules file)))))))
+                 (or entity
+                     (car (vhdl-ext-read-file-entities file))))))
       (test-hdl-no-messages
+        ;; DANGER: Do not forget to update cache variables since all tests will share the same project!
+        ;; - Before adding the line below there were many race conditions since
+        ;; tests interacted with each other, making ghdl ones fail randomly
+        (vhdl-scan-project-contents proj-name)
         (funcall mode)
-        (cond (;; vhier-outshine
-               ;;  - vhier cannot use temp-buffer since executes a command that requires a filename as an argument
-               (and (eq backend 'vhier)
+        (cond (;; ghdl-outshine
+               ;;  - ghdl cannot use temp-buffer since executes a command that requires a filename as an argument
+               (and (eq backend 'ghdl)
                     (eq frontend 'outshine))
                (test-hdl-vhdl-ext-hierarchy--outshine-fn))
-              ;; vhier-hierarchy
-              ;;  - vhier cannot use temp-buffer since executes a command that requires a filename as an argument
-              ((and (eq backend 'vhier)
+              ;; ghdl-hierarchy
+              ;;  - ghdl cannot use temp-buffer since executes a command that requires a filename as an argument
+              ((and (eq backend 'ghdl)
                     (eq frontend 'hierarchy))
                (test-hdl-vhdl-ext-hierarchy--hierarchy-fn))
               ;; builtin-hierarchy
               ((and (eq backend 'builtin)
                     (eq frontend 'hierarchy))
-               (vhdl-ext-workspace-hierarchy-parse)
+               (vhdl-ext-hierarchy-parse)
                (test-hdl-vhdl-ext-hierarchy--hierarchy-fn))
               ;; builtin-outshine
               ((and (eq backend 'builtin)
                     (eq frontend 'outshine))
-               (vhdl-ext-workspace-hierarchy-parse)
+               (vhdl-ext-hierarchy-parse)
                (test-hdl-vhdl-ext-hierarchy--outshine-fn))
               ;; tree-sitter-hierarchy
               ((and (eq backend 'tree-sitter)
                     (eq frontend 'hierarchy))
-               (vhdl-ext-workspace-hierarchy-parse)
+               (vhdl-ext-hierarchy-parse)
                (test-hdl-vhdl-ext-hierarchy--hierarchy-fn))
               ;; tree-sitter-outshine
               ((and (eq backend 'tree-sitter)
                     (eq frontend 'outshine))
-               (vhdl-ext-workspace-hierarchy-parse)
+               (vhdl-ext-hierarchy-parse)
                (test-hdl-vhdl-ext-hierarchy--outshine-fn))
               ;; Fallback
               (t
@@ -111,139 +163,236 @@
 
 
 (defun test-hdl-vhdl-ext-hierarchy-gen-expected-files ()
-  ;; vhier-hierarchy
-  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-ext-hierarchy-vhier-file-list
-                               :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
-                               :out-file-ext "vhier.hier.el"
-                               :process-fn 'eval-ff
-                               :fn #'test-hdl-vhdl-ext-hierarchy-buffer
-                               :args `(:mode vhdl-mode
-                                       :backend vhier
-                                       :frontend hierarchy
-                                       :vhier-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs
-                                       :vhier-files (,(file-name-concat test-hdl-vhdl-ucontroller-rtl-dir "global_pkg.sv"))))
-  ;; vhier-outshine
-  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-ext-hierarchy-vhier-file-list
-                               :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
-                               :out-file-ext "vhier.outshine.sv"
-                               :process-fn 'eval-ff
-                               :fn #'test-hdl-vhdl-ext-hierarchy-buffer
-                               :args `(:mode vhdl-mode
-                                       :backend vhier
-                                       :frontend outshine
-                                       :vhier-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs
-                                       :vhier-files (,(file-name-concat test-hdl-vhdl-ucontroller-rtl-dir "global_pkg.sv"))))
+  ;; ghdl-hierarchy simple: "instances.vhd"
+  (let* ((proj-dir test-hdl-vhdl-common-dir)
+         (file (file-name-concat proj-dir "instances.vhd"))
+         (lib-dir "lib/"))
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
+                                 :out-file-ext "ghdl.hier.el"
+                                 :process-fn 'eval-ff
+                                 :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                 :args `(:mode vhdl-mode
+                                         :backend ghdl
+                                         :frontend hierarchy
+                                         :proj-dir ,proj-dir
+                                         :lib-dir ,lib-dir
+                                         :sources ,test-hdl-vhdl-ext-hierarchy-ghdl-instances-sources-list)
+                                 :clean-fn (lambda () (delete-directory (file-name-concat proj-dir lib-dir) t))))
+  ;; ghdl-outshine simple: "instances.vhd"
+  (let* ((proj-dir test-hdl-vhdl-common-dir)
+         (file (file-name-concat proj-dir "instances.vhd"))
+         (lib-dir "lib/"))
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
+                                 :out-file-ext "ghdl.outshine.vhd"
+                                 :process-fn 'eval-ff
+                                 :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                 :args `(:mode vhdl-mode
+                                         :backend ghdl
+                                         :proj-dir ,proj-dir
+                                         :lib-dir ,lib-dir
+                                         :frontend outshine
+                                         :sources ,test-hdl-vhdl-ext-hierarchy-ghdl-instances-sources-list)
+                                 :clean-fn (lambda () (delete-directory (file-name-concat proj-dir lib-dir) t))))
+  ;; ghdl-hierarchy complex: "tb_axi_if_converter.vhd"
+  (let* ((proj-dir test-hdl-vhdl-axi-converter-dir)
+         (file (file-name-concat proj-dir "tb/tb_axi_if_converter.vhd"))
+         (lib-dir "lib/"))
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
+                                 :out-file-ext "ghdl.hier.el"
+                                 :process-fn 'eval-ff
+                                 :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                 :args `(:mode vhdl-mode
+                                         :backend ghdl
+                                         :frontend hierarchy
+                                         :proj-dir ,proj-dir
+                                         :lib-dir ,lib-dir
+                                         :lib-name "xil_defaultlib"
+                                         :sources ,test-hdl-vhdl-ext-hierarchy-ghdl-axi-converter-sources-list)
+                                 :clean-fn (lambda () (delete-directory (file-name-concat proj-dir lib-dir) t))))
+  ;; ghdl-outshine complex: "tb_axi_if_converter.vhd"
+  (let* ((proj-dir test-hdl-vhdl-axi-converter-dir)
+         (file (file-name-concat proj-dir "tb/tb_axi_if_converter.vhd"))
+         (lib-dir "lib/"))
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
+                                 :out-file-ext "ghdl.outshine.vhd"
+                                 :process-fn 'eval-ff
+                                 :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                 :args `(:mode vhdl-mode
+                                         :backend ghdl
+                                         :frontend outshine
+                                         :proj-dir ,proj-dir
+                                         :lib-dir ,lib-dir
+                                         :lib-name "xil_defaultlib"
+                                         :sources ,test-hdl-vhdl-ext-hierarchy-ghdl-axi-converter-sources-list)
+                                 :clean-fn (lambda () (delete-directory (file-name-concat proj-dir lib-dir) t))))
   ;; builtin-hierarchy
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-ext-hierarchy-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
                                :out-file-ext "builtin.hier.el"
-                               :process-fn 'eval
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                :args `(:mode vhdl-mode
                                        :backend builtin
                                        :frontend hierarchy
-                                       :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs))
+                                       :sources ,test-hdl-vhdl-ext-hierarchy-sources-list))
   ;; builtin-outshine
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-ext-hierarchy-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
-                               :out-file-ext "builtin.outshine.sv"
-                               :process-fn 'eval
+                               :out-file-ext "builtin.outshine.vhd"
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                :args `(:mode vhdl-mode
                                        :backend builtin
                                        :frontend outshine
-                                       :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs))
+                                       :sources ,test-hdl-vhdl-ext-hierarchy-sources-list))
   ;; tree-sitter-hierarchy
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-ext-hierarchy-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
                                :out-file-ext "ts.hier.el"
-                               :process-fn 'eval
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                :args `(:mode vhdl-ts-mode
                                        :backend tree-sitter
                                        :frontend hierarchy
-                                       :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs))
+                                       :sources ,test-hdl-vhdl-ext-hierarchy-sources-list))
   ;; tree-sitter-outshine
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-ext-hierarchy-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
-                               :out-file-ext "ts.outshine.sv"
-                               :process-fn 'eval
+                               :out-file-ext "ts.outshine.vhd"
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                :args `(:mode vhdl-ts-mode
                                        :backend tree-sitter
                                        :frontend outshine
-                                       :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs))
-  ;; More custom ones (e.g. need to explicit module to be parsed from a file with multiple modules declared)
-  ;; - axi_demux / builtin-hierarchy
-  (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-vhdl-common-dir "axi_demux.sv"))
+                                       :sources ,test-hdl-vhdl-ext-hierarchy-sources-list))
+  ;; More custom ones (e.g. need to explicit entity to be parsed from a file with multiple entities declared)
+  ;; - hierarchy.vhd / builtin-hierarchy
+  (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd"))
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
                                :out-file-ext "builtin.hier.el"
-                               :process-fn 'eval
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                :args `(:mode vhdl-mode
                                        :backend builtin
                                        :frontend hierarchy
-                                       :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs
-                                       :module "axi_demux_intf"))
-  ;; - axi_demux / builtin-outshine
-  (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-vhdl-common-dir "axi_demux.sv"))
+                                       :sources ,test-hdl-vhdl-ext-hierarchy-sources-list
+                                       :entity "tb_axi_if_converter"))
+  ;; - hierarchy.vhd / builtin-outshine
+  (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd"))
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
-                               :out-file-ext "builtin.outshine.sv"
-                               :process-fn 'eval
+                               :out-file-ext "builtin.outshine.vhd"
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                :args `(:mode vhdl-mode
                                        :backend builtin
                                        :frontend outshine
-                                       :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs
-                                       :module "axi_demux_intf"))
-  ;; - axi_demux / tree-sitter-hierarchy
-  (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-vhdl-common-dir "axi_demux.sv"))
+                                       :sources ,test-hdl-vhdl-ext-hierarchy-sources-list
+                                       :entity "tb_axi_if_converter"))
+  ;; - hierarchy.vhd / tree-sitter-hierarchy
+  (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd"))
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
                                :out-file-ext "ts.hier.el"
-                               :process-fn 'eval
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                :args `(:mode vhdl-ts-mode
                                        :backend tree-sitter
                                        :frontend hierarchy
-                                       :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs
-                                       :module "axi_demux_intf"))
-  ;; - axi_demux / tree-sitter-outshine
-  (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-vhdl-common-dir "axi_demux.sv"))
+                                       :sources ,test-hdl-vhdl-ext-hierarchy-sources-list
+                                       :entity "tb_axi_if_converter"))
+  ;; - hierarchy.vhd / tree-sitter-outshine
+  (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd"))
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref")
-                               :out-file-ext "ts.outshine.sv"
-                               :process-fn 'eval
+                               :out-file-ext "ts.outshine.vhd"
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                :args `(:mode vhdl-ts-mode
                                        :backend tree-sitter
                                        :frontend outshine
-                                       :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs
-                                       :module "axi_demux_intf")))
+                                       :sources ,test-hdl-vhdl-ext-hierarchy-sources-list
+                                       :entity "tb_axi_if_converter")))
 
-(ert-deftest vhdl-ext::hierarchy::vhier-hierarchy ()
-  (dolist (file test-hdl-vhdl-ext-hierarchy-vhier-file-list)
+
+(ert-deftest vhdl-ext::hierarchy::ghdl-hierarchy::simple ()
+  (let* ((proj-dir test-hdl-vhdl-common-dir)
+         (file (file-name-concat proj-dir "instances.vhd"))
+         (lib-dir "lib/"))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "vhier.hier.el"))
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "ghdl.hier.el"))
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                                          :args `(:mode vhdl-mode
-                                                                 :backend vhier
+                                                                 :backend ghdl
+                                                                 :proj-dir ,proj-dir
+                                                                 :lib-dir ,lib-dir
                                                                  :frontend hierarchy
-                                                                 :vhier-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs
-                                                                 :vhier-files (,(file-name-concat test-hdl-vhdl-ucontroller-rtl-dir "global_pkg.sv"))))
-                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.hier.el"))))))
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-ghdl-instances-sources-list))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ghdl.hier.el"))
+                                  ;; Cleanup function (remove lib/ compilation directory)
+                                  (lambda () (delete-directory (file-name-concat proj-dir lib-dir) t))))))
 
-(ert-deftest vhdl-ext::hierarchy::vhier-outshine ()
-  (dolist (file test-hdl-vhdl-ext-hierarchy-vhier-file-list)
+
+(ert-deftest vhdl-ext::hierarchy::ghdl-outshine::simple ()
+  (let* ((proj-dir test-hdl-vhdl-common-dir)
+         (file (file-name-concat proj-dir "instances.vhd"))
+         (lib-dir "lib/"))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "vhier.outshine.sv"))
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "ghdl.outshine.vhd"))
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                                          :args `(:mode vhdl-mode
-                                                                 :backend vhier
+                                                                 :backend ghdl
+                                                                 :proj-dir ,proj-dir
+                                                                 :lib-dir ,lib-dir
                                                                  :frontend outshine
-                                                                 :vhier-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs
-                                                                 :vhier-files (,(file-name-concat test-hdl-vhdl-ucontroller-rtl-dir "global_pkg.sv"))))
-                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.outshine.sv"))))))
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-ghdl-instances-sources-list))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ghdl.outshine.vhd"))
+                                  ;; Cleanup function (remove lib/ compilation directory)
+                                  (lambda () (delete-directory (file-name-concat proj-dir lib-dir) t))))))
+
+
+(ert-deftest vhdl-ext::hierarchy::ghdl-hierarchy::complex ()
+  (let* ((proj-dir test-hdl-vhdl-axi-converter-dir)
+         (file (file-name-concat proj-dir "tb/tb_axi_if_converter.vhd"))
+         (lib-dir "lib/"))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "ghdl.hier.el"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                                         :args `(:mode vhdl-mode
+                                                                 :backend ghdl
+                                                                 :frontend hierarchy
+                                                                 :proj-dir ,proj-dir
+                                                                 :lib-dir ,lib-dir
+                                                                 :lib-name "xil_defaultlib"
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-ghdl-axi-converter-sources-list))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ghdl.hier.el"))
+                                  ;; Cleanup function (remove lib/ compilation directory)
+                                  (lambda () (delete-directory (file-name-concat proj-dir lib-dir) t))))))
+
+
+(ert-deftest vhdl-ext::hierarchy::ghdl-outshine::complex ()
+  (let* ((proj-dir test-hdl-vhdl-axi-converter-dir)
+         (file (file-name-concat proj-dir "tb/tb_axi_if_converter.vhd"))
+         (lib-dir "lib/"))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "ghdl.outshine.vhd"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                                         :args `(:mode vhdl-mode
+                                                                 :backend ghdl
+                                                                 :frontend outshine
+                                                                 :proj-dir ,proj-dir
+                                                                 :lib-dir ,lib-dir
+                                                                 :lib-name "xil_defaultlib"
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-ghdl-axi-converter-sources-list))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ghdl.outshine.vhd"))
+                                  ;; Cleanup function (remove lib/ compilation directory)
+                                  (lambda () (delete-directory (file-name-concat proj-dir lib-dir) t))))))
+
 
 (ert-deftest vhdl-ext::hierarchy::builtin-hierarchy ()
   (dolist (file test-hdl-vhdl-ext-hierarchy-file-list)
@@ -254,20 +403,22 @@
                                                          :args `(:mode vhdl-mode
                                                                  :backend builtin
                                                                  :frontend hierarchy
-                                                                 :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs))
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-sources-list))
                                   (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.hier.el"))))))
+
 
 (ert-deftest vhdl-ext::hierarchy::builtin-outshine ()
   (dolist (file test-hdl-vhdl-ext-hierarchy-file-list)
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "builtin.outshine.sv"))
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "builtin.outshine.vhd"))
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                                          :args `(:mode vhdl-mode
                                                                  :backend builtin
                                                                  :frontend outshine
-                                                                 :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs))
-                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.outshine.sv"))))))
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-sources-list))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.outshine.vhd"))))))
+
 
 (ert-deftest vhdl-ext::hierarchy::tree-sitter-hierarchy ()
   (dolist (file test-hdl-vhdl-ext-hierarchy-file-list)
@@ -278,20 +429,77 @@
                                                          :args `(:mode vhdl-ts-mode
                                                                  :backend tree-sitter
                                                                  :frontend hierarchy
-                                                                 :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs))
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-sources-list))
                                   (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.hier.el"))))))
+
 
 (ert-deftest vhdl-ext::hierarchy::tree-sitter-outshine ()
   (dolist (file test-hdl-vhdl-ext-hierarchy-file-list)
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "ts.outshine.sv"))
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "ts.outshine.vhd"))
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-vhdl-ext-hierarchy-buffer
                                                          :args `(:mode vhdl-ts-mode
                                                                  :backend tree-sitter
                                                                  :frontend outshine
-                                                                 :workspace-dirs ,test-hdl-vhdl-ext-hierarchy-include-dirs))
-                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.sv"))))))
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-sources-list))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.vhd"))))))
+
+
+(ert-deftest vhdl-ext::hierarchy::builtin-hierarchy::multiple-entities ()
+  (let ((file (file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "builtin.hier.el"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                                         :args `(:mode vhdl-mode
+                                                                 :backend builtin
+                                                                 :frontend hierarchy
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-sources-list
+                                                                 :entity "tb_axi_if_converter"))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.hier.el"))))))
+
+
+(ert-deftest vhdl-ext::hierarchy::builtin-outshine::multiple-entities ()
+  (let ((file (file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "builtin.outshine.vhd"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                                         :args `(:mode vhdl-mode
+                                                                 :backend builtin
+                                                                 :frontend outshine
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-sources-list
+                                                                 :entity "tb_axi_if_converter"))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.outshine.vhd"))))))
+
+
+(ert-deftest vhdl-ext::hierarchy::tree-sitter-hierarchy::multiple-entities ()
+  (let ((file (file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "ts.hier.el"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                                         :args `(:mode vhdl-ts-mode
+                                                                 :backend tree-sitter
+                                                                 :frontend hierarchy
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-sources-list
+                                                                 :entity "tb_axi_if_converter"))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.hier.el"))))))
+
+
+(ert-deftest vhdl-ext::hierarchy::tree-sitter-outshine::multiple-entities ()
+  (let ((file (file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "dump" (test-hdl-basename file "ts.outshine.vhd"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-vhdl-ext-hierarchy-buffer
+                                                         :args `(:mode vhdl-ts-mode
+                                                                 :backend tree-sitter
+                                                                 :frontend outshine
+                                                                 :sources ,test-hdl-vhdl-ext-hierarchy-sources-list
+                                                                 :entity "tb_axi_if_converter"))
+                                  (file-name-concat test-hdl-vhdl-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.vhd"))))))
 
 
 (provide 'test-hdl-vhdl-ext-hierarchy)

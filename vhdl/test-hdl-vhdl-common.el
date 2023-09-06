@@ -34,6 +34,9 @@
 (defconst test-hdl-vhdl-files-dir (file-name-concat test-hdl-vhdl-test-dir "files"))
 (defconst test-hdl-vhdl-common-dir (file-name-concat test-hdl-vhdl-files-dir "common"))
 (defconst test-hdl-vhdl-subblocks-dir (file-name-concat test-hdl-vhdl-common-dir "subblocks"))
+(defconst test-hdl-vhdl-axi-converter-dir (file-name-concat test-hdl-vhdl-files-dir "axi_if_converter"))
+(defconst test-hdl-vhdl-axi-converter-rtl-dir (file-name-concat test-hdl-vhdl-axi-converter-dir "rtl"))
+(defconst test-hdl-vhdl-axi-converter-tb-dir (file-name-concat test-hdl-vhdl-axi-converter-dir "tb"))
 
 (defconst test-hdl-vhdl-imenu-dir (file-name-concat test-hdl-vhdl-files-dir "imenu"))
 (defconst test-hdl-vhdl-beautify-dir (file-name-concat test-hdl-vhdl-files-dir "beautify"))
