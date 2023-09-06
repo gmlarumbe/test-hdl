@@ -108,7 +108,9 @@
            (treesit-language-available-p 'verilog))
   (require 'treesit)
   (setq treesit-font-lock-level 4)
-  (use-package verilog-ts-mode))
+  (use-package verilog-ts-mode
+    ;; TODO: Update once set in MELPA
+    :straight (:host github :repo "gmlarumbe/verilog-ts-mode" :files (:defaults))))
 
 
 (provide 'test-hdl-verilog-setup-straight)

@@ -28,13 +28,6 @@
 (require 'test-hdl-vhdl-ts-mode-common)
 
 
-;; TODO: block-at-point: Segmentation fault with Emacs 29.1 @ tb_program.sv
-(defconst test-hdl-vhdl-ts-mode-utils-block-at-point-file-and-pos
-  (remove (assoc (file-name-concat test-hdl-vhdl-common-dir "tb_program.sv")
-                 test-hdl-vhdl-utils-block-at-point-file-and-pos)
-          test-hdl-vhdl-utils-block-at-point-file-and-pos))
-
-
 (defun test-hdl-vhdl-ts-mode-utils-block-at-point-fn ()
   (treesit-node-type (vhdl-ts-block-at-point)))
 
@@ -44,15 +37,39 @@
       `(,(vhdl-ts--node-identifier-name node)
         ,(vhdl-ts--node-instance-name node)))))
 
-(defun test-hdl-vhdl-ts-mode-utils-module-at-point-fn ()
-  (let ((node (vhdl-ts-module-at-point)))
+(defun test-hdl-vhdl-ts-mode-utils-entity-at-point-fn ()
+  (let ((node (vhdl-ts-entity-at-point)))
     (when node
       (vhdl-ts--node-identifier-name node))))
 
 
 (defun test-hdl-vhdl-ts-mode-utils-gen-expected-files ()
+  ;; Forward sexp
+  (dolist (file-and-pos test-hdl-vhdl-utils-forward-sexp-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (test-hdl-gen-expected-files :file-list `(,file)
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref")
+                                   :out-file-ext "fwd.sexp.el"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-pos-list-fn
+                                   :args `(:mode vhdl-ts-mode
+                                           :fn vhdl-ts-forward-sexp
+                                           :pos-list ,pos-list))))
+  ;; Backward sexp
+  (dolist (file-and-pos test-hdl-vhdl-utils-backward-sexp-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (test-hdl-gen-expected-files :file-list `(,file)
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref")
+                                   :out-file-ext "bwd.sexp.el"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-pos-list-fn
+                                   :args `(:mode vhdl-ts-mode
+                                           :fn vhdl-ts-backward-sexp
+                                           :pos-list ,pos-list))))
   ;; Block at point
-  (dolist (file-and-pos test-hdl-vhdl-ts-mode-utils-block-at-point-file-and-pos)
+  (dolist (file-and-pos test-hdl-vhdl-utils-block-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
       (test-hdl-gen-expected-files :file-list `(,file)
@@ -72,25 +89,25 @@
                                    :out-file-ext "inst.point.el"
                                    :process-fn 'eval
                                    :fn #'test-hdl-pos-list-fn
-                                   :args `(:mode vhdl-mode
+                                   :args `(:mode vhdl-ts-mode
                                            :fn test-hdl-vhdl-ts-mode-utils-instance-at-point-fn
                                            :pos-list ,pos-list))))
-  ;; Module at point
-  (dolist (file-and-pos test-hdl-vhdl-utils-module-at-point-file-and-pos)
+  ;; Entity at point
+  (dolist (file-and-pos test-hdl-vhdl-utils-entity-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
       (test-hdl-gen-expected-files :file-list `(,file)
                                    :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref")
-                                   :out-file-ext "mod.point.el"
+                                   :out-file-ext "ent.point.el"
                                    :process-fn 'eval
                                    :fn #'test-hdl-pos-list-fn
-                                   :args `(:mode vhdl-mode
-                                           :fn test-hdl-vhdl-ts-mode-utils-module-at-point-fn
+                                   :args `(:mode vhdl-ts-mode
+                                           :fn test-hdl-vhdl-ts-mode-utils-entity-at-point-fn
                                            :pos-list ,pos-list)))))
 
 
 (ert-deftest vhdl-ts-mode::block-at-point ()
-  (dolist (file-and-pos test-hdl-vhdl-ts-mode-utils-block-at-point-file-and-pos)
+  (dolist (file-and-pos test-hdl-vhdl-utils-block-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
@@ -116,18 +133,46 @@
                                     (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "inst.point.el")))))))
 
 
-(ert-deftest vhdl-ts-mode::module-at-point ()
-  (dolist (file-and-pos test-hdl-vhdl-utils-module-at-point-file-and-pos)
+(ert-deftest vhdl-ts-mode::entity-at-point ()
+  (dolist (file-and-pos test-hdl-vhdl-utils-entity-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                           :dump-file (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "dump" (test-hdl-basename file "mod.point.el"))
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "dump" (test-hdl-basename file "ent.point.el"))
                                                            :process-fn 'eval
                                                            :fn #'test-hdl-pos-list-fn
                                                            :args `(:mode vhdl-ts-mode
-                                                                   :fn test-hdl-vhdl-ts-mode-utils-module-at-point-fn
+                                                                   :fn test-hdl-vhdl-ts-mode-utils-entity-at-point-fn
                                                                    :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "mod.point.el")))))))
+                                    (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "ent.point.el")))))))
+
+
+(ert-deftest vhdl-ts-mode::forward-sexp ()
+  (dolist (file-and-pos test-hdl-vhdl-utils-forward-sexp-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "dump" (test-hdl-basename file "fwd.sexp.el"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-pos-list-fn
+                                                           :args `(:mode vhdl-ts-mode
+                                                                   :fn vhdl-ts-forward-sexp
+                                                                   :pos-list ,pos-list))
+                                    (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "fwd.sexp.el")))))))
+
+
+(ert-deftest vhdl-ts-mode::backward-sexp ()
+  (dolist (file-and-pos test-hdl-vhdl-utils-backward-sexp-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "dump" (test-hdl-basename file "bwd.sexp.el"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-pos-list-fn
+                                                           :args `(:mode vhdl-ts-mode
+                                                                   :fn vhdl-ts-backward-sexp
+                                                                   :pos-list ,pos-list))
+                                    (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "bwd.sexp.el")))))))
 
 
 

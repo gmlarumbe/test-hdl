@@ -1,0 +1,61 @@
+«x:--------------------------------------------------------------------------------»
+«x:-- File header:»
+«x:--------------------------------------------------------------------------------»
+
+«x:-- 1) Testing comments at unit space:»
+«k:library» «b:ieee»«:vhdl-ts-font-lock-punctuation-face:,» «b:work»«:vhdl-ts-font-lock-punctuation-face:;»
+«k:use» «f:ieee»«:vhdl-ts-font-lock-punctuation-face:.»«f:std_logic_1164»«:vhdl-ts-font-lock-punctuation-face:.»«k:all»«:vhdl-ts-font-lock-punctuation-face:;»
+«x:-- use ieee.std_logic_1164.all;»
+«x:-- use ieee.std_logic_1164.all;»
+
+«k:entity» «f:foo» «k:is»
+«k:end» «k:entity» «f:foo»«:vhdl-ts-font-lock-punctuation-face:;»
+
+
+
+«x:-- 2) Testing case statements»
+«k:architecture» «f:indent» «k:of» «f:indent_test» «k:is»
+
+«k:begin»
+
+«k:process» «:vhdl-ts-font-lock-parenthesis-face:(»«k:all»«:vhdl-ts-font-lock-parenthesis-face:)»
+«k:begin»
+«k:case» var «k:is»
+«k:when» A «:vhdl-ts-font-lock-operator-face:=>»
+out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
+«k:when» B «:vhdl-ts-font-lock-operator-face:=>»
+out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
+«k:when» C «:vhdl-ts-font-lock-operator-face:=>»
+out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
+«k:when» «k:others» «:vhdl-ts-font-lock-operator-face:=>»
+out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
+«k:end» «k:case»«:vhdl-ts-font-lock-punctuation-face:;»
+«k:end» «k:process»«:vhdl-ts-font-lock-punctuation-face:;»
+
+«k:end» «k:architecture» «f:indent»«:vhdl-ts-font-lock-punctuation-face:;»
+
+
+«x:-- 3) Constant array initialization»
+«k:package» «k:body» «f:foo» «k:is»
+«k:constant» «c:ARRAY_CONSTANT» «:vhdl-ts-font-lock-punctuation-face::» «t:array_type» «:vhdl-ts-font-lock-operator-face::=»
+«:vhdl-ts-font-lock-parenthesis-face:(»
+VALUE_0«:vhdl-ts-font-lock-punctuation-face:,»
+VALUE_1«:vhdl-ts-font-lock-punctuation-face:,»
+VALUE_2«:vhdl-ts-font-lock-punctuation-face:,»
+VALUE_3«:vhdl-ts-font-lock-punctuation-face:,»
+VALUE_4
+«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
+«k:end» «k:package» «k:body» «f:foo»«:vhdl-ts-font-lock-punctuation-face:;»
+
+
+«x:-- 4) Multiline procedural expression»
+«k:package» «k:body» «f:foo» «k:is»
+«k:procedure» «f:test_multiline_expression» «k:is»
+«k:begin»  «x:-- procedure test_multiline_expression»
+signal_out «:vhdl-ts-font-lock-operator-face:<=» signal_in1 «k:and»
+signal_in2 «k:and»
+signal_in3 «k:and»
+signal_in4«:vhdl-ts-font-lock-punctuation-face:;»
+«k:end» «k:procedure» test_multiline_expression«:vhdl-ts-font-lock-punctuation-face:;»
+«k:end» «k:package» «k:body» «f:foo»«:vhdl-ts-font-lock-punctuation-face:;»
+

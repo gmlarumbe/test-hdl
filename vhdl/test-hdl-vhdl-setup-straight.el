@@ -67,8 +67,6 @@
 ;;;; Install package
 (message "Installing and setting up vhdl-ext")
 (use-package vhdl-ext
-  :straight (:host github :repo "gmlarumbe/vhdl-ext"
-             :files ("*.el" "snippets" "ts-mode/vhdl-ts-mode.el"))
   :after vhdl-mode
   :hook ((vhdl-mode . vhdl-ext-mode))
   :demand
@@ -82,10 +80,9 @@
            (treesit-language-available-p 'vhdl))
   (require 'treesit)
   (setq treesit-font-lock-level 4)
-  ;; TODO: Upate when integrated into MELPA
   (use-package vhdl-ts-mode
-    :straight (:host github :repo "gmlarumbe/vhdl-ext"
-               :files ("ts-mode/vhdl-ts-mode.el"))))
+    ;; TODO: Upate when integrated into MELPA
+    :straight (:host github :repo "gmlarumbe/vhdl-ts-mode" :files (:defaults))))
 
 
 (provide 'test-hdl-vhdl-setup-straight)

@@ -36,7 +36,7 @@
                                :process-fn 'eval
                                :fn #'test-hdl-navigation-nav-file-fn
                                :args '(:mode vhdl-ts-mode
-                                       :fn vhdl-ts-find-module-instance-fwd))
+                                       :fn vhdl-ts-find-entity-instance-fwd))
   ;; Instances bwd
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-navigation-rtl-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref")
@@ -44,41 +44,24 @@
                                :process-fn 'eval
                                :fn #'test-hdl-navigation-nav-file-fn
                                :args '(:mode vhdl-ts-mode
-                                       :fn vhdl-ts-find-module-instance-bwd
+                                       :fn vhdl-ts-find-entity-instance-bwd
                                        :start-pos-max t))
-  ;; Classes fwd
+  ;; Procedure-functions fwd
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-navigation-tb-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref")
-                               :out-file-ext "class.fwd.el"
+                               :out-file-ext "pf.fwd.el"
                                :process-fn 'eval
                                :fn #'test-hdl-navigation-nav-file-fn
                                :args '(:mode vhdl-ts-mode
-                                       :fn vhdl-ts-find-class-fwd))
-  ;; Classes bwd
+                                       :fn vhdl-ts-find-function-procedure-fwd))
+  ;; Procedure-functions bwd
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-navigation-tb-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref")
-                               :out-file-ext "class.bwd.el"
+                               :out-file-ext "pf.bwd.el"
                                :process-fn 'eval
                                :fn #'test-hdl-navigation-nav-file-fn
                                :args '(:mode vhdl-ts-mode
-                                       :fn vhdl-ts-find-class-bwd
-                                       :start-pos-max t))
-  ;; Task-functions fwd
-  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-navigation-tb-file-list
-                               :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref")
-                               :out-file-ext "tf.fwd.el"
-                               :process-fn 'eval
-                               :fn #'test-hdl-navigation-nav-file-fn
-                               :args '(:mode vhdl-ts-mode
-                                       :fn vhdl-ts-find-function-task-fwd))
-  ;; Task-functions bwd
-  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-navigation-tb-file-list
-                               :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref")
-                               :out-file-ext "tf.bwd.el"
-                               :process-fn 'eval
-                               :fn #'test-hdl-navigation-nav-file-fn
-                               :args '(:mode vhdl-ts-mode
-                                       :fn vhdl-ts-find-function-task-bwd
+                                       :fn vhdl-ts-find-function-procedure-bwd
                                        :start-pos-max t))
   ;; Block fwd
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-navigation-block-nav-file-list
@@ -96,31 +79,7 @@
                                :fn #'test-hdl-navigation-nav-file-fn
                                :args '(:mode vhdl-ts-mode
                                        :fn vhdl-ts-find-block-bwd
-                                       :start-pos-max t))
-  ;; Defun level up
-  (dolist (file-and-pos test-hdl-vhdl-navigation-defun-up-file-and-pos)
-    (let ((file (car file-and-pos))
-          (pos-list (cdr file-and-pos)))
-      (test-hdl-gen-expected-files :file-list `(,file)
-                                   :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref")
-                                   :out-file-ext "defun.up.el"
-                                   :process-fn 'eval
-                                   :fn #'test-hdl-pos-list-fn
-                                   :args `(:mode vhdl-ts-mode
-                                           :fn vhdl-ts-defun-level-up
-                                           :pos-list ,pos-list))))
-  ;; Defun level down
-  (dolist (file-and-pos test-hdl-vhdl-navigation-defun-down-file-and-pos)
-    (let ((file (car file-and-pos))
-          (pos-list (cdr file-and-pos)))
-      (test-hdl-gen-expected-files :file-list `(,file)
-                                   :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref")
-                                   :out-file-ext "defun.down.el"
-                                   :process-fn 'eval
-                                   :fn #'test-hdl-pos-list-fn
-                                   :args `(:mode vhdl-ts-mode
-                                           :fn vhdl-ts-defun-level-down
-                                           :pos-list ,pos-list)))))
+                                       :start-pos-max t)))
 
 
 (ert-deftest vhdl-ts-mode::navigation::instances ()
@@ -131,7 +90,7 @@
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode vhdl-ts-mode
-                                                                 :fn vhdl-ts-find-module-instance-fwd))
+                                                                 :fn vhdl-ts-find-entity-instance-fwd))
                                   (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "inst.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
@@ -139,51 +98,30 @@
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode vhdl-ts-mode
-                                                                 :fn vhdl-ts-find-module-instance-bwd
+                                                                 :fn vhdl-ts-find-entity-instance-bwd
                                                                  :start-pos-max t))
                                   (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "inst.bwd.el"))))))
 
 
-(ert-deftest vhdl-ts-mode::navigation::classes ()
+(ert-deftest vhdl-ts-mode::navigation::procedure-functions ()
   (dolist (file test-hdl-vhdl-navigation-tb-file-list)
     ;; Forward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "dump" (test-hdl-basename file "class.fwd.el"))
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "dump" (test-hdl-basename file "pf.fwd.el"))
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode vhdl-ts-mode
-                                                                 :fn vhdl-ts-find-class-fwd))
-                                  (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "class.fwd.el"))))
+                                                                 :fn vhdl-ts-find-function-procedure-fwd))
+                                  (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "pf.fwd.el"))))
     ;; Backward
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "dump" (test-hdl-basename file "class.bwd.el"))
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "dump" (test-hdl-basename file "pf.bwd.el"))
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-navigation-nav-file-fn
                                                          :args '(:mode vhdl-ts-mode
-                                                                 :fn vhdl-ts-find-class-bwd
+                                                                 :fn vhdl-ts-find-function-procedure-bwd
                                                                  :start-pos-max t))
-                                  (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "class.bwd.el"))))))
-
-
-(ert-deftest vhdl-ts-mode::navigation::task-functions ()
-  (dolist (file test-hdl-vhdl-navigation-tb-file-list)
-    ;; Forward
-    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "dump" (test-hdl-basename file "tf.fwd.el"))
-                                                         :process-fn 'eval
-                                                         :fn #'test-hdl-navigation-nav-file-fn
-                                                         :args '(:mode vhdl-ts-mode
-                                                                 :fn vhdl-ts-find-function-task-fwd))
-                                  (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "tf.fwd.el"))))
-    ;; Backward
-    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "dump" (test-hdl-basename file "tf.bwd.el"))
-                                                         :process-fn 'eval
-                                                         :fn #'test-hdl-navigation-nav-file-fn
-                                                         :args '(:mode vhdl-ts-mode
-                                                                 :fn vhdl-ts-find-function-task-bwd
-                                                                 :start-pos-max t))
-                                  (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "tf.bwd.el"))))))
+                                  (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "pf.bwd.el"))))))
 
 
 (ert-deftest vhdl-ts-mode::navigation::blocks ()
@@ -205,34 +143,6 @@
                                                                  :fn vhdl-ts-find-block-bwd
                                                                  :start-pos-max t))
                                   (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "block.bwd.el"))))))
-
-
-(ert-deftest vhdl-ts-mode::navigation::defun-level-up ()
-  (dolist (file-and-pos test-hdl-vhdl-navigation-defun-up-file-and-pos)
-    (let ((file (car file-and-pos))
-          (pos-list (cdr file-and-pos)))
-      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                           :dump-file (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "dump" (test-hdl-basename file "defun.up.el"))
-                                                           :process-fn 'eval
-                                                           :fn #'test-hdl-pos-list-fn
-                                                           :args `(:mode vhdl-ts-mode
-                                                                   :fn vhdl-ts-defun-level-up
-                                                                   :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "defun.up.el")))))))
-
-
-(ert-deftest vhdl-ts-mode::navigation::defun-level-down ()
-  (dolist (file-and-pos test-hdl-vhdl-navigation-defun-down-file-and-pos)
-    (let ((file (car file-and-pos))
-          (pos-list (cdr file-and-pos)))
-      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                           :dump-file (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "dump" (test-hdl-basename file "defun.down.el"))
-                                                           :process-fn 'eval
-                                                           :fn #'test-hdl-pos-list-fn
-                                                           :args `(:mode vhdl-ts-mode
-                                                                   :fn vhdl-ts-defun-level-down
-                                                                   :pos-list ,pos-list))
-                                    (file-name-concat test-hdl-vhdl-ts-mode-navigation-dir "ref" (test-hdl-basename file "defun.down.el")))))))
 
 
 

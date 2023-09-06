@@ -30,7 +30,8 @@
 
 (defun test-hdl-indent-buffer (mode indent-fn)
   "Perform indentation of current buffer for indentation tests."
-  (funcall mode)
+  (test-hdl-no-messages
+    (funcall mode))
   ;; Clean whitespaces in buffer, for output comparison
   (untabify (point-min) (point-max))
   (delete-trailing-whitespace (point-min) (point-max))

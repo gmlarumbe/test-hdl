@@ -29,17 +29,19 @@
 
 
 (defun test-hdl-vhdl-ts-mode-faceup-gen-expected-files ()
-  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-faceup-file-list
+  (test-hdl-gen-expected-files :file-list (remove (file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd") ; TODO: hierarchy.vhd took ages in Emacs 29.1 release
+                                                  test-hdl-vhdl-faceup-file-list)
                                :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-faceup-dir "ref")
                                :out-file-ext "faceup"
-                               :fn #'test-hdl-vhdl-faceup-file
+                               :fn #'test-hdl-faceup-test-file
                                :args '(vhdl-ts-mode)))
 
 (ert-deftest vhdl-ts-mode::faceup ()
-  (dolist (file test-hdl-vhdl-faceup-file-list)
+  (dolist (file (remove (file-name-concat test-hdl-vhdl-common-dir "hierarchy.vhd") ; TODO: hierarchy.vhd took ages in Emacs 29.1 release
+                        test-hdl-vhdl-faceup-file-list))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-vhdl-ts-mode-faceup-dir "dump" (test-hdl-basename file "faceup"))
-                                                         :fn #'test-hdl-vhdl-faceup-file
+                                                         :fn #'test-hdl-faceup-test-file
                                                          :args '(vhdl-ts-mode))
                                   (file-name-concat test-hdl-vhdl-ts-mode-faceup-dir "ref" (test-hdl-basename file "faceup"))))))
 
