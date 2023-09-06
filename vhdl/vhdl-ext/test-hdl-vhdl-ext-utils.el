@@ -102,7 +102,7 @@
                                :fn #'test-hdl-vhdl-ext-utils-scan-entities-fn))
 
 
-(ert-deftest vhdl-ext::point-inside-block ()
+(ert-deftest vhdl-ext::utils::point-inside-block ()
   (dolist (file-pos-and-match test-hdl-vhdl-utils-point-inside-block-file-pos-and-match)
     (let ((file (car file-pos-and-match))
           (pos-and-match-alist (cadr file-pos-and-match)))
@@ -116,7 +116,7 @@
                                     (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "point.inside.block.el")))))))
 
 
-(ert-deftest vhdl-ext::block-at-point ()
+(ert-deftest vhdl-ext::utils::block-at-point ()
   (dolist (file-and-pos test-hdl-vhdl-utils-block-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
@@ -130,7 +130,7 @@
                                     (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "block.at.point.el")))))))
 
 
-(ert-deftest vhdl-ext::instance-at-point ()
+(ert-deftest vhdl-ext::utils::instance-at-point ()
   (dolist (file-and-pos test-hdl-vhdl-utils-instance-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
@@ -144,7 +144,7 @@
                                     (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "inst.point.el")))))))
 
 
-(ert-deftest vhdl-ext::scan-buffer-modules ()
+(ert-deftest vhdl-ext::utils::scan-buffer-modules ()
   (dolist (file test-hdl-vhdl-utils-file-list)
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "scan.entities.el"))
@@ -153,7 +153,7 @@
                                   (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "scan.entities.el"))))))
 
 
-(ert-deftest vhdl-ext::forward-sexp ()
+(ert-deftest vhdl-ext::utils::forward-sexp ()
   (dolist (file-and-pos test-hdl-vhdl-utils-forward-sexp-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
@@ -167,7 +167,7 @@
                                     (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "fwd.sexp.el")))))))
 
 
-(ert-deftest vhdl-ext::backward-sexp ()
+(ert-deftest vhdl-ext::utils::backward-sexp ()
   (dolist (file-and-pos test-hdl-vhdl-utils-backward-sexp-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))

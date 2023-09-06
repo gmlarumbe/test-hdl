@@ -106,7 +106,7 @@
                                            :pos-list ,pos-list)))))
 
 
-(ert-deftest vhdl-ts-mode::block-at-point ()
+(ert-deftest vhdl-ts-mode::utils::block-at-point ()
   (dolist (file-and-pos test-hdl-vhdl-utils-block-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
@@ -119,7 +119,7 @@
                                                                    :pos-list ,pos-list))
                                     (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "block.at.point.el")))))))
 
-(ert-deftest vhdl-ts-mode::instance-at-point ()
+(ert-deftest vhdl-ts-mode::utils::instance-at-point ()
   (dolist (file-and-pos test-hdl-vhdl-utils-instance-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
@@ -133,7 +133,7 @@
                                     (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "inst.point.el")))))))
 
 
-(ert-deftest vhdl-ts-mode::entity-at-point ()
+(ert-deftest vhdl-ts-mode::utils::entity-at-point ()
   (dolist (file-and-pos test-hdl-vhdl-utils-entity-at-point-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
@@ -147,7 +147,7 @@
                                     (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "ent.point.el")))))))
 
 
-(ert-deftest vhdl-ts-mode::forward-sexp ()
+(ert-deftest vhdl-ts-mode::utils::forward-sexp ()
   (dolist (file-and-pos test-hdl-vhdl-utils-forward-sexp-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
@@ -161,7 +161,7 @@
                                     (file-name-concat test-hdl-vhdl-ts-mode-utils-dir "ref" (test-hdl-basename file "fwd.sexp.el")))))))
 
 
-(ert-deftest vhdl-ts-mode::backward-sexp ()
+(ert-deftest vhdl-ts-mode::utils::backward-sexp ()
   (dolist (file-and-pos test-hdl-vhdl-utils-backward-sexp-file-and-pos)
     (let ((file (car file-and-pos))
           (pos-list (cdr file-and-pos)))
