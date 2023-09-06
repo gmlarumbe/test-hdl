@@ -65,15 +65,8 @@
   (setq vhdl-basic-offset 4))
 
 ;;;; Install package
-(message "Installing and setting up vhdl-ext")
-(use-package vhdl-ext
-  :after vhdl-mode
-  :hook ((vhdl-mode . vhdl-ext-mode))
-  :demand
-  :config
-  (vhdl-ext-mode-setup))
-
-;;;; Tree-sitter
+;;;;; Tree-sitter
+;; INFO: Load `vhdl-ts-mode' before `vhdl-ext' as the latter would require the first as a dependency.
 (message "Emacs version: %s" emacs-version)
 (when (and (>= emacs-major-version 29)
            (treesit-available-p)
@@ -81,8 +74,19 @@
   (require 'treesit)
   (setq treesit-font-lock-level 4)
   (use-package vhdl-ts-mode
-    ;; TODO: Upate when integrated into MELPA
+    ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid fetching vhdl-ext one
     :straight (:host github :repo "gmlarumbe/vhdl-ts-mode" :files (:defaults))))
+
+(message "Installing and setting up vhdl-ext")
+(use-package vhdl-ext
+  ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid overriding its autoloads
+  :straight (:host github :repo "gmlarumbe/vhdl-ext" :files (:defaults "snippets"))
+  :after vhdl-mode
+  :hook ((vhdl-mode . vhdl-ext-mode))
+  :demand
+  :config
+  (vhdl-ext-mode-setup))
+
 
 
 (provide 'test-hdl-vhdl-setup-straight)

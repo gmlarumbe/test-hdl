@@ -91,8 +91,22 @@
 
 
 ;;;; Setup package
+;;;;; Tree-sitter
+;; INFO: Load `verilog-ts-mode' before `verilog-ext' as the latter would require the first as a dependency.
+(message "Emacs version: %s" emacs-version)
+(when (and (>= emacs-major-version 29)
+           (treesit-available-p)
+           (treesit-language-available-p 'verilog))
+  (require 'treesit)
+  (setq treesit-font-lock-level 4)
+  (use-package verilog-ts-mode
+    ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid fetching verilog-ext one
+    :straight (:host github :repo "gmlarumbe/verilog-ts-mode" :files (:defaults))))
+
 (message "Installing and setting up verilog-ext")
 (use-package verilog-ext
+  ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid overriding its autoloads
+  :straight (:host github :repo "gmlarumbe/verilog-ext" :files (:defaults "snippets"))
   :after verilog-mode
   :hook ((verilog-mode . verilog-ext-mode))
   :demand
@@ -101,16 +115,6 @@
   (verilog-ext-mode-setup))
 
 
-;;;; Tree-sitter
-(message "Emacs version: %s" emacs-version)
-(when (and (>= emacs-major-version 29)
-           (treesit-available-p)
-           (treesit-language-available-p 'verilog))
-  (require 'treesit)
-  (setq treesit-font-lock-level 4)
-  (use-package verilog-ts-mode
-    ;; TODO: Update once set in MELPA
-    :straight (:host github :repo "gmlarumbe/verilog-ts-mode" :files (:defaults))))
 
 
 (provide 'test-hdl-verilog-setup-straight)
