@@ -293,6 +293,58 @@
                                                                  :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
                                   (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.sv"))))))
 
+(ert-deftest verilog-ext::hierarchy::builtin-hierarchy::multiple-entities ()
+  (let ((file (file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "builtin.hier.el"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                                         :args `(:mode verilog-mode
+                                                                 :backend builtin
+                                                                 :frontend hierarchy
+                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                                                 :module "axi_demux_intf"))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.hier.el"))))))
+
+(ert-deftest verilog-ext::hierarchy::builtin-outshine::multiple-entities ()
+  (let ((file (file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "builtin.outshine.sv"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                                         :args `(:mode verilog-mode
+                                                                 :backend builtin
+                                                                 :frontend outshine
+                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                                                 :module "axi_demux_intf"))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.outshine.sv"))))))
+
+(ert-deftest verilog-ext::hierarchy::tree-sitter-hierarchy::multiple-entities ()
+  (let ((file (file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "ts.hier.el"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                                         :args `(:mode verilog-ts-mode
+                                                                 :backend tree-sitter
+                                                                 :frontend hierarchy
+                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                                                 :module "axi_demux_intf"))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.hier.el"))))))
+
+(ert-deftest verilog-ext::hierarchy::tree-sitter-outshine::multiple-entities ()
+  (let ((file (file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "ts.outshine.sv"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                                         :args `(:mode verilog-ts-mode
+                                                                 :backend tree-sitter
+                                                                 :frontend outshine
+                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                                                 :module "axi_demux_intf"))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.sv"))))))
+
 
 (provide 'test-hdl-verilog-ext-hierarchy)
 
