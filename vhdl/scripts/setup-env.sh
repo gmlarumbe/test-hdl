@@ -25,7 +25,7 @@ done
 
 # Setup GHDL (get latest release)
 GHDL_GITHUB_URL=https://github.com/ghdl/ghdl
-LATEST_RELEASE_URL=releases/download/v3.0.0
+LATEST_RELEASE_URL=releases/download/nightly
 LATEST_RELEASE_FILE=ghdl-gha-ubuntu-22.04-llvm.tgz
 echo ""
 echo "Setting up GHDL..."

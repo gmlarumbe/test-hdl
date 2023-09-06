@@ -54,6 +54,12 @@
 (require 'test-hdl-utils)
 
 
+;; GitHub CI (required for GHDL tests)
+(when (getenv "GITHUB_WORKSPACE")
+  (setq temporary-file-directory (file-name-concat (getenv "GITHUB_WORKSPACE") "tmp/"))
+  (make-directory temporary-file-directory :parents))
+
+
 (provide 'test-hdl)
 
 ;;; test-hdl.el ends here
