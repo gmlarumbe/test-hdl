@@ -57,16 +57,12 @@
   (setq align-default-spacing 1)
   (setq align-to-tab-stop nil))
 
-(use-package vhdl-mode
-  :straight nil
-  :init
-  (setq vhdl-modify-date-on-saving nil)
-  (setq vhdl-basic-offset 4))
 
 ;;;; Install/setup package
 ;; TODO: Update when ts-mode is integrated into MELPA
 (use-package vhdl-ts-mode
   :straight (:host github :repo "gmlarumbe/vhdl-ts-mode" :files (:defaults))
+  :mode (("\\.vhdl?\\'" . vhdl-ts-mode))
   :config
   (setq treesit-font-lock-level 4))
 

@@ -59,8 +59,7 @@
         (goto-char (treesit-node-end (vhdl-ts--node-has-parent-recursive (vhdl-ts--node-at-point) "\\(statement_or_null\\|\\(non\\)?blocking_assignment\\)")))))))
 
 (defun test-hdl-vhdl-ts-mode-prettify-file ()
-  (let ((vhdl-ext-time-stamp-pattern nil) ; Prevent auto-update of timestamp
-        (debug nil)
+  (let ((debug nil)
         node)
     (vhdl-ts-mode)
     (test-hdl-vhdl-ts-mode-prettify--remove)

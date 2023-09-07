@@ -32,26 +32,11 @@
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-
-;;;; Setup built-in dependencies
-(require 'align)
-(setq align-default-spacing 1)
-(setq align-to-tab-stop nil)
-
-
 ;;;; Install/setup package
 (message "Installing and setting up vhdl-ts-mode")
 (package-install 'vhdl-ts-mode)
-
-
-;;;; Setup `vhdl-ts-mode'
 (require 'vhdl-ts-mode)
 (add-to-list 'auto-mode-alist '("\\.vhdl?\\'" . vhdl-ts-mode))
-
-(setq vhdl-basic-offset 4)
-(setq vhdl-modify-date-on-saving nil) ; Use `vhdl-ext' time-stamp instead
-
-(setq treesit-font-lock-level 4)
 
 
 ;;;; package.el CI test function
@@ -60,9 +45,8 @@
   (let ((test-file (file-name-concat test-hdl-vhdl-common-dir "axi_if_converter.vhd")))
     (find-file test-file)
     (if (not (eq major-mode 'vhdl-ts-mode))
-        (error "Error with package.el: Could not open %s with %s" buffer-file-name major-mode)
-      (message "Opened file: %s" buffer-file-name)
-      (message "With major-mode: %s" major-mode))))
+        (error "Error with package.el: Could not open %s with `vhdl-ts-mode', opened with `%s'" buffer-file-name major-mode)
+      (message "Opened file: %s, with major-mode: %s" buffer-file-name major-mode))))
 
 
 (provide 'test-hdl-vhdl-ts-mode-setup-package)

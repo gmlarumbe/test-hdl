@@ -1,4 +1,4 @@
-;;; test-hdl-vhdl-ext.el --- vhdl-ts-mode ERT tests  -*- lexical-binding: t -*-
+;;; test-hdl-vhdl-ts-mode.el --- vhdl-ts-mode ERT tests  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 
