@@ -32,28 +32,12 @@
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-
-;;;; Setup built-in dependencies
-(require 'align)
-(setq align-default-spacing 1)
-(setq align-to-tab-stop nil)
-
-
 ;;;; Install/setup package
 (message "Installing and setting up vhdl-ext")
 (package-install 'vhdl-ext)
-
-
-;;;; Setup `vhdl-mode' and `vhdl-ext'
-(require 'vhdl-mode)
-(setq vhdl-modify-date-on-saving nil) ; Use `vhdl-ext' time-stamp instead
-(setq vhdl-basic-offset 4)
-
 (require 'vhdl-ext)
 (vhdl-ext-mode-setup)
 (add-hook 'vhdl-mode-hook #'vhdl-ext-mode)
-
-(setq treesit-font-lock-level 4)
 
 
 ;;;; package.el CI test function
@@ -62,9 +46,8 @@
   (let ((test-file (file-name-concat test-hdl-vhdl-common-dir "axi_if_converter.vhd")))
     (find-file test-file)
     (if (not vhdl-ext-mode)
-        (error "Error with package.el: Could not open %s with `vhdl-ext-mode'" buffer-file-name major-mode)
-      (message "Opened file: %s" buffer-file-name)
-      (message "With minor-mode `vhdl-ext-mode'"))))
+        (error "Error with package.el: Could not open %s with `vhdl-ext-mode'" buffer-file-name)
+      (message "Opened file: %s, with `vhdl-ext-mode': %s" buffer-file-name vhdl-ext-mode))))
 
 
 (provide 'test-hdl-vhdl-ext-setup-package)
