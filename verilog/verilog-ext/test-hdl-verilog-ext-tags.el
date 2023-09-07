@@ -27,8 +27,7 @@
 
 (require 'test-hdl-verilog-ext-common)
 
-(defconst test-hdl-verilog-ext-tags-file-list
-  (test-hdl-directory-files test-hdl-verilog-common-dir verilog-ext-file-extension-re))
+(defconst test-hdl-verilog-ext-tags-file-list test-hdl-verilog-common-file-list)
 
 (defconst test-hdl-verilog-ext-tags-file-and-tag-type-list
   `((,(file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")      . top-items)

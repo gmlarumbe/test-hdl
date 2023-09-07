@@ -1,4 +1,4 @@
-;;; test-hdl-verilog-setup-straight.el --- Verilog ERT Tests Setup with straight.el  -*- lexical-binding: t -*-
+;;; test-hdl-verilog-ext-setup-straight.el --- verilog-ext ERT Tests Setup with straight.el -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 
@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 ;;
-;; Verilog ERT Tests Setup with straight.el
+;; verilog-ext ERT Tests Setup with straight.el
 ;;
 ;;; Code:
 
@@ -90,33 +90,24 @@
   (setq verilog-align-typedef-regexp (concat "\\<" verilog-identifier-re "_\\(t\\|if\\|vif\\)\\>")))
 
 
-;;;; Setup package
-;;;;; Tree-sitter
-;; INFO: Load `verilog-ts-mode' before `verilog-ext' as the latter would require the first as a dependency.
-(message "Emacs version: %s" emacs-version)
-(when (and (>= emacs-major-version 29)
-           (treesit-available-p)
-           (treesit-language-available-p 'verilog))
-  (require 'treesit)
-  (setq treesit-font-lock-level 4)
-  (use-package verilog-ts-mode
-    ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid fetching verilog-ext one
-    :straight (:host github :repo "gmlarumbe/verilog-ts-mode" :files (:defaults))))
-
+;;;; Install/setup package
 (message "Installing and setting up verilog-ext")
+
+;; TODO: Remove when ts-mode recipe is updated in MELPA
+;; - Put before `verilog-ext' to make sure that new updates are fetched for testing,
+;; otherwise it will fetch `verilog-ts-mode' as the old one already in MELPA
+(use-package verilog-ts-mode
+  :straight (:host github :repo "gmlarumbe/verilog-ts-mode" :files (:defaults)))
+
 (use-package verilog-ext
   ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid overriding its autoloads
   :straight (:host github :repo "gmlarumbe/verilog-ext" :files (:defaults "snippets"))
-  :after verilog-mode
   :hook ((verilog-mode . verilog-ext-mode))
-  :demand
   :config
   (setq verilog-ext-feature-list (remove 'typedefs verilog-ext-feature-list)) ; Do not override `verilog-align-typedef-regexp'
   (verilog-ext-mode-setup))
 
 
+(provide 'test-hdl-verilog-ext-setup-straight)
 
-
-(provide 'test-hdl-verilog-setup-straight)
-
-;;; test-hdl-verilog-setup-straight.el ends here
+;;; test-hdl-verilog-ext-setup-straight.el ends here

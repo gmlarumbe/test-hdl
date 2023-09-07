@@ -29,7 +29,7 @@
 
 
 (defconst test-hdl-verilog-ext-navigation-jump-to-parent-file-list
-  (test-hdl-directory-files test-hdl-verilog-subblocks-dir verilog-ext-file-extension-re))
+  (test-hdl-directory-files test-hdl-verilog-subblocks-dir (test-hdl-verilog-file-ext)))
 
 (cl-defun test-hdl-verilog-ext-jump-to-parent-module (&key mode engine)
   (cl-letf (((symbol-function 'compilation-start)
