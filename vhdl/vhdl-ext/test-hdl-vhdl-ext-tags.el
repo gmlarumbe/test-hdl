@@ -27,8 +27,9 @@
 
 (require 'test-hdl-vhdl-ext-common)
 
-(defconst test-hdl-vhdl-ext-tags-file-list
-  (test-hdl-directory-files test-hdl-vhdl-common-dir vhdl-ext-file-extension-re))
+(defconst test-hdl-vhdl-ext-tags-file-list test-hdl-vhdl-common-file-list)
+
+;; TODO: From here on !
 
 (defconst test-hdl-vhdl-ext-tags-file-and-tag-type-list
   `((,(file-name-concat test-hdl-vhdl-common-dir "axi_demux.sv")      . top-items)

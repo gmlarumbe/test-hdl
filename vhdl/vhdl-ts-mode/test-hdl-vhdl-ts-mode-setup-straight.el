@@ -1,4 +1,4 @@
-;;; test-hdl-vhdl-setup-straight.el --- VHDL ERT Tests Setup with straight.el  -*- lexical-binding: t -*-
+;;; test-hdl-vhdl-ts-mode-setup-straight.el --- vhdl-ts-mode ERT Tests Setup with straight.el -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 
@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 ;;
-;; VHDL ERT Tests Setup with straight.el
+;; vhdl-ts-mode ERT Tests Setup with straight.el
 ;;
 ;;; Code:
 
@@ -60,35 +60,18 @@
 (use-package vhdl-mode
   :straight nil
   :init
-  (setq vhdl-modify-date-on-saving nil) ; Use `vhdl-ext' time-stamp instead
-  :config
+  (setq vhdl-modify-date-on-saving nil)
   (setq vhdl-basic-offset 4))
 
-;;;; Install package
-;;;;; Tree-sitter
-;; INFO: Load `vhdl-ts-mode' before `vhdl-ext' as the latter would require the first as a dependency.
-(message "Emacs version: %s" emacs-version)
-(when (and (>= emacs-major-version 29)
-           (treesit-available-p)
-           (treesit-language-available-p 'vhdl))
-  (require 'treesit)
-  (setq treesit-font-lock-level 4)
-  (use-package vhdl-ts-mode
-    ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid fetching vhdl-ext one
-    :straight (:host github :repo "gmlarumbe/vhdl-ts-mode" :files (:defaults))))
-
-(message "Installing and setting up vhdl-ext")
-(use-package vhdl-ext
-  ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid overriding its autoloads
-  :straight (:host github :repo "gmlarumbe/vhdl-ext" :files (:defaults "snippets"))
-  :after vhdl-mode
-  :hook ((vhdl-mode . vhdl-ext-mode))
-  :demand
+;;;; Install/setup package
+;; TODO: Update when ts-mode is integrated into MELPA
+(use-package vhdl-ts-mode
+  :straight (:host github :repo "gmlarumbe/vhdl-ts-mode" :files (:defaults))
   :config
-  (vhdl-ext-mode-setup))
+  (setq treesit-font-lock-level 4))
 
 
 
-(provide 'test-hdl-vhdl-setup-straight)
+(provide 'test-hdl-vhdl-ts-mode-setup-straight)
 
-;;; test-hdl-vhdl-setup-straight.el ends here
+;;; test-hdl-vhdl-ts-mode-setup-straight.el ends here

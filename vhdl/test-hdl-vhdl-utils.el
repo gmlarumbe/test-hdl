@@ -27,8 +27,7 @@
 (require 'test-hdl-vhdl-common)
 
 
-(defconst test-hdl-vhdl-utils-file-list
-  (test-hdl-directory-files test-hdl-vhdl-common-dir vhdl-ext-file-extension-re))
+(defconst test-hdl-vhdl-utils-file-list test-hdl-vhdl-common-file-list)
 
 (defconst test-hdl-vhdl-utils-instance-at-point-file-and-pos
   `((,(file-name-concat test-hdl-vhdl-common-dir "axi_if_converter.vhd") 168 196 9493 14266 14268 14269 15657 16769 16775 16776 19059 19989 19990 20243 25844 28958 30411 30601 30941 31912 32596 32596 33595 33596 33597 33600 33623)
@@ -60,7 +59,7 @@
                                                                     (1337 . package)
                                                                     (1411 . entity)
                                                                     (1950 . package)))
-    ;; TODO: There is something wrong with procedures inside package body global_sim
+    ;; TODO: There is something wrong with procedures inside package body global_sim with `vhdl-ext'
     (,(file-name-concat test-hdl-vhdl-common-dir "global_sim.vhd") ((94 . package)
                                                                     (292 . package)
                                                                     (1854 . procedure)
@@ -110,7 +109,7 @@
                                                                    (2719 . generate)
                                                                    (2742 . generate)
                                                                    (2742 . architecture)))
-    ;; TODO: function and procedure at the beginning not detected
+    ;; TODO: function and procedure at the beginning not detected in `vhdl-ext'
     (,(file-name-concat test-hdl-vhdl-common-dir "sexp.vhd") ((2514 . function)
                                                               (3154 . procedure)
                                                               (3154 . process)

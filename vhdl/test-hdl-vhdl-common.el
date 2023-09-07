@@ -27,7 +27,6 @@
 
 ;;;; Requires
 (require 'test-hdl)
-(require 'vhdl-ext)
 
 ;;;; Directories
 (defconst test-hdl-vhdl-test-dir (file-name-concat test-hdl-test-dir "vhdl"))
@@ -46,6 +45,16 @@
 (defconst test-hdl-vhdl-navigation-dir (file-name-concat test-hdl-vhdl-files-dir "navigation"))
 (defconst test-hdl-vhdl-utils-dir (file-name-concat test-hdl-vhdl-files-dir "utils"))
 (defconst test-hdl-vhdl-tags-dir (file-name-concat test-hdl-vhdl-files-dir "tags"))
+
+;;;; File-lists
+(defun test-hdl-vhdl-file-ext ()
+  (or (and (boundp 'vhdl-ext-file-extension-re)
+           vhdl-ext-file-extension-re)
+      (and (boundp 'vhdl-ts-file-extension-re)
+           vhdl-ts-file-extension-re)))
+
+(defconst test-hdl-vhdl-common-file-list
+  (test-hdl-directory-files test-hdl-vhdl-common-dir (test-hdl-vhdl-file-ext)))
 
 
 (provide 'test-hdl-vhdl-common)

@@ -39,8 +39,8 @@
                                                           "global_sim.vhd"
                                                           "misc.vhd"
                                                           "sexp.vhd")))
-(defconst test-hdl-vhdl-navigation-block-nav-file-list
-  (test-hdl-directory-files test-hdl-vhdl-common-dir vhdl-ext-file-extension-re))
+
+(defconst test-hdl-vhdl-navigation-block-nav-file-list test-hdl-vhdl-common-file-list)
 
 
 (provide 'test-hdl-vhdl-navigation)

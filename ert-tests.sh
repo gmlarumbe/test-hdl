@@ -9,14 +9,13 @@ run_elisp_cmd() {
     local CMD=$1
     local LANGUAGE=$2
     local PACKAGE=$3
-    local PKG_MANAGER=$4
 
     args=(-Q -nw -batch
           -L $PWD/test-hdl
           -L $PWD/test-hdl/$LANGUAGE
           -L $PWD/test-hdl/$LANGUAGE/$PACKAGE
           -l ert
-          -l test-hdl-"$LANGUAGE"-setup-"${PKG_MANAGER}"
+          -l test-hdl-"${PACKAGE}"-setup-straight
           -l test-hdl-"${PACKAGE}"
           --eval "$CMD")
 
@@ -30,8 +29,7 @@ run_tests () {
 
     local LANGUAGE=$1
     local PACKAGE=$2
-    local PKG_MANAGER=$3
-    local SELECTOR=$4
+    local SELECTOR=$3
 
     if [[ -z "$LANGUAGE" ]]; then
         echo "run_tests: LANGUAGE not provided"
@@ -40,10 +38,6 @@ run_tests () {
     if [[ -z "$PACKAGE" ]]; then
         echo "run_tests: PACKAGE not provided"
         exit 1
-    fi
-    if [[ -z "$PKG_MANAGER" ]]; then
-       echo "run_tests: PKG_MANAGER not provided"
-       exit 1
     fi
 
     echo "#######################"
@@ -61,8 +55,30 @@ run_tests () {
         CMD="(ert-run-tests-batch-and-exit)"
     fi
 
-    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE" "$PKG_MANAGER"
+    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE"
     RC=$?
+    echo "Exiting with return code $RC"
+    return $RC
+}
+
+
+check_package_el() {
+    local RC=
+
+    local LANGUAGE=$1
+    local PACKAGE=$2
+
+    args=(-Q -nw -batch
+          -L $PWD/test-hdl
+          -L $PWD/test-hdl/$LANGUAGE
+          -L $PWD/test-hdl/$LANGUAGE/$PACKAGE
+          -l test-hdl-"${LANGUAGE}"-common
+          -l test-hdl-"${PACKAGE}"-setup-package
+          --eval "(test-hdl-${PACKAGE}-test-package-el)")
+
+    emacs "${args[@]}"
+    RC=$?
+
     echo "Exiting with return code $RC"
     return $RC
 }
@@ -86,35 +102,32 @@ compile() {
 
     local LANGUAGE=$1
     local PACKAGE=$2
-    local PKG_MANAGER=$3
 
     echo "###############"
     echo "## Compiling ##"
     echo "###############"
     echo ""
 
-    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE" "$PKG_MANAGER"
+    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE"
 }
 
 
 recompile() {
     local LANGUAGE=$1
     local PACKAGE=$2
-    local PKG_MANAGER=$3
 
     clean "$PACKAGE"
-    compile "$LANGUAGE" "$PACKAGE" "$PKG_MANAGER"
+    compile "$LANGUAGE" "$PACKAGE"
 }
 
 
 recompile_run () {
     local LANGUAGE=$1
     local PACKAGE=$2
-    local PKG_MANAGER=$3
-    local SELECTOR=$4
+    local SELECTOR=$3
 
-    recompile "$LANGUAGE" "$PACKAGE" "$PKG_MANAGER"
-    run_tests "$LANGUAGE" "$PACKAGE" "$PKG_MANAGER" "$SELECTOR"
+    recompile "$LANGUAGE" "$PACKAGE"
+    run_tests "$LANGUAGE" "$PACKAGE" "$SELECTOR"
 }
 
 

@@ -28,7 +28,7 @@
 (require 'test-hdl-vhdl-common)
 
 
-(defconst test-hdl-vhdl-indent-file-list (test-hdl-directory-files test-hdl-vhdl-common-dir vhdl-ext-file-extension-re))
+(defconst test-hdl-vhdl-indent-file-list test-hdl-vhdl-common-file-list)
 
 
 (provide 'test-hdl-vhdl-indent)

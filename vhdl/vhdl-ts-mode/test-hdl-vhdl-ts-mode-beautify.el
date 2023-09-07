@@ -27,12 +27,11 @@
 (require 'test-hdl-vhdl-ts-mode-common)
 
 
-;; TODO: At some point replace with:
-;; - (test-hdl-directory-files test-hdl-vhdl-common-dir vhdl-ext-file-extension-re)
-;; When axi_test.sv does not give errors
+;; TODO: At some point replace with `test-hdl-vhdl-common-file-list'
+;; - When axi_test.sv does not give errors
 (defconst test-hdl-vhdl-ts-mode-prettify-file-list (mapcar (lambda (file)
-                                                                (file-name-concat test-hdl-vhdl-common-dir file))
-                                                              '("axi_demux.sv" "instances.sv" "ucontroller.sv" "tb_program.sv")))
+                                                             (file-name-concat test-hdl-vhdl-common-dir file))
+                                                           '("axi_demux.sv" "instances.sv" "ucontroller.sv" "tb_program.sv")))
 
 
 (defun test-hdl-vhdl-ts-mode-prettify--remove ()
