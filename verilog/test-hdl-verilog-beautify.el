@@ -31,10 +31,19 @@
                                                         (file-name-concat test-hdl-verilog-common-dir file))
                                                       '("axi_demux.sv" "instances.sv" "ucontroller.sv")))
 
+
 (defun test-hdl-verilog-beautify-file (mode fn)
+  ;; Set mode or ts-mode
   (funcall mode)
-  (let ((verilog-ext-time-stamp-pattern nil)) ; Prevent auto-update of timestamp
-    (verilog-ext-replace-regexp-whole-buffer (concat "\\(?1:^\\s-*\\." verilog-identifier-re "\\)\\(?2:\\s-*\\)(") "\\1(")
+  (let* ((identifier-re "[a-zA-Z_][a-zA-Z_0-9]*")
+         (beautify-re (concat "\\(?1:^\\s-*\\." identifier-re "\\)\\(?2:\\s-*\\)("))
+         (verilog-ext-time-stamp-pattern nil)) ; Prevent auto-update of timestamp for `verilog-ext'
+    ;; Clean blanks in ports (similar to `verilog-ext-replace-regexp-whole-buffer')
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward beautify-re nil t)
+        (replace-match "\\1(")))
+    ;; Run beautify function
     (test-hdl-no-messages
       (funcall fn))))
 

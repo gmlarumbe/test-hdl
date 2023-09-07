@@ -1,4 +1,4 @@
-;;; test-hdl-verilog-ext.el --- verilog-ts-mode ERT tests  -*- lexical-binding: t -*-
+;;; test-hdl-verilog-ts-mode.el --- verilog-ts-mode ERT tests  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 

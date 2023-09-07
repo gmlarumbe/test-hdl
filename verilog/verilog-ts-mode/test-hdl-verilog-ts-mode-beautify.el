@@ -27,9 +27,8 @@
 (require 'test-hdl-verilog-ts-mode-common)
 
 
-;; TODO: At some point replace with:
-;; - (test-hdl-directory-files test-hdl-verilog-common-dir verilog-ext-file-extension-re)
-;; When axi_test.sv does not give errors
+;; TODO: At some point replace with `test-hdl-verilog-common-file-list':
+;; - When axi_test.sv does not give errors
 (defconst test-hdl-verilog-ts-mode-prettify-file-list (mapcar (lambda (file)
                                                                 (file-name-concat test-hdl-verilog-common-dir file))
                                                               '("axi_demux.sv" "instances.sv" "ucontroller.sv" "tb_program.sv")))
@@ -60,8 +59,7 @@
         (goto-char (treesit-node-end (verilog-ts--node-has-parent-recursive (verilog-ts--node-at-point) "\\(statement_or_null\\|\\(non\\)?blocking_assignment\\)")))))))
 
 (defun test-hdl-verilog-ts-mode-prettify-file ()
-  (let ((verilog-ext-time-stamp-pattern nil) ; Prevent auto-update of timestamp
-        (debug nil)
+  (let ((debug nil)
         node)
     (verilog-ts-mode)
     (test-hdl-verilog-ts-mode-prettify--remove)

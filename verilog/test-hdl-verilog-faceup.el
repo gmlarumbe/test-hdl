@@ -27,7 +27,7 @@
 (require 'test-hdl-verilog-common)
 
 
-(defconst test-hdl-verilog-faceup-file-list (test-hdl-directory-files test-hdl-verilog-common-dir verilog-ext-file-extension-re))
+(defconst test-hdl-verilog-faceup-file-list test-hdl-verilog-common-file-list)
 
 (defun test-hdl-verilog-faceup-file (mode)
   (funcall mode)

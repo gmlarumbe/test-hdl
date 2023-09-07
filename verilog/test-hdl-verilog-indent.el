@@ -29,10 +29,9 @@
 
 
 (defconst test-hdl-verilog-indent-file-list
-  (append (test-hdl-directory-files test-hdl-verilog-common-dir
-                                    verilog-ext-file-extension-re)
+  (append test-hdl-verilog-common-file-list
           (test-hdl-directory-files (file-name-concat test-hdl-verilog-files-dir "veripool")
-                                    verilog-ext-file-extension-re)))
+                                    (test-hdl-verilog-file-ext))))
 
 
 (provide 'test-hdl-verilog-indent)

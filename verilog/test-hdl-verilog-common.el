@@ -27,7 +27,6 @@
 
 ;;;; Requires
 (require 'test-hdl)
-(require 'verilog-ext)
 
 ;;;; Directories
 (defconst test-hdl-verilog-test-dir (file-name-concat test-hdl-test-dir "verilog"))
@@ -47,6 +46,16 @@
 (defconst test-hdl-verilog-utils-dir (file-name-concat test-hdl-verilog-files-dir "utils"))
 (defconst test-hdl-verilog-workspace-dir (file-name-concat test-hdl-verilog-files-dir "workspace"))
 (defconst test-hdl-verilog-tags-dir (file-name-concat test-hdl-verilog-files-dir "tags"))
+
+;;;; File-lists
+(defun test-hdl-verilog-file-ext ()
+  (or (and (boundp 'verilog-ext-file-extension-re)
+           verilog-ext-file-extension-re)
+      (and (boundp 'verilog-ts-file-extension-re)
+           verilog-ts-file-extension-re)))
+
+(defconst test-hdl-verilog-common-file-list
+  (test-hdl-directory-files test-hdl-verilog-common-dir (test-hdl-verilog-file-ext)))
 
 
 (provide 'test-hdl-verilog-common)

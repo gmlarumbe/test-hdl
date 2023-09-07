@@ -38,7 +38,7 @@
                                                              "tb_program.sv"
                                                              "uvm_component.svh")))
 
-(defconst test-hdl-verilog-navigation-block-nav-file-list (test-hdl-directory-files test-hdl-verilog-common-dir verilog-ext-file-extension-re))
+(defconst test-hdl-verilog-navigation-block-nav-file-list test-hdl-verilog-common-file-list)
 
 (defconst test-hdl-verilog-navigation-defun-up-file-and-pos
   `((,(file-name-concat test-hdl-verilog-common-dir "tb_program.sv") 855 1068 1143 1684 1829 2589 3495 4413 4635 4658)

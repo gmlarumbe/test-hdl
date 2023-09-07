@@ -28,7 +28,7 @@
 (require 'test-hdl-verilog-common)
 
 
-(defconst test-hdl-verilog-imenu-file-list (test-hdl-directory-files test-hdl-verilog-common-dir verilog-ext-file-extension-re))
+(defconst test-hdl-verilog-imenu-file-list test-hdl-verilog-common-file-list)
 
 
 (provide 'test-hdl-verilog-imenu)

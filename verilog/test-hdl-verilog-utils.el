@@ -27,8 +27,7 @@
 (require 'test-hdl-verilog-common)
 
 
-(defconst test-hdl-verilog-utils-file-list
-  (test-hdl-directory-files test-hdl-verilog-common-dir verilog-ext-file-extension-re))
+(defconst test-hdl-verilog-utils-file-list test-hdl-verilog-common-file-list)
 
 (defconst test-hdl-verilog-utils-block-at-point-file-and-pos
   `((,(file-name-concat test-hdl-verilog-common-dir "ucontroller.sv") 839 840 988 1288 2699 4873 4874 4888)
