@@ -29,7 +29,7 @@
 
 
 (defconst test-hdl-vhdl-ext-navigation-jump-to-parent-file-list
-  (test-hdl-directory-files test-hdl-vhdl-subblocks-dir vhdl-ext-file-extension-re))
+  (test-hdl-directory-files test-hdl-vhdl-subblocks-dir (test-hdl-vhdl-file-ext)))
 
 (cl-defun test-hdl-vhdl-ext-jump-to-parent-entity (&key mode engine)
   (cl-letf (((symbol-function 'compilation-start)

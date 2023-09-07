@@ -25,6 +25,7 @@
 ;;; Code:
 
 (require 'test-hdl-vhdl-ext-common)
+(require 'vhdl-ext) ; Needed for regexps of `test-hdl-vhdl-ext-beautify-block-at-point-re'
 
 (defconst test-hdl-vhdl-ext-beautify-block-at-point-re
   `(,vhdl-ext-entity-re
