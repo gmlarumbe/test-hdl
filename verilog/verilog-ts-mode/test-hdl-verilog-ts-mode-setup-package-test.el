@@ -1,4 +1,4 @@
-;;; test-hdl-verilog-ts-mode-setup-package.el --- verilog-ts-mode ERT Tests Setup with package.el  -*- lexical-binding: t -*-
+;;; test-hdl-verilog-ts-mode-setup-package-test.el --- verilog-ts-mode ERT Basic Test with package.el  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 
@@ -20,7 +20,10 @@
 
 ;;; Commentary:
 ;;
-;; verilog-ts-mode ERT Tests Setup with package.el
+;; verilog-ts-mode ERT Basic Test with package.el
+;;
+;; - Download package from MELPA, open Verilog file and ensure that
+;;  `vhdl-ts-mode' is enabled without compilation or runtime errors.
 ;;
 ;; INFO: Packages downloaded from MELPA (not MELPA Stable) will fetch the
 ;; snapshot of the latest commit in the corresponding Git repo and its
@@ -36,9 +39,8 @@
 
 ;;;; Setup package.el
 (require 'package)
-;; INFO: Perform tests in package.el only in MELPA Stable:
-;;  - For bleeding-edge versions use straight and package.el basic test
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; INFO: Do not use MELPA-Stable for basic test
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;;;; Install/setup package
@@ -47,16 +49,17 @@
 (require 'verilog-ts-mode)
 (add-to-list 'auto-mode-alist '("\\.s?vh?\\'" . verilog-ts-mode))
 
-;;;; Customization
-;;;;; align
-(require 'align)
-(setq align-default-spacing 1)
-(setq align-to-tab-stop nil)
 
-;;;;; tree-sitter
-(setq treesit-font-lock-level 4)
+;;;; package.el CI test function
+(defun test-hdl-verilog-ts-mode-setup-package-test-basic ()
+  "For test file path, rely on running emacs batch mode with -L test-hdl-verilog-common-dir"
+  (let ((test-file (file-name-concat test-hdl-verilog-common-dir "ucontroller.sv")))
+    (find-file test-file)
+    (if (not (eq major-mode 'verilog-ts-mode))
+        (error "Error with package.el: Could not open %s with `verilog-ts-mode', opened with `%s'" buffer-file-name major-mode)
+      (message "Opened file: %s, with major-mode: %s" buffer-file-name major-mode))))
 
 
-(provide 'test-hdl-verilog-ts-mode-setup-package)
+(provide 'test-hdl-verilog-ts-mode-setup-package-test)
 
-;;; test-hdl-verilog-ts-mode-setup-package.el ends here
+;;; test-hdl-verilog-ts-mode-setup-package-test.el ends here
