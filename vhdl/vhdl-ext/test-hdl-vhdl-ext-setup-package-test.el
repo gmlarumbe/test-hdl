@@ -1,4 +1,4 @@
-;;; test-hdl-vhdl-ext-setup-package.el --- vhdl-ext ERT Tests Setup with package.el  -*- lexical-binding: t -*-
+;;; test-hdl-vhdl-ext-setup-package-test.el --- vhdl-ext ERT Basic Test with package.el  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 
@@ -20,7 +20,10 @@
 
 ;;; Commentary:
 ;;
-;; vhdl-ext ERT Tests Setup with package.el
+;; vhdl-ext ERT Basic Test with package.el
+;;
+;; - Download package from MELPA, open VHDL file and ensure that
+;;  `vhdl-mode-ext' is enabled without compilation or runtime errors.
 ;;
 ;; INFO: Packages downloaded from MELPA (not MELPA Stable) will fetch the
 ;; snapshot of the latest commit in the corresponding Git repo and its
@@ -36,9 +39,8 @@
 
 ;;;; Setup package.el
 (require 'package)
-;; INFO: Perform tests in package.el only in MELPA Stable:
-;;  - For bleeding-edge versions use straight and package.el basic test
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; INFO: Do not use MELPA-Stable for basic test
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;;;; Install/setup package
@@ -48,17 +50,17 @@
 (vhdl-ext-mode-setup)
 (add-hook 'vhdl-mode-hook #'vhdl-ext-mode)
 
-;;;; Customization
-;;;;; align
-(require 'align)
-(setq align-default-spacing 1)
-(setq align-to-tab-stop nil)
 
-;;;;; vhdl-mode
-(setq vhdl-modify-date-on-saving nil)
-(setq vhdl-basic-offset 4)
+;;;; package.el CI test function
+(defun test-hdl-vhdl-ext-setup-package-test-basic ()
+  "For test file path, rely on running emacs batch mode with -L test-hdl-vhdl-common-dir"
+  (let ((test-file (file-name-concat test-hdl-vhdl-common-dir "axi_if_converter.vhd")))
+    (find-file test-file)
+    (if (not vhdl-ext-mode)
+        (error "Error with package.el: Could not open %s with `vhdl-ext-mode'" buffer-file-name)
+      (message "Opened file: %s, with `vhdl-ext-mode': %s" buffer-file-name vhdl-ext-mode))))
 
 
-(provide 'test-hdl-vhdl-ext-setup-package)
+(provide 'test-hdl-vhdl-ext-setup-package-test)
 
-;;; test-hdl-vhdl-ext-setup-package.el ends here
+;;; test-hdl-vhdl-ext-setup-package-test.el ends here
