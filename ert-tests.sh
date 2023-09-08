@@ -154,5 +154,25 @@ gen_expected () {
 }
 
 
+git_reset_to_latest_tag () {
+    # Abort if there are uncommitted changes
+    if [[ -n "$(git status --porcelain)" ]]; then
+        echo "There are uncommitted changes:"
+        git status
+        return 1
+    else
+        # Get new tags from remote
+        git fetch --tags
+        # Get latest tag name
+        latestTag=$(git describe --tags $(git rev-list --tags --max-count=1))
+        # Create temp branch to avoid issues with main in case there are errors
+        local TEMP_BRANCH=$(echo $RANDOM | md5sum | head -c 7; echo;)
+        git checkout -b ci/$TEMP_BRANCH
+        # Point main rapo to latest tag and update its submodules
+        git reset --hard --recurse-submodules $latestTag
+    fi
+}
+
+
 # Main
 "$@"

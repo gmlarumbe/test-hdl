@@ -49,4 +49,5 @@ package-el-melpa-test-basic:
 	$(ERT_TESTS) check_package_el $(LANGUAGE) $(PACKAGE)
 
 package-el-melpa-stable:
+	$(ERT_TESTS) git_reset_to_latest_tag
 	$(ERT_TESTS) run_tests $(LANGUAGE) $(PACKAGE) package $(TESTS)
