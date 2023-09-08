@@ -31,6 +31,7 @@ echo ""
 echo "Setting up GHDL..."
 curl -L -o $LATEST_RELEASE_FILE $GHDL_GITHUB_URL/$LATEST_RELEASE_URL/$LATEST_RELEASE_FILE
 sudo tar xvzf $LATEST_RELEASE_FILE --directory /usr
+rm $LATEST_RELEASE_FILE # Set a clean Git worktree
 echo ""
 echo "$(which ghdl)"
 echo "ghdl version: $(ghdl --version)"
@@ -51,5 +52,6 @@ echo ""
 echo "tree-sitter lib path: "
 echo "$(sudo ldconfig -p | grep libtree-sitter)"
 cd ..
+rm -rf tree-sitter # Set a clean Git worktree
 
 

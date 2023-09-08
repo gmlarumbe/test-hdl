@@ -23,7 +23,7 @@
 ;; vhdl-ext ERT Basic Test with package.el
 ;;
 ;; - Download package from MELPA, open VHDL file and ensure that
-;;  `vhdl-mode-ext' is enabled without compilation or runtime errors.
+;;  `vhdl-ext-mode' is enabled without compilation or runtime errors.
 ;;
 ;; INFO: Packages downloaded from MELPA (not MELPA Stable) will fetch the
 ;; snapshot of the latest commit in the corresponding Git repo and its

@@ -66,5 +66,5 @@ echo ""
 echo "tree-sitter lib path: "
 echo "$(sudo ldconfig -p | grep libtree-sitter)"
 cd ..
-rm -rf tree-sitter
+rm -rf tree-sitter # Set a clean Git worktree
 

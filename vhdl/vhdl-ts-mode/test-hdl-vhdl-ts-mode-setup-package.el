@@ -22,13 +22,22 @@
 ;;
 ;; vhdl-ts-mode ERT Tests Setup with package.el
 ;;
+;; INFO: Packages downloaded from MELPA (not MELPA Stable) will fetch the
+;; snapshot of the latest commit in the corresponding Git repo and its
+;; dependencies. It would therefore have the same effect as testing with
+;; straight but with the issue that test/ code in the repo would not be in sync
+;; with the code of the downloaded package until the snapshot is updated
+;; (various times per day).
+;;
+;; For MELPA Stable this is different since package.el will download the tagged
+;; version of the repo and all its dependencies.
+;;
 ;;; Code:
 
 ;;;; Setup package.el
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
+;; INFO: Perform tests in package.el only in MELPA Stable:
+;;  - For bleeding-edge versions use straight and package.el basic test
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
@@ -38,15 +47,14 @@
 (require 'vhdl-ts-mode)
 (add-to-list 'auto-mode-alist '("\\.vhdl?\\'" . vhdl-ts-mode))
 
+;;;; Customization
+;;;;; align
+(require 'align)
+(setq align-default-spacing 1)
+(setq align-to-tab-stop nil)
 
-;;;; package.el CI test function
-(defun test-hdl-vhdl-ts-mode-test-package-el ()
-  "For test file path, rely on running emacs batch mode with -L test-hdl-vhdl-common-dir"
-  (let ((test-file (file-name-concat test-hdl-vhdl-common-dir "axi_if_converter.vhd")))
-    (find-file test-file)
-    (if (not (eq major-mode 'vhdl-ts-mode))
-        (error "Error with package.el: Could not open %s with `vhdl-ts-mode', opened with `%s'" buffer-file-name major-mode)
-      (message "Opened file: %s, with major-mode: %s" buffer-file-name major-mode))))
+;;;;; tree-sitter
+(setq treesit-font-lock-level 4)
 
 
 (provide 'test-hdl-vhdl-ts-mode-setup-package)

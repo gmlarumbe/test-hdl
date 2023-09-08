@@ -1,4 +1,4 @@
-;;; test-hdl-verilog-ts-mode-setup-package-test.el --- verilog-ts-mode ERT Basic Test with package.el  -*- lexical-binding: t -*-
+;;; test-hdl-vhdl-ts-mode-setup-package-test.el --- vhdl-ts-mode ERT Basic Test with package.el  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2023 Gonzalo Larumbe
 
@@ -20,10 +20,10 @@
 
 ;;; Commentary:
 ;;
-;; verilog-ts-mode ERT Basic Test with package.el
+;; vhdl-ts-mode ERT Basic Test with package.el
 ;;
-;; - Download package from MELPA, open Verilog file and ensure that
-;;  `verilog-ts-mode' is enabled without compilation or runtime errors.
+;; - Download package from MELPA, open VHDL file and ensure that
+;;  `vhdl-ts-mode' is enabled without compilation or runtime errors.
 ;;
 ;; INFO: Packages downloaded from MELPA (not MELPA Stable) will fetch the
 ;; snapshot of the latest commit in the corresponding Git repo and its
@@ -44,22 +44,22 @@
 (package-initialize)
 
 ;;;; Install/setup package
-(message "Installing and setting up verilog-ts-mode")
-(package-install 'verilog-ts-mode)
-(require 'verilog-ts-mode)
-(add-to-list 'auto-mode-alist '("\\.s?vh?\\'" . verilog-ts-mode))
+(message "Installing and setting up vhdl-ts-mode")
+(package-install 'vhdl-ts-mode)
+(require 'vhdl-ts-mode)
+(add-to-list 'auto-mode-alist '("\\.vhdl?\\'" . vhdl-ts-mode))
 
 
 ;;;; package.el CI test function
-(defun test-hdl-verilog-ts-mode-setup-package-test-basic ()
-  "For test file path, rely on running emacs batch mode with -L test-hdl-verilog-common-dir"
-  (let ((test-file (file-name-concat test-hdl-verilog-common-dir "ucontroller.sv")))
+(defun test-hdl-vhdl-ts-mode-setup-package-test-basic ()
+  "For test file path, rely on running emacs batch mode with -L test-hdl-vhdl-common-dir"
+  (let ((test-file (file-name-concat test-hdl-vhdl-common-dir "axi_if_converter.vhd")))
     (find-file test-file)
-    (if (not (eq major-mode 'verilog-ts-mode))
-        (error "Error with package.el: Could not open %s with `verilog-ts-mode', opened with `%s'" buffer-file-name major-mode)
+    (if (not (eq major-mode 'vhdl-ts-mode))
+        (error "Error with package.el: Could not open %s with `vhdl-ts-mode', opened with `%s'" buffer-file-name major-mode)
       (message "Opened file: %s, with major-mode: %s" buffer-file-name major-mode))))
 
 
-(provide 'test-hdl-verilog-ts-mode-setup-package-test)
+(provide 'test-hdl-vhdl-ts-mode-setup-package-test)
 
-;;; test-hdl-verilog-ts-mode-setup-package-test.el ends here
+;;; test-hdl-vhdl-ts-mode-setup-package-test.el ends here
