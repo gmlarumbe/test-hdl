@@ -9,13 +9,14 @@ run_elisp_cmd() {
     local CMD=$1
     local LANGUAGE=$2
     local PACKAGE=$3
+    local PKG_MANAGER=$4
 
     args=(-Q -nw -batch
           -L $PWD/test-hdl
           -L $PWD/test-hdl/$LANGUAGE
           -L $PWD/test-hdl/$LANGUAGE/$PACKAGE
           -l ert
-          -l test-hdl-"${PACKAGE}"-setup-straight
+          -l test-hdl-"${PACKAGE}"-setup-"${PKG_MANAGER}"
           -l test-hdl-"${PACKAGE}"
           --eval "$CMD")
 
@@ -29,7 +30,8 @@ run_tests () {
 
     local LANGUAGE=$1
     local PACKAGE=$2
-    local SELECTOR=$3
+    local PKG_MANAGER=$3
+    local SELECTOR=$4
 
     if [[ -z "$LANGUAGE" ]]; then
         echo "run_tests: LANGUAGE not provided"
@@ -37,6 +39,10 @@ run_tests () {
     fi
     if [[ -z "$PACKAGE" ]]; then
         echo "run_tests: PACKAGE not provided"
+        exit 1
+    fi
+    if [[ -z "$PKG_MANAGER" ]]; then
+        echo "run_tests: PKG_MANAGER not provided"
         exit 1
     fi
 
@@ -55,7 +61,7 @@ run_tests () {
         CMD="(ert-run-tests-batch-and-exit)"
     fi
 
-    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE"
+    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE" "$PKG_MANAGER"
     RC=$?
     echo "Exiting with return code $RC"
     return $RC
@@ -73,8 +79,8 @@ check_package_el() {
           -L $PWD/test-hdl/$LANGUAGE
           -L $PWD/test-hdl/$LANGUAGE/$PACKAGE
           -l test-hdl-"${LANGUAGE}"-common
-          -l test-hdl-"${PACKAGE}"-setup-package
-          --eval "(test-hdl-${PACKAGE}-test-package-el)")
+          -l test-hdl-"${PACKAGE}"-setup-package-test
+          --eval "(test-hdl-${PACKAGE}-setup-package-test-basic)")
 
     emacs "${args[@]}"
     RC=$?
@@ -108,7 +114,7 @@ compile() {
     echo "###############"
     echo ""
 
-    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE"
+    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE" "straight"
 }
 
 
@@ -127,7 +133,7 @@ recompile_run () {
     local SELECTOR=$3
 
     recompile "$LANGUAGE" "$PACKAGE"
-    run_tests "$LANGUAGE" "$PACKAGE" "$SELECTOR"
+    run_tests "$LANGUAGE" "$PACKAGE" "straight" "$SELECTOR"
 }
 
 

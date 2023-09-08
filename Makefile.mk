@@ -30,22 +30,23 @@ endif
 
 
 # Default target
-all: recompile run
+all: run
 
 
-# Tests recompile/run
+# Straight
 recompile:
 	$(ERT_TESTS) recompile $(LANGUAGE) $(PACKAGE)
 
-run:
-	$(ERT_TESTS) run_tests $(LANGUAGE) $(PACKAGE) $(TESTS)
+run: recompile
+	$(ERT_TESTS) run_tests $(LANGUAGE) $(PACKAGE) straight $(TESTS)
 
-
-# Regenerate expected outputs
 gen: recompile
 	$(ERT_TESTS) gen_expected $(LANGUAGE) $(PACKAGE) $(TESTS)
 
 
-# package.el basic test
-pkg_el: recompile
+# Package.el
+package-el-melpa-test-basic:
 	$(ERT_TESTS) check_package_el $(LANGUAGE) $(PACKAGE)
+
+package-el-melpa-stable:
+	$(ERT_TESTS) run_tests $(LANGUAGE) $(PACKAGE) package $(TESTS)

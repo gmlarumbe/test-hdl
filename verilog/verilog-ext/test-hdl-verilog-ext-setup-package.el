@@ -22,13 +22,22 @@
 ;;
 ;; verilog-ext ERT Tests Setup with package.el
 ;;
+;; INFO: Packages downloaded from MELPA (not MELPA Stable) will fetch the
+;; snapshot of the latest commit in the corresponding Git repo and its
+;; dependencies. It would therefore have the same effect as testing with
+;; straight but with the issue that test/ code in the repo would not be in sync
+;; with the code of the downloaded package until the snapshot is updated
+;; (various times per day).
+;;
+;; For MELPA Stable this is different since package.el will download the tagged
+;; version of the repo and all its dependencies.
+;;
 ;;; Code:
 
 ;;;; Setup package.el
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
+;; INFO: Perform tests in package.el only in MELPA Stable:
+;;  - For bleeding-edge versions use straight and package.el basic test
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
@@ -39,15 +48,44 @@
 (verilog-ext-mode-setup)
 (add-hook 'verilog-mode-hook #'verilog-ext-mode)
 
+;;;; Customization
+;;;;; align
+(require 'align)
+(setq align-default-spacing 1)
+(setq align-to-tab-stop nil)
 
-;;;; package.el CI test function
-(defun test-hdl-verilog-ext-test-package-el ()
-  "For test file path, rely on running emacs batch mode with -L test-hdl-verilog-common-dir"
-  (let ((test-file (file-name-concat test-hdl-verilog-common-dir "ucontroller.sv")))
-    (find-file test-file)
-    (if (not verilog-ext-mode)
-        (error "Error with package.el: Could not open %s with `verilog-ext-mode'" buffer-file-name)
-      (message "Opened file: %s, with `verilog-ext-mode': %s" buffer-file-name verilog-ext-mode))))
+;;;;; verilog-mode
+(defvar verilog-ext-test-indent-level 4)
+(setq verilog-indent-level             verilog-ext-test-indent-level)
+(setq verilog-indent-level-module      verilog-ext-test-indent-level)
+(setq verilog-indent-level-declaration verilog-ext-test-indent-level)
+(setq verilog-indent-level-behavioral  verilog-ext-test-indent-level)
+(setq verilog-indent-level-directive   verilog-ext-test-indent-level)
+(setq verilog-case-indent              verilog-ext-test-indent-level)
+(setq verilog-cexp-indent              verilog-ext-test-indent-level)
+(setq verilog-indent-lists                  nil)
+(setq verilog-indent-begin-after-if           t)
+(setq verilog-tab-always-indent               t) ; Indent even though we are not at the beginning of line
+(setq verilog-tab-to-comment                nil)
+(setq verilog-date-scientific-format          t)
+(setq verilog-case-fold                     nil) ; Regexps should NOT ignore case
+(setq verilog-align-ifelse                  nil)
+(setq verilog-indent-ignore-regexp      "// \\*") ; Ignore outshine headings
+;; Verilog AUTO
+(setq verilog-auto-delete-trailing-whitespace t) ; ‘delete-trailing-whitespace’ in ‘verilog-auto’.
+(setq verilog-auto-indent-on-newline          t) ; Self-explaining
+(setq verilog-auto-lineup                   nil) ; other options are 'declarations or 'all
+(setq verilog-auto-newline                  nil)
+(setq verilog-auto-endcomments              nil)
+(setq verilog-auto-wire-comment             nil)
+(setq verilog-minimum-comment-distance        1) ; (default 10) Only applies to AUTOs, called in `verilog-set-auto-endcomments'
+;; Alignment
+(setq verilog-align-assign-expr t)
+(setq verilog-align-typedef-regexp (concat "\\<" verilog-identifier-re "_\\(t\\|if\\|vif\\)\\>"))
+
+;;;;; verilog-ext
+(setq verilog-ext-feature-list (remove 'typedefs verilog-ext-feature-list)) ; Do not override `verilog-align-typedef-regexp'
+(verilog-ext-mode-setup)
 
 
 (provide 'test-hdl-verilog-ext-setup-package)
