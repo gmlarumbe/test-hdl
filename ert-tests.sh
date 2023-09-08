@@ -159,17 +159,18 @@ git_reset_to_latest_tag () {
     if [[ -n "$(git status --porcelain)" ]]; then
         echo "There are uncommitted changes:"
         git status
-        return 1
+        exit 1
     else
         # Get new tags from remote
         git fetch --tags
         # Get latest tag name
         latestTag=$(git describe --tags $(git rev-list --tags --max-count=1))
-        # Create temp branch to avoid issues with main in case there are errors
-        local TEMP_BRANCH=$(echo $RANDOM | md5sum | head -c 7; echo;)
-        git checkout -b ci/$TEMP_BRANCH
+        [[ -z "$latestTag" ]] && { echo "Could not retrieve latest tag"; exit 1;}
+        # Create temp branch to avoid issues with main in case there are fatals/errors
+        git checkout -b ci/$latestTag
         # Point main rapo to latest tag and update its submodules
         git reset --hard --recurse-submodules $latestTag
+        echo "Current branch: $(git log --format='%d' -1 HEAD)"
     fi
 }
 

@@ -32,11 +32,13 @@ echo ""
 echo "Setting up Verible tools..."
 curl -L -o $LATEST_RELEASE_FILE $VERIBLE_GITHUB_URL/$LATEST_RELEASE_URL/$LATEST_RELEASE_FILE
 tar xvzf $LATEST_RELEASE_FILE
+rm $LATEST_RELEASE_FILE # Clean to avoid dirty Git worktree
 cd verible-*/bin
 sudo cp verible-verilog-ls /usr/bin/verible-verilog-ls
 sudo cp verible-verilog-format /usr/bin/verible-verilog-format
 sudo cp verible-verilog-lint /usr/bin/verible-verilog-lint
 cd -
+rm -rf verible-*
 
 echo ""
 echo "verible-verilog-ls version $(verible-verilog-ls --version)"
@@ -64,4 +66,5 @@ echo ""
 echo "tree-sitter lib path: "
 echo "$(sudo ldconfig -p | grep libtree-sitter)"
 cd ..
+rm -rf tree-sitter
 
