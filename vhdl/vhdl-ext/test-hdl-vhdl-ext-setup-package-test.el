@@ -38,10 +38,9 @@
 ;;; Code:
 
 ;;;; Setup package.el
-(require 'package)
 ;; INFO: Do not use MELPA-Stable for basic test
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+(setq test-hdl-setup-package-archives '(("melpa" . "https://melpa.org/packages/")))
+(require 'test-hdl-setup-package)
 
 ;;;; Install/setup package
 (message "Installing and setting up vhdl-ext")

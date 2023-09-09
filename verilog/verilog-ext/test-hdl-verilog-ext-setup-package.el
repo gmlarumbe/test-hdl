@@ -35,11 +35,10 @@
 ;;; Code:
 
 ;;;; Setup package.el
-(require 'package)
 ;; INFO: Perform tests in package.el only in MELPA Stable:
 ;;  - For bleeding-edge versions use straight and package.el basic test
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-initialize)
+(setq test-hdl-setup-package-archives '(("melpa-stable" . "https://stable.melpa.org/packages/")))
+(require 'test-hdl-setup-package)
 
 ;;;; Install/setup package
 (message "Installing and setting up verilog-ext")
