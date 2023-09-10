@@ -3,8 +3,8 @@
 # Copyright (c) 2022-2023 Gonzalo Larumbe
 # All rights reserved.
 
-PKGS_TO_INSTALL=(global universal-ctags python3-pygments silversearcher-ag ripgrep libgnat-10)
-EXPECTED_INSTALLED_BINARIES=(python global gtags ctags ag rg)
+PKGS_TO_INSTALL=(global universal-ctags python3-pygments silversearcher-ag libgnat-10)
+EXPECTED_INSTALLED_BINARIES=(python global gtags ctags ag)
 
 sudo apt-get update
 
@@ -22,6 +22,16 @@ for bin in "${EXPECTED_INSTALLED_BINARIES[@]}"; do
     echo "$bin path: $(which $bin)"
     echo "$bin version: $($bin --version)"
 done
+
+# Setup ripgrep with support for PCRE2 (the one from apt-get did not have it)
+# According to: https://github.com/BurntSushi/ripgrep#installation
+#  - Debian section
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+sudo dpkg -i ripgrep_13.0.0_amd64.deb
+echo ""
+echo "$(which rg)"
+echo "rg version: $(rg --version)"
+
 
 # Setup GHDL (get latest release)
 GHDL_GITHUB_URL=https://github.com/ghdl/ghdl
