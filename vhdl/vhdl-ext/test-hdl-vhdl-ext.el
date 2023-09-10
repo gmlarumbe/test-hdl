@@ -37,6 +37,7 @@
 (require 'test-hdl-vhdl-ext-hierarchy)
 (require 'test-hdl-vhdl-ext-tags)
 (require 'test-hdl-vhdl-ext-capf)
+(require 'test-hdl-vhdl-ext-xref)
 
 
 ;;;; Aux funcs
@@ -48,7 +49,8 @@
   (test-hdl-vhdl-ext-beautify-gen-expected-files)
   (test-hdl-vhdl-ext-hierarchy-gen-expected-files)
   (test-hdl-vhdl-ext-tags-gen-expected-files)
-  (test-hdl-vhdl-ext-capf-gen-expected-files))
+  (test-hdl-vhdl-ext-capf-gen-expected-files)
+  (test-hdl-vhdl-ext-xref-gen-expected-files))
 
 
 (provide 'test-hdl-vhdl-ext)

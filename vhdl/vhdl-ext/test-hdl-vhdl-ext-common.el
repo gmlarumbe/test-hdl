@@ -38,6 +38,7 @@
 (defconst test-hdl-vhdl-ext-utils-dir (file-name-concat test-hdl-vhdl-utils-dir "vhdl-ext"))
 (defconst test-hdl-vhdl-ext-tags-dir (file-name-concat test-hdl-vhdl-tags-dir "vhdl-ext"))
 (defconst test-hdl-vhdl-ext-capf-dir (file-name-concat test-hdl-vhdl-capf-dir "vhdl-ext"))
+(defconst test-hdl-vhdl-ext-xref-dir (file-name-concat test-hdl-vhdl-xref-dir "vhdl-ext"))
 
 
 
