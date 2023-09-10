@@ -52,6 +52,7 @@
 (require 'test-hdl-hierarchy)
 (require 'test-hdl-navigation)
 (require 'test-hdl-utils)
+(require 'test-hdl-capf)
 
 
 ;; GitHub CI (required for GHDL tests)

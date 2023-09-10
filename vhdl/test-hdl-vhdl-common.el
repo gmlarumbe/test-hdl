@@ -45,6 +45,7 @@
 (defconst test-hdl-vhdl-navigation-dir (file-name-concat test-hdl-vhdl-files-dir "navigation"))
 (defconst test-hdl-vhdl-utils-dir (file-name-concat test-hdl-vhdl-files-dir "utils"))
 (defconst test-hdl-vhdl-tags-dir (file-name-concat test-hdl-vhdl-files-dir "tags"))
+(defconst test-hdl-vhdl-capf-dir (file-name-concat test-hdl-vhdl-files-dir "capf"))
 
 ;;;; File-lists
 (defun test-hdl-vhdl-file-ext ()

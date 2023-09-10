@@ -107,7 +107,7 @@
          (description "")
          (vhdl-project-alist `((,proj-name
                                 ,proj-title
-                                ,(or proj-dir test-hdl-vhdl-common-dir proj-dir)    ; Project default-directory
+                                ,(or proj-dir test-hdl-vhdl-common-dir)             ; Project default-directory
                                 ,sources                                            ; Project sources
                                 ,exclude-regexp ,compile-options ,compile-directory ; Non-relevant options
                                 ,(or lib-name "work")                               ; Library name (key arg)
