@@ -35,8 +35,7 @@
 (require 'test-hdl-vhdl-ext-imenu)
 (require 'test-hdl-vhdl-ext-beautify)
 (require 'test-hdl-vhdl-ext-hierarchy)
-;; TODO
-;; (require 'test-hdl-vhdl-ext-tags)
+(require 'test-hdl-vhdl-ext-tags)
 
 
 ;;;; Aux funcs
@@ -47,9 +46,7 @@
   (test-hdl-vhdl-ext-imenu-gen-expected-files)
   (test-hdl-vhdl-ext-beautify-gen-expected-files)
   (test-hdl-vhdl-ext-hierarchy-gen-expected-files)
-  ;; TODO
-  ;; (test-hdl-vhdl-ext-tags-gen-expected-files)
-  )
+  (test-hdl-vhdl-ext-tags-gen-expected-files))
 
 
 (provide 'test-hdl-vhdl-ext)
