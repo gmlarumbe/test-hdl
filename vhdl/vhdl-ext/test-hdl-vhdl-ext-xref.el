@@ -60,57 +60,73 @@
         (vhdl-ext-tags-inst-table nil))
     ;; Generate/update tags for test project
     (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
-                                :sources test-hdl-vhdl-common-file-list)
+                                :sources test-hdl-vhdl-common-file-list
+                                :rel-path t)
     ;; Iterate over files with tags tables
     (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
       (let ((file (car file-refs))
             (refs (cdr file-refs)))
         (test-hdl-vhdl-ext-tags-with-test-project
-         ;; Defs
-         (test-hdl-gen-expected-files :file-list `(,file)
-                                      :dest-dir (file-name-concat test-hdl-vhdl-ext-xref-dir "ref")
-                                      :out-file-ext "xref.defs.el"
-                                      :process-fn 'eval
-                                      :fn #'test-hdl-vhdl-ext-xref-fn
-                                      :args `(:refs ,refs
-                                              :type def))
-         (test-hdl-gen-expected-files :file-list `(,file)
-                                      :dest-dir (file-name-concat test-hdl-vhdl-ext-xref-dir "ref")
-                                      :out-file-ext "xref.refs.el"
-                                      :process-fn 'eval
-                                      :fn #'test-hdl-vhdl-ext-xref-fn
-                                      :args `(:refs ,refs
-                                              :type ref)))))))
+          ;; Defs
+          (test-hdl-gen-expected-files :file-list `(,file)
+                                       :dest-dir (file-name-concat test-hdl-vhdl-ext-xref-dir "ref")
+                                       :out-file-ext "xref.defs.el"
+                                       :process-fn 'eval
+                                       :fn #'test-hdl-vhdl-ext-xref-fn
+                                       :args `(:refs ,refs
+                                               :type def))
+          (test-hdl-gen-expected-files :file-list `(,file)
+                                       :dest-dir (file-name-concat test-hdl-vhdl-ext-xref-dir "ref")
+                                       :out-file-ext "xref.refs.el"
+                                       :process-fn 'eval
+                                       :fn #'test-hdl-vhdl-ext-xref-fn
+                                       :args `(:refs ,refs
+                                               :type ref)))))))
 
 
-(ert-deftest vhdl-ext::xref ()
+(ert-deftest vhdl-ext::xref:defs ()
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
     ;; Generate/update tags for test project
     (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
-                                :sources test-hdl-vhdl-common-file-list)
+                                :sources test-hdl-vhdl-common-file-list
+                                :rel-path t)
     ;; Iterate over files with tags tables
     (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
       (let ((file (car file-refs))
             (refs (cdr file-refs)))
         (test-hdl-vhdl-ext-tags-with-test-project
-         ;; Defs
-         (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                              :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "xref.defs.el"))
-                                                              :process-fn 'eval
-                                                              :fn #'test-hdl-vhdl-ext-xref-fn
-                                                              :args `(:refs ,refs
-                                                                      :type def))
-                                       (file-name-concat test-hdl-vhdl-ext-xref-dir "ref" (test-hdl-basename file "xref.defs.el"))))
-         ;; Refs
-         (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                              :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "xref.refs.el"))
-                                                              :process-fn 'eval
-                                                              :fn #'test-hdl-vhdl-ext-xref-fn
-                                                              :args `(:refs ,refs
-                                                                      :type ref))
-                                       (file-name-concat test-hdl-vhdl-ext-xref-dir "ref" (test-hdl-basename file "xref.refs.el")))))))))
+          ;; Defs
+          (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                               :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "xref.defs.el"))
+                                                               :process-fn 'eval
+                                                               :fn #'test-hdl-vhdl-ext-xref-fn
+                                                               :args `(:refs ,refs
+                                                                       :type def))
+                                        (file-name-concat test-hdl-vhdl-ext-xref-dir "ref" (test-hdl-basename file "xref.defs.el")))))))))
+
+(ert-deftest vhdl-ext::xref:refs ()
+  (let ((vhdl-ext-tags-defs-table nil)
+        (vhdl-ext-tags-refs-table nil)
+        (vhdl-ext-tags-inst-table nil))
+    ;; Generate/update tags for test project
+    (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
+                                :sources test-hdl-vhdl-common-file-list
+                                :rel-path t)
+    ;; Iterate over files with tags tables
+    (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
+      (let ((file (car file-refs))
+            (refs (cdr file-refs)))
+        (test-hdl-vhdl-ext-tags-with-test-project
+          ;; Refs
+          (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                               :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "xref.refs.el"))
+                                                               :process-fn 'eval
+                                                               :fn #'test-hdl-vhdl-ext-xref-fn
+                                                               :args `(:refs ,refs
+                                                                       :type ref))
+                                        (file-name-concat test-hdl-vhdl-ext-xref-dir "ref" (test-hdl-basename file "xref.refs.el")))))))))
 
 
 (provide 'test-hdl-vhdl-ext-xref)

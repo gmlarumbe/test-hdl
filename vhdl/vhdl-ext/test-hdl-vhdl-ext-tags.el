@@ -38,7 +38,7 @@
               (lambda () test-vhdl-ext-tags-proj-name)))
      ,@body))
 
-(cl-defun test-hdl-vhdl-ext-tags-get (&key dir sources)
+(cl-defun test-hdl-vhdl-ext-tags-get (&key dir sources rel-path)
   "Populate the value of the tags tables for test-hdl-vhdl project."
   (let* ((proj-name test-vhdl-ext-tags-proj-name) ; `vhdl-project-alist' settings
          (proj-title "vhdl-ext ERT tags tests")
@@ -58,7 +58,12 @@
     ;; Get tags after setting environment
     (test-hdl-vhdl-ext-tags-with-test-project
       (test-hdl-no-messages
-        (vhdl-ext-tags-get)))))
+        ;; Make file entries relative to avoid issues in GitHub Actions CI with a different $HOME
+        (when rel-path
+          (advice-add 'vhdl-ext-tags-locs-props :filter-args #'test-hdl-tags-locs-props-files-relative))
+        (vhdl-ext-tags-get)
+        (when rel-path
+          (advice-remove 'vhdl-ext-tags-locs-props #'test-hdl-tags-locs-props-files-relative))))))
 
 
 ;;;; Standalone tests
@@ -70,7 +75,7 @@
   (delete-trailing-whitespace (point-min) (point-max)))
 
 (cl-defun test-hdl-vhdl-ext-tags-ts-defs-file-fn (&key table inst-table file)
-  (let ((file (file-relative-name file test-hdl-test-dir)))
+  (let ((file (file-relative-name file test-hdl-test-dir))) ; Use relative path for GitHub Actions
     (test-hdl-vhdl-ext-tags-clean)
     (test-hdl-no-messages
       (vhdl-ts-mode))
@@ -78,7 +83,7 @@
     table))
 
 (cl-defun test-hdl-vhdl-ext-tags-ts-refs-file-fn (&key table defs-table file)
-  (let ((file (file-relative-name file test-hdl-test-dir)))
+  (let ((file (file-relative-name file test-hdl-test-dir))) ; Use relative path for GitHub Actions
     (test-hdl-vhdl-ext-tags-clean)
     (test-hdl-no-messages
       (vhdl-ts-mode))

@@ -219,6 +219,21 @@ Call CLEAN-FN after comparison if arg is provided."
     (reverse ret-alist)))
 
 
+;;;; Advice functions
+(defun test-hdl-tags-locs-props-files-relative (&rest args)
+  "Advice for `vhdl-ext-tags-locs-props' or `verilog-ext-tags-locs-props'.
+
+Meant to be used with :filter-args.
+
+Convert file-name to relative before passing it to corresponding tags-locs-props
+function to avoid issues with GitHub Actions and CI."
+  (let* ((args-list (car args))
+         (type (nth 0 args-list))
+         (desc (nth 1 args-list))
+         (file (or (nth 2 args-list) buffer-file-name)))
+    `(,type ,desc ,(file-relative-name file test-hdl-test-dir))))
+
+
 ;;;; Hash-table
 ;; https://stackoverflow.com/questions/18180393/compare-hash-table-in-emacs-lisp
 ;; Using `ht' could be an alternative, but let's try to reduce the amount of dependencies
