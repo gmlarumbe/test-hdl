@@ -31,9 +31,11 @@
 (defconst test-hdl-verilog-ext-workspace-dummy-file-list `(,(file-name-concat test-hdl-verilog-common-dir "instances.sv")))
 
 
-(cl-defun test-hdl-verilog-ext-workspace-fn (&key root-dir ignore-dirs ignore-files)
+(cl-defun test-hdl-verilog-ext-workspace-fn (&key root-dir dirs extra-files ignore-dirs ignore-files)
   "Show as one file per line instead of as an Elisp string list."
   (let* ((verilog-ext-workspace-root-dir root-dir)
+         (verilog-ext-workspace-dirs dirs)
+         (verilog-ext-workspace-extra-files extra-files)
          (verilog-ext-workspace-ignore-dirs ignore-dirs)
          (verilog-ext-workspace-ignore-files ignore-files)
          (file-list (verilog-ext-workspace-files)))
@@ -45,31 +47,49 @@
 (defun test-hdl-verilog-ext-workspace-gen-expected-files ()
   "INFO: Result should be the same independently of the chosen file."
   (let ((file-list test-hdl-verilog-ext-workspace-dummy-file-list))
-  ;; Test1: Set `verilog-ext-workspace-root-dir'
-  (test-hdl-gen-expected-files :file-list file-list
-                               :dest-dir (file-name-concat test-hdl-verilog-ext-workspace-dir "ref")
-                               :out-file-ext "test1"
-                               :process-fn 'eval
-                               :fn #'test-hdl-verilog-ext-workspace-fn
-                               :args `(:root-dir ,test-hdl-verilog-common-dir))
-  ;; Test2: Set `verilog-ext-workspace-root-dir' and `verilog-ext-workspace-ignore-dirs'
-  (test-hdl-gen-expected-files :file-list file-list
-                               :dest-dir (file-name-concat test-hdl-verilog-ext-workspace-dir "ref")
-                               :out-file-ext "test2"
-                               :process-fn 'eval
-                               :fn #'test-hdl-verilog-ext-workspace-fn
-                               :args `(:root-dir ,test-hdl-verilog-common-dir
-                                       :ignore-dirs (,test-hdl-verilog-subblocks-dir)))
-  ;; Test3: Set `verilog-ext-workspace-root-dir', `verilog-ext-workspace-ignore-dirs' and `verilog-ext-workspace-ignore-files'
-  (test-hdl-gen-expected-files :file-list file-list
-                               :dest-dir (file-name-concat test-hdl-verilog-ext-workspace-dir "ref")
-                               :out-file-ext "test3"
-                               :process-fn 'eval
-                               :fn #'test-hdl-verilog-ext-workspace-fn
-                               :args `(:root-dir ,test-hdl-verilog-common-dir
-                                       :ignore-dirs (,test-hdl-verilog-subblocks-dir)
-                                       :ignore-files (,(file-name-concat test-hdl-verilog-common-dir "ucontroller.sv")
-                                                      ,(file-name-concat test-hdl-verilog-common-dir "instances.sv"))))))
+    ;; Test1: Set `verilog-ext-workspace-root-dir'
+    (test-hdl-gen-expected-files :file-list file-list
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-workspace-dir "ref")
+                                 :out-file-ext "test1"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-verilog-ext-workspace-fn
+                                 :args `(:root-dir ,test-hdl-verilog-common-dir))
+    ;; Test2: Set `verilog-ext-workspace-root-dir' and `verilog-ext-workspace-dirs'
+    (test-hdl-gen-expected-files :file-list file-list
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-workspace-dir "ref")
+                                 :out-file-ext "test2"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-verilog-ext-workspace-fn
+                                 :args `(:root-dir ,test-hdl-verilog-common-dir
+                                         :dirs (,test-hdl-verilog-ucontroller-rtl-dir)))
+    ;; Test3: Set `verilog-ext-workspace-root-dir', `verilog-ext-workspace-dirs' and `verilog-ext-workspace-extra-files'
+    (test-hdl-gen-expected-files :file-list file-list
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-workspace-dir "ref")
+                                 :out-file-ext "test3"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-verilog-ext-workspace-fn
+                                 :args `(:root-dir ,test-hdl-verilog-common-dir
+                                         :dirs (,test-hdl-verilog-ucontroller-rtl-dir)
+                                         :extra-files (,(file-name-concat test-hdl-verilog-ucontroller-tb-dir "tb_top.sv")
+                                                       ,(file-name-concat test-hdl-verilog-ucontroller-tb-dir "tb_alu.sv"))))
+    ;; Test4: Set `verilog-ext-workspace-root-dir' and `verilog-ext-workspace-ignore-dirs'
+    (test-hdl-gen-expected-files :file-list file-list
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-workspace-dir "ref")
+                                 :out-file-ext "test4"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-verilog-ext-workspace-fn
+                                 :args `(:root-dir ,test-hdl-verilog-common-dir
+                                         :ignore-dirs (,test-hdl-verilog-subblocks-dir)))
+    ;; Test5: Set `verilog-ext-workspace-root-dir', `verilog-ext-workspace-ignore-dirs' and `verilog-ext-workspace-ignore-files'
+    (test-hdl-gen-expected-files :file-list file-list
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-workspace-dir "ref")
+                                 :out-file-ext "test5"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-verilog-ext-workspace-fn
+                                 :args `(:root-dir ,test-hdl-verilog-common-dir
+                                         :ignore-dirs (,test-hdl-verilog-subblocks-dir)
+                                         :ignore-files (,(file-name-concat test-hdl-verilog-common-dir "ucontroller.sv")
+                                                        ,(file-name-concat test-hdl-verilog-common-dir "instances.sv"))))))
 
 (ert-deftest verilog-ext::workspace::files ()
   (let ((file (car test-hdl-verilog-ext-workspace-dummy-file-list)))
@@ -80,24 +100,42 @@
                                                          :fn #'test-hdl-verilog-ext-workspace-fn
                                                          :args `(:root-dir ,test-hdl-verilog-common-dir))
                                   (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test1"))))
-    ;; Test2: Set `verilog-ext-workspace-root-dir' and `verilog-ext-workspace-ignore-dirs'
+    ;; Test2: Set `verilog-ext-workspace-root-dir' and `verilog-ext-workspace-dirs'
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-workspace-dir "dump" (test-hdl-basename file "test2"))
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-verilog-ext-workspace-fn
                                                          :args `(:root-dir ,test-hdl-verilog-common-dir
-                                                                 :ignore-dirs (,test-hdl-verilog-subblocks-dir)))
+                                                                 :dirs (,test-hdl-verilog-ucontroller-rtl-dir)))
                                   (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test2"))))
-    ;; Test3: Set `verilog-ext-workspace-root-dir', `verilog-ext-workspace-ignore-dirs' and `verilog-ext-workspace-ignore-files'
+    ;; Test3: Set `verilog-ext-workspace-root-dir', `verilog-ext-workspace-dirs' and `verilog-ext-workspace-extra-files'
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-workspace-dir "dump" (test-hdl-basename file "test3"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-verilog-ext-workspace-fn
+                                                         :args `(:root-dir ,test-hdl-verilog-common-dir
+                                                                 :dirs (,test-hdl-verilog-ucontroller-rtl-dir)
+                                                                 :extra-files (,(file-name-concat test-hdl-verilog-ucontroller-tb-dir "tb_top.sv")
+                                                                               ,(file-name-concat test-hdl-verilog-ucontroller-tb-dir "tb_alu.sv"))))
+                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test3"))))
+    ;; Test4: Set `verilog-ext-workspace-root-dir' and `verilog-ext-workspace-ignore-dirs'
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-workspace-dir "dump" (test-hdl-basename file "test4"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-verilog-ext-workspace-fn
+                                                         :args `(:root-dir ,test-hdl-verilog-common-dir
+                                                                 :ignore-dirs (,test-hdl-verilog-subblocks-dir)))
+                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test4"))))
+    ;; Test5: Set `verilog-ext-workspace-root-dir', `verilog-ext-workspace-ignore-dirs' and `verilog-ext-workspace-ignore-files'
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-workspace-dir "dump" (test-hdl-basename file "test5"))
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-verilog-ext-workspace-fn
                                                          :args `(:root-dir ,test-hdl-verilog-common-dir
                                                                  :ignore-dirs (,test-hdl-verilog-subblocks-dir)
                                                                  :ignore-files (,(file-name-concat test-hdl-verilog-common-dir "ucontroller.sv")
                                                                                 ,(file-name-concat test-hdl-verilog-common-dir "instances.sv"))))
-                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test3"))))))
+                                  (file-name-concat test-hdl-verilog-ext-workspace-dir "ref" (test-hdl-basename file "test5"))))))
 
 
 

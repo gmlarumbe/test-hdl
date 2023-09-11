@@ -25,6 +25,7 @@
 ;;; Code:
 
 ;;;; Requires
+(require 'verilog-ext)
 (require 'test-hdl-verilog)
 
 ;;;; Directories

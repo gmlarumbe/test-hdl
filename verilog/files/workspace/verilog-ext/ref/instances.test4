@@ -1,0 +1,6 @@
+verilog/files/common/axi_demux.sv
+verilog/files/common/axi_test.sv
+verilog/files/common/instances.sv
+verilog/files/common/tb_program.sv
+verilog/files/common/ucontroller.sv
+verilog/files/common/uvm_component.svh
