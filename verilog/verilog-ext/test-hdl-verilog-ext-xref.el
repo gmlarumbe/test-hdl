@@ -86,7 +86,7 @@
                                              :type ref))))))
 
 
-(ert-deftest verilog-ext::xref:defs ()
+(ert-deftest verilog-ext::xref::defs ()
   (let ((verilog-ext-workspace-tags-defs-table nil)
         (verilog-ext-workspace-tags-refs-table nil)
         (verilog-ext-workspace-tags-inst-table nil))
@@ -100,7 +100,7 @@
             (refs (cdr file-refs)))
         ;; Defs
         (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                             :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "xref.defs.el"))
+                                                             :dump-file (file-name-concat test-hdl-verilog-ext-xref-dir "dump" (test-hdl-basename file "xref.defs.el"))
                                                              :process-fn 'eval
                                                              :fn #'test-hdl-verilog-ext-xref-fn
                                                              :args `(:refs ,refs
@@ -108,7 +108,7 @@
                                       (file-name-concat test-hdl-verilog-ext-xref-dir "ref" (test-hdl-basename file "xref.defs.el"))))))))
 
 
-(ert-deftest verilog-ext::xref:refs ()
+(ert-deftest verilog-ext::xref::refs ()
   (let ((verilog-ext-workspace-tags-defs-table nil)
         (verilog-ext-workspace-tags-refs-table nil)
         (verilog-ext-workspace-tags-inst-table nil))
@@ -122,7 +122,7 @@
             (refs (cdr file-refs)))
         ;; Refs
         (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                             :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "xref.refs.el"))
+                                                             :dump-file (file-name-concat test-hdl-verilog-ext-xref-dir "dump" (test-hdl-basename file "xref.refs.el"))
                                                              :process-fn 'eval
                                                              :fn #'test-hdl-verilog-ext-xref-fn
                                                              :args `(:refs ,refs

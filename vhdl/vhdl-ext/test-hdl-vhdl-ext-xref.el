@@ -84,7 +84,7 @@
                                                :type ref)))))))
 
 
-(ert-deftest vhdl-ext::xref:defs ()
+(ert-deftest vhdl-ext::xref::defs ()
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
@@ -106,7 +106,7 @@
                                                                        :type def))
                                         (file-name-concat test-hdl-vhdl-ext-xref-dir "ref" (test-hdl-basename file "xref.defs.el")))))))))
 
-(ert-deftest vhdl-ext::xref:refs ()
+(ert-deftest vhdl-ext::xref::refs ()
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
