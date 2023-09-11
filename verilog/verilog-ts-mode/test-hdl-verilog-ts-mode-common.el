@@ -25,6 +25,7 @@
 ;;; Code:
 
 ;;;; Requires
+(require 'verilog-ts-mode)
 (require 'test-hdl-verilog)
 
 ;;;; Directories

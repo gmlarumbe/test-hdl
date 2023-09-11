@@ -25,6 +25,7 @@
 ;;; Code:
 
 ;;;; Requires
+(require 'vhdl-ext)
 (require 'test-hdl-vhdl)
 
 ;;;; Directories

@@ -25,6 +25,7 @@
 ;;; Code:
 
 ;;;; Requires
+(require 'vhdl-ts-mode)
 (require 'test-hdl-vhdl)
 
 ;;;; Directories
