@@ -38,6 +38,8 @@
 (require 'test-hdl-verilog-ext-workspace)
 (require 'test-hdl-verilog-ext-hierarchy)
 (require 'test-hdl-verilog-ext-tags)
+(require 'test-hdl-verilog-ext-capf)
+(require 'test-hdl-verilog-ext-xref)
 
 
 ;;;; Aux funcs
@@ -50,7 +52,9 @@
   (test-hdl-verilog-ext-beautify-gen-expected-files)
   (test-hdl-verilog-ext-workspace-gen-expected-files)
   (test-hdl-verilog-ext-hierarchy-gen-expected-files)
-  (test-hdl-verilog-ext-tags-gen-expected-files))
+  (test-hdl-verilog-ext-tags-gen-expected-files)
+  (test-hdl-verilog-ext-capf-gen-expected-files)
+  (test-hdl-verilog-ext-xref-gen-expected-files))
 
 
 (provide 'test-hdl-verilog-ext)

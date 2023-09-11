@@ -27,6 +27,25 @@
 
 (require 'test-hdl-verilog-ext-common)
 
+
+;;;; Aux functions (used for capf/hierarchy/xref)
+(cl-defun test-hdl-verilog-ext-tags-get (&key backend root-dir dirs extra-files ignore-dirs ignore-files rel-path)
+  (let* ((verilog-ext-tags-backend backend)
+         (verilog-ext-workspace-root-dir root-dir)
+         (verilog-ext-workspace-dirs dirs)
+         (verilog-ext-workspace-extra-files extra-files)
+         (verilog-ext-workspace-ignore-dirs ignore-dirs)
+         (verilog-ext-workspace-ignore-files ignore-files))
+    ;; Make file entries relative to avoid issues in GitHub Actions CI with a different $HOME
+    (test-hdl-no-messages
+      (when rel-path
+        (advice-add 'verilog-ext-tags-locs-props :filter-args #'test-hdl-tags-locs-props-files-relative))
+      (verilog-ext-workspace-get-tags)
+      (when rel-path
+        (advice-remove 'verilog-ext-tags-locs-props #'test-hdl-tags-locs-props-files-relative)))))
+
+
+;;;; Standalone tests
 (defconst test-hdl-verilog-ext-tags-file-list test-hdl-verilog-common-file-list)
 
 (defconst test-hdl-verilog-ext-tags-file-and-tag-type-list
