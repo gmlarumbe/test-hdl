@@ -37,9 +37,7 @@
 
 
 ;;;; Install/setup package
-;; TODO: Update when ts-mode is integrated into MELPA
 (use-package vhdl-ts-mode
-  :straight (:host github :repo "gmlarumbe/vhdl-ts-mode" :files (:defaults))
   :mode (("\\.vhdl?\\'" . vhdl-ts-mode))
   :config
   (setq treesit-font-lock-level 4))

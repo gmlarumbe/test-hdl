@@ -37,9 +37,7 @@
 
 
 ;;;; Install/setup package
-;; TODO: Update when ts-mode is integrated into MELPA
 (use-package verilog-ts-mode
-  :straight (:host github :repo "gmlarumbe/verilog-ts-mode" :files (:defaults))
   :mode (("\\.s?vh?\\'" . verilog-ts-mode))
   :config
   (setq treesit-font-lock-level 4))

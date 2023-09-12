@@ -42,14 +42,7 @@
   (setq vhdl-basic-offset 4))
 
 ;;;; Install/setup package
-;; TODO: Remove when ts-mode recipe is updated in MELPA
-;; - Put before `vhdl-ext' to make sure that new updates are fetched for testing,
-;; otherwise it will fetch `vhdl-ts-mode' as the old one already in MELPA
-(use-package vhdl-ts-mode
-  :straight (:host github :repo "gmlarumbe/vhdl-ts-mode" :files (:defaults)))
-
 (use-package vhdl-ext
-  :straight (:host github :repo "gmlarumbe/vhdl-ext" :files (:defaults "snippets"))
   :hook ((vhdl-mode . vhdl-ext-mode))
   :config
   (vhdl-ext-mode-setup))

@@ -70,16 +70,7 @@
 
 ;;;; Install/setup package
 (message "Installing and setting up verilog-ext")
-
-;; TODO: Remove when ts-mode recipe is updated in MELPA
-;; - Put before `verilog-ext' to make sure that new updates are fetched for testing,
-;; otherwise it will fetch `verilog-ts-mode' as the old one already in MELPA
-(use-package verilog-ts-mode
-  :straight (:host github :repo "gmlarumbe/verilog-ts-mode" :files (:defaults)))
-
 (use-package verilog-ext
-  ;; TODO: Remove when ts-mode is integrated into MELPA, to avoid overriding its autoloads
-  :straight (:host github :repo "gmlarumbe/verilog-ext" :files (:defaults "snippets"))
   :hook ((verilog-mode . verilog-ext-mode))
   :config
   (setq verilog-ext-feature-list (remove 'typedefs verilog-ext-feature-list)) ; Do not override `verilog-align-typedef-regexp'
