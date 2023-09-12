@@ -32,6 +32,7 @@ sudo dpkg -i ripgrep_13.0.0_amd64.deb
 echo ""
 echo "$(which rg)"
 echo "rg version: $(rg --version)"
+rm ripgrep_13.0.0_amd64.deb  # Set a clean Git worktree
 
 
 # Setup Verible (get latest release)
