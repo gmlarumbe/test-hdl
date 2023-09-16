@@ -8,19 +8,19 @@
        :annotation-function verilog-ext-workspace-capf-annotation-function :company-docsig identity))
  ((2956 "cpu::")
   (2961 2961
-	("Clk" "Rst_n" "ROM_Data" "ROM_Addr" "RAM_Addr" "RAM_Cs" "RAM_Wen" "RAM_Oen" "DataOut" "DataIn" "DMA_Req" "DMA_Ack" "DMA_Tx_Start" "DMA_Ready" "alu_op" "ALU_DataOut" "ALU_DataIn" "FlagZ" "FlagC" "FlagN" "FlagE" "state" "next_state" "pc_ena" "load_inst" "load_inst_auxbyte" "rom_instruction" "rom_aux" "addr" "addr_aux" "alu_data" "decode_type1_inst" "decode_type2_inst" "decode_type3_inst" "decode_type4_inst" "execute_type2_inst" "execute_type3_inst")
+	("Clk" "Rst_n" "ROM_Data" "ROM_Addr" "RAM_Addr" "RAM_Cs" "RAM_Wen" "RAM_Oen" "DataOut" "DataIn" "DMA_Req" "DMA_Ack" "DMA_Tx_Start" "DMA_Ready" "ALU_op" "ALU_DataOut" "ALU_DataIn" "FlagZ" "FlagC" "FlagN" "FlagE" "state_t" "state" "next_state" "pc_ena" "load_inst" "load_inst_auxbyte" "rom_instruction" "rom_aux" "addr" "addr_aux" "alu_data" "decode_type1_inst" "decode_type2_inst" "decode_type3_inst" "decode_type4_inst" "execute_type2_inst" "execute_type3_inst")
 	:annotation-function verilog-ext-workspace-capf-annotation-function :company-docsig identity))
  ((2956 "I_CPU.")
   (2962 2962
-	("Clk" "Rst_n" "ROM_Data" "ROM_Addr" "RAM_Addr" "RAM_Cs" "RAM_Wen" "RAM_Oen" "DataOut" "DataIn" "DMA_Req" "DMA_Ack" "DMA_Tx_Start" "DMA_Ready" "alu_op" "ALU_DataOut" "ALU_DataIn" "FlagZ" "FlagC" "FlagN" "FlagE" "state" "next_state" "pc_ena" "load_inst" "load_inst_auxbyte" "rom_instruction" "rom_aux" "addr" "addr_aux" "alu_data" "decode_type1_inst" "decode_type2_inst" "decode_type3_inst" "decode_type4_inst" "execute_type2_inst" "execute_type3_inst")
+	("Clk" "Rst_n" "ROM_Data" "ROM_Addr" "RAM_Addr" "RAM_Cs" "RAM_Wen" "RAM_Oen" "DataOut" "DataIn" "DMA_Req" "DMA_Ack" "DMA_Tx_Start" "DMA_Ready" "ALU_op" "ALU_DataOut" "ALU_DataIn" "FlagZ" "FlagC" "FlagN" "FlagE" "state_t" "state" "next_state" "pc_ena" "load_inst" "load_inst_auxbyte" "rom_instruction" "rom_aux" "addr" "addr_aux" "alu_data" "decode_type1_inst" "decode_type2_inst" "decode_type3_inst" "decode_type4_inst" "execute_type2_inst" "execute_type3_inst")
 	:annotation-function verilog-ext-workspace-capf-annotation-function :company-docsig identity))
  ((2956 "alu::In")
   (2961 2963
-	("Clk" "Rst_n" "alu_op" "InData" "OutData" "FlagZ" "FlagC" "FlagN" "FlagE" "ASCII_BINARY_0" "ASCII_BINARY_9" "InA" "InB" "InAcc" "InIndex" "InZ" "InC" "InN" "InE" "EnA" "EnB" "EnAcc" "EnIndex" "EnZ" "EnC" "EnN" "EnE" "OutA" "OutB" "OutAcc" "OutIndex")
+	("Clk" "Rst_n" "ALU_op" "InData" "OutData" "FlagZ" "FlagC" "FlagN" "FlagE" "ASCII_BINARY_0" "ASCII_BINARY_9" "InA" "InB" "InAcc" "InIndex" "InZ" "InC" "InN" "InE" "EnA" "EnB" "EnAcc" "EnIndex" "EnZ" "EnC" "EnN" "EnE" "OutA" "OutB" "OutAcc" "OutIndex")
 	:annotation-function verilog-ext-workspace-capf-annotation-function :company-docsig identity))
  ((2956 "I_ALU.In")
   (2962 2964
-	("Clk" "Rst_n" "alu_op" "InData" "OutData" "FlagZ" "FlagC" "FlagN" "FlagE" "ASCII_BINARY_0" "ASCII_BINARY_9" "InA" "InB" "InAcc" "InIndex" "InZ" "InC" "InN" "InE" "EnA" "EnB" "EnAcc" "EnIndex" "EnZ" "EnC" "EnN" "EnE" "OutA" "OutB" "OutAcc" "OutIndex")
+	("Clk" "Rst_n" "ALU_op" "InData" "OutData" "FlagZ" "FlagC" "FlagN" "FlagE" "ASCII_BINARY_0" "ASCII_BINARY_9" "InA" "InB" "InAcc" "InIndex" "InZ" "InC" "InN" "InE" "EnA" "EnB" "EnAcc" "EnIndex" "EnZ" "EnC" "EnN" "EnE" "OutA" "OutB" "OutAcc" "OutIndex")
 	:annotation-function verilog-ext-workspace-capf-annotation-function :company-docsig identity))
  ((point-max "end")
   (4840 4843
