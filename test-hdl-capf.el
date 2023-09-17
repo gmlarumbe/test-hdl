@@ -36,7 +36,7 @@ The car of each element must be a file.
 The cdr must be a list with positions (or a function returning a position)
 and initial strings used for completion."
   (let (ret-alist pos-or-func pos init-string completions)
-    (dolist (pos-and-string pos-init-string-alist)
+    (dolist (pos-and-string pos-init-string-alist (nreverse ret-alist))
       (setq pos-or-func (car pos-and-string))
       (setq pos (if (functionp pos-or-func) (funcall pos-or-func) pos-or-func))
       (setq init-string (cadr pos-and-string))
@@ -45,8 +45,7 @@ and initial strings used for completion."
         (insert init-string)
         (setq completions (funcall capf-fn))
         (push `(,pos-and-string ,completions) ret-alist))
-      (kill-forward-chars (length init-string)))
-    (nreverse ret-alist)))
+      (kill-forward-chars (length init-string)))))
 
 
 (provide 'test-hdl-capf)

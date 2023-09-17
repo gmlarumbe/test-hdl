@@ -200,23 +200,21 @@ Call CLEAN-FN after comparison if arg is provided."
   (let (fn-ret-value ret-alist)
     (test-hdl-no-messages
       (funcall mode))
-    (dolist (pos pos-list)
+    (dolist (pos pos-list (nreverse ret-alist))
       (goto-char pos)
       (setq fn-ret-value (funcall fn))
-      (push (cons fn-ret-value (point)) ret-alist))
-    (reverse ret-alist)))
+      (push (cons fn-ret-value (point)) ret-alist))))
 
 (cl-defun test-hdl-pos-and-match-alist-fn (&key mode fn pos-and-match-alist)
   (let (fn-ret-value ret-alist)
     (test-hdl-no-messages
       (funcall mode))
-    (dolist (pos-and-match pos-and-match-alist)
+    (dolist (pos-and-match pos-and-match-alist (nreverse ret-alist))
       (let ((pos (car pos-and-match))
             (match (cdr pos-and-match)))
         (goto-char pos)
         (setq fn-ret-value (funcall fn match))
-        (push (cons fn-ret-value (point)) ret-alist)))
-    (reverse ret-alist)))
+        (push (cons fn-ret-value (point)) ret-alist)))))
 
 
 ;;;; Advice functions

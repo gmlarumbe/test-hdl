@@ -49,9 +49,8 @@
 
 (cl-defun test-hdl-vhdl-ext-xref-fn (&key refs type)
   (let (ret-val)
-    (dolist (ref refs)
-      (push (vhdl-ext-xref--find-symbol ref type) ret-val))
-    (nreverse ret-val)))
+    (dolist (ref refs (nreverse ret-val))
+      (push (vhdl-ext-xref--find-symbol ref type) ret-val))))
 
 
 (defun test-hdl-vhdl-ext-xref-gen-expected-files ()

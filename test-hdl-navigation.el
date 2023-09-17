@@ -37,7 +37,7 @@
         (push (point) var)
         (when while-hook
           (funcall while-hook))))
-    (reverse var)))
+    (nreverse var)))
 
 
 (provide 'test-hdl-navigation)

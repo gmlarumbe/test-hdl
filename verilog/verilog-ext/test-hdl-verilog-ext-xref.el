@@ -51,9 +51,8 @@
 
 (cl-defun test-hdl-verilog-ext-xref-fn (&key refs type)
   (let (ret-val)
-    (dolist (ref refs)
-      (push (verilog-ext-xref--find-symbol ref type) ret-val))
-    (nreverse ret-val)))
+    (dolist (ref refs (nreverse ret-val))
+      (push (verilog-ext-xref--find-symbol ref type) ret-val))))
 
 
 (defun test-hdl-verilog-ext-xref-gen-expected-files ()
