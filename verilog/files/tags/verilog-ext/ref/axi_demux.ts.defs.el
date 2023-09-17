@@ -288,13 +288,13 @@
 		       ((:type "cnt_t" :desc "cnt_t cnt_delta, in_flight;" :file "verilog/files/common/axi_demux.sv" :line 734)))
 	       "axi_demux_intf"
 	       (:items
-		("clk_i" "rst_ni" "test_i" "slv_aw_select_i" "slv_ar_select_i" "Slave" "Master" "id_t" "addr_t" "data_t" "strb_t" "user_t" "slv_req" "slv_resp" "mst_req" "mst_resp")
+		("clk_i" "rst_ni" "test_i" "slv_aw_select_i" "slv_ar_select_i" "slv" "mst" "id_t" "addr_t" "data_t" "strb_t" "user_t" "slv_req" "slv_resp" "mst_req" "mst_resp")
 		:locs
 		((:type "module_declaration" :desc "module axi_demux_intf #(" :file "verilog/files/common/axi_demux.sv" :line 810)))
-	       "Slave"
+	       "slv"
 	       (:items nil :locs
 		       ((:type "AXI_BUS.Slave" :desc "AXI_BUS.Slave   slv,                   // slave port" :file "verilog/files/common/axi_demux.sv" :line 834)))
-	       "Master"
+	       "mst"
 	       (:items nil :locs
 		       ((:type "AXI_BUS.Master" :desc "AXI_BUS.Master  mst [NO_MST_PORTS-1:0] // master ports" :file "verilog/files/common/axi_demux.sv" :line 835)))
 	       "id_t"
