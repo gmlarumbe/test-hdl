@@ -35,7 +35,7 @@ all: run
 
 # Straight
 recompile:
-	@if [[ -n "${TESTS_RECOMPILE_SKIP}" ]] || [[ -n "${TESTS_CLEAN_ENV}" ]]; then\
+	@if [ -n "${TESTS_RECOMPILE_SKIP}" ] || [ -n "${TESTS_CLEAN_ENV}" ]; then\
 		echo "TESTS_RECOMPILE_SKIP or TESTS_CLEAN_ENV env var set: Skipping recompiling";\
 	else\
 		$(ERT_TESTS) recompile $(LANGUAGE) $(PACKAGE);\
