@@ -1,1 +1,1 @@
-("[0m[35m./instances.sv[0m:[0m[32m83[0m:    [0m[1m[31mtest_if_params_empty[0m #() I_TEST_IF_PARAMS_EMPTY (.clk(clk), .rst_n(rst_n));" "" "1 matches" "1 matched lines" "1 files contained matches" "17 files searched" "98 bytes printed")
+("./instances.sv:83:5:    test_if_params_empty #() I_TEST_IF_PARAMS_EMPTY (.clk(clk), .rst_n(rst_n));" "" "1 matches" "1 matched lines" "1 files contained matches" "17 files searched" "100 bytes printed")

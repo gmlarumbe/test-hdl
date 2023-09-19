@@ -1,1 +1,1 @@
-("[0m[35m./instances.sv[0m:[0m[32m79[0m:    [0m[1m[31mtest_if_params[0m # (.param1(param1), .param2(param2)) ITEST_IF_PARAMS (.clk(clk), .rst_n(rst_n));" "" "1 matches" "1 matched lines" "1 files contained matches" "17 files searched" "118 bytes printed")
+("./instances.sv:79:5:    test_if_params # (.param1(param1), .param2(param2)) ITEST_IF_PARAMS (.clk(clk), .rst_n(rst_n));" "" "1 matches" "1 matched lines" "1 files contained matches" "17 files searched" "120 bytes printed")

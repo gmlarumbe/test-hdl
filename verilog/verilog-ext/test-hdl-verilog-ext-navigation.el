@@ -36,7 +36,17 @@
              (lambda (command &optional mode name-function highlight-regexp)
                (butlast (split-string (shell-command-to-string command) "\n") 4))))
     (let* ((verilog-ext-jump-to-parent-module-engine engine)
-           (verilog-ext-workspace-root-dir test-hdl-verilog-common-dir))
+           (verilog-ext-workspace-root-dir test-hdl-verilog-common-dir)
+           ;; INFO: Using let-binding in ripgrep.el arguments for compatibility with release 0.4.0 (Feb 2017) for MELPA Stable tests
+           ;;
+           ;; From man rg(1):
+           ;;
+           ;; --vimgrep
+           ;;     Show results with every match on its own line, including line
+           ;;     numbers and column numbers. With this option, a line with more than
+           ;;     one match will be printed more than once.
+           (ripgrep-highlight-search nil)
+           (ripgrep-arguments '("--vimgrep")))
       ;; Core after all the function setup, using default args for ag and rg
       (funcall mode)
       (verilog-ext-workspace-jump-to-parent-module))))

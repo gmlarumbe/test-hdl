@@ -1,1 +1,1 @@
-("[0m[35m./instances.sv[0m:[0m[32m77[0m:    [0m[1m[31mtest_if[0m I_TEST_IF (.clk(clk), .rst_n(rst_n));" "" "1 matches" "1 matched lines" "1 files contained matches" "17 files searched" "68 bytes printed")
+("./instances.sv:77:5:    test_if I_TEST_IF (.clk(clk), .rst_n(rst_n));" "" "1 matches" "1 matched lines" "1 files contained matches" "17 files searched" "70 bytes printed")
