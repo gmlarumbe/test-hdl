@@ -3,13 +3,17 @@
 «x:--------------------------------------------------------------------------------»
 
 «x:-- 1) Testing comments at unit space:»
+     «x:-- before library comment»
 «k:library» «b:ieee»«:vhdl-ts-font-lock-punctuation-face:,» «b:work»«:vhdl-ts-font-lock-punctuation-face:;»
+     «x:-- after library comment»
 «k:use» «f:ieee»«:vhdl-ts-font-lock-punctuation-face:.»«f:std_logic_1164»«:vhdl-ts-font-lock-punctuation-face:.»«k:all»«:vhdl-ts-font-lock-punctuation-face:;»
-«x:-- use ieee.std_logic_1164.all;»
-«x:-- use ieee.std_logic_1164.all;»
+        «x:-- use ieee.std_logic_1164.all;»
+   «x:-- use ieee.std_logic_1164.all;»
 
+     «x:-- before entity comment»
 «k:entity» «f:foo» «k:is»
 «k:end» «k:entity» «f:foo»«:vhdl-ts-font-lock-punctuation-face:;»
+    «x:-- after entity comment»
 
 
 
