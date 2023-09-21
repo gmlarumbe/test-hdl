@@ -60,6 +60,31 @@
     (setq straight-base-dir dir)))
 
 
+(defmacro test-hdl-when-github-action (&rest body)
+  "BODY should be a use-package form with :straight nil clause.
+
+This is done in order to shadow fresh downloaded repos by straight.el with local
+repos with or without changes.
+
+This is needed in GitHub Actions since the correct revision of the repo is
+downloaded by actions/checkout, for PRs and pushes to specific branches.
+
+Otherwise the wrong version in master/main from MELPA recipe would be always
+used with straight."
+  (declare (indent 0) (debug t))
+  `(when (getenv "GITHUB_ACTION")
+     ;; For GitHub Actions use checked out repo instead of downloading one new with straight
+     (message "Env var GITHUB_ACTION set, using already checked out repo...")
+     (message "GITHUB_REPOSITORY = %s" (getenv "GITHUB_REPOSITORY"))
+     (message "GITHUB_REF = %s" (getenv "GITHUB_REF"))
+     (message "GITHUB_REF_NAME = %s" (getenv "GITHUB_REF_NAME"))
+     (message "Testing on branch: %s\n" (car (split-string (shell-command-to-string "git rev-parse --abbrev-ref HEAD") "\n")))
+     ;; Build current directory instead of downloaded copy
+     ;; This will automatically set the host and branch for pull requests
+     (add-to-list 'load-path default-directory)
+     ,@body))
+
+
 (provide 'test-hdl-setup-straight)
 
 ;;; test-hdl-setup-straight.el ends here

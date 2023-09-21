@@ -115,6 +115,7 @@ compile() {
     echo ""
 
     run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE" "straight"
+    echo ""
 }
 
 

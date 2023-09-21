@@ -42,12 +42,18 @@
   (setq vhdl-basic-offset 4))
 
 ;;;; Install/setup package
+;; Always needed since straight.el does not download dependencies of local packages
 (use-package vhdl-ext
   :hook ((vhdl-mode . vhdl-ext-mode))
   :config
-  (vhdl-ext-mode-setup))
+  (vhdl-ext-mode-setup)
+  (setq treesit-font-lock-level 4))
 
-(setq treesit-font-lock-level 4)
+;; Shadow/override with actions/checkout repo, instead of the one downloaded by straight.el
+(test-hdl-when-github-action
+  (use-package vhdl-ext
+   :straight nil))
+
 
 
 (provide 'test-hdl-vhdl-ext-setup-straight)

@@ -37,11 +37,16 @@
 
 
 ;;;; Install/setup package
+;; Always needed since straight.el does not download dependencies of local packages
 (use-package vhdl-ts-mode
   :mode (("\\.vhdl?\\'" . vhdl-ts-mode))
   :config
   (setq treesit-font-lock-level 4))
 
+;; Shadow/override with actions/checkout repo, instead of the one downloaded by straight.el
+(test-hdl-when-github-action
+  (use-package vhdl-ts-mode
+   :straight nil))
 
 
 (provide 'test-hdl-vhdl-ts-mode-setup-straight)

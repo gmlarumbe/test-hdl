@@ -70,12 +70,17 @@
 
 ;;;; Install/setup package
 (message "Installing and setting up verilog-ext")
+;; Always needed since straight.el does not download dependencies of local packages
 (use-package verilog-ext
   :hook ((verilog-mode . verilog-ext-mode))
   :config
   (setq verilog-ext-feature-list (remove 'typedefs verilog-ext-feature-list)) ; Do not override `verilog-align-typedef-regexp'
   (verilog-ext-mode-setup))
 
+;; Shadow/override with actions/checkout repo, instead of the one downloaded by straight.el
+(test-hdl-when-github-action
+  (use-package verilog-ext
+   :straight nil))
 
 (provide 'test-hdl-verilog-ext-setup-straight)
 
