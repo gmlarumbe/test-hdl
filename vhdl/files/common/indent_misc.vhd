@@ -3,13 +3,17 @@
 --------------------------------------------------------------------------------
 
 -- 1) Testing comments at unit space:
+     -- before library comment
 library ieee, work;
+     -- after library comment
 use ieee.std_logic_1164.all;
--- use ieee.std_logic_1164.all;
--- use ieee.std_logic_1164.all;
+        -- use ieee.std_logic_1164.all;
+   -- use ieee.std_logic_1164.all;
 
+     -- before entity comment
 entity foo is
 end entity foo;
+    -- after entity comment
 
 
 

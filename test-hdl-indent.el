@@ -28,7 +28,7 @@
 (require 'test-hdl-common)
 
 
-(defun test-hdl-indent-buffer (mode indent-fn)
+(defun test-hdl-indent-buffer (mode indent-fn &optional no-deindent)
   "Perform indentation of current buffer for indentation tests."
   (test-hdl-no-messages
     (funcall mode))
@@ -36,10 +36,11 @@
   (untabify (point-min) (point-max))
   (delete-trailing-whitespace (point-min) (point-max))
   ;; De-indent original file
-  (goto-char (point-min))
-  (while (< (point) (point-max))
-    (delete-horizontal-space)
-    (forward-line 1))
+  (unless no-deindent
+    (goto-char (point-min))
+    (while (< (point) (point-max))
+      (delete-horizontal-space)
+      (forward-line 1)))
   ;; Re-indent with proper funcion
   (test-hdl-no-messages
     (funcall indent-fn)))

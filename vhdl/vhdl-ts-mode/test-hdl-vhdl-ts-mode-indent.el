@@ -35,7 +35,12 @@
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-indent-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-indent-dir "ref")
                                :fn #'test-hdl-indent-buffer
-                               :args '(vhdl-ts-mode test-hdl-vhdl-ts-mode-indent-fn)))
+                               :args '(vhdl-ts-mode test-hdl-vhdl-ts-mode-indent-fn))
+  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-indent-file-list
+                               :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-indent-dir "ref")
+                               :out-file-ext "no_deindent.vhd"
+                               :fn #'test-hdl-indent-buffer
+                               :args '(vhdl-ts-mode test-hdl-vhdl-ts-mode-indent-fn :no-deindent)))
 
 (ert-deftest vhdl-ts-mode::indent ()
   (dolist (file test-hdl-vhdl-indent-file-list)
@@ -43,7 +48,12 @@
                                                          :dump-file (file-name-concat test-hdl-vhdl-ts-mode-indent-dir "dump" (test-hdl-basename file))
                                                          :fn #'test-hdl-indent-buffer
                                                          :args '(vhdl-ts-mode test-hdl-vhdl-ts-mode-indent-fn))
-                                  (file-name-concat test-hdl-vhdl-ts-mode-indent-dir "ref" (test-hdl-basename file))))))
+                                  (file-name-concat test-hdl-vhdl-ts-mode-indent-dir "ref" (test-hdl-basename file))))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-indent-dir "dump" (test-hdl-basename file "no_deindent.vhd"))
+                                                         :fn #'test-hdl-indent-buffer
+                                                         :args '(vhdl-ts-mode test-hdl-vhdl-ts-mode-indent-fn))
+                                  (file-name-concat test-hdl-vhdl-ts-mode-indent-dir "ref" (test-hdl-basename file "no_deindent.vhd"))))))
 
 
 (provide 'test-hdl-vhdl-ts-mode-indent)
