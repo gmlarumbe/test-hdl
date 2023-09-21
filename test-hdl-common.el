@@ -42,6 +42,13 @@
   (profiler-stop)
   (profiler-report))
 
+(defun test-hdl-profile-funcall (fun &rest args)
+  "Use Emacs profiler in FILE."
+  (profiler-start 'cpu+mem)
+  (apply fun args)
+  (profiler-stop)
+  (profiler-report))
+
 ;;;; Utils
 (defmacro test-hdl-no-messages (&rest body)
   (declare (indent 0) (debug t))
