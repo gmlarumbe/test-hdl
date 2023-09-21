@@ -3,14 +3,18 @@
 »«m:--------------------------------------------------------------------------------»«x:
 »
 «m:-- »«x:1) Testing comments at unit space:
+»     «m:-- »«x:before library comment
 »«k:library» «b:ieee»«:vhdl-ext-font-lock-punctuation-face:,» «b:work»«:vhdl-ext-font-lock-punctuation-face:;»
-«k:use» «b:ieee»«:vhdl-ext-font-lock-operator-face:.»«b:std_logic_1164»«:vhdl-ext-font-lock-operator-face:.»«k:all»«:vhdl-ext-font-lock-punctuation-face:;»
-«m:-- »«x:use ieee.std_logic_1164.all;
-»«m:-- »«x:use ieee.std_logic_1164.all;
+     «m:-- »«x:after library comment
+»«k:use» «b:ieee»«:vhdl-ext-font-lock-operator-face:.»«b:std_logic_1164»«:vhdl-ext-font-lock-operator-face:.»«k:all»«:vhdl-ext-font-lock-punctuation-face:;»
+        «m:-- »«x:use ieee.std_logic_1164.all;
+»   «m:-- »«x:use ieee.std_logic_1164.all;
 »
-«k:entity» «f:foo» «k:is»
+     «m:-- »«x:before entity comment
+»«k:entity» «f:foo» «k:is»
 «k:end» «k:entity» «f:foo»«:vhdl-ext-font-lock-punctuation-face:;»
-
+    «m:-- »«x:after entity comment
+»
 
 
 «m:-- »«x:2) Testing case statements
