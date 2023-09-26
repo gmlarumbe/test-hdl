@@ -92,7 +92,7 @@
 
     «x:-- Generate»
     «c:GEN_BLOCK1» «:vhdl-ts-font-lock-punctuation-face::»
-    «k:for» I «k:in» 0 «:vhdl-ts-font-lock-instance-lib-face:to» 3 «k:generate»
+    «k:for» I «k:in» «:vhdl-ts-font-lock-brackets-content-face:0» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:3» «k:generate»
         «:vhdl-ts-font-lock-instance-face:I_BLOCK1_GEN» «:vhdl-ts-font-lock-punctuation-face::» «k:entity» «:vhdl-ts-font-lock-instance-lib-face:work»«:vhdl-ts-font-lock-punctuation-face:.»«:vhdl-ts-font-lock-entity-face:block1» «k:port» «k:map»
             «:vhdl-ts-font-lock-parenthesis-face:(»Port0«:vhdl-ts-font-lock-punctuation-face:,» Port1«:vhdl-ts-font-lock-punctuation-face:,» Port2«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
     «k:end» «k:generate» GEN_BLOCK1«:vhdl-ts-font-lock-punctuation-face:;»

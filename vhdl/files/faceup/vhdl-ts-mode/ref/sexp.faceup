@@ -56,7 +56,7 @@
         «k:variable» depth «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-operator-face::=» bit_depth«:vhdl-ts-font-lock-punctuation-face:;»
         «k:variable» count «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-operator-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
     «k:begin»
-        «k:for» clogb2 «k:in» 1 «:vhdl-ts-font-lock-instance-lib-face:to» bit_depth «k:loop»
+        «k:for» clogb2 «k:in» «:vhdl-ts-font-lock-brackets-content-face:1» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:bit_depth» «k:loop»
             «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»bit_depth «:vhdl-ts-font-lock-operator-face:<=» 2«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
                 count «:vhdl-ts-font-lock-operator-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
             «k:else»
@@ -101,12 +101,12 @@
         «k:variable» depth «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-operator-face::=» bit_depth«:vhdl-ts-font-lock-punctuation-face:;»
         «k:variable» count «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-operator-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
     «k:begin»
-        «k:for» clogb2 «k:in» 1 «:vhdl-ts-font-lock-instance-lib-face:to» bit_depth «k:loop»
+        «k:for» clogb2 «k:in» «:vhdl-ts-font-lock-brackets-content-face:1» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:bit_depth» «k:loop»
             «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»bit_depth «:vhdl-ts-font-lock-operator-face:<=» 2«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
                 count «:vhdl-ts-font-lock-operator-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
             «k:else»
                 «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»depth «:vhdl-ts-font-lock-operator-face:<=» 1«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
-                    «k:for» j «k:in» 1 «:vhdl-ts-font-lock-instance-lib-face:to» 10 «k:loop»
+                    «k:for» j «k:in» «:vhdl-ts-font-lock-brackets-content-face:1» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:10» «k:loop»
                         count «:vhdl-ts-font-lock-operator-face::=» count«:vhdl-ts-font-lock-punctuation-face:;»
                     «k:end» «k:loop»«:vhdl-ts-font-lock-punctuation-face:;»
                 «k:else»
