@@ -6,7 +6,7 @@
 -- Author     : Gonzalo Larumbe  <gonzalomlarumbe@gmail.com>
 -- Company    : gmlarumbe
 -- Created    : 2023-08-30
--- Last update: 2023-08-30
+-- Last update: 2023-09-26
 -- Platform   : Archvm
 -- Standard   : VHDL'08
 -------------------------------------------------------------------------------
@@ -37,3 +37,20 @@ begin  -- architecture RTL
     );
 
 end architecture RTL;
+
+------------------------------------------------------------
+-- Ports with bit-select
+------------------------------------------------------------
+
+architecture port_bit_select of misc is
+
+begin  -- architecture port_bit_select
+
+    I_BLOCK1_0 : entity block1
+    port map (
+        Port0(0) => Port0,
+        Port1(1) => Port1,
+        Port2(i) => Port2
+    );
+
+end architecture port_bit_select;
