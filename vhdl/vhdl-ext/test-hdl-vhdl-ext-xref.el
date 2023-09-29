@@ -98,7 +98,7 @@
         (test-hdl-vhdl-ext-tags-with-test-project
           ;; Defs
           (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                               :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "xref.defs.el"))
+                                                               :dump-file (file-name-concat test-hdl-vhdl-ext-xref-dir "dump" (test-hdl-basename file "xref.defs.el"))
                                                                :process-fn 'eval
                                                                :fn #'test-hdl-vhdl-ext-xref-fn
                                                                :args `(:refs ,refs
@@ -120,7 +120,7 @@
         (test-hdl-vhdl-ext-tags-with-test-project
           ;; Refs
           (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                               :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "xref.refs.el"))
+                                                               :dump-file (file-name-concat test-hdl-vhdl-ext-xref-dir "dump" (test-hdl-basename file "xref.refs.el"))
                                                                :process-fn 'eval
                                                                :fn #'test-hdl-vhdl-ext-xref-fn
                                                                :args `(:refs ,refs

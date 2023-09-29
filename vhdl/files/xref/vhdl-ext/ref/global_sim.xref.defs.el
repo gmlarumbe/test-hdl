@@ -9,7 +9,7 @@
        (fontified nil)
        19 21
        (face font-lock-keyword-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/global_sim.vhd" 9 0))
+     #s(xref-file-location "global_sim.vhd" 9 0))
     #s(xref-item
        #("package body global_sim is" 0 7
 	 (face font-lock-keyword-face fontified nil)
@@ -25,7 +25,7 @@
 	 (fontified nil)
 	 24 26
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/global_sim.vhd" 66 0)))
+       #s(xref-file-location "global_sim.vhd" 66 0)))
  (#s(xref-item
      #("    constant AXI_CLK_T : time := 6.4 ns;" 0 4
        (fontified nil)
@@ -51,7 +51,7 @@
        (fontified nil)
        39 40
        (face vhdl-ts-font-lock-punctuation-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/global_sim.vhd" 12 4)))
+     #s(xref-file-location "global_sim.vhd" 12 4)))
  (#s(xref-item
      #("    procedure read_control_reg (signal bfm_in_r            : in s_common_response_r_in; signal bfm_out_r : out s_common_response_r_out);" 0 4
        (fontified nil)
@@ -101,7 +101,7 @@
        (face vhdl-ts-font-lock-parenthesis-face fontified nil)
        135 136
        (face vhdl-ts-font-lock-punctuation-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/global_sim.vhd" 36 4))
+     #s(xref-file-location "global_sim.vhd" 36 4))
     #s(xref-item
        #("    procedure read_control_reg (signal bfm_in_r : in s_common_response_r_in; signal bfm_out_r : out s_common_response_r_out) is" 0 4
 	 (fontified nil)
@@ -153,4 +153,4 @@
 	 (fontified nil)
 	 125 127
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/global_sim.vhd" 78 4))))
+       #s(xref-file-location "global_sim.vhd" 78 4))))

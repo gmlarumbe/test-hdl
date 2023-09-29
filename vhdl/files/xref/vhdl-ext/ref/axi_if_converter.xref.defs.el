@@ -9,7 +9,7 @@
        (fontified nil)
        24 26
        (face font-lock-keyword-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/axi_if_converter.vhd" 8 0))
+     #s(xref-file-location "axi_if_converter.vhd" 8 0))
     #s(xref-item
        #("entity axi_if_converter is" 0 6
 	 (face font-lock-keyword-face fontified nil)
@@ -21,7 +21,7 @@
 	 (fontified nil)
 	 24 26
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 29 0)))
+       #s(xref-file-location "hierarchy.vhd" 29 0)))
  (#s(xref-item
      #("        clk        : in std_logic;" 0 8
        (fontified nil)
@@ -41,7 +41,7 @@
        (face font-lock-type-face fontified nil)
        33 34
        (face vhdl-ts-font-lock-punctuation-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/axi_if_converter.vhd" 12 8))
+     #s(xref-file-location "axi_if_converter.vhd" 12 8))
     #s(xref-item
        #("        clk        : in std_logic;" 0 8
 	 (fontified nil)
@@ -61,7 +61,7 @@
 	 (face font-lock-type-face fontified nil)
 	 33 34
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 33 8))
+       #s(xref-file-location "hierarchy.vhd" 33 8))
     #s(xref-item
        #("        clk        : in  std_logic;" 0 8
 	 (fontified nil)
@@ -81,7 +81,7 @@
 	 (face font-lock-type-face fontified nil)
 	 34 35
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 879 8))
+       #s(xref-file-location "hierarchy.vhd" 879 8))
     #s(xref-item
        #("        clk         : in  std_logic;" 0 8
 	 (fontified nil)
@@ -101,7 +101,7 @@
 	 (face font-lock-type-face fontified nil)
 	 35 36
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 928 8))
+       #s(xref-file-location "hierarchy.vhd" 928 8))
     #s(xref-item
        #("        clk            : in  std_logic;" 0 8
 	 (fontified nil)
@@ -121,7 +121,7 @@
 	 (face font-lock-type-face fontified nil)
 	 38 39
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 1535 8))
+       #s(xref-file-location "hierarchy.vhd" 1535 8))
     #s(xref-item
        #("        clk    : in std_logic;" 0 8
 	 (fontified nil)
@@ -141,7 +141,7 @@
 	 (face font-lock-type-face fontified nil)
 	 29 30
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/sexp.vhd" 28 8))
+       #s(xref-file-location "sexp.vhd" 28 8))
     #s(xref-item
        #("        clk    : in std_logic;" 0 8
 	 (fontified nil)
@@ -161,7 +161,7 @@
 	 (face font-lock-type-face fontified nil)
 	 29 30
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/sexp.vhd" 36 8))
+       #s(xref-file-location "sexp.vhd" 36 8))
     #s(xref-item
        #("    signal clk        : std_logic := '1';" 0 4
 	 (fontified nil)
@@ -189,7 +189,7 @@
 	 (face font-lock-string-face fontified nil)
 	 40 41
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/tb_axi_if_converter.vhd" 24 4)))
+       #s(xref-file-location "tb_axi_if_converter.vhd" 24 4)))
  (#s(xref-item
      #("        s_axi_aclk    : in  std_logic;" 0 8
        (fontified nil)
@@ -209,7 +209,7 @@
        (face font-lock-type-face fontified nil)
        37 38
        (face vhdl-ts-font-lock-punctuation-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/axi_if_converter.vhd" 17 8))
+     #s(xref-file-location "axi_if_converter.vhd" 17 8))
     #s(xref-item
        #("        s_axi_aclk    : in  std_logic;" 0 8
 	 (fontified nil)
@@ -229,7 +229,7 @@
 	 (face font-lock-type-face fontified nil)
 	 37 38
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 38 8))
+       #s(xref-file-location "hierarchy.vhd" 38 8))
     #s(xref-item
        #("        s_axi_aclk    : in  std_logic;" 0 8
 	 (fontified nil)
@@ -249,7 +249,7 @@
 	 (face font-lock-type-face fontified nil)
 	 37 38
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 2532 8))
+       #s(xref-file-location "hierarchy.vhd" 2532 8))
     #s(xref-item
        #("    signal s_axi_aclk    : std_logic := '1';" 0 4
 	 (fontified nil)
@@ -277,7 +277,7 @@
 	 (face font-lock-string-face fontified nil)
 	 43 44
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/tb_axi_if_converter.vhd" 28 4)))
+       #s(xref-file-location "tb_axi_if_converter.vhd" 28 4)))
  (#s(xref-item
      #("architecture RTL of axi_if_converter is" 0 12
        (face font-lock-keyword-face fontified nil)
@@ -297,7 +297,7 @@
        (fontified nil)
        37 39
        (face font-lock-keyword-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/axi_if_converter.vhd" 193 0))
+     #s(xref-file-location "axi_if_converter.vhd" 193 0))
     #s(xref-item
        #("architecture RTL of axi_if_converter is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -317,7 +317,7 @@
 	 (fontified nil)
 	 37 39
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 214 0))
+       #s(xref-file-location "hierarchy.vhd" 214 0))
     #s(xref-item
        #("architecture RTL of pattern_counter is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -337,7 +337,7 @@
 	 (fontified nil)
 	 36 38
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 838 0))
+       #s(xref-file-location "hierarchy.vhd" 838 0))
     #s(xref-item
        #("architecture RTL of clk_div is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -357,7 +357,7 @@
 	 (fontified nil)
 	 28 30
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 887 0))
+       #s(xref-file-location "hierarchy.vhd" 887 0))
     #s(xref-item
        #("architecture RTL of clk_sync is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -377,7 +377,7 @@
 	 (fontified nil)
 	 29 31
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 937 0))
+       #s(xref-file-location "hierarchy.vhd" 937 0))
     #s(xref-item
        #("architecture RTL of input_buffer is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -397,7 +397,7 @@
 	 (fontified nil)
 	 33 35
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 1024 0))
+       #s(xref-file-location "hierarchy.vhd" 1024 0))
     #s(xref-item
        #("architecture RTL of core_fsm is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -417,7 +417,7 @@
 	 (fontified nil)
 	 29 31
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 1559 0))
+       #s(xref-file-location "hierarchy.vhd" 1559 0))
     #s(xref-item
        #("architecture RTL of core_converter is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -437,7 +437,7 @@
 	 (fontified nil)
 	 35 37
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 1767 0))
+       #s(xref-file-location "hierarchy.vhd" 1767 0))
     #s(xref-item
        #("architecture RTL of axi_lite_regs is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -457,7 +457,7 @@
 	 (fontified nil)
 	 34 36
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 2558 0))
+       #s(xref-file-location "hierarchy.vhd" 2558 0))
     #s(xref-item
        #("architecture RTL of axi_lite_master is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -477,7 +477,7 @@
 	 (fontified nil)
 	 36 38
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 3134 0))
+       #s(xref-file-location "hierarchy.vhd" 3134 0))
     #s(xref-item
        #("architecture RTL of instances is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -497,7 +497,7 @@
 	 (fontified nil)
 	 30 32
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/instances.vhd" 29 0))
+       #s(xref-file-location "instances.vhd" 29 0))
     #s(xref-item
        #("architecture RTL of misc is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -517,7 +517,7 @@
 	 (fontified nil)
 	 25 27
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/misc.vhd" 28 0))
+       #s(xref-file-location "misc.vhd" 28 0))
     #s(xref-item
        #("architecture RTL of foo is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -537,7 +537,7 @@
 	 (fontified nil)
 	 24 26
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/sexp.vhd" 44 0))
+       #s(xref-file-location "sexp.vhd" 44 0))
     #s(xref-item
        #("architecture RTL of foo is" 0 12
 	 (face font-lock-keyword-face fontified nil)
@@ -557,7 +557,7 @@
 	 (fontified nil)
 	 24 26
 	 (face font-lock-keyword-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/sexp.vhd" 96 0)))
+       #s(xref-file-location "sexp.vhd" 96 0)))
  (#s(xref-item
      #("entity axi_lite_regs is" 0 6
        (face font-lock-keyword-face fontified nil)
@@ -569,7 +569,7 @@
        (fontified nil)
        21 23
        (face font-lock-keyword-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 2491 0)))
+     #s(xref-file-location "hierarchy.vhd" 2491 0)))
  nil
  (#s(xref-item
      #("    signal soft_reset : std_logic;" 0 4
@@ -590,7 +590,7 @@
        (face font-lock-type-face fontified nil)
        33 34
        (face vhdl-ts-font-lock-punctuation-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/axi_if_converter.vhd" 196 4))
+     #s(xref-file-location "axi_if_converter.vhd" 196 4))
     #s(xref-item
        #("    signal soft_reset : std_logic;" 0 4
 	 (fontified nil)
@@ -610,7 +610,7 @@
 	 (face font-lock-type-face fontified nil)
 	 33 34
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 217 4))
+       #s(xref-file-location "hierarchy.vhd" 217 4))
     #s(xref-item
        #("        soft_reset  : in std_logic;" 0 8
 	 (fontified nil)
@@ -630,7 +630,7 @@
 	 (face font-lock-type-face fontified nil)
 	 34 35
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 825 8))
+       #s(xref-file-location "hierarchy.vhd" 825 8))
     #s(xref-item
        #("        soft_reset : in  std_logic;" 0 8
 	 (fontified nil)
@@ -650,7 +650,7 @@
 	 (face font-lock-type-face fontified nil)
 	 34 35
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 881 8))
+       #s(xref-file-location "hierarchy.vhd" 881 8))
     #s(xref-item
        #("        soft_reset  : in  std_logic;" 0 8
 	 (fontified nil)
@@ -670,7 +670,7 @@
 	 (face font-lock-type-face fontified nil)
 	 35 36
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 930 8))
+       #s(xref-file-location "hierarchy.vhd" 930 8))
     #s(xref-item
        #("        soft_reset : in  std_logic;" 0 8
 	 (fontified nil)
@@ -690,7 +690,7 @@
 	 (face font-lock-type-face fontified nil)
 	 34 35
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 977 8))
+       #s(xref-file-location "hierarchy.vhd" 977 8))
     #s(xref-item
        #("        soft_reset     : in  std_logic;" 0 8
 	 (fontified nil)
@@ -710,7 +710,7 @@
 	 (face font-lock-type-face fontified nil)
 	 38 39
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 1538 8))
+       #s(xref-file-location "hierarchy.vhd" 1538 8))
     #s(xref-item
        #("        soft_reset : in  std_logic;" 0 8
 	 (fontified nil)
@@ -730,7 +730,7 @@
 	 (face font-lock-type-face fontified nil)
 	 34 35
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 1682 8))
+       #s(xref-file-location "hierarchy.vhd" 1682 8))
     #s(xref-item
        #("        soft_reset     : out std_logic;" 0 8
 	 (fontified nil)
@@ -750,7 +750,7 @@
 	 (face font-lock-type-face fontified nil)
 	 38 39
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 2497 8))
+       #s(xref-file-location "hierarchy.vhd" 2497 8))
     #s(xref-item
        #("        soft_reset        : in  std_logic;" 0 8
 	 (fontified nil)
@@ -770,7 +770,7 @@
 	 (face font-lock-type-face fontified nil)
 	 41 42
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 3096 8))
+       #s(xref-file-location "hierarchy.vhd" 3096 8))
     #s(xref-item
        #("    signal soft_reset : std_logic;" 0 4
 	 (fontified nil)
@@ -790,7 +790,7 @@
 	 (face font-lock-type-face fontified nil)
 	 33 34
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/sexp.vhd" 46 4))
+       #s(xref-file-location "sexp.vhd" 46 4))
     #s(xref-item
        #("    signal soft_reset : std_logic;" 0 4
 	 (fontified nil)
@@ -810,7 +810,7 @@
 	 (face font-lock-type-face fontified nil)
 	 33 34
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/sexp.vhd" 98 4)))
+       #s(xref-file-location "sexp.vhd" 98 4)))
  (#s(xref-item
      #("    signal fb_send_size_l        : unsigned(9 downto 0);" 0 4
        (fontified nil)
@@ -844,7 +844,7 @@
        (face vhdl-ts-font-lock-parenthesis-face fontified nil)
        55 56
        (face vhdl-ts-font-lock-punctuation-face fontified nil))
-     #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/axi_if_converter.vhd" 222 4))
+     #s(xref-file-location "axi_if_converter.vhd" 222 4))
     #s(xref-item
        #("    signal fb_send_size_l        : unsigned(9 downto 0);" 0 4
 	 (fontified nil)
@@ -878,4 +878,4 @@
 	 (face vhdl-ts-font-lock-parenthesis-face fontified nil)
 	 55 56
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "/home/gonz/.emacs.d/straight/repos/vhdl-ext/test-hdl/vhdl/files/common/hierarchy.vhd" 243 4))))
+       #s(xref-file-location "hierarchy.vhd" 243 4))))

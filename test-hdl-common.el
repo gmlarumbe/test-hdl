@@ -235,8 +235,20 @@ function to avoid issues with GitHub Actions and CI."
   (let* ((args-list (car args))
          (type (nth 0 args-list))
          (desc (nth 1 args-list))
-         (file (or (nth 2 args-list) buffer-file-name)))
-    `(,type ,desc ,(file-relative-name file test-hdl-test-dir))))
+         (file (nth 2 args-list))
+         (line (nth 3 args-list))
+         (col  (nth 4 args-list)))
+    `(,type ,desc ,(file-relative-name file test-hdl-test-dir) ,line ,col)))
+
+(defun test-hdl-tags-proj-files-relative (&rest args)
+  "Advice for `vhdl-ext-proj-files' or `verilog-ext-proj-files'.
+
+Meant to be used with :filter-return.
+
+Convert file-name to relative to avoid issues with GitHub Actions and CI."
+  (mapcar (lambda (file)
+            (file-relative-name file))
+          (car args)))
 
 
 ;;;; Hash-table
