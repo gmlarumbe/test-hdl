@@ -35,8 +35,8 @@
   (cl-letf (((symbol-function 'compilation-start)
              (lambda (command &optional mode name-function highlight-regexp)
                (butlast (split-string (shell-command-to-string command) "\n") 4)))
-            ((symbol-function 'vhdl-ext-project-root)
-             (lambda ()
+            ((symbol-function 'vhdl-ext-buffer-proj-root)
+             (lambda (&optional project)
                test-hdl-vhdl-common-dir)))
     (let* ((vhdl-ext-jump-to-parent-entity-engine engine)
            ;; INFO: Using let-binding in ripgrep.el arguments for compatibility with release 0.4.0 (Feb 2017) for MELPA Stable tests

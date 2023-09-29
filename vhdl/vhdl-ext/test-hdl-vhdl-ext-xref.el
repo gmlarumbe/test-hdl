@@ -58,8 +58,8 @@
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
     ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
-                                :sources test-hdl-vhdl-common-file-list
+    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                :files test-hdl-vhdl-common-file-list
                                 :rel-path t)
     ;; Iterate over files with tags tables
     (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
@@ -88,8 +88,8 @@
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
     ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
-                                :sources test-hdl-vhdl-common-file-list
+    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                :files test-hdl-vhdl-common-file-list
                                 :rel-path t)
     ;; Iterate over files with tags tables
     (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
@@ -110,8 +110,8 @@
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
     ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
-                                :sources test-hdl-vhdl-common-file-list
+    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                :files test-hdl-vhdl-common-file-list
                                 :rel-path t)
     ;; Iterate over files with tags tables
     (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)

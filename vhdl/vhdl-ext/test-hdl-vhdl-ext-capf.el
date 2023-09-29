@@ -53,74 +53,65 @@
 
 
 (defun test-hdl-vhdl-ext-capf-gen-expected-files ()
-  (let ((vhdl-ext-tags-defs-table nil)
-        (vhdl-ext-tags-refs-table nil)
-        (vhdl-ext-tags-inst-table nil))
-    ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
-                                :sources test-hdl-vhdl-common-file-list)
-    (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
-      (let ((file (car file-pos-and-init-string))
-            (pos-and-init-string-alist (cadr file-pos-and-init-string)))
-        (test-hdl-vhdl-ext-tags-with-test-project
-          ;; Completion
-          (test-hdl-gen-expected-files :file-list `(,file)
-                                       :dest-dir (file-name-concat test-hdl-vhdl-ext-capf-dir "ref")
-                                       :out-file-ext "capf.el"
-                                       :process-fn 'eval
-                                       :fn #'test-hdl-capf-fn
-                                       :args `(:capf-fn vhdl-ext-capf
-                                               :pos-init-string-alist ,pos-and-init-string-alist))
-          ;; Annotation
-          (test-hdl-gen-expected-files :file-list `(,file)
-                                       :dest-dir (file-name-concat test-hdl-vhdl-ext-capf-dir "ref")
-                                       :out-file-ext "annotations.el"
-                                       :process-fn 'eval
-                                       :fn #'test-hdl-capf-fn
-                                       :args `(:capf-fn test-hdl-vhdl-ext-capf-anotation-fn
-                                               :pos-init-string-alist ,pos-and-init-string-alist)))))))
+  ;; Generate/update tags for test project
+  (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                              :files test-hdl-vhdl-common-file-list)
+  (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
+    (let ((file (car file-pos-and-init-string))
+          (pos-and-init-string-alist (cadr file-pos-and-init-string)))
+      (test-hdl-vhdl-ext-tags-with-test-project
+        ;; Completion
+        (test-hdl-gen-expected-files :file-list `(,file)
+                                     :dest-dir (file-name-concat test-hdl-vhdl-ext-capf-dir "ref")
+                                     :out-file-ext "capf.el"
+                                     :process-fn 'eval
+                                     :fn #'test-hdl-capf-fn
+                                     :args `(:capf-fn vhdl-ext-capf
+                                             :pos-init-string-alist ,pos-and-init-string-alist))
+        ;; Annotation
+        (test-hdl-gen-expected-files :file-list `(,file)
+                                     :dest-dir (file-name-concat test-hdl-vhdl-ext-capf-dir "ref")
+                                     :out-file-ext "annotations.el"
+                                     :process-fn 'eval
+                                     :fn #'test-hdl-capf-fn
+                                     :args `(:capf-fn test-hdl-vhdl-ext-capf-anotation-fn
+                                             :pos-init-string-alist ,pos-and-init-string-alist))))))
 
 
 (ert-deftest vhdl-ext::capf::completions ()
-  (let ((vhdl-ext-tags-defs-table nil)
-        (vhdl-ext-tags-refs-table nil)
-        (vhdl-ext-tags-inst-table nil))
-    ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
-                                :sources test-hdl-vhdl-common-file-list)
-    ;; Test each file
-    (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
-      (let ((file (car file-pos-and-init-string))
-            (pos-and-init-string-alist (cadr file-pos-and-init-string)))
-        (test-hdl-vhdl-ext-tags-with-test-project
-          (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                               :dump-file (file-name-concat test-hdl-vhdl-ext-capf-dir "dump" (test-hdl-basename file "capf.el"))
-                                                               :process-fn 'eval
-                                                               :fn #'test-hdl-capf-fn
-                                                               :args `(:capf-fn vhdl-ext-capf
-                                                                       :pos-init-string-alist ,pos-and-init-string-alist))
-                                        (file-name-concat test-hdl-vhdl-ext-capf-dir "ref" (test-hdl-basename file "capf.el")))))))))
+  ;; Generate/update tags for test project
+  (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                              :files test-hdl-vhdl-common-file-list)
+  ;; Test each file
+  (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
+    (let ((file (car file-pos-and-init-string))
+          (pos-and-init-string-alist (cadr file-pos-and-init-string)))
+      (test-hdl-vhdl-ext-tags-with-test-project
+        (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                             :dump-file (file-name-concat test-hdl-vhdl-ext-capf-dir "dump" (test-hdl-basename file "capf.el"))
+                                                             :process-fn 'eval
+                                                             :fn #'test-hdl-capf-fn
+                                                             :args `(:capf-fn vhdl-ext-capf
+                                                                     :pos-init-string-alist ,pos-and-init-string-alist))
+                                      (file-name-concat test-hdl-vhdl-ext-capf-dir "ref" (test-hdl-basename file "capf.el"))))))))
 
 
 (ert-deftest vhdl-ext::capf::annotations ()
-  (let ((vhdl-ext-tags-defs-table nil)
-        (vhdl-ext-tags-refs-table nil)
-        (vhdl-ext-tags-inst-table nil))
-    ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :dir test-hdl-vhdl-common-dir
-                                :sources test-hdl-vhdl-common-file-list)
-    ;; Test each file
-    (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
-      (let ((file (car file-pos-and-init-string))
-            (pos-and-init-string-alist (cadr file-pos-and-init-string)))
-        (test-hdl-vhdl-ext-tags-with-test-project
-          (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                               :dump-file (file-name-concat test-hdl-vhdl-ext-capf-dir "dump" (test-hdl-basename file "annotations.el"))
-                                                               :process-fn 'eval
-                                                               :fn #'test-hdl-capf-fn
-                                                               :args `(:capf-fn test-hdl-vhdl-ext-capf-anotation-fn
-                                                                       :pos-init-string-alist ,pos-and-init-string-alist))
-                                        (file-name-concat test-hdl-vhdl-ext-capf-dir "ref" (test-hdl-basename file "annotations.el")))))))))
+  ;; Generate/update tags for test project
+  (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                              :files test-hdl-vhdl-common-file-list)
+  ;; Test each file
+  (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
+    (let ((file (car file-pos-and-init-string))
+          (pos-and-init-string-alist (cadr file-pos-and-init-string)))
+      (test-hdl-vhdl-ext-tags-with-test-project
+        (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                             :dump-file (file-name-concat test-hdl-vhdl-ext-capf-dir "dump" (test-hdl-basename file "annotations.el"))
+                                                             :process-fn 'eval
+                                                             :fn #'test-hdl-capf-fn
+                                                             :args `(:capf-fn test-hdl-vhdl-ext-capf-anotation-fn
+                                                                     :pos-init-string-alist ,pos-and-init-string-alist))
+                                      (file-name-concat test-hdl-vhdl-ext-capf-dir "ref" (test-hdl-basename file "annotations.el"))))))))
 
 
 (provide 'test-hdl-vhdl-ext-capf)

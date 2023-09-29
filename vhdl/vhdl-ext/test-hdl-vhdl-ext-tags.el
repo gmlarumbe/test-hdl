@@ -38,26 +38,16 @@
               (lambda () test-vhdl-ext-tags-proj-name)))
      ,@body))
 
-(cl-defun test-hdl-vhdl-ext-tags-get (&key dir sources rel-path)
+(cl-defun test-hdl-vhdl-ext-tags-get (&key root files rel-path)
   "Populate the value of the tags tables for test-hdl-vhdl project."
-  (let* ((proj-name test-vhdl-ext-tags-proj-name) ; `vhdl-project-alist' settings
-         (proj-title "vhdl-ext ERT tags tests")
-         (exclude-regexp "")
-         (compile-options nil)
-         (compile-directory "./")
-         (makefile-name "")
-         (description "")
-         (lib-name "work/")
-         (lib-dir "lib/")
-         (vhdl-project-alist `((,proj-name
-                                ,proj-title
-                                ,dir                                                ; Project default-directory (key arg)
-                                ,sources                                            ; Project sources (key arg)
-                                ,exclude-regexp ,compile-options ,compile-directory ; Non-relevant options
-                                ,lib-name ,lib-dir ,makefile-name ,description))))
+  (let ((vhdl-ext-project-alist `((,test-vhdl-ext-tags-proj-name
+                                   :root ,(or root test-hdl-vhdl-common-dir)
+                                   :files ,files
+                                   :workdir "lib/"))))
     ;; Get tags after setting environment
     (test-hdl-vhdl-ext-tags-with-test-project
       (test-hdl-no-messages
+        (vhdl-ext-tags-clear-cache) ; INFO: This is very important in order to start off with a clean environment
         ;; Make file entries relative to avoid issues in GitHub Actions CI with a different $HOME
         (when rel-path
           (advice-add 'vhdl-ext-tags-locs-props :filter-args #'test-hdl-tags-locs-props-files-relative))
@@ -69,76 +59,63 @@
 ;;;; Standalone tests
 (defconst test-hdl-vhdl-ext-tags-file-list test-hdl-vhdl-common-file-list)
 
-(defun test-hdl-vhdl-ext-tags-clean ()
+(defun test-hdl-vhdl-ext-tags-setup ()
   "Avoid errors in desc when there are tabs and trailing whitespaces."
   (untabify (point-min) (point-max))
-  (delete-trailing-whitespace (point-min) (point-max)))
+  (delete-trailing-whitespace (point-min) (point-max))
+  ;; The lines below are run every time a file is processed in `vhdl-ext-tags-get--process-file'
+  (setq vhdl-ext-tags-defs-current-file (make-hash-table :test #'equal))
+  (setq vhdl-ext-tags-inst-current-file (make-hash-table :test #'equal))
+  (setq vhdl-ext-tags-refs-current-file (make-hash-table :test #'equal))
+  (treesit-parser-create 'vhdl))
 
-(cl-defun test-hdl-vhdl-ext-tags-ts-defs-file-fn (&key table inst-table file)
+(defun test-hdl-vhdl-ext-tags-ts-defs-file-fn (file)
   (let ((file (file-relative-name file test-hdl-test-dir))) ; Use relative path for GitHub Actions
-    (test-hdl-vhdl-ext-tags-clean)
-    (test-hdl-no-messages
-      (vhdl-ts-mode))
-    (vhdl-ext-tags-table-push-defs-ts :table table :inst-table inst-table :file file)
-    table))
+    (test-hdl-vhdl-ext-tags-setup)
+    (vhdl-ext-tags-table-push-defs-ts file)
+    vhdl-ext-tags-defs-current-file))
 
-(cl-defun test-hdl-vhdl-ext-tags-ts-refs-file-fn (&key table defs-table file)
+(defun test-hdl-vhdl-ext-tags-ts-refs-file-fn (file)
   (let ((file (file-relative-name file test-hdl-test-dir))) ; Use relative path for GitHub Actions
-    (test-hdl-vhdl-ext-tags-clean)
-    (test-hdl-no-messages
-      (vhdl-ts-mode))
-    (vhdl-ext-tags-table-push-refs-ts :table table :defs-table defs-table :file file)
-    table))
+    (test-hdl-vhdl-ext-tags-setup)
+    (vhdl-ext-tags-table-push-refs-ts file)
+    vhdl-ext-tags-refs-current-file))
 
 (defun test-hdl-vhdl-ext-tags-gen-expected-files ()
   ;; Tree-sitter
   (dolist (file test-hdl-vhdl-ext-tags-file-list)
-    (let ((table-defs (make-hash-table :test #'equal))
-          (table-refs (make-hash-table :test #'equal))
-          (table-inst (make-hash-table :test #'equal)))
-      ;; Defs
-      (test-hdl-gen-expected-files :file-list `(,file)
-                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-tags-dir "ref")
-                                   :out-file-ext "ts.defs.el"
-                                   :process-fn 'eval
-                                   :fn #'test-hdl-vhdl-ext-tags-ts-defs-file-fn
-                                   :args `(:table ,table-defs
-                                           :inst-table ,table-inst
-                                           :file ,file))
-      ;; Refs
-      (test-hdl-gen-expected-files :file-list `(,file)
-                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-tags-dir "ref")
-                                   :out-file-ext "ts.refs.el"
-                                   :process-fn 'eval
-                                   :fn #'test-hdl-vhdl-ext-tags-ts-refs-file-fn
-                                   :args `(:table ,table-refs
-                                           :defs-table ,table-defs
-                                           :file ,file)))))
+    ;; Per-file defs
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-vhdl-ext-tags-dir "ref")
+                                 :out-file-ext "ts.defs.el"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-vhdl-ext-tags-ts-defs-file-fn
+                                 :args `(,file))
+    ;; Per-file refs
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-vhdl-ext-tags-dir "ref")
+                                 :out-file-ext "ts.refs.el"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-vhdl-ext-tags-ts-refs-file-fn
+                                 :args `(,file))))
 
 
 (ert-deftest vhdl-ext::tags::tree-sitter ()
   (dolist (file test-hdl-vhdl-ext-tags-file-list)
-    (let ((table-defs (make-hash-table :test #'equal))
-          (table-refs (make-hash-table :test #'equal))
-          (table-inst (make-hash-table :test #'equal)))
-      ;; Defs
-      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "ts.defs.el"))
-                                                           :process-fn 'eval
-                                                           :fn #'test-hdl-vhdl-ext-tags-ts-defs-file-fn
-                                                           :args `(:table ,table-defs
-                                                                   :inst-table ,table-inst
-                                                                   :file ,file))
-                                    (file-name-concat test-hdl-vhdl-ext-tags-dir "ref" (test-hdl-basename file "ts.defs.el"))))
-      ;; Refs
-      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "ts.refs.el"))
-                                                           :process-fn 'eval
-                                                           :fn #'test-hdl-vhdl-ext-tags-ts-refs-file-fn
-                                                           :args `(:table ,table-refs
-                                                                   :defs-table ,table-defs
-                                                                   :file ,file))
-                                    (file-name-concat test-hdl-vhdl-ext-tags-dir "ref" (test-hdl-basename file "ts.refs.el")))))))
+    ;; Per-file defs
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "ts.defs.el"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-vhdl-ext-tags-ts-defs-file-fn
+                                                         :args `(,file))
+                                  (file-name-concat test-hdl-vhdl-ext-tags-dir "ref" (test-hdl-basename file "ts.defs.el"))))
+    ;; Per-file refs
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-tags-dir "dump" (test-hdl-basename file "ts.refs.el"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-vhdl-ext-tags-ts-refs-file-fn
+                                                         :args `(,file))
+                                  (file-name-concat test-hdl-vhdl-ext-tags-dir "ref" (test-hdl-basename file "ts.refs.el"))))))
 
 
 (provide 'test-hdl-vhdl-ext-tags)
