@@ -1,7 +1,4 @@
-((#s(xref-item
-     #("typedef class uvm_objection;" 14 27
-       (face font-lock-warning-face))
-     #s(xref-file-location "verilog/files/common/uvm_component.svh" 32 nil)))
+(nil
  (#s(xref-item
      #("virtual class uvm_component extends uvm_report_object;" 14 27
        (face font-lock-warning-face))

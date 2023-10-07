@@ -57,6 +57,12 @@
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1390 nil))
     #s(xref-item
+       #("protected     uvm_component m_children_by_handle[uvm_component];" 14 27
+	 (face font-lock-warning-face)
+	 49 62
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 1390 nil))
+    #s(xref-item
        #("extern protected virtual function bit  m_add_child(uvm_component child);" 51 64
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1391 nil))
@@ -77,11 +83,29 @@
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1480 nil))
     #s(xref-item
+       #("function uvm_component::new (string name, uvm_component parent);" 9 22
+	 (face font-lock-warning-face)
+	 42 55
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 1480 nil))
+    #s(xref-item
        #("function bit uvm_component::m_add_child(uvm_component child);" 13 26
 	 (face font-lock-warning-face)
 	 40 53
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1574 nil))
+    #s(xref-item
+       #("function bit uvm_component::m_add_child(uvm_component child);" 13 26
+	 (face font-lock-warning-face)
+	 40 53
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 1574 nil))
+    #s(xref-item
+       #("function void uvm_component::get_children(ref uvm_component children[$]);" 14 27
+	 (face font-lock-warning-face)
+	 46 59
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 1610 nil))
     #s(xref-item
        #("function void uvm_component::get_children(ref uvm_component children[$]);" 14 27
 	 (face font-lock-warning-face)
@@ -96,6 +120,12 @@
        #("function int uvm_component::get_next_child(ref string name);" 13 26
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1627 nil))
+    #s(xref-item
+       #("function uvm_component uvm_component::get_child(string name);" 9 22
+	 (face font-lock-warning-face)
+	 23 36
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 1635 nil))
     #s(xref-item
        #("function uvm_component uvm_component::get_child(string name);" 9 22
 	 (face font-lock-warning-face)
@@ -121,6 +151,12 @@
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1676 nil))
     #s(xref-item
+       #("function uvm_component uvm_component::get_parent ();" 9 22
+	 (face font-lock-warning-face)
+	 23 36
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 1676 nil))
+    #s(xref-item
        #("function void uvm_component::set_name (string name);" 14 27
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1684 nil))
@@ -132,6 +168,12 @@
        #("uvm_component tmp;" 0 13
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1706 nil))
+    #s(xref-item
+       #("function uvm_component uvm_component::lookup( string name );" 9 22
+	 (face font-lock-warning-face)
+	 23 36
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 1717 nil))
     #s(xref-item
        #("function uvm_component uvm_component::lookup( string name );" 9 22
 	 (face font-lock-warning-face)
@@ -170,6 +212,12 @@
        #("function void  uvm_component::print_override_info (string requested_type_name," 15 28
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 1847 nil))
+    #s(xref-item
+       #("function uvm_component uvm_component::create_component (string requested_type_name," 9 22
+	 (face font-lock-warning-face)
+	 23 36
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 1858 nil))
     #s(xref-item
        #("function uvm_component uvm_component::create_component (string requested_type_name," 9 22
 	 (face font-lock-warning-face)
@@ -660,6 +708,12 @@
        #("set_report_verbosity_level(m_verbosity_settings[i].verbosity);" 27 47
 	 (face font-lock-warning-face))
        #s(xref-file-location "verilog/files/common/uvm_component.svh" 2943 nil))
+    #s(xref-item
+       #("set_report_id_verbosity(m_verbosity_settings[i].id, m_verbosity_settings[i].verbosity);" 24 44
+	 (face font-lock-warning-face)
+	 52 72
+	 (face font-lock-warning-face))
+       #s(xref-file-location "verilog/files/common/uvm_component.svh" 2945 nil))
     #s(xref-item
        #("set_report_id_verbosity(m_verbosity_settings[i].id, m_verbosity_settings[i].verbosity);" 24 44
 	 (face font-lock-warning-face)
