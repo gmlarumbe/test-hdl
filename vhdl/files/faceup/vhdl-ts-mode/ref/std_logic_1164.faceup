@@ -159,8 +159,8 @@
   «x:-------------------------------------------------------------------»
   «x:-- conversion functions»
   «x:-------------------------------------------------------------------»
-  «k:function» «f:To_bit»       «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:BIT»        «:vhdl-ts-font-lock-operator-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» BIT«:vhdl-ts-font-lock-punctuation-face:;»
-  «k:function» «f:To_bitvector» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:BIT» «:vhdl-ts-font-lock-operator-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» BIT_VECTOR«:vhdl-ts-font-lock-punctuation-face:;»
+  «k:function» «f:To_bit»       «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:BIT»        «:vhdl-ts-font-lock-punctuation-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» BIT«:vhdl-ts-font-lock-punctuation-face:;»
+  «k:function» «f:To_bitvector» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:BIT» «:vhdl-ts-font-lock-punctuation-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» BIT_VECTOR«:vhdl-ts-font-lock-punctuation-face:;»
 
   «k:function» «f:To_StdULogic»       «:vhdl-ts-font-lock-parenthesis-face:(»b «:vhdl-ts-font-lock-punctuation-face::» «t:BIT»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» STD_ULOGIC«:vhdl-ts-font-lock-punctuation-face:;»
   «k:function» «f:To_StdLogicVector»  «:vhdl-ts-font-lock-parenthesis-face:(»b «:vhdl-ts-font-lock-punctuation-face::» «t:BIT_VECTOR»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» STD_LOGIC_VECTOR«:vhdl-ts-font-lock-punctuation-face:;»
@@ -197,13 +197,13 @@
   «x:-- strength strippers and type convertors»
   «x:-------------------------------------------------------------------»
 
-  «k:function» «f:TO_01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC» «:vhdl-ts-font-lock-operator-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)»
+  «k:function» «f:TO_01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC» «:vhdl-ts-font-lock-punctuation-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)»
     «k:return» STD_ULOGIC_VECTOR«:vhdl-ts-font-lock-punctuation-face:;»
-  «k:function» «f:TO_01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC» «:vhdl-ts-font-lock-operator-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)»
+  «k:function» «f:TO_01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC» «:vhdl-ts-font-lock-punctuation-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)»
     «k:return» STD_ULOGIC«:vhdl-ts-font-lock-punctuation-face:;»
-  «k:function» «f:TO_01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:BIT_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC» «:vhdl-ts-font-lock-operator-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)»
+  «k:function» «f:TO_01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:BIT_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC» «:vhdl-ts-font-lock-punctuation-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)»
     «k:return» STD_ULOGIC_VECTOR«:vhdl-ts-font-lock-punctuation-face:;»
-  «k:function» «f:TO_01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:BIT»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC» «:vhdl-ts-font-lock-operator-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)»
+  «k:function» «f:TO_01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:BIT»«:vhdl-ts-font-lock-punctuation-face:;» xmap «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC» «:vhdl-ts-font-lock-punctuation-face::=» «s:'0'»«:vhdl-ts-font-lock-parenthesis-face:)»
     «k:return» STD_ULOGIC«:vhdl-ts-font-lock-punctuation-face:;»
 
   «k:function» «f:To_X01» «:vhdl-ts-font-lock-parenthesis-face:(»s «:vhdl-ts-font-lock-punctuation-face::» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» STD_ULOGIC_VECTOR«:vhdl-ts-font-lock-punctuation-face:;»
@@ -275,10 +275,10 @@
   «k:procedure» «f:READ» «:vhdl-ts-font-lock-parenthesis-face:(»L «:vhdl-ts-font-lock-punctuation-face::» «k:inout» «t:LINE»«:vhdl-ts-font-lock-punctuation-face:;» VALUE «:vhdl-ts-font-lock-punctuation-face::» «k:out» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
 
   «k:procedure» «f:WRITE» «:vhdl-ts-font-lock-parenthesis-face:(»L         «:vhdl-ts-font-lock-punctuation-face::» «k:inout» «t:LINE»«:vhdl-ts-font-lock-punctuation-face:;» VALUE «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:STD_ULOGIC»«:vhdl-ts-font-lock-punctuation-face:;»
-                   JUSTIFIED «:vhdl-ts-font-lock-punctuation-face::» «k:in»    «t:SIDE» «:vhdl-ts-font-lock-operator-face::=» right«:vhdl-ts-font-lock-punctuation-face:;» FIELD «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:WIDTH» «:vhdl-ts-font-lock-operator-face::=» 0«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
+                   JUSTIFIED «:vhdl-ts-font-lock-punctuation-face::» «k:in»    «t:SIDE» «:vhdl-ts-font-lock-punctuation-face::=» right«:vhdl-ts-font-lock-punctuation-face:;» FIELD «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:WIDTH» «:vhdl-ts-font-lock-punctuation-face::=» 0«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
 
   «k:procedure» «f:WRITE» «:vhdl-ts-font-lock-parenthesis-face:(»L         «:vhdl-ts-font-lock-punctuation-face::» «k:inout» «t:LINE»«:vhdl-ts-font-lock-punctuation-face:;» VALUE «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;»
-                   JUSTIFIED «:vhdl-ts-font-lock-punctuation-face::» «k:in»    «t:SIDE» «:vhdl-ts-font-lock-operator-face::=» right«:vhdl-ts-font-lock-punctuation-face:;» FIELD «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:WIDTH» «:vhdl-ts-font-lock-operator-face::=» 0«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
+                   JUSTIFIED «:vhdl-ts-font-lock-punctuation-face::» «k:in»    «t:SIDE» «:vhdl-ts-font-lock-punctuation-face::=» right«:vhdl-ts-font-lock-punctuation-face:;» FIELD «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:WIDTH» «:vhdl-ts-font-lock-punctuation-face::=» 0«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
 
   «k:alias» «c:BREAD» «k:is» READ «:vhdl-ts-font-lock-parenthesis-face:[»LINE«:vhdl-ts-font-lock-punctuation-face:,» STD_ULOGIC_VECTOR«:vhdl-ts-font-lock-punctuation-face:,» BOOLEAN«:vhdl-ts-font-lock-parenthesis-face:]»«:vhdl-ts-font-lock-punctuation-face:;»
   «k:alias» «c:BREAD» «k:is» READ «:vhdl-ts-font-lock-parenthesis-face:[»LINE«:vhdl-ts-font-lock-punctuation-face:,» STD_ULOGIC_VECTOR«:vhdl-ts-font-lock-parenthesis-face:]»«:vhdl-ts-font-lock-punctuation-face:;»
@@ -299,11 +299,11 @@
   «k:alias» «c:BINARY_WRITE» «k:is» WRITE «:vhdl-ts-font-lock-parenthesis-face:[»LINE«:vhdl-ts-font-lock-punctuation-face:,» STD_ULOGIC_VECTOR«:vhdl-ts-font-lock-punctuation-face:,» SIDE«:vhdl-ts-font-lock-punctuation-face:,» WIDTH«:vhdl-ts-font-lock-parenthesis-face:]»«:vhdl-ts-font-lock-punctuation-face:;»
 
   «k:procedure» «f:OWRITE» «:vhdl-ts-font-lock-parenthesis-face:(»L         «:vhdl-ts-font-lock-punctuation-face::» «k:inout» «t:LINE»«:vhdl-ts-font-lock-punctuation-face:;» VALUE «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;»
-                    JUSTIFIED «:vhdl-ts-font-lock-punctuation-face::» «k:in»    «t:SIDE» «:vhdl-ts-font-lock-operator-face::=» right«:vhdl-ts-font-lock-punctuation-face:;» FIELD «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:WIDTH» «:vhdl-ts-font-lock-operator-face::=» 0«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
+                    JUSTIFIED «:vhdl-ts-font-lock-punctuation-face::» «k:in»    «t:SIDE» «:vhdl-ts-font-lock-punctuation-face::=» right«:vhdl-ts-font-lock-punctuation-face:;» FIELD «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:WIDTH» «:vhdl-ts-font-lock-punctuation-face::=» 0«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
   «k:alias» «c:OCTAL_WRITE» «k:is» OWRITE «:vhdl-ts-font-lock-parenthesis-face:[»LINE«:vhdl-ts-font-lock-punctuation-face:,» STD_ULOGIC_VECTOR«:vhdl-ts-font-lock-punctuation-face:,» SIDE«:vhdl-ts-font-lock-punctuation-face:,» WIDTH«:vhdl-ts-font-lock-parenthesis-face:]»«:vhdl-ts-font-lock-punctuation-face:;»
 
   «k:procedure» «f:HWRITE» «:vhdl-ts-font-lock-parenthesis-face:(»L         «:vhdl-ts-font-lock-punctuation-face::» «k:inout» «t:LINE»«:vhdl-ts-font-lock-punctuation-face:;» VALUE «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:STD_ULOGIC_VECTOR»«:vhdl-ts-font-lock-punctuation-face:;»
-                    JUSTIFIED «:vhdl-ts-font-lock-punctuation-face::» «k:in»    «t:SIDE» «:vhdl-ts-font-lock-operator-face::=» right«:vhdl-ts-font-lock-punctuation-face:;» FIELD «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:WIDTH» «:vhdl-ts-font-lock-operator-face::=» 0«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
+                    JUSTIFIED «:vhdl-ts-font-lock-punctuation-face::» «k:in»    «t:SIDE» «:vhdl-ts-font-lock-punctuation-face::=» right«:vhdl-ts-font-lock-punctuation-face:;» FIELD «:vhdl-ts-font-lock-punctuation-face::» «k:in» «t:WIDTH» «:vhdl-ts-font-lock-punctuation-face::=» 0«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
   «k:alias» «c:HEX_WRITE» «k:is» HWRITE «:vhdl-ts-font-lock-parenthesis-face:[»LINE«:vhdl-ts-font-lock-punctuation-face:,» STD_ULOGIC_VECTOR«:vhdl-ts-font-lock-punctuation-face:,» SIDE«:vhdl-ts-font-lock-punctuation-face:,» WIDTH«:vhdl-ts-font-lock-parenthesis-face:]»«:vhdl-ts-font-lock-punctuation-face:;»
 
 «k:end» «k:package» std_logic_1164«:vhdl-ts-font-lock-punctuation-face:;»

@@ -53,18 +53,18 @@
     «k:end» «k:component»«:vhdl-ts-font-lock-punctuation-face:;»
 
     «k:function» «f:clogb2» «:vhdl-ts-font-lock-parenthesis-face:(»bit_depth «:vhdl-ts-font-lock-punctuation-face::» «t:integer»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» integer «k:is»
-        «k:variable» depth «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-operator-face::=» bit_depth«:vhdl-ts-font-lock-punctuation-face:;»
-        «k:variable» count «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-operator-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
+        «k:variable» depth «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-punctuation-face::=» bit_depth«:vhdl-ts-font-lock-punctuation-face:;»
+        «k:variable» count «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-punctuation-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
     «k:begin»
         «k:for» clogb2 «k:in» «:vhdl-ts-font-lock-brackets-content-face:1» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:bit_depth» «k:loop»
-            «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»bit_depth «:vhdl-ts-font-lock-operator-face:<=» 2«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
-                count «:vhdl-ts-font-lock-operator-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
+            «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»bit_depth «:vhdl-ts-font-lock-punctuation-face:<=» 2«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
+                count «:vhdl-ts-font-lock-punctuation-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
             «k:else»
-                «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»depth «:vhdl-ts-font-lock-operator-face:<=» 1«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
-                    count «:vhdl-ts-font-lock-operator-face::=» count«:vhdl-ts-font-lock-punctuation-face:;»
+                «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»depth «:vhdl-ts-font-lock-punctuation-face:<=» 1«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
+                    count «:vhdl-ts-font-lock-punctuation-face::=» count«:vhdl-ts-font-lock-punctuation-face:;»
                 «k:else»
-                    depth «:vhdl-ts-font-lock-operator-face::=» depth «:vhdl-ts-font-lock-operator-face:/» 2«:vhdl-ts-font-lock-punctuation-face:;»
-                    count «:vhdl-ts-font-lock-operator-face::=» count «:vhdl-ts-font-lock-operator-face:+» 1«:vhdl-ts-font-lock-punctuation-face:;»
+                    depth «:vhdl-ts-font-lock-punctuation-face::=» depth «:vhdl-ts-font-lock-operator-face:/» 2«:vhdl-ts-font-lock-punctuation-face:;»
+                    count «:vhdl-ts-font-lock-punctuation-face::=» count «:vhdl-ts-font-lock-operator-face:+» 1«:vhdl-ts-font-lock-punctuation-face:;»
                 «k:end» «k:if»«:vhdl-ts-font-lock-punctuation-face:;»
             «k:end» «k:if»«:vhdl-ts-font-lock-punctuation-face:;»
         «k:end» «k:loop»«:vhdl-ts-font-lock-punctuation-face:;»
@@ -77,8 +77,8 @@
 
         «k:procedure» «f:init_values» «k:is»
         «k:begin»
-            resetn     «:vhdl-ts-font-lock-operator-face:<=» «s:'0'»«:vhdl-ts-font-lock-punctuation-face:;»
-            soft_reset «:vhdl-ts-font-lock-operator-face:<=» «s:'0'»«:vhdl-ts-font-lock-punctuation-face:;»
+            resetn     «:vhdl-ts-font-lock-punctuation-face:<=» «s:'0'»«:vhdl-ts-font-lock-punctuation-face:;»
+            soft_reset «:vhdl-ts-font-lock-punctuation-face:<=» «s:'0'»«:vhdl-ts-font-lock-punctuation-face:;»
         «k:end» «k:procedure» init_values«:vhdl-ts-font-lock-punctuation-face:;»
 
     «k:begin»
@@ -86,7 +86,7 @@
 
     «c:gen_mem_sel» «:vhdl-ts-font-lock-punctuation-face::» «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»USER_NUM_MEM >= 1«:vhdl-ts-font-lock-parenthesis-face:)» «k:generate»
     «k:begin»
-        mem_select  «:vhdl-ts-font-lock-operator-face:<=» «s:"1"»«:vhdl-ts-font-lock-punctuation-face:;»
+        mem_select  «:vhdl-ts-font-lock-punctuation-face:<=» «s:"1"»«:vhdl-ts-font-lock-punctuation-face:;»
     «k:end» «k:generate» gen_mem_sel«:vhdl-ts-font-lock-punctuation-face:;»
 
 «k:end» «k:architecture» «f:RTL»«:vhdl-ts-font-lock-punctuation-face:;»
@@ -98,20 +98,20 @@
     «k:signal» soft_reset «:vhdl-ts-font-lock-punctuation-face::» «t:std_logic»«:vhdl-ts-font-lock-punctuation-face:;»
 
     «k:function» «f:clogb2» «:vhdl-ts-font-lock-parenthesis-face:(»bit_depth «:vhdl-ts-font-lock-punctuation-face::» «t:integer»«:vhdl-ts-font-lock-parenthesis-face:)» «k:return» integer «k:is»
-        «k:variable» depth «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-operator-face::=» bit_depth«:vhdl-ts-font-lock-punctuation-face:;»
-        «k:variable» count «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-operator-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
+        «k:variable» depth «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-punctuation-face::=» bit_depth«:vhdl-ts-font-lock-punctuation-face:;»
+        «k:variable» count «:vhdl-ts-font-lock-punctuation-face::» «t:integer» «:vhdl-ts-font-lock-punctuation-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
     «k:begin»
         «k:for» clogb2 «k:in» «:vhdl-ts-font-lock-brackets-content-face:1» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:bit_depth» «k:loop»
-            «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»bit_depth «:vhdl-ts-font-lock-operator-face:<=» 2«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
-                count «:vhdl-ts-font-lock-operator-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
+            «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»bit_depth «:vhdl-ts-font-lock-punctuation-face:<=» 2«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
+                count «:vhdl-ts-font-lock-punctuation-face::=» 1«:vhdl-ts-font-lock-punctuation-face:;»
             «k:else»
-                «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»depth «:vhdl-ts-font-lock-operator-face:<=» 1«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
+                «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»depth «:vhdl-ts-font-lock-punctuation-face:<=» 1«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-then-face:then»
                     «k:for» j «k:in» «:vhdl-ts-font-lock-brackets-content-face:1» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:10» «k:loop»
-                        count «:vhdl-ts-font-lock-operator-face::=» count«:vhdl-ts-font-lock-punctuation-face:;»
+                        count «:vhdl-ts-font-lock-punctuation-face::=» count«:vhdl-ts-font-lock-punctuation-face:;»
                     «k:end» «k:loop»«:vhdl-ts-font-lock-punctuation-face:;»
                 «k:else»
-                    depth «:vhdl-ts-font-lock-operator-face::=» depth «:vhdl-ts-font-lock-operator-face:/» 2«:vhdl-ts-font-lock-punctuation-face:;»
-                    count «:vhdl-ts-font-lock-operator-face::=» count «:vhdl-ts-font-lock-operator-face:+» 1«:vhdl-ts-font-lock-punctuation-face:;»
+                    depth «:vhdl-ts-font-lock-punctuation-face::=» depth «:vhdl-ts-font-lock-operator-face:/» 2«:vhdl-ts-font-lock-punctuation-face:;»
+                    count «:vhdl-ts-font-lock-punctuation-face::=» count «:vhdl-ts-font-lock-operator-face:+» 1«:vhdl-ts-font-lock-punctuation-face:;»
                 «k:end» «k:if»«:vhdl-ts-font-lock-punctuation-face:;»
             «k:end» «k:if»«:vhdl-ts-font-lock-punctuation-face:;»
         «k:end» «k:loop»«:vhdl-ts-font-lock-punctuation-face:;»
@@ -124,8 +124,8 @@
 
         «k:procedure» «f:init_values» «k:is»
         «k:begin»
-            resetn     «:vhdl-ts-font-lock-operator-face:<=» «s:'0'»«:vhdl-ts-font-lock-punctuation-face:;»
-            soft_reset «:vhdl-ts-font-lock-operator-face:<=» «s:'0'»«:vhdl-ts-font-lock-punctuation-face:;»
+            resetn     «:vhdl-ts-font-lock-punctuation-face:<=» «s:'0'»«:vhdl-ts-font-lock-punctuation-face:;»
+            soft_reset «:vhdl-ts-font-lock-punctuation-face:<=» «s:'0'»«:vhdl-ts-font-lock-punctuation-face:;»
         «k:end» init_values«:vhdl-ts-font-lock-punctuation-face:;»
 
     «k:begin»
@@ -133,7 +133,7 @@
 
     «c:gen_mem_sel» «:vhdl-ts-font-lock-punctuation-face::» «k:if» «:vhdl-ts-font-lock-parenthesis-face:(»USER_NUM_MEM >= 1«:vhdl-ts-font-lock-parenthesis-face:)» «k:generate»
     «k:begin»
-        mem_select  «:vhdl-ts-font-lock-operator-face:<=» «s:"1"»«:vhdl-ts-font-lock-punctuation-face:;»
+        mem_select  «:vhdl-ts-font-lock-punctuation-face:<=» «s:"1"»«:vhdl-ts-font-lock-punctuation-face:;»
     «k:end» «k:generate»«:vhdl-ts-font-lock-punctuation-face:;»
 
 «k:end» «f:RTL»«:vhdl-ts-font-lock-punctuation-face:;»
@@ -164,7 +164,7 @@
         «k:signal» common_in   «:vhdl-ts-font-lock-punctuation-face::» «k:in»  «t:mf_common_response_r_type_in»
         «:vhdl-ts-font-lock-parenthesis-face:)» «k:is»
     «k:begin»
-        «:vhdl-ts-font-lock-instance-lib-face:common_out»«:vhdl-ts-font-lock-punctuation-face:.»m_axi_arready «:vhdl-ts-font-lock-operator-face:<=» «s:'1'»«:vhdl-ts-font-lock-punctuation-face:;»
+        «:vhdl-ts-font-lock-instance-lib-face:common_out»«:vhdl-ts-font-lock-punctuation-face:.»m_axi_arready «:vhdl-ts-font-lock-punctuation-face:<=» «s:'1'»«:vhdl-ts-font-lock-punctuation-face:;»
     «k:end» «k:procedure» foo«:vhdl-ts-font-lock-punctuation-face:;»
 
 «k:end» «k:package» «k:body» «f:foo»«:vhdl-ts-font-lock-punctuation-face:;»
@@ -176,7 +176,7 @@
         «k:signal» common_in   «:vhdl-ts-font-lock-punctuation-face::» «k:in»  «t:mf_common_response_r_type_in»
         «:vhdl-ts-font-lock-parenthesis-face:)» «k:is»
     «k:begin»
-        «:vhdl-ts-font-lock-instance-lib-face:common_out»«:vhdl-ts-font-lock-punctuation-face:.»m_axi_arready «:vhdl-ts-font-lock-operator-face:<=» «s:'1'»«:vhdl-ts-font-lock-punctuation-face:;»
+        «:vhdl-ts-font-lock-instance-lib-face:common_out»«:vhdl-ts-font-lock-punctuation-face:.»m_axi_arready «:vhdl-ts-font-lock-punctuation-face:<=» «s:'1'»«:vhdl-ts-font-lock-punctuation-face:;»
     «k:end»  foo«:vhdl-ts-font-lock-punctuation-face:;»
 
 «k:end»«:vhdl-ts-font-lock-punctuation-face:;»

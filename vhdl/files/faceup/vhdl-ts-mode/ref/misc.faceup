@@ -31,9 +31,9 @@
 
     «:vhdl-ts-font-lock-instance-face:I_BLOCK1_0» «:vhdl-ts-font-lock-punctuation-face::» «k:entity» «:vhdl-ts-font-lock-entity-face:block1»
         «k:port» «k:map» «:vhdl-ts-font-lock-parenthesis-face:(»
-            «:vhdl-ts-font-lock-port-connection-face:Port0» «:vhdl-ts-font-lock-operator-face:=>» Port0«:vhdl-ts-font-lock-punctuation-face:,»
-            «:vhdl-ts-font-lock-port-connection-face:Port1» «:vhdl-ts-font-lock-operator-face:=>» Port1«:vhdl-ts-font-lock-punctuation-face:,»
-            «:vhdl-ts-font-lock-port-connection-face:Port2» «:vhdl-ts-font-lock-operator-face:=>» Port2
+            «:vhdl-ts-font-lock-port-connection-face:Port0» «:vhdl-ts-font-lock-punctuation-face:=>» Port0«:vhdl-ts-font-lock-punctuation-face:,»
+            «:vhdl-ts-font-lock-port-connection-face:Port1» «:vhdl-ts-font-lock-punctuation-face:=>» Port1«:vhdl-ts-font-lock-punctuation-face:,»
+            «:vhdl-ts-font-lock-port-connection-face:Port2» «:vhdl-ts-font-lock-punctuation-face:=>» Port2
             «:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
 
 «k:end» «k:architecture» «f:RTL»«:vhdl-ts-font-lock-punctuation-face:;»
@@ -48,16 +48,16 @@
 
     «:vhdl-ts-font-lock-instance-face:I_BLOCK1_0» «:vhdl-ts-font-lock-punctuation-face::» «k:entity» «:vhdl-ts-font-lock-entity-face:block1»
         «k:port» «k:map» «:vhdl-ts-font-lock-parenthesis-face:(»
-            «:vhdl-ts-font-lock-port-connection-face:Port0»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:0»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-operator-face:=>» Port0«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:0»«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:,»
-            «:vhdl-ts-font-lock-port-connection-face:Port1»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:1»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-operator-face:=>» Port1«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:1»«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:,»
-            «:vhdl-ts-font-lock-port-connection-face:Port2»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:i»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-operator-face:=>» Port2«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:i»«:vhdl-ts-font-lock-parenthesis-face:)»
+            «:vhdl-ts-font-lock-port-connection-face:Port0»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:0»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-punctuation-face:=>» Port0«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:0»«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:,»
+            «:vhdl-ts-font-lock-port-connection-face:Port1»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:1»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-punctuation-face:=>» Port1«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:1»«:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:,»
+            «:vhdl-ts-font-lock-port-connection-face:Port2»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:i»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-punctuation-face:=>» Port2«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:i»«:vhdl-ts-font-lock-parenthesis-face:)»
             «:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
 
     «:vhdl-ts-font-lock-instance-face:I_BLOCK1_1» «:vhdl-ts-font-lock-punctuation-face::» «k:entity» «:vhdl-ts-font-lock-entity-face:block1»
         «k:port» «k:map» «:vhdl-ts-font-lock-parenthesis-face:(»
-            «:vhdl-ts-font-lock-port-connection-face:Port0»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:3» «:vhdl-ts-font-lock-instance-lib-face:downto» «:vhdl-ts-font-lock-brackets-content-face:0»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-operator-face:=>» Port0«:vhdl-ts-font-lock-punctuation-face:,»
-            «:vhdl-ts-font-lock-port-connection-face:Port1»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:5» «:vhdl-ts-font-lock-instance-lib-face:downto» «:vhdl-ts-font-lock-brackets-content-face:1»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-operator-face:=>» Port1«:vhdl-ts-font-lock-punctuation-face:,»
-            «:vhdl-ts-font-lock-port-connection-face:Port2»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:0» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:5»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-operator-face:=>» Port2
+            «:vhdl-ts-font-lock-port-connection-face:Port0»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:3» «:vhdl-ts-font-lock-instance-lib-face:downto» «:vhdl-ts-font-lock-brackets-content-face:0»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-punctuation-face:=>» Port0«:vhdl-ts-font-lock-punctuation-face:,»
+            «:vhdl-ts-font-lock-port-connection-face:Port1»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:5» «:vhdl-ts-font-lock-instance-lib-face:downto» «:vhdl-ts-font-lock-brackets-content-face:1»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-punctuation-face:=>» Port1«:vhdl-ts-font-lock-punctuation-face:,»
+            «:vhdl-ts-font-lock-port-connection-face:Port2»«:vhdl-ts-font-lock-parenthesis-face:(»«:vhdl-ts-font-lock-brackets-content-face:0» «:vhdl-ts-font-lock-instance-lib-face:to» «:vhdl-ts-font-lock-brackets-content-face:5»«:vhdl-ts-font-lock-parenthesis-face:)» «:vhdl-ts-font-lock-punctuation-face:=>» Port2
             «:vhdl-ts-font-lock-parenthesis-face:)»«:vhdl-ts-font-lock-punctuation-face:;»
 
 «k:end» «k:architecture» «f:port_bit_select»«:vhdl-ts-font-lock-punctuation-face:;»

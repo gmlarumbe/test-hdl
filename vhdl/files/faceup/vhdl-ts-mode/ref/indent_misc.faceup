@@ -25,14 +25,14 @@
 «k:process» «:vhdl-ts-font-lock-parenthesis-face:(»«k:all»«:vhdl-ts-font-lock-parenthesis-face:)»
 «k:begin»
 «k:case» var «k:is»
-«k:when» A «:vhdl-ts-font-lock-operator-face:=>»
-out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
-«k:when» B «:vhdl-ts-font-lock-operator-face:=>»
-out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
-«k:when» C «:vhdl-ts-font-lock-operator-face:=>»
-out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
-«k:when» «k:others» «:vhdl-ts-font-lock-operator-face:=>»
-out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
+«k:when» A «:vhdl-ts-font-lock-punctuation-face:=>»
+out «:vhdl-ts-font-lock-punctuation-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
+«k:when» B «:vhdl-ts-font-lock-punctuation-face:=>»
+out «:vhdl-ts-font-lock-punctuation-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
+«k:when» C «:vhdl-ts-font-lock-punctuation-face:=>»
+out «:vhdl-ts-font-lock-punctuation-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
+«k:when» «k:others» «:vhdl-ts-font-lock-punctuation-face:=>»
+out «:vhdl-ts-font-lock-punctuation-face:<=» in«:vhdl-ts-font-lock-punctuation-face:;»
 «k:end» «k:case»«:vhdl-ts-font-lock-punctuation-face:;»
 «k:end» «k:process»«:vhdl-ts-font-lock-punctuation-face:;»
 
@@ -41,7 +41,7 @@ out «:vhdl-ts-font-lock-operator-face:<=» in«:vhdl-ts-font-lock-punctuation-f
 
 «x:-- 3) Constant array initialization»
 «k:package» «k:body» «f:foo» «k:is»
-«k:constant» «c:ARRAY_CONSTANT» «:vhdl-ts-font-lock-punctuation-face::» «t:array_type» «:vhdl-ts-font-lock-operator-face::=»
+«k:constant» «c:ARRAY_CONSTANT» «:vhdl-ts-font-lock-punctuation-face::» «t:array_type» «:vhdl-ts-font-lock-punctuation-face::=»
 «:vhdl-ts-font-lock-parenthesis-face:(»
 VALUE_0«:vhdl-ts-font-lock-punctuation-face:,»
 VALUE_1«:vhdl-ts-font-lock-punctuation-face:,»
@@ -56,7 +56,7 @@ VALUE_4
 «k:package» «k:body» «f:foo» «k:is»
 «k:procedure» «f:test_multiline_expression» «k:is»
 «k:begin»  «x:-- procedure test_multiline_expression»
-signal_out «:vhdl-ts-font-lock-operator-face:<=» signal_in1 «k:and»
+signal_out «:vhdl-ts-font-lock-punctuation-face:<=» signal_in1 «k:and»
 signal_in2 «k:and»
 signal_in3 «k:and»
 signal_in4«:vhdl-ts-font-lock-punctuation-face:;»
