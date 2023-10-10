@@ -252,7 +252,7 @@
       «:verilog-ts-font-lock-operator-face:.»«:verilog-ts-font-lock-port-connection-face:ready_i» «:verilog-ts-font-lock-parenthesis-face:(» slv_aw_ready       «:verilog-ts-font-lock-parenthesis-face:)»«:verilog-ts-font-lock-punctuation-face:,»
       «:verilog-ts-font-lock-operator-face:.»«:verilog-ts-font-lock-port-connection-face:data_o»  «:verilog-ts-font-lock-parenthesis-face:(» slv_aw_select      «:verilog-ts-font-lock-parenthesis-face:)»
     «:verilog-ts-font-lock-parenthesis-face:)»«:verilog-ts-font-lock-punctuation-face:;»
-    «k:assign» slv_resp_o«:verilog-ts-font-lock-operator-face:.»aw_ready «:verilog-ts-font-lock-punctuation-face:=» slv_aw_ready_chan «:verilog-ts-font-lock-operator-face:&» slv_aw_ready_sel«:verilog-ts-font-lock-punctuation-face:;»
+    «k:assign» «:verilog-ts-font-lock-dot-name-face:slv_resp_o»«:verilog-ts-font-lock-operator-face:.»aw_ready «:verilog-ts-font-lock-punctuation-face:=» slv_aw_ready_chan «:verilog-ts-font-lock-operator-face:&» slv_aw_ready_sel«:verilog-ts-font-lock-punctuation-face:;»
     «k:assign» slv_aw_valid «:verilog-ts-font-lock-punctuation-face:=» slv_aw_valid_chan «:verilog-ts-font-lock-operator-face:&» slv_aw_valid_sel«:verilog-ts-font-lock-punctuation-face:;»
 
     «x:// Control of the AW handshake»
@@ -459,7 +459,7 @@
       «:verilog-ts-font-lock-operator-face:.»«:verilog-ts-font-lock-port-connection-face:ready_i» «:verilog-ts-font-lock-parenthesis-face:(» slv_ar_ready       «:verilog-ts-font-lock-parenthesis-face:)»«:verilog-ts-font-lock-punctuation-face:,»
       «:verilog-ts-font-lock-operator-face:.»«:verilog-ts-font-lock-port-connection-face:data_o»  «:verilog-ts-font-lock-parenthesis-face:(» slv_ar_select      «:verilog-ts-font-lock-parenthesis-face:)»
     «:verilog-ts-font-lock-parenthesis-face:)»«:verilog-ts-font-lock-punctuation-face:;»
-    «k:assign» slv_resp_o«:verilog-ts-font-lock-operator-face:.»ar_ready «:verilog-ts-font-lock-punctuation-face:=» slv_ar_ready_chan «:verilog-ts-font-lock-operator-face:&» slv_ar_ready_sel«:verilog-ts-font-lock-punctuation-face:;»
+    «k:assign» «:verilog-ts-font-lock-dot-name-face:slv_resp_o»«:verilog-ts-font-lock-operator-face:.»ar_ready «:verilog-ts-font-lock-punctuation-face:=» slv_ar_ready_chan «:verilog-ts-font-lock-operator-face:&» slv_ar_ready_sel«:verilog-ts-font-lock-punctuation-face:;»
     «k:assign» slv_ar_valid «:verilog-ts-font-lock-punctuation-face:=» ar_valid_chan «:verilog-ts-font-lock-operator-face:&» ar_valid_sel«:verilog-ts-font-lock-punctuation-face:;»
 
     «x:// control of the AR handshake»
