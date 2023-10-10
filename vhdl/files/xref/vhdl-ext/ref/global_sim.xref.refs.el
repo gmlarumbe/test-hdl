@@ -484,7 +484,7 @@
        #("    clk <= (not clk and not stop_clock) after AXI_CLK_T/2;" 0 8
 	 (fontified nil)
 	 8 10
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 10 11
 	 (fontified nil)
 	 11 12

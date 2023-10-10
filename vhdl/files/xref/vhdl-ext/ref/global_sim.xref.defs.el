@@ -46,7 +46,7 @@
        29 30
        (fontified nil)
        30 32
-       (face vhdl-ts-font-lock-operator-face fontified nil)
+       (face vhdl-ts-font-lock-punctuation-face fontified nil)
        32 39
        (fontified nil)
        39 40

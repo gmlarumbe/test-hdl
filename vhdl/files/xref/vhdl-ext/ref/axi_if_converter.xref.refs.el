@@ -96,7 +96,7 @@
        15 23
        (fontified nil)
        23 25
-       (face vhdl-ts-font-lock-operator-face fontified nil)
+       (face vhdl-ts-font-lock-punctuation-face fontified nil)
        25 36
        (fontified nil)
        36 37
@@ -110,7 +110,7 @@
 	 15 24
 	 (fontified nil)
 	 24 26
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 26 27
 	 (fontified nil)
 	 27 30
@@ -126,7 +126,7 @@
 	 15 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 32
@@ -142,7 +142,7 @@
 	 15 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 32
@@ -158,7 +158,7 @@
 	 15 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 36
 	 (fontified nil)
 	 36 37
@@ -172,7 +172,7 @@
 	 15 24
 	 (fontified nil)
 	 24 26
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 26 27
 	 (fontified nil)
 	 27 30
@@ -188,7 +188,7 @@
 	 15 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 32
@@ -204,7 +204,7 @@
 	 15 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 32
@@ -360,7 +360,7 @@
 	 15 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 29
@@ -376,7 +376,7 @@
 	 7 8
 	 (fontified nil)
 	 8 10
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 10 11
 	 (fontified nil)
 	 11 12
@@ -416,7 +416,7 @@
        #("    s_axi_aclk      <= clk;" 0 20
 	 (fontified nil)
 	 20 22
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 22 23
 	 (fontified nil)
 	 23 26
@@ -428,7 +428,7 @@
        #("    m_axi_conf_aclk <= clk;" 0 20
 	 (fontified nil)
 	 20 22
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 22 23
 	 (fontified nil)
 	 23 26
@@ -440,7 +440,7 @@
        #("    s_axis_lch_aclk <= clk;" 0 20
 	 (fontified nil)
 	 20 22
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 22 23
 	 (fontified nil)
 	 23 26
@@ -452,7 +452,7 @@
        #("    s_axis_rch_aclk <= clk;" 0 20
 	 (fontified nil)
 	 20 22
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 22 23
 	 (fontified nil)
 	 23 26
@@ -464,7 +464,7 @@
        #("    m_axi_lch_aclk  <= clk;" 0 20
 	 (fontified nil)
 	 20 22
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 22 23
 	 (fontified nil)
 	 23 26
@@ -476,7 +476,7 @@
        #("    m_axi_rch_aclk  <= clk;" 0 20
 	 (fontified nil)
 	 20 22
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 22 23
 	 (fontified nil)
 	 23 26
@@ -488,7 +488,7 @@
        #("    m_axis_lch_aclk  <= clk;" 0 21
 	 (fontified nil)
 	 21 23
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 23 24
 	 (fontified nil)
 	 24 27
@@ -500,7 +500,7 @@
        #("    m_axis_rch_aclk  <= clk;" 0 21
 	 (fontified nil)
 	 21 23
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 23 24
 	 (fontified nil)
 	 24 27
@@ -516,7 +516,7 @@
        22 26
        (fontified nil)
        26 28
-       (face vhdl-ts-font-lock-operator-face fontified nil)
+       (face vhdl-ts-font-lock-punctuation-face fontified nil)
        28 29
        (fontified nil)
        29 39
@@ -532,7 +532,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1134,7 +1134,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1150,7 +1150,7 @@
 	 22 27
 	 (fontified nil)
 	 27 29
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 29 44
 	 (fontified nil)
 	 44 45
@@ -1164,7 +1164,7 @@
 	 22 27
 	 (fontified nil)
 	 27 29
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 29 44
 	 (fontified nil)
 	 44 45
@@ -1178,7 +1178,7 @@
 	 14 20
 	 (fontified nil)
 	 20 22
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 22 26
 	 (fontified nil)
 	 26 27
@@ -1188,7 +1188,7 @@
        #("    s_bfm_in_r                                                                                        <= (s_axi_aclk, s_axi_arready, s_axi_rready, s_axi_rvalid);" 0 102
 	 (fontified nil)
 	 102 104
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 104 105
 	 (fontified nil)
 	 105 106
@@ -1216,7 +1216,7 @@
        #("    s_bfm_in_w                                                                                        <= (s_axi_aclk, s_axi_awready, s_axi_wready, s_axi_bvalid);" 0 102
 	 (fontified nil)
 	 102 104
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 104 105
 	 (fontified nil)
 	 105 106
@@ -1534,7 +1534,7 @@
        22 23
        (fontified nil)
        23 25
-       (face vhdl-ts-font-lock-operator-face fontified nil)
+       (face vhdl-ts-font-lock-punctuation-face fontified nil)
        25 26
        (fontified nil)
        26 36
@@ -1550,7 +1550,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1566,7 +1566,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1582,7 +1582,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1598,7 +1598,7 @@
 	 22 30
 	 (fontified nil)
 	 30 32
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 32 33
 	 (fontified nil)
 	 33 43
@@ -1614,7 +1614,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1630,7 +1630,7 @@
 	 22 24
 	 (fontified nil)
 	 24 26
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 26 27
 	 (fontified nil)
 	 27 37
@@ -1646,7 +1646,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1662,7 +1662,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1678,7 +1678,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1694,7 +1694,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1710,7 +1710,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1726,7 +1726,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1742,7 +1742,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1758,7 +1758,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1774,7 +1774,7 @@
 	 22 30
 	 (fontified nil)
 	 30 32
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 32 33
 	 (fontified nil)
 	 33 43
@@ -1790,7 +1790,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 36
@@ -1806,7 +1806,7 @@
 	 22 24
 	 (fontified nil)
 	 24 26
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 26 27
 	 (fontified nil)
 	 27 30
@@ -1822,7 +1822,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1838,7 +1838,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1854,7 +1854,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1870,7 +1870,7 @@
 	 22 26
 	 (fontified nil)
 	 26 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 39
@@ -1888,7 +1888,7 @@
 	 15 27
 	 (fontified nil)
 	 27 28
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 28 29
 	 (fontified nil)
 	 29 32
@@ -1904,7 +1904,7 @@
 	 46 47
 	 (fontified nil)
 	 47 48
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 48 49
 	 (fontified nil)
 	 49 52
@@ -1928,7 +1928,7 @@
 	 16 23
 	 (fontified nil)
 	 23 24
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 24 25
 	 (fontified nil)
 	 25 28
@@ -1944,7 +1944,7 @@
 	 42 43
 	 (fontified nil)
 	 43 44
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 44 45
 	 (fontified nil)
 	 45 48
@@ -1968,7 +1968,7 @@
 	 16 23
 	 (fontified nil)
 	 23 24
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 24 25
 	 (fontified nil)
 	 25 28
@@ -1984,7 +1984,7 @@
 	 42 43
 	 (fontified nil)
 	 43 44
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 44 45
 	 (fontified nil)
 	 45 48
@@ -2008,7 +2008,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2024,7 +2024,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2048,7 +2048,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2064,7 +2064,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2088,7 +2088,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2104,7 +2104,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2128,7 +2128,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2144,7 +2144,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2168,7 +2168,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2184,7 +2184,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2208,7 +2208,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2224,7 +2224,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2248,7 +2248,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2264,7 +2264,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2288,7 +2288,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2304,7 +2304,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2328,7 +2328,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2344,7 +2344,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2368,7 +2368,7 @@
 	 16 35
 	 (fontified nil)
 	 35 36
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 36 37
 	 (fontified nil)
 	 37 40
@@ -2384,7 +2384,7 @@
 	 54 55
 	 (fontified nil)
 	 55 56
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 56 57
 	 (fontified nil)
 	 57 60
@@ -2408,7 +2408,7 @@
 	 16 23
 	 (fontified nil)
 	 23 24
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 24 25
 	 (fontified nil)
 	 25 28
@@ -2424,7 +2424,7 @@
 	 42 43
 	 (fontified nil)
 	 43 44
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 44 45
 	 (fontified nil)
 	 45 48
@@ -2448,7 +2448,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2464,7 +2464,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2488,7 +2488,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2504,7 +2504,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2528,7 +2528,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2544,7 +2544,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2568,7 +2568,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2580,7 +2580,7 @@
 	 38 45
 	 (fontified nil)
 	 45 47
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 47 62
 	 (fontified nil)
 	 62 64
@@ -2592,7 +2592,7 @@
 	 75 76
 	 (fontified nil)
 	 76 77
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 77 78
 	 (fontified nil)
 	 78 81
@@ -2616,7 +2616,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2632,7 +2632,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2656,7 +2656,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2668,7 +2668,7 @@
 	 38 45
 	 (fontified nil)
 	 45 47
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 47 65
 	 (fontified nil)
 	 65 67
@@ -2680,7 +2680,7 @@
 	 78 79
 	 (fontified nil)
 	 79 80
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 80 81
 	 (fontified nil)
 	 81 84
@@ -2704,7 +2704,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2720,7 +2720,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2744,7 +2744,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2756,7 +2756,7 @@
 	 38 45
 	 (fontified nil)
 	 45 47
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 47 65
 	 (fontified nil)
 	 65 67
@@ -2768,7 +2768,7 @@
 	 78 79
 	 (fontified nil)
 	 79 80
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 80 81
 	 (fontified nil)
 	 81 84
@@ -2792,7 +2792,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2808,7 +2808,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2832,7 +2832,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2848,7 +2848,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2872,7 +2872,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2888,7 +2888,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2912,7 +2912,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2928,7 +2928,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2952,7 +2952,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -2968,7 +2968,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -2980,7 +2980,7 @@
 	 58 65
 	 (fontified nil)
 	 65 67
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 67 82
 	 (fontified nil)
 	 82 83
@@ -3002,7 +3002,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3014,7 +3014,7 @@
 	 38 45
 	 (fontified nil)
 	 45 47
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 47 63
 	 (fontified nil)
 	 63 65
@@ -3026,7 +3026,7 @@
 	 76 77
 	 (fontified nil)
 	 77 78
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 78 79
 	 (fontified nil)
 	 79 82
@@ -3050,7 +3050,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3066,7 +3066,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3090,7 +3090,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3102,7 +3102,7 @@
 	 38 45
 	 (fontified nil)
 	 45 47
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 47 63
 	 (fontified nil)
 	 63 65
@@ -3114,7 +3114,7 @@
 	 76 77
 	 (fontified nil)
 	 77 78
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 78 79
 	 (fontified nil)
 	 79 82
@@ -3138,7 +3138,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3150,7 +3150,7 @@
 	 38 45
 	 (fontified nil)
 	 45 47
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 47 63
 	 (fontified nil)
 	 63 65
@@ -3162,7 +3162,7 @@
 	 76 77
 	 (fontified nil)
 	 77 78
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 78 79
 	 (fontified nil)
 	 79 82
@@ -3186,7 +3186,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3202,7 +3202,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3226,7 +3226,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3242,7 +3242,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3262,7 +3262,7 @@
 	 26 31
 	 (fontified nil)
 	 31 33
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 33 34
 	 (fontified nil)
 	 34 37
@@ -3278,7 +3278,7 @@
 	 26 27
 	 (fontified nil)
 	 27 29
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 29 42
 	 (fontified nil)
 	 42 43
@@ -3296,7 +3296,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3312,7 +3312,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3336,7 +3336,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3352,7 +3352,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3376,7 +3376,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3392,7 +3392,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3416,7 +3416,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3432,7 +3432,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3456,7 +3456,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3472,7 +3472,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3496,7 +3496,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3512,7 +3512,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3536,7 +3536,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3552,7 +3552,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3576,7 +3576,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3592,7 +3592,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3616,7 +3616,7 @@
 	 16 30
 	 (fontified nil)
 	 30 31
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 31 32
 	 (fontified nil)
 	 32 35
@@ -3632,7 +3632,7 @@
 	 49 50
 	 (fontified nil)
 	 50 51
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 51 52
 	 (fontified nil)
 	 52 55
@@ -3652,7 +3652,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 29
@@ -3668,7 +3668,7 @@
 	 22 23
 	 (fontified nil)
 	 23 25
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 25 26
 	 (fontified nil)
 	 26 29
@@ -3684,7 +3684,7 @@
        18 19
        (fontified nil)
        19 21
-       (face vhdl-ts-font-lock-operator-face fontified nil)
+       (face vhdl-ts-font-lock-punctuation-face fontified nil)
        21 22
        (fontified nil)
        22 27
@@ -3718,7 +3718,7 @@
 	 30 40
 	 (fontified nil)
 	 40 42
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 42 43
 	 (fontified nil)
 	 43 57
@@ -3734,7 +3734,7 @@
 	 18 19
 	 (fontified nil)
 	 19 21
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 21 22
 	 (fontified nil)
 	 22 27
@@ -3768,7 +3768,7 @@
 	 30 40
 	 (fontified nil)
 	 40 42
-	 (face vhdl-ts-font-lock-operator-face fontified nil)
+	 (face vhdl-ts-font-lock-punctuation-face fontified nil)
 	 42 43
 	 (fontified nil)
 	 43 57
