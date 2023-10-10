@@ -62,13 +62,17 @@
 
 (defun test-hdl-vhdl-ext-tags-setup ()
   "Avoid errors in desc when there are tabs and trailing whitespaces."
-  (untabify (point-min) (point-max))
-  (delete-trailing-whitespace (point-min) (point-max))
-  ;; The lines below are run every time a file is processed in `vhdl-ext-tags-get--process-file'
-  (setq vhdl-ext-tags-defs-current-file (make-hash-table :test #'equal))
-  (setq vhdl-ext-tags-inst-current-file (make-hash-table :test #'equal))
-  (setq vhdl-ext-tags-refs-current-file (make-hash-table :test #'equal))
-  (treesit-parser-create 'vhdl))
+  (let ((disable-serialization nil))
+    (untabify (point-min) (point-max))
+    (delete-trailing-whitespace (point-min) (point-max))
+    ;; The lines below are run every time a file is processed in `vhdl-ext-tags-get--process-file'
+    (setq vhdl-ext-tags-defs-current-file (make-hash-table :test #'equal))
+    (setq vhdl-ext-tags-inst-current-file (make-hash-table :test #'equal))
+    (setq vhdl-ext-tags-refs-current-file (make-hash-table :test #'equal))
+    (treesit-parser-create 'vhdl)
+    ;; Avoid cache serialization in batch mode, if set locally
+    (when disable-serialization
+      (remove-hook 'kill-emacs-hook #'vhdl-ext-tags-serialize))))
 
 (defun test-hdl-vhdl-ext-tags-ts-defs-file-fn (file)
   (let ((file (file-relative-name file test-hdl-test-dir))) ; Use relative path for GitHub Actions
