@@ -46,19 +46,16 @@
 
 (defun test-hdl-verilog-ext-capf-anotation-fn ()
   (mapcar (lambda (cand)
-            (verilog-ext-capf-annotation-function cand
-                                                  verilog-ext-workspace-tags-defs-table
-                                                  verilog-ext-workspace-tags-inst-table))
-          (nth 2 (verilog-ext-workspace-capf))))
+            (verilog-ext-capf-annotation-function cand))
+          (nth 2 (verilog-ext-capf))))
 
 
 (defun test-hdl-verilog-ext-capf-gen-expected-files ()
-  (let ((verilog-ext-workspace-tags-defs-table nil)
-        (verilog-ext-workspace-tags-refs-table nil)
-        (verilog-ext-workspace-tags-inst-table nil))
+  (test-hdl-verilog-ext-tags-with-test-project
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
-                                   :root-dir test-hdl-verilog-ucontroller-dir
+                                   :root test-hdl-verilog-ucontroller-dir
+                                   :dirs `(,test-hdl-verilog-ucontroller-rtl-dir ,test-hdl-verilog-ucontroller-tb-dir)
                                    :rel-path t)
     (dolist (file-pos-and-init-string test-hdl-verilog-ext-capf-file-pos-init-string-alist)
       (let ((file (car file-pos-and-init-string))
@@ -69,7 +66,7 @@
                                      :out-file-ext "capf.el"
                                      :process-fn 'eval
                                      :fn #'test-hdl-capf-fn
-                                     :args `(:capf-fn verilog-ext-workspace-capf
+                                     :args `(:capf-fn verilog-ext-capf
                                              :pos-init-string-alist ,pos-and-init-string-alist))
         ;; Annotation
         (test-hdl-gen-expected-files :file-list `(,file)
@@ -82,12 +79,11 @@
 
 
 (ert-deftest verilog-ext::capf::completions ()
-  (let ((verilog-ext-workspace-tags-defs-table nil)
-        (verilog-ext-workspace-tags-refs-table nil)
-        (verilog-ext-workspace-tags-inst-table nil))
+  (test-hdl-verilog-ext-tags-with-test-project
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
-                                   :root-dir test-hdl-verilog-ucontroller-dir
+                                   :root test-hdl-verilog-ucontroller-dir
+                                   :dirs `(,test-hdl-verilog-ucontroller-rtl-dir ,test-hdl-verilog-ucontroller-tb-dir)
                                    :rel-path t)
     ;; Test each file
     (dolist (file-pos-and-init-string test-hdl-verilog-ext-capf-file-pos-init-string-alist)
@@ -97,18 +93,17 @@
                                                              :dump-file (file-name-concat test-hdl-verilog-ext-capf-dir "dump" (test-hdl-basename file "capf.el"))
                                                              :process-fn 'eval
                                                              :fn #'test-hdl-capf-fn
-                                                             :args `(:capf-fn verilog-ext-workspace-capf
+                                                             :args `(:capf-fn verilog-ext-capf
                                                                      :pos-init-string-alist ,pos-and-init-string-alist))
                                       (file-name-concat test-hdl-verilog-ext-capf-dir "ref" (test-hdl-basename file "capf.el"))))))))
 
 
 (ert-deftest verilog-ext::capf::annotations ()
-  (let ((verilog-ext-workspace-tags-defs-table nil)
-        (verilog-ext-workspace-tags-refs-table nil)
-        (verilog-ext-workspace-tags-inst-table nil))
+  (test-hdl-verilog-ext-tags-with-test-project
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
-                                   :root-dir test-hdl-verilog-ucontroller-dir
+                                   :root test-hdl-verilog-ucontroller-dir
+                                   :dirs `(,test-hdl-verilog-ucontroller-rtl-dir ,test-hdl-verilog-ucontroller-tb-dir)
                                    :rel-path t)
     ;; Test each file
     (dolist (file-pos-and-init-string test-hdl-verilog-ext-capf-file-pos-init-string-alist)

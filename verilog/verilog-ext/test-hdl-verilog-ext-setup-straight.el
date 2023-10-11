@@ -75,6 +75,7 @@
   :hook ((verilog-mode . verilog-ext-mode))
   :config
   (setq verilog-ext-feature-list (remove 'typedefs verilog-ext-feature-list)) ; Do not override `verilog-align-typedef-regexp'
+  (setq verilog-ext-cache-enable nil)
   (verilog-ext-mode-setup))
 
 ;; Shadow/override with actions/checkout repo, instead of the one downloaded by straight.el

@@ -34,9 +34,11 @@
 (cl-defun test-hdl-verilog-ext-jump-to-parent-module (&key mode engine)
   (cl-letf (((symbol-function 'compilation-start)
              (lambda (command &optional mode name-function highlight-regexp)
-               (butlast (split-string (shell-command-to-string command) "\n") 4))))
+               (butlast (split-string (shell-command-to-string command) "\n") 4)))
+            ((symbol-function 'verilog-ext-buffer-proj-root)
+             (lambda (&optional project)
+               test-hdl-verilog-common-dir)))
     (let* ((verilog-ext-jump-to-parent-module-engine engine)
-           (verilog-ext-workspace-root-dir test-hdl-verilog-common-dir)
            ;; INFO: Using let-binding in ripgrep.el arguments for compatibility with release 0.4.0 (Feb 2017) for MELPA Stable tests
            ;;
            ;; From man rg(1):
@@ -49,7 +51,7 @@
            (ripgrep-arguments '("--vimgrep")))
       ;; Core after all the function setup, using default args for ag and rg
       (funcall mode)
-      (verilog-ext-workspace-jump-to-parent-module))))
+      (verilog-ext-jump-to-parent-module))))
 
 (defun test-hdl-verilog-ext-navigation-interactive-fwd-fn ()
   "Hack to emulate the point position when using interactive navigation.

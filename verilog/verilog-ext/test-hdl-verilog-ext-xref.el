@@ -56,12 +56,10 @@
 
 
 (defun test-hdl-verilog-ext-xref-gen-expected-files ()
-  (let ((verilog-ext-workspace-tags-defs-table nil)
-        (verilog-ext-workspace-tags-refs-table nil)
-        (verilog-ext-workspace-tags-inst-table nil))
+  (test-hdl-verilog-ext-tags-with-test-project
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
-                                   :root-dir test-hdl-verilog-common-dir
+                                   :files test-hdl-verilog-common-file-list
                                    :rel-path t)
     ;; Iterate over files with tags tables
     (dolist (file-refs test-hdl-verilog-ext-xref-file-and-refs-alist)
@@ -71,7 +69,7 @@
         (test-hdl-gen-expected-files :file-list `(,file)
                                      :dest-dir (file-name-concat test-hdl-verilog-ext-xref-dir "ref")
                                      :out-file-ext "xref.defs.el"
-                                     :process-fn 'eval
+                                     :process-fn 'eval-ff
                                      :fn #'test-hdl-verilog-ext-xref-fn
                                      :args `(:refs ,refs
                                              :type def))
@@ -79,19 +77,16 @@
         (test-hdl-gen-expected-files :file-list `(,file)
                                      :dest-dir (file-name-concat test-hdl-verilog-ext-xref-dir "ref")
                                      :out-file-ext "xref.refs.el"
-                                     :process-fn 'eval
+                                     :process-fn 'eval-ff
                                      :fn #'test-hdl-verilog-ext-xref-fn
                                      :args `(:refs ,refs
                                              :type ref))))))
 
-
 (ert-deftest verilog-ext::xref::defs ()
-  (let ((verilog-ext-workspace-tags-defs-table nil)
-        (verilog-ext-workspace-tags-refs-table nil)
-        (verilog-ext-workspace-tags-inst-table nil))
+  (test-hdl-verilog-ext-tags-with-test-project
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
-                                   :root-dir test-hdl-verilog-common-dir
+                                   :files test-hdl-verilog-common-file-list
                                    :rel-path t)
     ;; Iterate over files with tags tables
     (dolist (file-refs test-hdl-verilog-ext-xref-file-and-refs-alist)
@@ -100,20 +95,19 @@
         ;; Defs
         (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                              :dump-file (file-name-concat test-hdl-verilog-ext-xref-dir "dump" (test-hdl-basename file "xref.defs.el"))
-                                                             :process-fn 'eval
+                                                             :process-fn 'eval-ff
                                                              :fn #'test-hdl-verilog-ext-xref-fn
                                                              :args `(:refs ,refs
                                                                      :type def))
                                       (file-name-concat test-hdl-verilog-ext-xref-dir "ref" (test-hdl-basename file "xref.defs.el"))))))))
 
 
+
 (ert-deftest verilog-ext::xref::refs ()
-  (let ((verilog-ext-workspace-tags-defs-table nil)
-        (verilog-ext-workspace-tags-refs-table nil)
-        (verilog-ext-workspace-tags-inst-table nil))
+  (test-hdl-verilog-ext-tags-with-test-project
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
-                                   :root-dir test-hdl-verilog-common-dir
+                                   :files test-hdl-verilog-common-file-list
                                    :rel-path t)
     ;; Iterate over files with tags tables
     (dolist (file-refs test-hdl-verilog-ext-xref-file-and-refs-alist)
@@ -122,12 +116,11 @@
         ;; Refs
         (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                              :dump-file (file-name-concat test-hdl-verilog-ext-xref-dir "dump" (test-hdl-basename file "xref.refs.el"))
-                                                             :process-fn 'eval
+                                                             :process-fn 'eval-ff
                                                              :fn #'test-hdl-verilog-ext-xref-fn
                                                              :args `(:refs ,refs
                                                                      :type ref))
                                       (file-name-concat test-hdl-verilog-ext-xref-dir "ref" (test-hdl-basename file "xref.refs.el"))))))))
-
 
 (provide 'test-hdl-verilog-ext-xref)
 

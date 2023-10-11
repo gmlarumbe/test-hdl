@@ -44,6 +44,8 @@
 (message "Installing and setting up verilog-ext")
 (package-install 'verilog-ext)
 (require 'verilog-ext)
+(setq verilog-ext-feature-list (remove 'typedefs verilog-ext-feature-list)) ; Do not override `verilog-align-typedef-regexp'
+(setq verilog-ext-cache-enable nil)
 (verilog-ext-mode-setup)
 (add-hook 'verilog-mode-hook #'verilog-ext-mode)
 
@@ -81,10 +83,6 @@
 ;; Alignment
 (setq verilog-align-assign-expr t)
 (setq verilog-align-typedef-regexp (concat "\\<" verilog-identifier-re "_\\(t\\|if\\|vif\\)\\>"))
-
-;;;;; verilog-ext
-(setq verilog-ext-feature-list (remove 'typedefs verilog-ext-feature-list)) ; Do not override `verilog-align-typedef-regexp'
-(verilog-ext-mode-setup)
 
 
 (provide 'test-hdl-verilog-ext-setup-package)

@@ -27,18 +27,25 @@
 (require 'test-hdl-verilog-ext-common)
 
 
+(defconst test-hdl-verilog-ext-hierarchy-ucontroller-rtl-file-list
+  (test-hdl-directory-files test-hdl-verilog-ucontroller-rtl-dir verilog-ext-file-extension-re))
+(defconst test-hdl-verilog-ext-hierarchy-ucontroller-tb-file-list
+  (test-hdl-directory-files test-hdl-verilog-ucontroller-tb-dir verilog-ext-file-extension-re))
+(defconst test-hdl-verilog-ext-hierarchy-ucontroller-file-list
+  (append test-hdl-verilog-ext-hierarchy-ucontroller-rtl-file-list
+          test-hdl-verilog-ext-hierarchy-ucontroller-tb-file-list))
+
 (defconst test-hdl-verilog-ext-hierarchy-file-list (mapcar (lambda (file)
                                                          (file-name-concat test-hdl-verilog-common-dir file))
                                                        '("instances.sv"
-                                                         "ucontroller.sv")))
+                                                         "ucontroller.sv"
+                                                         "axi_demux.sv")))
+(defconst test-hdl-verilog-ext-hierarchy-sources-list
+  (append (test-hdl-directory-files test-hdl-verilog-subblocks-dir verilog-ext-file-extension-re)
+          test-hdl-verilog-ext-hierarchy-file-list
+          test-hdl-verilog-ext-hierarchy-ucontroller-file-list))
 
-(defconst test-hdl-verilog-ext-hierarchy-vhier-file-list
-  `(,(file-name-concat test-hdl-verilog-common-dir "instances.sv")
-    ;; INFO: For some reason, the one ucontroller.sv in `test-hdl-verilog-common-dir'
-    ;; had the package line removed and didn't work as expected
-    ,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "ucontroller.sv")))
-
-(defconst test-hdl-verilog-ext-hierarchy-include-dirs
+(defconst test-hdl-verilog-ext-hierarchy-vhier-lib-search-path
   `(,test-hdl-verilog-common-dir
     ,test-hdl-verilog-ucontroller-rtl-dir
     ,test-hdl-verilog-subblocks-dir))
@@ -55,16 +62,17 @@
   (buffer-substring-no-properties (point-min) (point-max)))
 
 
-(cl-defun test-hdl-verilog-ext-hierarchy-buffer (&key mode backend frontend vhier-dirs vhier-files workspace-dirs module)
+(cl-defun test-hdl-verilog-ext-hierarchy-buffer (&key mode backend frontend root files lib-search-path module)
   (let* ((verilog-ext-hierarchy-backend backend)
          (verilog-ext-hierarchy-frontend frontend)
-         ;; Builtin/tree-sitter
-         (verilog-ext-workspace-root-dir test-hdl-verilog-common-dir)
-         (verilog-ext-workspace-dirs workspace-dirs)
          ;; Vhier
          (verilog-ext-hierarchy-vhier-use-open-buffers nil)
-         (verilog-ext-hierarchy-vhier-dirs vhier-dirs)
-         (verilog-ext-hierarchy-vhier-files vhier-files))
+         ;; Project-alist
+         (proj-name "test-hdl-verilog-ext-hierarchy")
+         (verilog-ext-project-alist `((,proj-name
+                                       :root ,(or root test-hdl-verilog-common-dir)
+                                       :files ,files
+                                       :lib-search-path ,lib-search-path))))
     ;; Mock functions
     (cl-letf (((symbol-function 'verilog-ext-hierarchy-twidget-display)
                (lambda (hierarchy &optional module)
@@ -73,7 +81,10 @@
                (lambda (&optional file)
                  (or module
                      (car (mapcar #'car (verilog-ext-read-file-modules file)))))))
+      ;; Run tests
       (test-hdl-no-messages
+        ;; INFO: This one seems important to have a clear state on each file parsed.
+        (verilog-ext-hierarchy-clear-cache)
         (funcall mode)
         (cond (;; vhier-outshine
                ;;  - vhier cannot use temp-buffer since executes a command that requires a filename as an argument
@@ -88,22 +99,22 @@
               ;; builtin-hierarchy
               ((and (eq backend 'builtin)
                     (eq frontend 'hierarchy))
-               (verilog-ext-workspace-hierarchy-parse)
+               (verilog-ext-hierarchy-parse)
                (test-hdl-verilog-ext-hierarchy--hierarchy-fn))
               ;; builtin-outshine
               ((and (eq backend 'builtin)
                     (eq frontend 'outshine))
-               (verilog-ext-workspace-hierarchy-parse)
+               (verilog-ext-hierarchy-parse)
                (test-hdl-verilog-ext-hierarchy--outshine-fn))
               ;; tree-sitter-hierarchy
               ((and (eq backend 'tree-sitter)
                     (eq frontend 'hierarchy))
-               (verilog-ext-workspace-hierarchy-parse)
+               (verilog-ext-hierarchy-parse)
                (test-hdl-verilog-ext-hierarchy--hierarchy-fn))
               ;; tree-sitter-outshine
               ((and (eq backend 'tree-sitter)
                     (eq frontend 'outshine))
-               (verilog-ext-workspace-hierarchy-parse)
+               (verilog-ext-hierarchy-parse)
                (test-hdl-verilog-ext-hierarchy--outshine-fn))
               ;; Fallback
               (t
@@ -112,115 +123,150 @@
 
 (defun test-hdl-verilog-ext-hierarchy-gen-expected-files ()
   ;; vhier-hierarchy
-  (test-hdl-gen-expected-files :file-list test-hdl-verilog-ext-hierarchy-vhier-file-list
-                               :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
-                               :out-file-ext "vhier.hier.el"
-                               :process-fn 'eval-ff
-                               :fn #'test-hdl-verilog-ext-hierarchy-buffer
-                               :args `(:mode verilog-mode
-                                       :backend vhier
-                                       :frontend hierarchy
-                                       :vhier-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
-                                       :vhier-files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv"))))
+  (let ((file (file-name-concat test-hdl-verilog-common-dir "instances.sv")))
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
+                                 :out-file-ext "vhier.hier.el"
+                                 :process-fn 'eval-ff
+                                 :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                 :args `(:mode verilog-mode
+                                         :backend vhier
+                                         :frontend hierarchy
+                                         :root ,test-hdl-verilog-common-dir
+                                         :files (,file)
+                                         :lib-search-path ,test-hdl-verilog-ext-hierarchy-vhier-lib-search-path)))
+  ;; INFO: For some reason, the one ucontroller.sv in `test-hdl-verilog-common-dir'
+  ;; had the package line removed and didn't work as expected
+  (let ((file (file-name-concat test-hdl-verilog-ucontroller-rtl-dir "ucontroller.sv")))
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
+                                 :out-file-ext "vhier.hier.el"
+                                 :process-fn 'eval-ff
+                                 :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                 :args `(:mode verilog-mode
+                                         :backend vhier
+                                         :frontend hierarchy
+                                         :root ,test-hdl-verilog-ucontroller-rtl-dir
+                                         :files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv")
+                                                 ,@test-hdl-verilog-ext-hierarchy-ucontroller-file-list)
+                                         :lib-search-path ,test-hdl-verilog-ext-hierarchy-vhier-lib-search-path)))
   ;; vhier-outshine
-  (test-hdl-gen-expected-files :file-list test-hdl-verilog-ext-hierarchy-vhier-file-list
-                               :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
-                               :out-file-ext "vhier.outshine.sv"
-                               :process-fn 'eval-ff
-                               :fn #'test-hdl-verilog-ext-hierarchy-buffer
-                               :args `(:mode verilog-mode
-                                       :backend vhier
-                                       :frontend outshine
-                                       :vhier-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
-                                       :vhier-files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv"))))
+  (let ((file (file-name-concat test-hdl-verilog-common-dir "instances.sv")))
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
+                                 :out-file-ext "vhier.outshine.sv"
+                                 :process-fn 'eval-ff
+                                 :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                 :args `(:mode verilog-mode
+                                         :backend vhier
+                                         :frontend outshine
+                                         :root ,test-hdl-verilog-common-dir
+                                         :files (,file)
+                                         :lib-search-path ,test-hdl-verilog-ext-hierarchy-vhier-lib-search-path)))
+  ;; INFO: For some reason, the one ucontroller.sv in `test-hdl-verilog-common-dir'
+  ;; had the package line removed and didn't work as expected
+  (let ((file (file-name-concat test-hdl-verilog-ucontroller-rtl-dir "ucontroller.sv")))
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
+                                 :out-file-ext "vhier.outshine.sv"
+                                 :process-fn 'eval-ff
+                                 :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                 :args `(:mode verilog-mode
+                                         :backend vhier
+                                         :frontend outshine
+                                         :root ,test-hdl-verilog-ucontroller-rtl-dir
+                                         :files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv")
+                                                 ,@test-hdl-verilog-ext-hierarchy-ucontroller-file-list)
+                                         :lib-search-path ,test-hdl-verilog-ext-hierarchy-vhier-lib-search-path)))
   ;; builtin-hierarchy
   (test-hdl-gen-expected-files :file-list test-hdl-verilog-ext-hierarchy-file-list
                                :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
                                :out-file-ext "builtin.hier.el"
-                               :process-fn 'eval
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                :args `(:mode verilog-mode
                                        :backend builtin
                                        :frontend hierarchy
-                                       :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
+                                       :files ,test-hdl-verilog-ext-hierarchy-sources-list))
   ;; builtin-outshine
   (test-hdl-gen-expected-files :file-list test-hdl-verilog-ext-hierarchy-file-list
                                :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
                                :out-file-ext "builtin.outshine.sv"
-                               :process-fn 'eval
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                :args `(:mode verilog-mode
                                        :backend builtin
                                        :frontend outshine
-                                       :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
+                                       :files ,test-hdl-verilog-ext-hierarchy-sources-list))
   ;; tree-sitter-hierarchy
   (test-hdl-gen-expected-files :file-list test-hdl-verilog-ext-hierarchy-file-list
                                :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
                                :out-file-ext "ts.hier.el"
-                               :process-fn 'eval
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                :args `(:mode verilog-ts-mode
                                        :backend tree-sitter
                                        :frontend hierarchy
-                                       :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
+                                       :files ,test-hdl-verilog-ext-hierarchy-sources-list))
   ;; tree-sitter-outshine
   (test-hdl-gen-expected-files :file-list test-hdl-verilog-ext-hierarchy-file-list
                                :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
                                :out-file-ext "ts.outshine.sv"
-                               :process-fn 'eval
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                :args `(:mode verilog-ts-mode
                                        :backend tree-sitter
                                        :frontend outshine
-                                       :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
+                                       :files ,test-hdl-verilog-ext-hierarchy-sources-list))
   ;; More custom ones (e.g. need to explicit module to be parsed from a file with multiple modules declared)
   ;; - axi_demux / builtin-hierarchy
   (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-verilog-common-dir "axi_demux.sv"))
                                :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
-                               :out-file-ext "builtin.hier.el"
-                               :process-fn 'eval
+                               :out-file-ext "mm.builtin.hier.el"
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                :args `(:mode verilog-mode
                                        :backend builtin
                                        :frontend hierarchy
-                                       :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                       :files ,test-hdl-verilog-ext-hierarchy-sources-list
                                        :module "axi_demux_intf"))
   ;; - axi_demux / builtin-outshine
   (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-verilog-common-dir "axi_demux.sv"))
                                :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
-                               :out-file-ext "builtin.outshine.sv"
-                               :process-fn 'eval
+                               :out-file-ext "mm.builtin.outshine.sv"
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                :args `(:mode verilog-mode
                                        :backend builtin
                                        :frontend outshine
-                                       :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                       :files ,test-hdl-verilog-ext-hierarchy-sources-list
                                        :module "axi_demux_intf"))
   ;; - axi_demux / tree-sitter-hierarchy
   (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-verilog-common-dir "axi_demux.sv"))
                                :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
-                               :out-file-ext "ts.hier.el"
-                               :process-fn 'eval
+                               :out-file-ext "mm.ts.hier.el"
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                :args `(:mode verilog-ts-mode
                                        :backend tree-sitter
                                        :frontend hierarchy
-                                       :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                       :files ,test-hdl-verilog-ext-hierarchy-sources-list
                                        :module "axi_demux_intf"))
   ;; - axi_demux / tree-sitter-outshine
   (test-hdl-gen-expected-files :file-list `(,(file-name-concat test-hdl-verilog-common-dir "axi_demux.sv"))
                                :dest-dir (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref")
-                               :out-file-ext "ts.outshine.sv"
-                               :process-fn 'eval
+                               :out-file-ext "mm.ts.outshine.sv"
+                               :process-fn 'eval-ff
                                :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                :args `(:mode verilog-ts-mode
                                        :backend tree-sitter
                                        :frontend outshine
-                                       :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                       :files ,test-hdl-verilog-ext-hierarchy-sources-list
                                        :module "axi_demux_intf")))
 
 (ert-deftest verilog-ext::hierarchy::vhier-hierarchy ()
-  (dolist (file test-hdl-verilog-ext-hierarchy-vhier-file-list)
+  ;; instances.sv
+  (let ((file (file-name-concat test-hdl-verilog-common-dir "instances.sv")))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "vhier.hier.el"))
                                                          :process-fn 'eval-ff
@@ -228,12 +274,32 @@
                                                          :args `(:mode verilog-mode
                                                                  :backend vhier
                                                                  :frontend hierarchy
-                                                                 :vhier-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
-                                                                 :vhier-files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv"))))
+                                                                 :root ,test-hdl-verilog-common-dir
+                                                                 :files (,file)
+                                                                 :lib-search-path ,test-hdl-verilog-ext-hierarchy-vhier-lib-search-path
+                                                                 ))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.hier.el")))))
+  ;; ucontroller.sv
+  ;; INFO: For some reason, the one ucontroller.sv in `test-hdl-verilog-common-dir'
+  ;; had the package line removed and didn't work as expected
+  (let ((file (file-name-concat test-hdl-verilog-ucontroller-rtl-dir "ucontroller.sv")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "vhier.hier.el"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                                         :args `(:mode verilog-mode
+                                                                 :backend vhier
+                                                                 :frontend hierarchy
+                                                                 :root ,test-hdl-verilog-ucontroller-rtl-dir
+                                                                 :files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv")
+                                                                         ,@test-hdl-verilog-ext-hierarchy-ucontroller-file-list)
+                                                                 :lib-search-path ,test-hdl-verilog-ext-hierarchy-vhier-lib-search-path
+                                                                 ))
                                   (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.hier.el"))))))
 
 (ert-deftest verilog-ext::hierarchy::vhier-outshine ()
-  (dolist (file test-hdl-verilog-ext-hierarchy-vhier-file-list)
+  ;; instances.sv
+  (let ((file (file-name-concat test-hdl-verilog-common-dir "instances.sv")))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "vhier.outshine.sv"))
                                                          :process-fn 'eval-ff
@@ -241,8 +307,27 @@
                                                          :args `(:mode verilog-mode
                                                                  :backend vhier
                                                                  :frontend outshine
-                                                                 :vhier-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
-                                                                 :vhier-files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv"))))
+                                                                 :root ,test-hdl-verilog-common-dir
+                                                                 :files (,file)
+                                                                 :lib-search-path ,test-hdl-verilog-ext-hierarchy-vhier-lib-search-path
+                                                                 ))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.outshine.sv")))))
+  ;; ucontroller.sv
+  ;; INFO: For some reason, the one ucontroller.sv in `test-hdl-verilog-common-dir'
+  ;; had the package line removed and didn't work as expected
+  (let ((file (file-name-concat test-hdl-verilog-ucontroller-rtl-dir "ucontroller.sv")))
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "vhier.outshine.sv"))
+                                                         :process-fn 'eval-ff
+                                                         :fn #'test-hdl-verilog-ext-hierarchy-buffer
+                                                         :args `(:mode verilog-mode
+                                                                 :backend vhier
+                                                                 :frontend outshine
+                                                                 :root ,test-hdl-verilog-ucontroller-rtl-dir
+                                                                 :files (,(file-name-concat test-hdl-verilog-ucontroller-rtl-dir "global_pkg.sv")
+                                                                         ,@test-hdl-verilog-ext-hierarchy-ucontroller-file-list)
+                                                                 :lib-search-path ,test-hdl-verilog-ext-hierarchy-vhier-lib-search-path
+                                                                 ))
                                   (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "vhier.outshine.sv"))))))
 
 (ert-deftest verilog-ext::hierarchy::builtin-hierarchy ()
@@ -254,7 +339,7 @@
                                                          :args `(:mode verilog-mode
                                                                  :backend builtin
                                                                  :frontend hierarchy
-                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
+                                                                 :files ,test-hdl-verilog-ext-hierarchy-sources-list))
                                   (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.hier.el"))))))
 
 (ert-deftest verilog-ext::hierarchy::builtin-outshine ()
@@ -266,7 +351,7 @@
                                                          :args `(:mode verilog-mode
                                                                  :backend builtin
                                                                  :frontend outshine
-                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
+                                                                 :files ,test-hdl-verilog-ext-hierarchy-sources-list))
                                   (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.outshine.sv"))))))
 
 (ert-deftest verilog-ext::hierarchy::tree-sitter-hierarchy ()
@@ -278,7 +363,7 @@
                                                          :args `(:mode verilog-ts-mode
                                                                  :backend tree-sitter
                                                                  :frontend hierarchy
-                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
+                                                                 :files ,test-hdl-verilog-ext-hierarchy-sources-list))
                                   (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.hier.el"))))))
 
 (ert-deftest verilog-ext::hierarchy::tree-sitter-outshine ()
@@ -290,60 +375,60 @@
                                                          :args `(:mode verilog-ts-mode
                                                                  :backend tree-sitter
                                                                  :frontend outshine
-                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs))
+                                                                 :files ,test-hdl-verilog-ext-hierarchy-sources-list))
                                   (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.sv"))))))
 
-(ert-deftest verilog-ext::hierarchy::builtin-hierarchy::multiple-entities ()
+(ert-deftest verilog-ext::hierarchy::builtin-hierarchy::multiple-modules ()
   (let ((file (file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "builtin.hier.el"))
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "mm.builtin.hier.el"))
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                                          :args `(:mode verilog-mode
                                                                  :backend builtin
                                                                  :frontend hierarchy
-                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                                                 :files ,test-hdl-verilog-ext-hierarchy-sources-list
                                                                  :module "axi_demux_intf"))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.hier.el"))))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "mm.builtin.hier.el"))))))
 
-(ert-deftest verilog-ext::hierarchy::builtin-outshine::multiple-entities ()
+(ert-deftest verilog-ext::hierarchy::builtin-outshine::multiple-modules ()
   (let ((file (file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "builtin.outshine.sv"))
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "mm.builtin.outshine.sv"))
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                                          :args `(:mode verilog-mode
                                                                  :backend builtin
                                                                  :frontend outshine
-                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                                                 :files ,test-hdl-verilog-ext-hierarchy-sources-list
                                                                  :module "axi_demux_intf"))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "builtin.outshine.sv"))))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "mm.builtin.outshine.sv"))))))
 
-(ert-deftest verilog-ext::hierarchy::tree-sitter-hierarchy::multiple-entities ()
+(ert-deftest verilog-ext::hierarchy::tree-sitter-hierarchy::multiple-modules ()
   (let ((file (file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "ts.hier.el"))
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "mm.ts.hier.el"))
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                                          :args `(:mode verilog-ts-mode
                                                                  :backend tree-sitter
                                                                  :frontend hierarchy
-                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                                                 :files ,test-hdl-verilog-ext-hierarchy-sources-list
                                                                  :module "axi_demux_intf"))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.hier.el"))))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "mm.ts.hier.el"))))))
 
-(ert-deftest verilog-ext::hierarchy::tree-sitter-outshine::multiple-entities ()
+(ert-deftest verilog-ext::hierarchy::tree-sitter-outshine::multiple-modules ()
   (let ((file (file-name-concat test-hdl-verilog-common-dir "axi_demux.sv")))
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "ts.outshine.sv"))
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-hierarchy-dir "dump" (test-hdl-basename file "mm.ts.outshine.sv"))
                                                          :process-fn 'eval-ff
                                                          :fn #'test-hdl-verilog-ext-hierarchy-buffer
                                                          :args `(:mode verilog-ts-mode
                                                                  :backend tree-sitter
                                                                  :frontend outshine
-                                                                 :workspace-dirs ,test-hdl-verilog-ext-hierarchy-include-dirs
+                                                                 :files ,test-hdl-verilog-ext-hierarchy-sources-list
                                                                  :module "axi_demux_intf"))
-                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "ts.outshine.sv"))))))
+                                  (file-name-concat test-hdl-verilog-ext-hierarchy-dir "ref" (test-hdl-basename file "mm.ts.outshine.sv"))))))
 
 
 (provide 'test-hdl-verilog-ext-hierarchy)

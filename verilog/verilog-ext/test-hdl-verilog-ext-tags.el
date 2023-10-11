@@ -29,20 +29,34 @@
 
 
 ;;;; Aux functions (used for capf/hierarchy/xref)
-(cl-defun test-hdl-verilog-ext-tags-get (&key backend root-dir dirs extra-files ignore-dirs ignore-files rel-path)
-  (let* ((verilog-ext-tags-backend backend)
-         (verilog-ext-workspace-root-dir root-dir)
-         (verilog-ext-workspace-dirs dirs)
-         (verilog-ext-workspace-extra-files extra-files)
-         (verilog-ext-workspace-ignore-dirs ignore-dirs)
-         (verilog-ext-workspace-ignore-files ignore-files))
-    ;; Make file entries relative to avoid issues in GitHub Actions CI with a different $HOME
+(defconst test-verilog-ext-tags-proj-name "test-hdl-verilog-ext-tags")
+
+(defmacro test-hdl-verilog-ext-tags-with-test-project (&rest body)
+  (declare (indent 0) (debug t))
+  ;; Mock `verilog-ext-buffer-proj' so that function can be run outside of a Verilog
+  ;; project buffer and sources are extracted for hardcoded project "test-hdl-verilog-ext-tags"
+  `(cl-letf (((symbol-function 'verilog-ext-buffer-proj)
+              (lambda () test-verilog-ext-tags-proj-name)))
+     ,@body))
+
+(cl-defun test-hdl-verilog-ext-tags-get (&key backend root files dirs rel-path)
+  "Populate the value of the tags tables for test-hdl-verilog project."
+  (let ((verilog-ext-tags-backend backend)
+        (verilog-ext-project-alist `((,test-verilog-ext-tags-proj-name
+                                      :root ,(or root test-hdl-verilog-common-dir)
+                                      :files ,files
+                                      :dirs ,dirs
+                                      )))
+        (default-directory test-hdl-verilog-common-dir)) ; DANGER: Needed to get relative filename for GitHub Actions via advice
+    ;; Get tags after setting environment
     (test-hdl-no-messages
+      (verilog-ext-tags-clear-cache) ; INFO: This is very important in order to start off with a clean environment
+      ;; Make file entries relative to avoid issues in GitHub Actions CI with a different $HOME
       (when rel-path
-        (advice-add 'verilog-ext-tags-locs-props :filter-args #'test-hdl-tags-locs-props-files-relative))
-      (verilog-ext-workspace-get-tags)
+        (advice-add 'verilog-ext-proj-files :filter-return #'test-hdl-tags-proj-files-relative))
+      (verilog-ext-tags-get)
       (when rel-path
-        (advice-remove 'verilog-ext-tags-locs-props #'test-hdl-tags-locs-props-files-relative)))))
+        (advice-remove 'verilog-ext-proj-files #'test-hdl-tags-proj-files-relative)))))
 
 
 ;;;; Standalone tests
@@ -56,141 +70,123 @@
     (,(file-name-concat test-hdl-verilog-common-dir "ucontroller.sv")    . top-items)
     (,(file-name-concat test-hdl-verilog-common-dir "uvm_component.svh") . classes)))
 
-(defmacro test-hdl-verilog-ext-tags-clean (&rest body)
+(defun test-hdl-verilog-ext-tags-setup ()
   "Avoid errors in desc when there are tabs and trailing whitespaces."
-  (declare (indent 0) (debug t))
-  `(let ((verilog-align-typedef-regexp nil))
-     (untabify (point-min) (point-max))
-     (delete-trailing-whitespace (point-min) (point-max))
-     ,@body))
+  (let ((verilog-align-typedef-regexp nil)
+        (disable-serialization nil)) ; TODO: Only works for tags, not for capf or xref
+    (untabify (point-min) (point-max))
+    (delete-trailing-whitespace (point-min) (point-max))
+    ;; The lines below are run every time a file is processed in `verilog-ext-tags-get--process-file'
+    (setq verilog-ext-tags-defs-current-file (make-hash-table :test #'equal))
+    (setq verilog-ext-tags-inst-current-file (make-hash-table :test #'equal))
+    (setq verilog-ext-tags-refs-current-file (make-hash-table :test #'equal))
+    ;; Avoid cache serialization in batch mode, if set locally
+    (when disable-serialization
+      (remove-hook 'kill-emacs-hook #'verilog-ext-tags-serialize))))
 
-(cl-defun test-hdl-verilog-ext-tags-builtin-defs-file-fn (&key table tag-type file)
-  (test-hdl-verilog-ext-tags-clean
-    (let ((file (file-relative-name file test-hdl-test-dir)))
-      (verilog-mode)
-      (verilog-ext-tags-table-push-defs :tag-type tag-type :table table :file file)
-      table)))
+(defun test-hdl-verilog-ext-tags-builtin-defs-file-fn (tag-type file)
+  (let ((file (file-relative-name file test-hdl-test-dir)))
+    (test-hdl-verilog-ext-tags-setup)
+    (verilog-ext-with-no-hooks
+      (verilog-mode))
+    (verilog-ext-tags-table-push-defs :tag-type tag-type :file file)
+    verilog-ext-tags-defs-current-file))
 
-(cl-defun test-hdl-verilog-ext-tags-builtin-refs-file-fn (&key table defs-table file)
-  (test-hdl-verilog-ext-tags-clean
-    (let ((file (file-relative-name file test-hdl-test-dir)))
-      (verilog-mode)
-      (verilog-ext-tags-table-push-refs :table table :defs-table defs-table :file file)
-      table)))
+(defun test-hdl-verilog-ext-tags-builtin-refs-file-fn (file)
+  (let ((file (file-relative-name file test-hdl-test-dir)))
+    (test-hdl-verilog-ext-tags-setup)
+    (verilog-ext-with-no-hooks
+      (verilog-mode))
+    (verilog-ext-tags-table-push-refs file)
+    verilog-ext-tags-refs-current-file))
 
-(cl-defun test-hdl-verilog-ext-tags-ts-defs-file-fn (&key table inst-table file)
-  (test-hdl-verilog-ext-tags-clean
-    (let ((file (file-relative-name file test-hdl-test-dir)))
-      (verilog-ts-mode)
-      (verilog-ext-tags-table-push-defs-ts :table table :inst-table inst-table :file file)
-      table)))
+(defun test-hdl-verilog-ext-tags-ts-defs-file-fn (file)
+  (let ((file (file-relative-name file test-hdl-test-dir)))
+    (test-hdl-verilog-ext-tags-setup)
+    (treesit-parser-create 'verilog)
+    (verilog-ext-tags-table-push-defs-ts file)
+    verilog-ext-tags-defs-current-file))
 
-(cl-defun test-hdl-verilog-ext-tags-ts-refs-file-fn (&key table defs-table file)
-  (test-hdl-verilog-ext-tags-clean
-    (let ((file (file-relative-name file test-hdl-test-dir)))
-      (verilog-ts-mode)
-      (verilog-ext-tags-table-push-refs-ts :table table :defs-table defs-table :file file)
-      table)))
+(defun test-hdl-verilog-ext-tags-ts-refs-file-fn (file)
+  (let ((file (file-relative-name file test-hdl-test-dir)))
+    (test-hdl-verilog-ext-tags-setup)
+    (treesit-parser-create 'verilog)
+    (verilog-ext-tags-table-push-refs-ts file)
+    verilog-ext-tags-refs-current-file))
 
 (defun test-hdl-verilog-ext-tags-gen-expected-files ()
   ;; Builtin
   (dolist (file-and-tag-type test-hdl-verilog-ext-tags-file-and-tag-type-list)
     (let ((file (car file-and-tag-type))
-          (tag-type (cdr file-and-tag-type))
-          (table-defs (make-hash-table :test #'equal))
-          (table-refs (make-hash-table :test #'equal)))
+          (tag-type (cdr file-and-tag-type)))
       ;; Defs
       (test-hdl-gen-expected-files :file-list `(,file)
                                    :dest-dir (file-name-concat test-hdl-verilog-ext-tags-dir "ref")
                                    :out-file-ext "defs.el"
                                    :process-fn 'eval
                                    :fn #'test-hdl-verilog-ext-tags-builtin-defs-file-fn
-                                   :args `(:table ,table-defs
-                                           :tag-type ,tag-type
-                                           :file ,file))
+                                   :args `(,tag-type ,file))
       ;; Refs
       (test-hdl-gen-expected-files :file-list `(,file)
                                    :dest-dir (file-name-concat test-hdl-verilog-ext-tags-dir "ref")
                                    :out-file-ext "refs.el"
                                    :process-fn 'eval
                                    :fn #'test-hdl-verilog-ext-tags-builtin-refs-file-fn
-                                   :args `(:table ,table-refs
-                                           :defs-table ,table-defs
-                                           :file ,file))))
+                                   :args `(,file))))
   ;; Tree-sitter
   (dolist (file test-hdl-verilog-ext-tags-file-list)
-    (let ((table-defs (make-hash-table :test #'equal))
-          (table-refs (make-hash-table :test #'equal))
-          (table-inst (make-hash-table :test #'equal)))
-      ;; Defs
-      (test-hdl-gen-expected-files :file-list `(,file)
-                                   :dest-dir (file-name-concat test-hdl-verilog-ext-tags-dir "ref")
-                                   :out-file-ext "ts.defs.el"
-                                   :process-fn 'eval
-                                   :fn #'test-hdl-verilog-ext-tags-ts-defs-file-fn
-                                   :args `(:table ,table-defs
-                                           :inst-table ,table-inst
-                                           :file ,file))
-      ;; Refs
-      (test-hdl-gen-expected-files :file-list `(,file)
-                                   :dest-dir (file-name-concat test-hdl-verilog-ext-tags-dir "ref")
-                                   :out-file-ext "ts.refs.el"
-                                   :process-fn 'eval
-                                   :fn #'test-hdl-verilog-ext-tags-ts-refs-file-fn
-                                   :args `(:table ,table-refs
-                                           :defs-table ,table-defs
-                                           :file ,file)))))
+    ;; Defs
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-tags-dir "ref")
+                                 :out-file-ext "ts.defs.el"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-verilog-ext-tags-ts-defs-file-fn
+                                 :args `(,file))
+    ;; Refs
+    (test-hdl-gen-expected-files :file-list `(,file)
+                                 :dest-dir (file-name-concat test-hdl-verilog-ext-tags-dir "ref")
+                                 :out-file-ext "ts.refs.el"
+                                 :process-fn 'eval
+                                 :fn #'test-hdl-verilog-ext-tags-ts-refs-file-fn
+                                 :args `(,file))))
 
 
 (ert-deftest verilog-ext::tags::builtin ()
   (dolist (file-and-tag-type test-hdl-verilog-ext-tags-file-and-tag-type-list)
     (let ((file (car file-and-tag-type))
-          (tag-type (cdr file-and-tag-type))
-          (table-defs (make-hash-table :test #'equal))
-          (table-refs (make-hash-table :test #'equal)))
+          (tag-type (cdr file-and-tag-type)))
       ;; Defs
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                            :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "defs.el"))
                                                            :process-fn 'eval
                                                            :fn #'test-hdl-verilog-ext-tags-builtin-defs-file-fn
-                                                           :args `(:table ,table-defs
-                                                                   :tag-type ,tag-type
-                                                                   :file ,file))
+                                                           :args `(,tag-type ,file))
                                     (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "defs.el"))))
       ;; Refs
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                            :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "refs.el"))
                                                            :process-fn 'eval
                                                            :fn #'test-hdl-verilog-ext-tags-builtin-refs-file-fn
-                                                           :args `(:table ,table-refs
-                                                                   :defs-table ,table-defs
-                                                                   :file ,file))
+                                                           :args `(,file))
                                     (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "refs.el")))))))
 
 
 (ert-deftest verilog-ext::tags::tree-sitter ()
   (dolist (file test-hdl-verilog-ext-tags-file-list)
-    (let ((table-defs (make-hash-table :test #'equal))
-          (table-refs (make-hash-table :test #'equal))
-          (table-inst (make-hash-table :test #'equal)))
-      ;; Defs
-      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                           :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "ts.defs.el"))
-                                                           :process-fn 'eval
-                                                           :fn #'test-hdl-verilog-ext-tags-ts-defs-file-fn
-                                                           :args `(:table ,table-defs
-                                                                   :inst-table ,table-inst
-                                                                   :file ,file))
-                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "ts.defs.el"))))
-      ;; Refs
-      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                           :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "ts.refs.el"))
-                                                           :process-fn 'eval
-                                                           :fn #'test-hdl-verilog-ext-tags-ts-refs-file-fn
-                                                           :args `(:table ,table-refs
-                                                                   :defs-table ,table-defs
-                                                                   :file ,file))
-                                    (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "ts.refs.el")))))))
+    ;; Defs
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "ts.defs.el"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-verilog-ext-tags-ts-defs-file-fn
+                                                         :args `(,file))
+                                  (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "ts.defs.el"))))
+    ;; Refs
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-tags-dir "dump" (test-hdl-basename file "ts.refs.el"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-verilog-ext-tags-ts-refs-file-fn
+                                                         :args `(,file))
+                                  (file-name-concat test-hdl-verilog-ext-tags-dir "ref" (test-hdl-basename file "ts.refs.el"))))))
 
 
 (provide 'test-hdl-verilog-ext-tags)
