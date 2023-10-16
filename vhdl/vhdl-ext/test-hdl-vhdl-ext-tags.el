@@ -28,19 +28,11 @@
 
 
 ;;;; Aux functions (used for capf/hierarchy/xref)
-(defconst test-vhdl-ext-tags-proj-name "test-hdl-vhdl-ext-tags")
-
-(defmacro test-hdl-vhdl-ext-tags-with-test-project (&rest body)
-  (declare (indent 0) (debug t))
-  ;; Mock `vhdl-ext-buffer-proj' so that function can be run outside of a VHDL
-  ;; project buffer and sources are extracted for hardcoded project "test-hdl-vhdl-ext-tags"
-  `(cl-letf (((symbol-function 'vhdl-ext-buffer-proj)
-              (lambda () test-vhdl-ext-tags-proj-name)))
-     ,@body))
+(defconst test-hdl-vhdl-ext-tags-proj-name "test-hdl-vhdl-ext-tags")
 
 (cl-defun test-hdl-vhdl-ext-tags-get (&key root files rel-path)
   "Populate the value of the tags tables for test-hdl-vhdl project."
-  (let ((vhdl-ext-project-alist `((,test-vhdl-ext-tags-proj-name
+  (let ((vhdl-ext-project-alist `((,test-hdl-vhdl-ext-tags-proj-name
                                    :root ,(or root test-hdl-vhdl-common-dir)
                                    :files ,files
                                    :workdir "lib/")))

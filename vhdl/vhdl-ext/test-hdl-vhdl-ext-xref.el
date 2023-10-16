@@ -57,7 +57,7 @@
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
-    (test-hdl-vhdl-ext-tags-with-test-project
+    (test-hdl-vhdl-ext-with-test-project test-hdl-vhdl-ext-tags-proj-name
       ;; Generate/update tags for test project
       (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
                                   :files test-hdl-vhdl-common-file-list
@@ -87,7 +87,7 @@
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
-    (test-hdl-vhdl-ext-tags-with-test-project
+    (test-hdl-vhdl-ext-with-test-project test-hdl-vhdl-ext-tags-proj-name
       ;; Generate/update tags for test project
       (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
                                   :files test-hdl-vhdl-common-file-list
@@ -109,7 +109,7 @@
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
-    (test-hdl-vhdl-ext-tags-with-test-project
+    (test-hdl-vhdl-ext-with-test-project test-hdl-vhdl-ext-tags-proj-name
       ;; Generate/update tags for test project
       (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
                                   :files test-hdl-vhdl-common-file-list

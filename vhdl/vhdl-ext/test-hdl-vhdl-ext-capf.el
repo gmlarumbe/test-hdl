@@ -53,7 +53,7 @@
 
 
 (defun test-hdl-vhdl-ext-capf-gen-expected-files ()
-  (test-hdl-vhdl-ext-tags-with-test-project
+  (test-hdl-vhdl-ext-with-test-project test-hdl-vhdl-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
                                 :files test-hdl-vhdl-common-file-list)
@@ -79,7 +79,7 @@
 
 
 (ert-deftest vhdl-ext::capf::completions ()
-  (test-hdl-vhdl-ext-tags-with-test-project
+  (test-hdl-vhdl-ext-with-test-project test-hdl-vhdl-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
                                 :files test-hdl-vhdl-common-file-list)
@@ -97,7 +97,7 @@
 
 
 (ert-deftest vhdl-ext::capf::annotations ()
-  (test-hdl-vhdl-ext-tags-with-test-project
+  (test-hdl-vhdl-ext-with-test-project test-hdl-vhdl-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
                                 :files test-hdl-vhdl-common-file-list)

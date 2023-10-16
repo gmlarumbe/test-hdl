@@ -28,10 +28,38 @@
 (require 'test-hdl-vhdl-ext-common)
 
 
+(defconst test-hdl-vhdl-ext-dummy-file-list `(,(file-name-concat test-hdl-vhdl-common-dir "instances.vhd")))
+(defconst test-hdl-vhdl-ext-utils-proj-name "test-hdl-vhdl-ext-utils")
+
+
+(defmacro test-hdl-vhdl-ext-with-test-project (project &rest body)
+  (declare (indent 1) (debug t))
+  ;; Mock `vhdl-ext-buffer-proj' so that function can be run outside of a VHDL
+  ;; project buffer and sources are extracted project
+  `(cl-letf (((symbol-function 'vhdl-ext-buffer-proj)
+              (lambda () ,project)))
+     ,@body))
+
+
 (defun test-hdl-vhdl-ext-utils-scan-entities-fn ()
   (test-hdl-no-messages
     (vhdl-mode))
   (vhdl-ext-scan-buffer-entities))
+
+(cl-defun test-hdl-vhdl-ext-proj-files-fn (&key root dirs ignore-dirs files ignore-files)
+  "Show as one file per line instead of as an Elisp string list."
+  (let* ((vhdl-ext-project-alist `((,test-hdl-vhdl-ext-utils-proj-name
+                                    :root ,root
+                                    :dirs ,dirs
+                                    :ignore-dirs ,ignore-dirs
+                                    :files ,files
+                                    :ignore-files ,ignore-files)))
+         (file-list (vhdl-ext-proj-files)))
+    (mapconcat (lambda (file)
+                 (file-relative-name file test-hdl-test-dir))
+               file-list
+               "\n")))
+
 
 (defun test-hdl-vhdl-ext-utils-gen-expected-files ()
   ;; Forward sexp
@@ -99,7 +127,63 @@
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
                                :out-file-ext "scan.entities.el"
                                :process-fn 'eval
-                               :fn #'test-hdl-vhdl-ext-utils-scan-entities-fn))
+                               :fn #'test-hdl-vhdl-ext-utils-scan-entities-fn)
+  ;; Proj files
+  (let ((file-list test-hdl-vhdl-ext-dummy-file-list))
+    (test-hdl-vhdl-ext-with-test-project test-hdl-vhdl-ext-utils-proj-name
+      ;; Test1: Set only `:root'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test1"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-common-dir))
+      ;; Test2: Set `:root' and `:dirs'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test2"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-files-dir
+                                           :dirs ("common"
+                                                  "axi_if_converter/rtl")))
+      ;; Test3: Set `:root' and `:dirs' recursively
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test3"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-files-dir
+                                           :dirs ("-r common"
+                                                  "-r axi_if_converter")))
+      ;; Test4: Set `:root', `:dirs' and `:files'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test4"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-files-dir
+                                           :dirs ("axi_if_converter/rtl")
+                                           :files ("axi_if_converter/tb/tb_axi_if_converter.vhd"
+                                                   "axi_if_converter/tb/tb_core_fsm.vhd")))
+      ;; Test5: Set `:root' and `:ignore-dirs'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test5"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-common-dir
+                                           :ignore-dirs ("subblocks")))
+      ;; Test6: Set `:root', `:ignore-dirs' and `:ignore-files'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test6"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-common-dir
+                                           :ignore-dirs ("subblocks")
+                                           :ignore-files ("axi_if_converter.vhd"
+                                                          "instances.vhd"))))))
 
 
 (ert-deftest vhdl-ext::utils::point-inside-block ()
@@ -179,6 +263,64 @@
                                                                    :fn vhdl-ext-backward-sexp
                                                                    :pos-list ,pos-list))
                                     (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "bwd.sexp.el")))))))
+
+
+(ert-deftest vhdl-ext::utils::proj-files ()
+  (let ((file (car test-hdl-vhdl-ext-dummy-file-list)))
+    (test-hdl-vhdl-ext-with-test-project test-hdl-vhdl-ext-utils-proj-name
+      ;; Test1: Set only `:root'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test1"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-common-dir))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test1"))))
+      ;; Test2: Set `:root' and `:dirs'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test2"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-files-dir
+                                                                   :dirs ("common"
+                                                                          "axi_if_converter/rtl")))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test2"))))
+      ;; Test3: Set `:root' and `:dirs' recursively
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test3"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-files-dir
+                                                                   :dirs ("-r common"
+                                                                          "-r axi_if_converter")))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test3"))))
+      ;; Test4: Set `:root', `:dirs' and `:files'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test4"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-files-dir
+                                                                   :dirs ("axi_if_converter/rtl")
+                                                                   :files ("axi_if_converter/tb/tb_axi_if_converter.vhd"
+                                                                           "axi_if_converter/tb/tb_core_fsm.vhd")))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test4"))))
+      ;; Test5: Set `:root' and `:ignore-dirs'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test5"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-common-dir
+                                                                   :ignore-dirs ("subblocks")))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test5"))))
+      ;; Test6: Set `:root', `:ignore-dirs' and `:ignore-files'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test6"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-common-dir
+                                                                   :ignore-dirs ("subblocks")
+                                                                   :ignore-files ("axi_if_converter.vhd"
+                                                                                  "instances.vhd")))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test6")))))))
 
 
 (provide 'test-hdl-vhdl-ext-utils)
