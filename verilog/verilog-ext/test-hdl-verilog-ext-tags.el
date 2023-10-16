@@ -29,24 +29,15 @@
 
 
 ;;;; Aux functions (used for capf/hierarchy/xref)
-(defconst test-verilog-ext-tags-proj-name "test-hdl-verilog-ext-tags")
-
-(defmacro test-hdl-verilog-ext-tags-with-test-project (&rest body)
-  (declare (indent 0) (debug t))
-  ;; Mock `verilog-ext-buffer-proj' so that function can be run outside of a Verilog
-  ;; project buffer and sources are extracted for hardcoded project "test-hdl-verilog-ext-tags"
-  `(cl-letf (((symbol-function 'verilog-ext-buffer-proj)
-              (lambda () test-verilog-ext-tags-proj-name)))
-     ,@body))
+(defconst test-hdl-verilog-ext-tags-proj-name "test-hdl-verilog-ext-tags")
 
 (cl-defun test-hdl-verilog-ext-tags-get (&key backend root files dirs rel-path)
   "Populate the value of the tags tables for test-hdl-verilog project."
   (let ((verilog-ext-tags-backend backend)
-        (verilog-ext-project-alist `((,test-verilog-ext-tags-proj-name
+        (verilog-ext-project-alist `((,test-hdl-verilog-ext-tags-proj-name
                                       :root ,(or root test-hdl-verilog-common-dir)
                                       :files ,files
-                                      :dirs ,dirs
-                                      )))
+                                      :dirs ,dirs)))
         (default-directory test-hdl-verilog-common-dir)) ; DANGER: Needed to get relative filename for GitHub Actions via advice
     ;; Get tags after setting environment
     (test-hdl-no-messages

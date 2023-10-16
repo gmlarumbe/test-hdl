@@ -35,7 +35,6 @@
 (require 'test-hdl-verilog-ext-navigation)
 (require 'test-hdl-verilog-ext-imenu)
 (require 'test-hdl-verilog-ext-beautify)
-;; (require 'test-hdl-verilog-ext-workspace) ; TODO: Move to utils to check files of `verilog-ext-proj-files'
 (require 'test-hdl-verilog-ext-hierarchy)
 (require 'test-hdl-verilog-ext-tags)
 (require 'test-hdl-verilog-ext-capf)
@@ -50,7 +49,6 @@
   (test-hdl-verilog-ext-navigation-gen-expected-files)
   (test-hdl-verilog-ext-imenu-gen-expected-files)
   (test-hdl-verilog-ext-beautify-gen-expected-files)
-  ;; (test-hdl-verilog-ext-workspace-gen-expected-files) ; TODO: Remove
   (test-hdl-verilog-ext-hierarchy-gen-expected-files)
   (test-hdl-verilog-ext-tags-gen-expected-files)
   (test-hdl-verilog-ext-capf-gen-expected-files)

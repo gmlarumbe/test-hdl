@@ -1,3 +1,9 @@
+verilog/files/common/axi_demux.sv
+verilog/files/common/axi_test.sv
+verilog/files/common/instances.sv
+verilog/files/common/tb_program.sv
+verilog/files/common/ucontroller.sv
+verilog/files/common/uvm_component.svh
 verilog/files/ucontroller/rtl/alu.sv
 verilog/files/ucontroller/rtl/bin2bcd.sv
 verilog/files/ucontroller/rtl/cpu.sv

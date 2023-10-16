@@ -51,7 +51,7 @@
 
 
 (defun test-hdl-verilog-ext-capf-gen-expected-files ()
-  (test-hdl-verilog-ext-tags-with-test-project
+  (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
                                    :root test-hdl-verilog-ucontroller-dir
@@ -79,7 +79,7 @@
 
 
 (ert-deftest verilog-ext::capf::completions ()
-  (test-hdl-verilog-ext-tags-with-test-project
+  (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
                                    :root test-hdl-verilog-ucontroller-dir
@@ -99,7 +99,7 @@
 
 
 (ert-deftest verilog-ext::capf::annotations ()
-  (test-hdl-verilog-ext-tags-with-test-project
+  (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
                                    :root test-hdl-verilog-ucontroller-dir

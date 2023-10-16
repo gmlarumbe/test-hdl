@@ -28,9 +28,36 @@
 (require 'test-hdl-verilog-ext-common)
 
 
+(defconst test-hdl-verilog-ext-dummy-file-list `(,(file-name-concat test-hdl-verilog-common-dir "instances.sv")))
+(defconst test-hdl-verilog-ext-utils-proj-name "test-hdl-verilog-ext-utils")
+
+(defmacro test-hdl-verilog-ext-with-test-project (project &rest body)
+  (declare (indent 1) (debug t))
+  ;; Mock `verilog-ext-buffer-proj' so that function can be run outside of a Verilog
+  ;; project buffer and sources are extracted project
+  `(cl-letf (((symbol-function 'verilog-ext-buffer-proj)
+              (lambda () ,project)))
+     ,@body))
+
+
 (defun test-hdl-verilog-ext-utils-scan-modules-fn ()
-  (verilog-mode)
+  (verilog-ext-with-no-hooks
+    (verilog-mode))
   (verilog-ext-scan-buffer-modules))
+
+(cl-defun test-hdl-verilog-ext-proj-files-fn (&key root dirs ignore-dirs files ignore-files)
+  "Show as one file per line instead of as an Elisp string list."
+  (let* ((verilog-ext-project-alist `((,test-hdl-verilog-ext-utils-proj-name
+                                       :root ,root
+                                       :dirs ,dirs
+                                       :ignore-dirs ,ignore-dirs
+                                       :files ,files
+                                       :ignore-files ,ignore-files)))
+         (file-list (verilog-ext-proj-files)))
+    (mapconcat (lambda (file)
+                 (file-relative-name file test-hdl-test-dir))
+               file-list
+               "\n")))
 
 
 (defun test-hdl-verilog-ext-utils-gen-expected-files ()
@@ -76,7 +103,63 @@
                                :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
                                :out-file-ext "scan.modules.el"
                                :process-fn 'eval
-                               :fn #'test-hdl-verilog-ext-utils-scan-modules-fn))
+                               :fn #'test-hdl-verilog-ext-utils-scan-modules-fn)
+  ;; Proj files
+  (let ((file-list test-hdl-verilog-ext-dummy-file-list))
+    (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-utils-proj-name
+      ;; Test1: Set only `:root'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                                   :out-file-ext "files.test1"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-verilog-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-verilog-common-dir))
+      ;; Test2: Set `:root' and `:dirs'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                                   :out-file-ext "files.test2"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-verilog-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-verilog-files-dir
+                                           :dirs ("common"
+                                                  "ucontroller/rtl")))
+      ;; Test3: Set `:root' and `:dirs' recursively
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                                   :out-file-ext "files.test3"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-verilog-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-verilog-files-dir
+                                           :dirs ("-r common"
+                                                  "-r ucontroller")))
+      ;; Test4: Set `:root', `:dirs' and `:files'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                                   :out-file-ext "files.test4"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-verilog-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-verilog-files-dir
+                                           :dirs ("ucontroller/rtl")
+                                           :files ("ucontroller/tb/tb_top.sv"
+                                                   "ucontroller/tb/tb_alu.sv")))
+      ;; Test5: Set `:root' and `:ignore-dirs'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                                   :out-file-ext "files.test5"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-verilog-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-verilog-common-dir
+                                           :ignore-dirs ("subblocks")))
+      ;; Test6: Set `:root', `:ignore-dirs' and `:ignore-files'
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                                   :out-file-ext "files.test6"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-verilog-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-verilog-common-dir
+                                           :ignore-dirs ("subblocks")
+                                           :ignore-files ("ucontroller.sv"
+                                                          "instances.sv"))))))
 
 
 (ert-deftest verilog-ext::utils::point-inside-block ()
@@ -128,6 +211,64 @@
                                                          :process-fn 'eval
                                                          :fn #'test-hdl-verilog-ext-utils-scan-modules-fn)
                                   (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "scan.modules.el"))))))
+
+
+(ert-deftest verilog-ext::utils::proj-files ()
+  (let ((file (car test-hdl-verilog-ext-dummy-file-list)))
+    (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-utils-proj-name
+      ;; Test1: Set only `:root'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "files.test1"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-verilog-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-verilog-common-dir))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "files.test1"))))
+      ;; Test2: Set `:root' and `:dirs'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "files.test2"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-verilog-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-verilog-files-dir
+                                                                   :dirs ("common"
+                                                                          "ucontroller/rtl")))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "files.test2"))))
+      ;; Test3: Set `:root' and `:dirs' recursively
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "files.test3"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-verilog-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-verilog-files-dir
+                                                                   :dirs ("-r common"
+                                                                          "-r ucontroller")))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "files.test3"))))
+      ;; Test4: Set `:root', `:dirs' and `:files'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "files.test4"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-verilog-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-verilog-files-dir
+                                                                   :dirs ("ucontroller/rtl")
+                                                                   :files ("ucontroller/tb/tb_top.sv"
+                                                                           "ucontroller/tb/tb_alu.sv")))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "files.test4"))))
+      ;; Test5: Set `:root' and `:ignore-dirs'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "files.test5"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-verilog-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-verilog-common-dir
+                                                                   :ignore-dirs ("subblocks")))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "files.test5"))))
+      ;; Test6: Set `:root', `:ignore-dirs' and `:ignore-files'
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "files.test6"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-verilog-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-verilog-common-dir
+                                                                   :ignore-dirs ("subblocks")
+                                                                   :ignore-files ("ucontroller.sv"
+                                                                                  "instances.sv")))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "files.test6")))))))
 
 
 

@@ -56,7 +56,7 @@
 
 
 (defun test-hdl-verilog-ext-xref-gen-expected-files ()
-  (test-hdl-verilog-ext-tags-with-test-project
+  (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
                                    :files test-hdl-verilog-common-file-list
@@ -83,7 +83,7 @@
                                              :type ref))))))
 
 (ert-deftest verilog-ext::xref::defs ()
-  (test-hdl-verilog-ext-tags-with-test-project
+  (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
                                    :files test-hdl-verilog-common-file-list
@@ -104,7 +104,7 @@
 
 
 (ert-deftest verilog-ext::xref::refs ()
-  (test-hdl-verilog-ext-tags-with-test-project
+  (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-tags-proj-name
     ;; Generate/update tags for test project
     (test-hdl-verilog-ext-tags-get :backend 'tree-sitter
                                    :files test-hdl-verilog-common-file-list
