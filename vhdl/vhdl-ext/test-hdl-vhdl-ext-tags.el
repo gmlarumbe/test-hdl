@@ -46,15 +46,14 @@
                                    :workdir "lib/")))
         (default-directory test-hdl-vhdl-common-dir)) ; DANGER: Needed to get relative filename for GitHub Actions via advice
     ;; Get tags after setting environment
-    (test-hdl-vhdl-ext-tags-with-test-project
-      (test-hdl-no-messages
-        (vhdl-ext-tags-clear-cache) ; INFO: This is very important in order to start off with a clean environment
-        ;; Make file entries relative to avoid issues in GitHub Actions CI with a different $HOME
-        (when rel-path
-          (advice-add 'vhdl-ext-proj-files :filter-return #'test-hdl-tags-proj-files-relative))
-        (vhdl-ext-tags-get)
-        (when rel-path
-          (advice-remove 'vhdl-ext-proj-files #'test-hdl-tags-proj-files-relative))))))
+    (test-hdl-no-messages
+      (vhdl-ext-tags-clear-cache) ; INFO: This is very important in order to start off with a clean environment
+      ;; Make file entries relative to avoid issues in GitHub Actions CI with a different $HOME
+      (when rel-path
+        (advice-add 'vhdl-ext-proj-files :filter-return #'test-hdl-tags-proj-files-relative))
+      (vhdl-ext-tags-get)
+      (when rel-path
+        (advice-remove 'vhdl-ext-proj-files #'test-hdl-tags-proj-files-relative)))))
 
 
 ;;;; Standalone tests

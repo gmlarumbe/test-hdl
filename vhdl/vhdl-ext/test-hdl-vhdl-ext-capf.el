@@ -53,13 +53,13 @@
 
 
 (defun test-hdl-vhdl-ext-capf-gen-expected-files ()
-  ;; Generate/update tags for test project
-  (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
-                              :files test-hdl-vhdl-common-file-list)
-  (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
-    (let ((file (car file-pos-and-init-string))
-          (pos-and-init-string-alist (cadr file-pos-and-init-string)))
-      (test-hdl-vhdl-ext-tags-with-test-project
+  (test-hdl-vhdl-ext-tags-with-test-project
+    ;; Generate/update tags for test project
+    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                :files test-hdl-vhdl-common-file-list)
+    (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
+      (let ((file (car file-pos-and-init-string))
+            (pos-and-init-string-alist (cadr file-pos-and-init-string)))
         ;; Completion
         (test-hdl-gen-expected-files :file-list `(,file)
                                      :dest-dir (file-name-concat test-hdl-vhdl-ext-capf-dir "ref")
@@ -79,14 +79,14 @@
 
 
 (ert-deftest vhdl-ext::capf::completions ()
-  ;; Generate/update tags for test project
-  (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
-                              :files test-hdl-vhdl-common-file-list)
-  ;; Test each file
-  (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
-    (let ((file (car file-pos-and-init-string))
-          (pos-and-init-string-alist (cadr file-pos-and-init-string)))
-      (test-hdl-vhdl-ext-tags-with-test-project
+  (test-hdl-vhdl-ext-tags-with-test-project
+    ;; Generate/update tags for test project
+    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                :files test-hdl-vhdl-common-file-list)
+    ;; Test each file
+    (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
+      (let ((file (car file-pos-and-init-string))
+            (pos-and-init-string-alist (cadr file-pos-and-init-string)))
         (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                              :dump-file (file-name-concat test-hdl-vhdl-ext-capf-dir "dump" (test-hdl-basename file "capf.el"))
                                                              :process-fn 'eval
@@ -97,14 +97,14 @@
 
 
 (ert-deftest vhdl-ext::capf::annotations ()
-  ;; Generate/update tags for test project
-  (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
-                              :files test-hdl-vhdl-common-file-list)
-  ;; Test each file
-  (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
-    (let ((file (car file-pos-and-init-string))
-          (pos-and-init-string-alist (cadr file-pos-and-init-string)))
-      (test-hdl-vhdl-ext-tags-with-test-project
+  (test-hdl-vhdl-ext-tags-with-test-project
+    ;; Generate/update tags for test project
+    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                :files test-hdl-vhdl-common-file-list)
+    ;; Test each file
+    (dolist (file-pos-and-init-string test-hdl-vhdl-ext-capf-file-pos-init-string-alist)
+      (let ((file (car file-pos-and-init-string))
+            (pos-and-init-string-alist (cadr file-pos-and-init-string)))
         (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                              :dump-file (file-name-concat test-hdl-vhdl-ext-capf-dir "dump" (test-hdl-basename file "annotations.el"))
                                                              :process-fn 'eval

@@ -57,15 +57,15 @@
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
-    ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
-                                :files test-hdl-vhdl-common-file-list
-                                :rel-path t)
-    ;; Iterate over files with tags tables
-    (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
-      (let ((file (car file-refs))
-            (refs (cdr file-refs)))
-        (test-hdl-vhdl-ext-tags-with-test-project
+    (test-hdl-vhdl-ext-tags-with-test-project
+      ;; Generate/update tags for test project
+      (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                  :files test-hdl-vhdl-common-file-list
+                                  :rel-path t)
+      ;; Iterate over files with tags tables
+      (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
+        (let ((file (car file-refs))
+              (refs (cdr file-refs)))
           ;; Defs
           (test-hdl-gen-expected-files :file-list `(,file)
                                        :dest-dir (file-name-concat test-hdl-vhdl-ext-xref-dir "ref")
@@ -87,15 +87,15 @@
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
-    ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
-                                :files test-hdl-vhdl-common-file-list
-                                :rel-path t)
-    ;; Iterate over files with tags tables
-    (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
-      (let ((file (car file-refs))
-            (refs (cdr file-refs)))
-        (test-hdl-vhdl-ext-tags-with-test-project
+    (test-hdl-vhdl-ext-tags-with-test-project
+      ;; Generate/update tags for test project
+      (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                  :files test-hdl-vhdl-common-file-list
+                                  :rel-path t)
+      ;; Iterate over files with tags tables
+      (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
+        (let ((file (car file-refs))
+              (refs (cdr file-refs)))
           ;; Defs
           (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                                :dump-file (file-name-concat test-hdl-vhdl-ext-xref-dir "dump" (test-hdl-basename file "xref.defs.el"))
@@ -109,15 +109,15 @@
   (let ((vhdl-ext-tags-defs-table nil)
         (vhdl-ext-tags-refs-table nil)
         (vhdl-ext-tags-inst-table nil))
-    ;; Generate/update tags for test project
-    (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
-                                :files test-hdl-vhdl-common-file-list
-                                :rel-path t)
-    ;; Iterate over files with tags tables
-    (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
-      (let ((file (car file-refs))
-            (refs (cdr file-refs)))
-        (test-hdl-vhdl-ext-tags-with-test-project
+    (test-hdl-vhdl-ext-tags-with-test-project
+      ;; Generate/update tags for test project
+      (test-hdl-vhdl-ext-tags-get :root test-hdl-vhdl-common-dir
+                                  :files test-hdl-vhdl-common-file-list
+                                  :rel-path t)
+      ;; Iterate over files with tags tables
+      (dolist (file-refs test-hdl-vhdl-ext-xref-file-and-refs-alist)
+        (let ((file (car file-refs))
+              (refs (cdr file-refs)))
           ;; Refs
           (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                                :dump-file (file-name-concat test-hdl-vhdl-ext-xref-dir "dump" (test-hdl-basename file "xref.refs.el"))

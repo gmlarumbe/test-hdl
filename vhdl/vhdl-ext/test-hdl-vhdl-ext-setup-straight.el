@@ -46,6 +46,7 @@
 (use-package vhdl-ext
   :hook ((vhdl-mode . vhdl-ext-mode))
   :config
+  (setq vhdl-ext-cache-enable nil)
   (vhdl-ext-mode-setup)
   (setq treesit-font-lock-level 4))
 

@@ -44,6 +44,7 @@
 (message "Installing and setting up vhdl-ext")
 (package-install 'vhdl-ext)
 (require 'vhdl-ext)
+(setq vhdl-ext-cache-enable nil)
 (vhdl-ext-mode-setup)
 (add-hook 'vhdl-mode-hook #'vhdl-ext-mode)
 
