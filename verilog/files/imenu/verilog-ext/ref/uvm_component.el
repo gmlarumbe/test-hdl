@@ -1,626 +1,521 @@
 (("*Classes*"
   (#("uvm_component (v)" 0 13
-     (face
-      (:foreground "goldenrod" :weight bold))
+     (face verilog-ext-imenu-class-item-face)
      13 17
      (face italic))
    (#("new [F] (e)" 0 3
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       7 11
       (face italic))
     . 2561)
    (#("get_parent [F] (ev)" 0 10
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       14 19
       (face italic))
     . 3192)
    (#("get_full_name [F] (ev)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 22
       (face italic))
     . 3559)
    (#("get_children [F] (e)" 0 12
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       16 20
       (face italic))
     . 3943)
    (#("get_child [F] (e)" 0 9
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       13 17
       (face italic))
     . 4055)
    (#("get_next_child [F] (e)" 0 14
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       18 22
       (face italic))
     . 4155)
    (#("get_first_child [F] (e)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 23
       (face italic))
     . 4756)
    (#("get_num_children [F] (e)" 0 16
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       20 24
       (face italic))
     . 4960)
    (#("has_child [F] (e)" 0 9
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       13 17
       (face italic))
     . 5170)
    (#("set_name [F] (ev)" 0 8
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       12 17
       (face italic))
     . 5377)
    (#("lookup [F] (e)" 0 6
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       10 14
       (face italic))
     . 5843)
    (#("get_depth [F] (e)" 0 9
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       13 17
       (face italic))
     . 6108)
    (#("build_phase [F] (ev)" 0 11
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       15 20
       (face italic))
     . 7542)
    (#("connect_phase [F] (ev)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 22
       (face italic))
     . 7807)
    (#("end_of_elaboration_phase [F] (ev)" 0 24
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       28 33
       (face italic))
     . 8096)
    (#("start_of_simulation_phase [F] (ev)" 0 25
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       29 34
       (face italic))
     . 8398)
    (#("run_phase [T] (ev)" 0 9
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       13 18
       (face italic))
     . 9021)
    (#("pre_reset_phase [T] (ev)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 24
       (face italic))
     . 9789)
    (#("reset_phase [T] (ev)" 0 11
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       15 20
       (face italic))
     . 10555)
    (#("post_reset_phase [T] (ev)" 0 16
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       20 25
       (face italic))
     . 11327)
    (#("pre_configure_phase [T] (ev)" 0 19
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       23 28
       (face italic))
     . 12110)
    (#("configure_phase [T] (ev)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 24
       (face italic))
     . 12888)
    (#("post_configure_phase [T] (ev)" 0 20
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       24 29
       (face italic))
     . 13672)
    (#("pre_main_phase [T] (ev)" 0 14
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       18 23
       (face italic))
     . 14449)
    (#("main_phase [T] (ev)" 0 10
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       14 19
       (face italic))
     . 15212)
    (#("post_main_phase [T] (ev)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 24
       (face italic))
     . 15981)
    (#("pre_shutdown_phase [T] (ev)" 0 18
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       22 27
       (face italic))
     . 16762)
    (#("shutdown_phase [T] (ev)" 0 14
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       18 23
       (face italic))
     . 17538)
    (#("post_shutdown_phase [T] (ev)" 0 19
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       23 28
       (face italic))
     . 18320)
    (#("extract_phase [F] (ev)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 22
       (face italic))
     . 18584)
    (#("check_phase [F] (ev)" 0 11
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       15 20
       (face italic))
     . 18849)
    (#("report_phase [F] (ev)" 0 12
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       16 21
       (face italic))
     . 19112)
    (#("final_phase [F] (ev)" 0 11
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       15 20
       (face italic))
     . 19374)
    (#("phase_started [F] (ev)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 22
       (face italic))
     . 19708)
    (#("phase_ready_to_end [F] (ev)" 0 18
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       22 27
       (face italic))
     . 20992)
    (#("phase_ended [F] (ev)" 0 11
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       15 20
       (face italic))
     . 21333)
    (#("set_domain [F] (e)" 0 10
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       14 18
       (face italic))
     . 21935)
    (#("get_domain [F] (e)" 0 10
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       14 18
       (face italic))
     . 22151)
    (#("define_domain [F] (evp)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 23
       (face italic))
     . 23754)
    (#("suspend [T] (ev)" 0 7
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       11 16
       (face italic))
     . 24155)
    (#("resume [T] (ev)" 0 6
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       10 15
       (face italic))
     . 24525)
    (#("resolve_bindings [F] (ev)" 0 16
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       20 25
       (face italic))
     . 24848)
    (#("massage_scope [F] (e)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 21
       (face italic))
     . 24901)
    (#("apply_config_settings [F] (ev)" 0 21
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       25 30
       (face italic))
     . 27202)
    (#("use_automatic_config [F] (ev)" 0 20
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       24 29
       (face italic))
     . 27491)
    (#("print_config [F] (e)" 0 12
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       16 20
       (face italic))
     . 28204)
    (#("print_config_with_audit [F] (e)" 0 23
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       27 31
       (face italic))
     . 28656)
    (#("get_print_config_matches [F] (s)" 0 24
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       28 32
       (face italic))
     . 29349)
    (#("set_print_config_matches [F] (s)" 0 24
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       28 32
       (face italic))
     . 29826)
    (#("raised [F] (v)" 0 6
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       10 14
       (face italic))
     . 30799)
    (#("dropped [F] (v)" 0 7
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       11 15
       (face italic))
     . 31416)
    (#("all_dropped [T] (v)" 0 11
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       15 19
       (face italic))
     . 32028)
    (#("create_component [F] (e)" 0 16
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       20 24
       (face italic))
     . 33609)
    (#("create_object [F] (e)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 21
       (face italic))
     . 34420)
    (#("set_type_override_by_type [F] (es)" 0 25
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       29 34
       (face italic))
     . 35511)
    (#("set_inst_override_by_type [F] (e)" 0 25
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       29 33
       (face italic))
     . 38009)
    (#("set_type_override [F] (es)" 0 17
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       21 26
       (face italic))
     . 39120)
    (#("set_inst_override [F] (e)" 0 17
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       21 25
       (face italic))
     . 40398)
    (#("print_override_info [F] (e)" 0 19
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       23 27
       (face italic))
     . 40906)
    (#("set_report_id_verbosity_hier [F] (e)" 0 28
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       32 36
       (face italic))
     . 41730)
    (#("set_report_severity_id_verbosity_hier [F] (e)" 0 37
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       41 45
       (face italic))
     . 42366)
    (#("set_report_severity_action_hier [F] (e)" 0 31
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       35 39
       (face italic))
     . 42655)
    (#("set_report_id_action_hier [F] (e)" 0 25
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       29 33
       (face italic))
     . 42866)
    (#("set_report_severity_id_action_hier [F] (e)" 0 34
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       38 42
       (face italic))
     . 43487)
    (#("set_report_default_file_hier [F] (e)" 0 28
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       32 36
       (face italic))
     . 43775)
    (#("set_report_severity_file_hier [F] (e)" 0 29
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       33 37
       (face italic))
     . 43903)
    (#("set_report_id_file_hier [F] (e)" 0 23
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       27 31
       (face italic))
     . 44103)
    (#("set_report_severity_id_file_hier [F] (e)" 0 32
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       36 40
       (face italic))
     . 44801)
    (#("set_report_verbosity_level_hier [F] (e)" 0 31
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       35 39
       (face italic))
     . 45415)
    (#("pre_abort [F] (v)" 0 9
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       13 17
       (face italic))
     . 46266)
    (#("accept_tr [F] (e)" 0 9
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       13 17
       (face italic))
     . 47514)
    (#("do_accept_tr [F] (evp)" 0 12
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       16 22
       (face italic))
     . 47866)
    (#("begin_tr [F] (e)" 0 8
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       12 16
       (face italic))
     . 48639)
    (#("do_begin_tr [F]" 0 11
-      (face
-       (:foreground "goldenrod" :weight bold)))
+      (face verilog-ext-imenu-class-item-face))
     . 49298)
    (#("end_tr [F] (e)" 0 6
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       10 14
       (face italic))
     . 50589)
    (#("do_end_tr [F] (evp)" 0 9
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       13 19
       (face italic))
     . 51002)
    (#("record_error_tr [F] (e)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 23
       (face italic))
     . 51839)
    (#("record_event_tr [F] (e)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 23
       (face italic))
     . 52728)
    (#("get_tr_stream [F] (ev)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 22
       (face italic))
     . 53159)
    (#("free_tr_stream [F] (ev)" 0 14
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       18 23
       (face italic))
     . 53353)
    (#("do_execute_op [F] (ev)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 22
       (face italic))
     . 53793)
    (#("get_tr_database [F] (ev)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 24
       (face italic))
     . 54158)
    (#("set_tr_database [F] (ev)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 24
       (face italic))
     . 54262)
    (#("set_local [F] (e)" 0 9
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       13 17
       (face italic))
     . 55681)
    (#("m_add_child [F] (epv)" 0 11
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       15 21
       (face italic))
     . 55916)
    (#("m_set_full_name [F] (elv)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 25
       (face italic))
     . 55991)
    (#("do_resolve_bindings [F] (e)" 0 19
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       23 27
       (face italic))
     . 56052)
    (#("do_flush [F] (e)" 0 8
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       12 16
       (face italic))
     . 56116)
    (#("flush [F] (ev)" 0 5
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       9 14
       (face italic))
     . 56170)
    (#("m_extract_name [F] (el)" 0 14
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       18 23
       (face italic))
     . 56222)
    (#("create [F] (ev)" 0 6
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       10 15
       (face italic))
     . 56480)
    (#("clone [F] (ev)" 0 5
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       9 14
       (face italic))
     . 56542)
    (#("m_begin_tr [F] (ep)" 0 10
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       14 19
       (face italic))
     . 56686)
    (#("get_recording_enabled [F] (ev)" 0 21
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       25 30
       (face italic))
     . 57265)
    (#("set_recording_enabled [F] (ev)" 0 21
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       25 30
       (face italic))
     . 57771)
    (#("set_recording_enabled_hier [F] (ev)" 0 26
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       30 35
       (face italic))
     . 57877)
    (#("do_print [F] (e)" 0 8
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       12 16
       (face italic))
     . 57951)
    (#("m_set_cl_msg_args [F] (e)" 0 17
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       21 25
       (face italic))
     . 58082)
    (#("m_set_cl_verb [F] (e)" 0 13
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       17 21
       (face italic))
     . 58124)
    (#("m_set_cl_action [F] (e)" 0 15
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       19 23
       (face italic))
     . 58162)
    (#("m_set_cl_sev [F] (e)" 0 12
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       16 20
       (face italic))
     . 58202)
    (#("m_apply_verbosity_settings [F] (e)" 0 26
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       30 34
       (face italic))
     . 58239)
    (#("m_do_pre_abort [F]" 0 14
-      (face
-       (:foreground "goldenrod" :weight bold)))
+      (face verilog-ext-imenu-class-item-face))
     . 58411)
    (#("m_unsupported_set_local [F] (e)" 0 23
-      (face
-       (:foreground "goldenrod" :weight bold))
+      (face verilog-ext-imenu-class-item-face)
       27 31
       (face italic))
     . 58587)))
