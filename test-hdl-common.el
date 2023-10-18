@@ -35,15 +35,8 @@
   (profiler-stop)
   (profiler-report))
 
-(defun test-hdl-profile-imenu (func)
-  "Use Emacs profiler after calling FUNC."
-  (profiler-start 'cpu+mem)
-  (funcall func)
-  (profiler-stop)
-  (profiler-report))
-
 (defun test-hdl-profile-funcall (fun &rest args)
-  "Use Emacs profiler in FILE."
+  "Use Emacs profiler after calling FUNC with ARGS."
   (profiler-start 'cpu+mem)
   (apply fun args)
   (profiler-stop)
