@@ -44,7 +44,6 @@
 (defconst test-hdl-verilog-hierarchy-dir (file-name-concat test-hdl-verilog-files-dir "hierarchy"))
 (defconst test-hdl-verilog-navigation-dir (file-name-concat test-hdl-verilog-files-dir "navigation"))
 (defconst test-hdl-verilog-utils-dir (file-name-concat test-hdl-verilog-files-dir "utils"))
-(defconst test-hdl-verilog-workspace-dir (file-name-concat test-hdl-verilog-files-dir "workspace"))
 (defconst test-hdl-verilog-tags-dir (file-name-concat test-hdl-verilog-files-dir "tags"))
 (defconst test-hdl-verilog-capf-dir (file-name-concat test-hdl-verilog-files-dir "capf"))
 (defconst test-hdl-verilog-xref-dir (file-name-concat test-hdl-verilog-files-dir "xref"))
