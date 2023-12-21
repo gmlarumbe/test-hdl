@@ -6,7 +6,7 @@
 -- Author     : Gonzalo Larumbe  <gonzalomlarumbe@gmail.com>
 -- Company    : gmlarumbe
 -- Created    : 2023-01-28
--- Last update: 2023-08-16
+-- Last update: 2023-12-21
 -- Platform   : Debian
 -- Standard   : VHDL'08
 -------------------------------------------------------------------------------
@@ -90,11 +90,24 @@ begin  -- architecture RTL
             Port1 => Port1,
             Port2 => Port2);
 
+    I_BLOCK1_3 : entity work.block1
+        generic map (
+            Generic0 => 0,
+            Generic1 => 0,
+            Generic2 => 0
+            ) port map (
+                Port0 => Port0,
+                Port1 => Port1,
+                Port2 => Port2
+                );
+
 -- Generate
 GEN_BLOCK1 :
 for I in 0 to 3 generate
     I_BLOCK1_GEN : entity work.block1 port map
         (Port0, Port1, Port2);
 end generate GEN_BLOCK1;
+
+
 
 end architecture RTL;

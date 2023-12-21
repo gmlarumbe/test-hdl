@@ -1369,7 +1369,7 @@
 	 (face vhdl-ext-xref-match-face)
 	 20 21
 	 (face vhdl-ts-font-lock-punctuation-face fontified nil))
-       #s(xref-file-location "instances.vhd" 100 17))
+       #s(xref-file-location "instances.vhd" 113 17))
     #s(xref-item
        #("end architecture RTL;" 0 3
 	 (face font-lock-keyword-face fontified nil)

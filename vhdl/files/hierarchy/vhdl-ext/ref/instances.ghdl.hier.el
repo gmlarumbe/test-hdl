@@ -5,6 +5,7 @@ instances
   instances.block1:i_block1_0
   instances.block1:i_block1_1
   instances.block1:i_block1_2
+  instances.block1:i_block1_3
   instances.gen_block1(0):for-generate
     instances.gen_block1(0):for-generate.block1:i_block1_gen
   instances.gen_block1(1):for-generate

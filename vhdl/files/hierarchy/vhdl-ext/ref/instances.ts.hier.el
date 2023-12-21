@@ -5,4 +5,5 @@ instances
   instances.block1:I_BLOCK1_0
   instances.block1:I_BLOCK1_1
   instances.block1:I_BLOCK1_2
+  instances.block1:I_BLOCK1_3
   instances.block1:I_BLOCK1_GEN

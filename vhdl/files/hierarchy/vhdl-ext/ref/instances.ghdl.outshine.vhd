@@ -7,6 +7,7 @@
 -- ** block1
 -- ** block1
 -- ** block1
+-- ** block1
 -- ** gen_block1(0):for-generate
 -- *** block1
 -- ** gen_block1(1):for-generate

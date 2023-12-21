@@ -15,4 +15,5 @@
   ("block1" . #<marker at 2009 in instances.vhd>)
   ("block1" . #<marker at 2163 in instances.vhd>)
   ("block1" . #<marker at 2317 in instances.vhd>)
-  ("block1" . #<marker at 2604 in instances.vhd>)))
+  ("block1" . #<marker at 2542 in instances.vhd>)
+  ("block1" . #<marker at 2822 in instances.vhd>)))
