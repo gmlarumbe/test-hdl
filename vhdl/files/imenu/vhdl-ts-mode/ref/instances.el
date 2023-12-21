@@ -7,6 +7,7 @@
   ("block1 (cmp)" . #<marker at 2013 in instances.vhd>)
   ("block1 (cmp)" . #<marker at 2167 in instances.vhd>)
   ("block1 (cmp)" . #<marker at 2321 in instances.vhd>)
+  ("block1 (cmp)" . #<marker at 2546 in instances.vhd>)
   ("I_BLOCK1_GEN (gen)..."
-   ("*gen*" . #<marker at 2612 in instances.vhd>)
-   ("block1 (cmp)" . #<marker at 2612 in instances.vhd>))))
+   ("*gen*" . #<marker at 2830 in instances.vhd>)
+   ("block1 (cmp)" . #<marker at 2830 in instances.vhd>))))
