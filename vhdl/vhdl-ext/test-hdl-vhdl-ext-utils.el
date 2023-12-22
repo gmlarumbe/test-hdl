@@ -158,6 +158,18 @@
                                    :args `(:mode vhdl-mode
                                            :fn vhdl-ext-instance-at-point
                                            :pos-list ,pos-list))))
+  ;; Instance at point (ts-mode)
+  (dolist (file-and-pos test-hdl-vhdl-utils-instance-at-point-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (test-hdl-gen-expected-files :file-list `(,file)
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "ts.inst.point.el"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-pos-list-fn
+                                   :args `(:mode vhdl-ts-mode
+                                           :fn vhdl-ext-instance-at-point
+                                           :pos-list ,pos-list))))
   ;; Scan buffer entities
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-utils-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
@@ -284,6 +296,20 @@
                                                                    :fn vhdl-ext-instance-at-point
                                                                    :pos-list ,pos-list))
                                     (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "inst.point.el")))))))
+
+
+(ert-deftest vhdl-ext::utils::instance-at-point-ts-mode ()
+  (dolist (file-and-pos test-hdl-vhdl-utils-instance-at-point-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "ts.inst.point.el"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-pos-list-fn
+                                                           :args `(:mode vhdl-ts-mode
+                                                                   :fn vhdl-ext-instance-at-point
+                                                                   :pos-list ,pos-list))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "ts.inst.point.el")))))))
 
 
 (ert-deftest vhdl-ext::utils::scan-buffer-modules ()
