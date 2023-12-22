@@ -36,7 +36,8 @@
     ,vhdl-ext-component-re
     ,vhdl-ext-process-re
     ,vhdl-ext-procedure-re
-    ,vhdl-ext-function-re))
+    ,vhdl-ext-function-re
+    ,vhdl-ext-instance-re))
 
 (defun test-hdl-vhdl-ext-beautify-instance-at-point-fn ()
   (goto-char (point-min))
@@ -63,7 +64,13 @@
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-beautify-dir "ref")
                                :out-file-ext "beauty.block.vhd"
                                :fn #'test-hdl-vhdl-beautify-file
-                               :args '(vhdl-mode test-hdl-vhdl-ext-beautify-block-at-point-fn)))
+                               :args '(vhdl-mode test-hdl-vhdl-ext-beautify-block-at-point-fn))
+  ;; Block at point (tree-sitter)
+  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-beautify-block-at-point-file-list
+                               :dest-dir (file-name-concat test-hdl-vhdl-ext-beautify-dir "ref")
+                               :out-file-ext "ts.beauty.block.vhd"
+                               :fn #'test-hdl-vhdl-beautify-file
+                               :args '(vhdl-ts-mode test-hdl-vhdl-ext-beautify-block-at-point-fn)))
 
 (ert-deftest vhdl-ext::beautify-instance-at-point ()
   (dolist (file test-hdl-vhdl-beautify-instance-at-point-file-list)
@@ -80,6 +87,14 @@
                                                          :fn #'test-hdl-vhdl-beautify-file
                                                          :args '(vhdl-mode test-hdl-vhdl-ext-beautify-block-at-point-fn))
                                   (file-name-concat test-hdl-vhdl-ext-beautify-dir "ref" (test-hdl-basename file "beauty.block.vhd"))))))
+
+(ert-deftest vhdl-ext::beautify-block-at-point-ts-mode ()
+  (dolist (file test-hdl-vhdl-beautify-block-at-point-file-list)
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-beautify-dir "dump" (test-hdl-basename file "ts.beauty.block.vhd"))
+                                                         :fn #'test-hdl-vhdl-beautify-file
+                                                         :args '(vhdl-ts-mode test-hdl-vhdl-ext-beautify-block-at-point-fn))
+                                  (file-name-concat test-hdl-vhdl-ext-beautify-dir "ref" (test-hdl-basename file "ts.beauty.block.vhd"))))))
 
 
 (provide 'test-hdl-vhdl-ext-beautify)

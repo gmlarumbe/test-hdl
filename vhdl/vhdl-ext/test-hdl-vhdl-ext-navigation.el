@@ -73,6 +73,23 @@
                                :args '(:mode vhdl-mode
                                        :fn vhdl-ext-find-entity-instance-bwd
                                        :start-pos-max t))
+  ;; Instances fwd (ts-mode)
+  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-navigation-rtl-file-list
+                               :dest-dir (file-name-concat test-hdl-vhdl-ext-navigation-dir "ref")
+                               :out-file-ext "ts.inst.fwd.el"
+                               :process-fn 'eval
+                               :fn #'test-hdl-navigation-nav-file-fn
+                               :args '(:mode vhdl-ts-mode
+                                       :fn vhdl-ext-find-entity-instance-fwd))
+  ;; Instances bwd (ts-mode)
+  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-navigation-rtl-file-list
+                               :dest-dir (file-name-concat test-hdl-vhdl-ext-navigation-dir "ref")
+                               :out-file-ext "ts.inst.bwd.el"
+                               :process-fn 'eval
+                               :fn #'test-hdl-navigation-nav-file-fn
+                               :args '(:mode vhdl-ts-mode
+                                       :fn vhdl-ext-find-entity-instance-bwd
+                                       :start-pos-max t))
   ;; Jump-to-parent ag
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-ext-navigation-jump-to-parent-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ext-navigation-dir "ref")
@@ -110,6 +127,26 @@
                                                                  :fn vhdl-ext-find-entity-instance-bwd
                                                                  :start-pos-max t))
                                   (file-name-concat test-hdl-vhdl-ext-navigation-dir "ref" (test-hdl-basename file "inst.bwd.el"))))))
+
+(ert-deftest vhdl-ext::navigation::instances-ts-mode ()
+  (dolist (file test-hdl-vhdl-navigation-rtl-file-list)
+    ;; Forward
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-navigation-dir "dump" (test-hdl-basename file "ts.inst.fwd.el"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-navigation-nav-file-fn
+                                                         :args '(:mode vhdl-ts-mode
+                                                                 :fn vhdl-ext-find-entity-instance-fwd))
+                                  (file-name-concat test-hdl-vhdl-ext-navigation-dir "ref" (test-hdl-basename file "ts.inst.fwd.el"))))
+    ;; Backward
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ext-navigation-dir "dump" (test-hdl-basename file "ts.inst.bwd.el"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-navigation-nav-file-fn
+                                                         :args '(:mode vhdl-ts-mode
+                                                                 :fn vhdl-ext-find-entity-instance-bwd
+                                                                 :start-pos-max t))
+                                  (file-name-concat test-hdl-vhdl-ext-navigation-dir "ref" (test-hdl-basename file "ts.inst.bwd.el"))))))
 
 
 (ert-deftest vhdl-ext::navigation::jump-to-parent-entity-ag ()
