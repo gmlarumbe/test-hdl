@@ -63,3 +63,84 @@ signal_in4;
 end procedure test_multiline_expression;
 end package body foo;
 
+
+-- 5) Block statement (https://peterfab.com/ref/vhdl/vhdl_renerta/mobile/source/vhd00012.htm)
+---- Example 1
+A1: OUT1 <= '1' after 5 ns;
+LEVEL1 : block
+begin
+A2: OUT2 <= '1' after 5 ns;
+A3: OUT3 <= '0' after 4 ns;
+end block LEVEL1;
+A1: OUT1 <= '1' after 5 ns;
+A2: OUT2 <= '1' after 5 ns;
+A3: OUT3 <= '0' after 4 ns;
+
+---- Example 2
+entity X_GATE is
+generic (LongTime : Time; ShortTime : Time);
+port (P1, P2, P3 : inout BIT);
+end X_GATE;
+architecture STRUCTURE of X_GATE is
+-- global declarations of signal:
+signal A, B : BIT;
+begin
+LEVEL1 : block
+-- local declaration of generic parameters
+generic (GB1, GB2 : Time);
+-- local binding of generic parameters
+generic map (GB1 => LongTime, GB2 => ShortTime);
+-- local declaration of ports
+port (PB1: in BIT; PB2 : inout BIT );
+-- local binding of ports and signals
+port map (PB1 => P1, PB2 => B);
+-- local declarations:
+constant Delay : Time := 1 ms;
+signal S1 : BIT;
+begin
+S1 <= PB1 after Delay;
+PB2 <= S1 after GB1, P1 after GB2;
+end block LEVEL1;
+end architecture STRUCTURE;
+
+---- https://www.hdlworks.com/hdl_corner/vhdl_ref/VHDLContents/BlockStatement.htm
+signal P, Q, R: std_logic;
+-- ...
+level1: block
+port(A, B: in std_logic;
+C: out std_logic);
+port map(A => P, B => Q, C => R);
+begin
+C <= A and B;
+end block level1;
+
+---- Own example:
+----   Copy of Example 2 and place block after the first concurrent
+----   statement so that it is detected as a "block_statement"
+entity block_test is
+end block_test;
+architecture arch of block_test is
+-- global declarations of signal:
+signal A, B : BIT;
+begin
+-- Extra statements wrt Example 2
+S1 <= PB1 after Delay;
+PB2 <= S1 after GB1, P1 after GB2;
+
+LEVEL1 : block
+-- local declaration of generic parameters
+generic (GB1, GB2 : Time);
+-- local binding of generic parameters
+generic map (GB1 => LongTime, GB2 => ShortTime);
+-- local declaration of ports
+port (PB1: in BIT; PB2 : inout BIT );
+-- local binding of ports and signals
+port map (PB1 => P1, PB2 => B);
+-- local declarations:
+constant Delay : Time := 1 ms;
+signal S1 : BIT;
+begin
+S1 <= PB1 after Delay;
+PB2 <= S1 after GB1, P1 after GB2;
+end block LEVEL1;
+end architecture arch;
