@@ -63,3 +63,84 @@ signal_in4«:vhdl-ext-font-lock-punctuation-face:;»
 «k:end» «k:procedure» «f:test_multiline_expression»«:vhdl-ext-font-lock-punctuation-face:;»
 «k:end» «k:package» «k:body» «f:foo»«:vhdl-ext-font-lock-punctuation-face:;»
 
+
+«m:-- »«x:5) Block statement (https://peterfab.com/ref/vhdl/vhdl_renerta/mobile/source/vhd00012.htm)
+»«m:---- »«x:Example 1
+»A1«:vhdl-ext-font-lock-punctuation-face::» OUT1 «:vhdl-ext-font-lock-punctuation-face:<=» «s:'1'» «k:after» 5 «:vhdl-font-lock-enumvalue-face:ns»«:vhdl-ext-font-lock-punctuation-face:;»
+LEVEL1 «:vhdl-ext-font-lock-punctuation-face::» «k:block»
+«k:begin»
+A2«:vhdl-ext-font-lock-punctuation-face::» OUT2 «:vhdl-ext-font-lock-punctuation-face:<=» «s:'1'» «k:after» 5 «:vhdl-font-lock-enumvalue-face:ns»«:vhdl-ext-font-lock-punctuation-face:;»
+A3«:vhdl-ext-font-lock-punctuation-face::» OUT3 «:vhdl-ext-font-lock-punctuation-face:<=» «s:'0'» «k:after» 4 «:vhdl-font-lock-enumvalue-face:ns»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:block» «f:LEVEL1»«:vhdl-ext-font-lock-punctuation-face:;»
+A1«:vhdl-ext-font-lock-punctuation-face::» OUT1 «:vhdl-ext-font-lock-punctuation-face:<=» «s:'1'» «k:after» 5 «:vhdl-font-lock-enumvalue-face:ns»«:vhdl-ext-font-lock-punctuation-face:;»
+A2«:vhdl-ext-font-lock-punctuation-face::» OUT2 «:vhdl-ext-font-lock-punctuation-face:<=» «s:'1'» «k:after» 5 «:vhdl-font-lock-enumvalue-face:ns»«:vhdl-ext-font-lock-punctuation-face:;»
+A3«:vhdl-ext-font-lock-punctuation-face::» OUT3 «:vhdl-ext-font-lock-punctuation-face:<=» «s:'0'» «k:after» 4 «:vhdl-font-lock-enumvalue-face:ns»«:vhdl-ext-font-lock-punctuation-face:;»
+
+«m:---- »«x:Example 2
+»«k:entity» «f:X_GATE» «k:is»
+«k:generic» «:vhdl-ext-font-lock-parenthesis-face:(»LongTime «:vhdl-ext-font-lock-punctuation-face::» «t:Time»«:vhdl-ext-font-lock-punctuation-face:;» ShortTime «:vhdl-ext-font-lock-punctuation-face::» «t:Time»«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:port» «:vhdl-ext-font-lock-parenthesis-face:(»P1«:vhdl-ext-font-lock-punctuation-face:,» P2«:vhdl-ext-font-lock-punctuation-face:,» P3 «:vhdl-ext-font-lock-punctuation-face::» «k:inout» «t:BIT»«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «f:X_GATE»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:architecture» «f:STRUCTURE» «k:of» «f:X_GATE» «k:is»
+«m:-- »«x:global declarations of signal:
+»«k:signal» A«:vhdl-ext-font-lock-punctuation-face:,» B «:vhdl-ext-font-lock-punctuation-face::» «t:BIT»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:begin»
+LEVEL1 «:vhdl-ext-font-lock-punctuation-face::» «k:block»
+«m:-- »«x:local declaration of generic parameters
+»«k:generic» «:vhdl-ext-font-lock-parenthesis-face:(»GB1«:vhdl-ext-font-lock-punctuation-face:,» GB2 «:vhdl-ext-font-lock-punctuation-face::» «t:Time»«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:local binding of generic parameters
+»«k:generic» «k:map» «:vhdl-ext-font-lock-parenthesis-face:(»«:vhdl-ext-font-lock-port-connection-face:GB1» «:vhdl-ext-font-lock-punctuation-face:=>» LongTime«:vhdl-ext-font-lock-punctuation-face:,» «:vhdl-ext-font-lock-port-connection-face:GB2» «:vhdl-ext-font-lock-punctuation-face:=>» ShortTime«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:local declaration of ports
+»«k:port» «:vhdl-ext-font-lock-parenthesis-face:(»PB1«:vhdl-ext-font-lock-punctuation-face::» «k:in» «t:BIT»«:vhdl-ext-font-lock-punctuation-face:;» PB2 «:vhdl-ext-font-lock-punctuation-face::» «k:inout» «t:BIT» «:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:local binding of ports and signals
+»«k:port» «k:map» «:vhdl-ext-font-lock-parenthesis-face:(»«:vhdl-ext-font-lock-port-connection-face:PB1» «:vhdl-ext-font-lock-punctuation-face:=>» P1«:vhdl-ext-font-lock-punctuation-face:,» «:vhdl-ext-font-lock-port-connection-face:PB2» «:vhdl-ext-font-lock-punctuation-face:=>» B«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:local declarations:
+»«k:constant» Delay «:vhdl-ext-font-lock-punctuation-face::» «t:Time» «:vhdl-ext-font-lock-punctuation-face::=» 1 «:vhdl-font-lock-enumvalue-face:ms»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:signal» S1 «:vhdl-ext-font-lock-punctuation-face::» «t:BIT»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:begin»
+S1 «:vhdl-ext-font-lock-punctuation-face:<=» PB1 «k:after» Delay«:vhdl-ext-font-lock-punctuation-face:;»
+PB2 «:vhdl-ext-font-lock-punctuation-face:<=» S1 «k:after» GB1«:vhdl-ext-font-lock-punctuation-face:,» P1 «k:after» GB2«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:block» «f:LEVEL1»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:architecture» «f:STRUCTURE»«:vhdl-ext-font-lock-punctuation-face:;»
+
+«m:---- »«x:https://www.hdlworks.com/hdl_corner/vhdl_ref/VHDLContents/BlockStatement.htm
+»«k:signal» P«:vhdl-ext-font-lock-punctuation-face:,» Q«:vhdl-ext-font-lock-punctuation-face:,» R«:vhdl-ext-font-lock-punctuation-face::» «t:std_logic»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:...
+»level1«:vhdl-ext-font-lock-punctuation-face::» «k:block»
+«k:port»«:vhdl-ext-font-lock-parenthesis-face:(»A«:vhdl-ext-font-lock-punctuation-face:,» B«:vhdl-ext-font-lock-punctuation-face::» «k:in» «t:std_logic»«:vhdl-ext-font-lock-punctuation-face:;»
+C«:vhdl-ext-font-lock-punctuation-face::» «k:out» «t:std_logic»«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:port» «k:map»«:vhdl-ext-font-lock-parenthesis-face:(»«:vhdl-ext-font-lock-port-connection-face:A» «:vhdl-ext-font-lock-punctuation-face:=>» P«:vhdl-ext-font-lock-punctuation-face:,» «:vhdl-ext-font-lock-port-connection-face:B» «:vhdl-ext-font-lock-punctuation-face:=>» Q«:vhdl-ext-font-lock-punctuation-face:,» «:vhdl-ext-font-lock-port-connection-face:C» «:vhdl-ext-font-lock-punctuation-face:=>» R«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:begin»
+C «:vhdl-ext-font-lock-punctuation-face:<=» A «k:and» B«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:block» «f:level1»«:vhdl-ext-font-lock-punctuation-face:;»
+
+«m:---- »«x:Own example:
+»«m:----   »«x:Copy of Example 2 and place block after the first concurrent
+»«m:----   »«x:statement so that it is detected as a "block_statement"
+»«k:entity» «f:block_test» «k:is»
+«k:end» «f:block_test»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:architecture» «f:arch» «k:of» «f:block_test» «k:is»
+«m:-- »«x:global declarations of signal:
+»«k:signal» A«:vhdl-ext-font-lock-punctuation-face:,» B «:vhdl-ext-font-lock-punctuation-face::» «t:BIT»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:begin»
+«m:-- »«x:Extra statements wrt Example 2
+»S1 «:vhdl-ext-font-lock-punctuation-face:<=» PB1 «k:after» Delay«:vhdl-ext-font-lock-punctuation-face:;»
+PB2 «:vhdl-ext-font-lock-punctuation-face:<=» S1 «k:after» GB1«:vhdl-ext-font-lock-punctuation-face:,» P1 «k:after» GB2«:vhdl-ext-font-lock-punctuation-face:;»
+
+LEVEL1 «:vhdl-ext-font-lock-punctuation-face::» «k:block»
+«m:-- »«x:local declaration of generic parameters
+»«k:generic» «:vhdl-ext-font-lock-parenthesis-face:(»GB1«:vhdl-ext-font-lock-punctuation-face:,» GB2 «:vhdl-ext-font-lock-punctuation-face::» «t:Time»«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:local binding of generic parameters
+»«k:generic» «k:map» «:vhdl-ext-font-lock-parenthesis-face:(»«:vhdl-ext-font-lock-port-connection-face:GB1» «:vhdl-ext-font-lock-punctuation-face:=>» LongTime«:vhdl-ext-font-lock-punctuation-face:,» «:vhdl-ext-font-lock-port-connection-face:GB2» «:vhdl-ext-font-lock-punctuation-face:=>» ShortTime«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:local declaration of ports
+»«k:port» «:vhdl-ext-font-lock-parenthesis-face:(»PB1«:vhdl-ext-font-lock-punctuation-face::» «k:in» «t:BIT»«:vhdl-ext-font-lock-punctuation-face:;» PB2 «:vhdl-ext-font-lock-punctuation-face::» «k:inout» «t:BIT» «:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:local binding of ports and signals
+»«k:port» «k:map» «:vhdl-ext-font-lock-parenthesis-face:(»«:vhdl-ext-font-lock-port-connection-face:PB1» «:vhdl-ext-font-lock-punctuation-face:=>» P1«:vhdl-ext-font-lock-punctuation-face:,» «:vhdl-ext-font-lock-port-connection-face:PB2» «:vhdl-ext-font-lock-punctuation-face:=>» B«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+«m:-- »«x:local declarations:
+»«k:constant» Delay «:vhdl-ext-font-lock-punctuation-face::» «t:Time» «:vhdl-ext-font-lock-punctuation-face::=» 1 «:vhdl-font-lock-enumvalue-face:ms»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:signal» S1 «:vhdl-ext-font-lock-punctuation-face::» «t:BIT»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:begin»
+S1 «:vhdl-ext-font-lock-punctuation-face:<=» PB1 «k:after» Delay«:vhdl-ext-font-lock-punctuation-face:;»
+PB2 «:vhdl-ext-font-lock-punctuation-face:<=» S1 «k:after» GB1«:vhdl-ext-font-lock-punctuation-face:,» P1 «k:after» GB2«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:block» «f:LEVEL1»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:end» «k:architecture» «f:arch»«:vhdl-ext-font-lock-punctuation-face:;»
