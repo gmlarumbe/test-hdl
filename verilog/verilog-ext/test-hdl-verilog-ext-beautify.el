@@ -31,7 +31,12 @@
   (test-hdl-gen-expected-files :file-list test-hdl-verilog-beautify-file-list
                                :dest-dir (file-name-concat test-hdl-verilog-ext-beautify-dir "ref")
                                :fn #'test-hdl-verilog-beautify-file
-                               :args '(verilog-mode verilog-ext-beautify-current-buffer)))
+                               :args '(verilog-mode verilog-ext-beautify-current-buffer))
+  (test-hdl-gen-expected-files :file-list test-hdl-verilog-beautify-file-list
+                               :dest-dir (file-name-concat test-hdl-verilog-ext-beautify-dir "ref")
+                               :out-file-ext "ts.sv"
+                               :fn #'test-hdl-verilog-beautify-file
+                               :args '(verilog-ts-mode verilog-ext-beautify-current-buffer)))
 
 (ert-deftest verilog-ext::beautify ()
   (dolist (file test-hdl-verilog-beautify-file-list)
@@ -40,6 +45,14 @@
                                                          :fn #'test-hdl-verilog-beautify-file
                                                          :args '(verilog-mode verilog-ext-beautify-current-buffer))
                                   (file-name-concat test-hdl-verilog-ext-beautify-dir "ref" (test-hdl-basename file))))))
+
+(ert-deftest verilog-ext::beautify-ts-mode ()
+  (dolist (file test-hdl-verilog-beautify-file-list)
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-beautify-dir "dump" (test-hdl-basename file "ts.sv"))
+                                                         :fn #'test-hdl-verilog-beautify-file
+                                                         :args '(verilog-ts-mode verilog-ext-beautify-current-buffer))
+                                  (file-name-concat test-hdl-verilog-ext-beautify-dir "ref" (test-hdl-basename file "ts.sv"))))))
 
 
 (provide 'test-hdl-verilog-ext-beautify)

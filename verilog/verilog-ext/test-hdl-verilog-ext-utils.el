@@ -40,9 +40,9 @@
      ,@body))
 
 
-(defun test-hdl-verilog-ext-utils-scan-modules-fn ()
+(cl-defun test-hdl-verilog-ext-utils-scan-modules-fn (&key mode)
   (verilog-ext-with-no-hooks
-    (verilog-mode))
+    (funcall mode))
   (verilog-ext-scan-buffer-modules))
 
 (cl-defun test-hdl-verilog-ext-proj-files-fn (&key root dirs ignore-dirs files ignore-files)
@@ -85,6 +85,18 @@
                                    :args `(:mode verilog-mode
                                            :fn verilog-ext-block-at-point
                                            :pos-list ,pos-list))))
+  ;; Block at point (ts-mode)
+  (dolist (file-and-pos test-hdl-verilog-utils-block-at-point-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (test-hdl-gen-expected-files :file-list `(,file)
+                                   :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                                   :out-file-ext "ts.block.at.point.el"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-pos-list-fn
+                                   :args `(:mode verilog-ts-mode
+                                           :fn verilog-ext-block-at-point
+                                           :pos-list ,pos-list))))
   ;; Instance at point
   (dolist (file-and-pos test-hdl-verilog-utils-instance-at-point-file-and-pos)
     (let ((file (car file-and-pos))
@@ -97,13 +109,32 @@
                                    :args `(:mode verilog-mode
                                            :fn verilog-ext-instance-at-point
                                            :pos-list ,pos-list))))
-
+  ;; Instance at point (ts-mode)
+  (dolist (file-and-pos test-hdl-verilog-utils-instance-at-point-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (test-hdl-gen-expected-files :file-list `(,file)
+                                   :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                                   :out-file-ext "ts.inst.point.el"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-pos-list-fn
+                                   :args `(:mode verilog-ts-mode
+                                           :fn verilog-ext-instance-at-point
+                                           :pos-list ,pos-list))))
   ;; Scan buffer modules
   (test-hdl-gen-expected-files :file-list test-hdl-verilog-utils-file-list
                                :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
                                :out-file-ext "scan.modules.el"
                                :process-fn 'eval
-                               :fn #'test-hdl-verilog-ext-utils-scan-modules-fn)
+                               :fn #'test-hdl-verilog-ext-utils-scan-modules-fn
+                               :args `(:mode verilog-mode))
+  ;; Scan buffer modules (ts-mode)
+  (test-hdl-gen-expected-files :file-list test-hdl-verilog-utils-file-list
+                               :dest-dir (file-name-concat test-hdl-verilog-ext-utils-dir "ref")
+                               :out-file-ext "ts.scan.modules.el"
+                               :process-fn 'eval
+                               :fn #'test-hdl-verilog-ext-utils-scan-modules-fn
+                               :args `(:mode verilog-ts-mode))
   ;; Proj files
   (let ((file-list test-hdl-verilog-ext-dummy-file-list))
     (test-hdl-verilog-ext-with-test-project test-hdl-verilog-ext-utils-proj-name
@@ -190,6 +221,20 @@
                                     (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "block.at.point.el")))))))
 
 
+(ert-deftest verilog-ext::utils::block-at-point-ts-mode ()
+  (dolist (file-and-pos test-hdl-verilog-utils-block-at-point-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "ts.block.at.point.el"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-pos-list-fn
+                                                           :args `(:mode verilog-ts-mode
+                                                                   :fn verilog-ext-block-at-point
+                                                                   :pos-list ,pos-list))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "ts.block.at.point.el")))))))
+
+
 (ert-deftest verilog-ext::utils::instance-at-point ()
   (dolist (file-and-pos test-hdl-verilog-utils-instance-at-point-file-and-pos)
     (let ((file (car file-and-pos))
@@ -204,13 +249,38 @@
                                     (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "inst.point.el")))))))
 
 
+(ert-deftest verilog-ext::utils::instance-at-point-ts-mode ()
+  (dolist (file-and-pos test-hdl-verilog-utils-instance-at-point-file-and-pos)
+    (let ((file (car file-and-pos))
+          (pos-list (cdr file-and-pos)))
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "ts.inst.point.el"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-pos-list-fn
+                                                           :args `(:mode verilog-ts-mode
+                                                                   :fn verilog-ext-instance-at-point
+                                                                   :pos-list ,pos-list))
+                                    (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "ts.inst.point.el")))))))
+
+
 (ert-deftest verilog-ext::utils::scan-buffer-modules ()
   (dolist (file test-hdl-verilog-utils-file-list)
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "scan.modules.el"))
                                                          :process-fn 'eval
-                                                         :fn #'test-hdl-verilog-ext-utils-scan-modules-fn)
+                                                         :fn #'test-hdl-verilog-ext-utils-scan-modules-fn
+                                                         :args `(:mode verilog-mode))
                                   (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "scan.modules.el"))))))
+
+
+(ert-deftest verilog-ext::utils::scan-buffer-modules-ts-mode ()
+  (dolist (file test-hdl-verilog-utils-file-list)
+    (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                         :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "ts.scan.modules.el"))
+                                                         :process-fn 'eval
+                                                         :fn #'test-hdl-verilog-ext-utils-scan-modules-fn
+                                                         :args `(:mode verilog-ts-mode))
+                                  (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "ts.scan.modules.el"))))))
 
 
 (ert-deftest verilog-ext::utils::proj-files ()
