@@ -1,25 +1,3 @@
-//-----------------------------------------------------------------------------
-// Title         : Testbench program routines
-// Project       : 
-//-----------------------------------------------------------------------------
-// File          : tb_program.sv
-// Author        : Gonzalo Martinez Larumbe
-// Created       : 2020/02/16
-// Last modified : 2020/02/16
-//-----------------------------------------------------------------------------
-// Description :
-// 
-//-----------------------------------------------------------------------------
-// Copyright (c) Gonzalo Martinez Larumbe  <gonzalomlarumbe@gmail.com> 
-//
-//------------------------------------------------------------------------------
-// Modification history :
-// 2020/02/16 : created
-//-----------------------------------------------------------------------------
-
-
-import global_pkg::*;
-
 module automatic tb_program (
     input logic         Clk,
     output logic        Rst_n,
@@ -37,19 +15,6 @@ module automatic tb_program (
     localparam logic [31:0] FREQ_CLK = 100000000;
     localparam logic [31:0] TX_SPEED = 115200;
     localparam integer BIT_CYCLES = FREQ_CLK / TX_SPEED;
-
-    // === TB Setup === \\
-    //$timeformat params:
-    //1) Scaling factor (–9 for nanoseconds, –12 for picoseconds)
-    //2) Number of digits to the right of the decimal point
-    //3) A string to print after the time value
-    //4) Minimum field width
-    initial begin
-        $dumpfile("tb_top.lx2");  // iverilog, vpp & gtkwave
-        $dumpvars(0, tb_top);     // Module Output file
-        $timeformat(-9, 3, "ns", 8);
-    end
-
 
     // ROM Model
     logic [11:0] ROM [4096];
@@ -78,28 +43,21 @@ module automatic tb_program (
         ROM['hD]  = {TYPE_1, ALU_AND};
         ROM['hE]  = {TYPE_2, JMP_UNCOND};
         ROM['hF]  = 8'h20;
-	// DMA TX
+        // DMA TX
         ROM['h20] = {TYPE_3, LD_SRC_CONSTANT, DST_ACC}; // Load DMA TX registers:
-        ROM['h21] = 'hAB;				// Requires write to acc and 
-        ROM['h22] = {TYPE_3, WR_SRC_ACC, DST_MEM};	// from acc to mem.
-        ROM['h23] = DMA_TX_BUFFER_MSB;			// One for MSB and other
+        ROM['h21] = 'hAB;                               // Requires write to acc and
+        ROM['h22] = {TYPE_3, WR_SRC_ACC, DST_MEM};      // from acc to mem.
+        ROM['h23] = DMA_TX_BUFFER_MSB;                  // One for MSB and other
         ROM['h24] = {TYPE_3, LD_SRC_CONSTANT, DST_ACC}; // for LSB
-        ROM['h25] = 'hCD;				
-        ROM['h26] = {TYPE_3, WR_SRC_ACC, DST_MEM};	
-        ROM['h27] = DMA_TX_BUFFER_LSB;			
-	// TX Enable
+        ROM['h25] = 'hCD;
+        ROM['h26] = {TYPE_3, WR_SRC_ACC, DST_MEM};
+        ROM['h27] = DMA_TX_BUFFER_LSB;
+        // TX Enable
         ROM['h28] = {TYPE_4, 6'h0};
-	// Infinite loop
+        // Infinite loop
         ROM['h29] = {TYPE_2, JMP_UNCOND};
         ROM['h2A] = 8'h20;
     endtask: init_rom
-
-
-    // Tasks
-    task init_values;
-        RXD = 1'b1;
-    endtask : init_values
-
 
     task reset_system;
         init_values;
@@ -109,7 +67,6 @@ module automatic tb_program (
         Rst_n <= 1;
         repeat (10) @(posedge Clk);
     endtask : reset_system
-
 
     // RX DMA - UART to Memory
     task serial_rx (input logic [7:0] Data);
@@ -130,22 +87,51 @@ module automatic tb_program (
         @(posedge Clk); // Resync
     endtask: serial_rx
 
-
-    initial begin
-        init_rom;
-        reset_system;
-        $display("Starting simulation...");
-        serial_rx('hAB);
-        serial_rx('hCD);
-        repeat (1000) @(posedge Clk);
-        $finish;
-    end
-
-    initial begin
-        #10ms;
-        $display("@%0d: Timeout occurred", $time);
-        $finish();
-    end
-
-
 endmodule: tb_program
+
+
+
+class axi_ax_beat #(
+    parameter AW = 32,
+    parameter IW = 8 ,
+    parameter UW = 1
+);
+    rand logic [IW-1:0] ax_id     = '0;
+    rand logic [AW-1:0] ax_addr   = '0;
+    logic [7:0] 	ax_len = '0;
+    logic [2:0] 	ax_size = '0;
+    logic [1:0] 	ax_burst = '0;
+    logic 		ax_lock   = '0;
+    logic [3:0] 	ax_cache  = '0;
+    logic [2:0] 	ax_prot   = '0;
+    rand logic [3:0] 	ax_qos    = '0;
+    logic [3:0] 	ax_region = '0;
+    logic [5:0] 	ax_atop   = '0; // Only defined on the AW channel.
+    rand logic [UW-1:0] ax_user   = '0;
+
+    task send_w (
+        input logic [DW-1:0] data,
+        input logic [DW/8-1:0] strb
+    );
+        axi.w_data  <= #TA data;
+        axi.w_strb  <= #TA strb;
+        axi.w_valid <= #TA 1;
+        cycle_start();
+        while (axi.w_ready != 1) begin cycle_end(); cycle_start(); end
+        cycle_end();
+        axi.w_data  <= #TA '0;
+        axi.w_strb  <= #TA '0;
+        axi.w_valid <= #TA 0;
+    endtask
+
+endclass
+
+
+
+module foo;
+always_comb begin
+data0_out <= {data0[1:0], data_i[2:0]};
+data1 	  <= {data1[1:0], data_i[2:0]};
+end
+endmodule;
+

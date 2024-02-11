@@ -125,3 +125,13 @@ class axi_ax_beat #(
     endtask
 
 endclass
+
+
+
+module foo;
+always_comb begin
+data0_out <= {data0[1:0], data_i[2:0]};
+data1 <= {data1[1:0], data_i[2:0]};
+end
+endmodule;
+

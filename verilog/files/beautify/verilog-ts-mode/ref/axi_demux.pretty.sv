@@ -591,7 +591,7 @@ module axi_demux #(
       slv_w_ready 		 = 1'b0;
       w_cnt_down 		 = 1'b0;
 
-      for (int unsigned i = 0; i < NoMstPorts; i ++) begin
+      for (int unsigned i = 0; i < NoMstPorts; i++) begin
         // AW channel
         mst_reqs_o[i].aw 	 = slv_aw_chan;
         mst_reqs_o[i].aw_valid 	 = 1'b0;
@@ -600,26 +600,26 @@ module axi_demux #(
         end
 
         //  W channel
-        mst_reqs_o[i].w = slv_w_chan;
-        mst_reqs_o[i].w_valid = 1'b0;
+        mst_reqs_o[i].w 	 = slv_w_chan;
+        mst_reqs_o[i].w_valid 	 = 1'b0;
         if (w_select_valid && (w_select == i)) begin
-          mst_reqs_o[i].w_valid = slv_w_valid;
-          slv_w_ready 		= mst_resps_i[i].w_ready;
-          w_cnt_down 		= slv_w_valid & mst_resps_i[i].w_ready & slv_w_chan.last;
+          mst_reqs_o[i].w_valid  = slv_w_valid;
+          slv_w_ready 		 = mst_resps_i[i].w_ready;
+          w_cnt_down 		 = slv_w_valid & mst_resps_i[i].w_ready & slv_w_chan.last;
         end
 
         //  B channel
-        mst_reqs_o[i].b_ready = mst_b_readies[i];
+        mst_reqs_o[i].b_ready 	 = mst_b_readies[i];
 
         // AR channel
-        mst_reqs_o[i].ar = slv_ar_chan;
-        mst_reqs_o[i].ar_valid = 1'b0;
+        mst_reqs_o[i].ar 	 = slv_ar_chan;
+        mst_reqs_o[i].ar_valid 	 = 1'b0;
         if (ar_valid && (slv_ar_select == i)) begin
           mst_reqs_o[i].ar_valid = 1'b1;
         end
 
         //  R channel
-        mst_reqs_o[i].r_ready = mst_r_readies[i];
+        mst_reqs_o[i].r_ready 	 = mst_r_readies[i];
       end
     end
     // unpack the response B and R channels for the arbitration

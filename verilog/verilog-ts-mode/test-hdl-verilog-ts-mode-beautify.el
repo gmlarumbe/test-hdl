@@ -29,9 +29,14 @@
 
 ;; TODO: At some point replace with `test-hdl-verilog-common-file-list':
 ;; - When axi_test.sv does not give errors
-(defconst test-hdl-verilog-ts-mode-prettify-file-list (mapcar (lambda (file)
-                                                                (file-name-concat test-hdl-verilog-common-dir file))
-                                                              '("axi_demux.sv" "instances.sv" "ucontroller.sv" "tb_program.sv")))
+(defconst test-hdl-verilog-ts-mode-prettify-file-list
+  (append
+   (mapcar (lambda (file)
+             (file-name-concat test-hdl-verilog-beautify-dir "verilog-ts-mode" file))
+           '("pretty-declarations.sv" "pretty-expr.sv"))
+   (mapcar (lambda (file)
+             (file-name-concat test-hdl-verilog-common-dir file))
+           '("axi_demux.sv" "instances.sv" "ucontroller.sv" "tb_program.sv"))))
 
 
 (defun test-hdl-verilog-ts-mode-prettify--remove ()
