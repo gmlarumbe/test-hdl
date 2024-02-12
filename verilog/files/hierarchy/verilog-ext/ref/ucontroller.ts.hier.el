@@ -12,6 +12,8 @@ ucontroller
     ucontroller.uart:I_UART.fifo_wrapper:I_FIFO
       ucontroller.uart:I_UART.fifo_wrapper:I_FIFO.fifo_generator_0:I_FIFO_GENERATOR_0
         ucontroller.uart:I_UART.fifo_wrapper:I_FIFO.fifo_generator_0:I_FIFO_GENERATOR_0.fifo_generator_0_fifo_generator_v13_2_3:U0
+          ucontroller.uart:I_UART.fifo_wrapper:I_FIFO.fifo_generator_0:I_FIFO_GENERATOR_0.fifo_generator_0_fifo_generator_v13_2_3:U0.GND:GND
+          ucontroller.uart:I_UART.fifo_wrapper:I_FIFO.fifo_generator_0:I_FIFO_GENERATOR_0.fifo_generator_0_fifo_generator_v13_2_3:U0.VCC:VCC
           ucontroller.uart:I_UART.fifo_wrapper:I_FIFO.fifo_generator_0:I_FIFO_GENERATOR_0.fifo_generator_0_fifo_generator_v13_2_3:U0.fifo_generator_0_fifo_generator_v13_2_3_synth:inst_fifo_gen
             ucontroller.uart:I_UART.fifo_wrapper:I_FIFO.fifo_generator_0:I_FIFO_GENERATOR_0.fifo_generator_0_fifo_generator_v13_2_3:U0.fifo_generator_0_fifo_generator_v13_2_3_synth:inst_fifo_gen.fifo_generator_0_fifo_generator_top:\gconvfifo.rf
   ucontroller.ram_arbiter:I_RAM_ARBITER

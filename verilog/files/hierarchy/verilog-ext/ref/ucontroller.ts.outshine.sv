@@ -14,6 +14,8 @@
 // *** fifo_wrapper
 // **** fifo_generator_0
 // ***** fifo_generator_0_fifo_generator_v13_2_3
+// ****** GND
+// ****** VCC
 // ****** fifo_generator_0_fifo_generator_v13_2_3_synth
 // ******* rf
 // ** ram_arbiter
