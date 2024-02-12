@@ -382,7 +382,6 @@
                                                                    :ignore-files ("ucontroller.sv"
                                                                                   "instances.sv")))
                                     (file-name-concat test-hdl-verilog-ext-utils-dir "ref" (test-hdl-basename file "files.test6"))))
-
       ;; Test7: Set glob pattern: files
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                            :dump-file (file-name-concat test-hdl-verilog-ext-utils-dir "dump" (test-hdl-basename file "files.test7"))

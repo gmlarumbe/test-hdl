@@ -239,7 +239,49 @@
                                    :args `(:root ,test-hdl-vhdl-common-dir
                                            :ignore-dirs ("subblocks")
                                            :ignore-files ("axi_if_converter.vhd"
-                                                          "instances.vhd"))))))
+                                                          "instances.vhd")))
+      ;; Test7: Set glob pattern: files
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test7"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-files-dir
+                                           :files ("axi_if_converter/rtl/*.vhd"
+                                                   "axi_if_converter/tb/*.vhd"
+                                                   "common/*.vhd"
+                                                   "common/*.vhdl")
+                                           :ignore-files ("common/axi_*.vhd"
+                                                          "common/tb_*.vhd")))
+      ;; Test8: Set glob pattern: directories
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test8"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-files-dir
+                                           :dirs ("axi_if_converter/*" ; axi_if_converter rtl/tb
+                                                  "comm*n/*")))   ; common/subblocks
+      ;; Test9: Set glob pattern: recursive directories and ignoring
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test9"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-vhdl-files-dir
+                                           :dirs ("-r comm*n"       ; common/subblocks
+                                                  "-r *xi_if_converter") ; axi_if_converter rtl/tb
+                                           :ignore-dirs ("*xi_if_converter/tb"))) ; ignore axi_if_converter/tb
+      ;; Test10: Set globstar pattern
+      (test-hdl-gen-expected-files :file-list file-list
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "files.test10"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                   :args `(:root ,test-hdl-test-dir
+                                           :dirs ("vhdl/files/**/vhdl-ext/ref"
+                                                  "**/vhdl-ts-mode/ref"
+                                                  "vhdl/**/common"))))))
 
 
 (ert-deftest vhdl-ext::utils::point-inside-block ()
@@ -442,7 +484,49 @@
                                                                    :ignore-dirs ("subblocks")
                                                                    :ignore-files ("axi_if_converter.vhd"
                                                                                   "instances.vhd")))
-                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test6")))))))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test6"))))
+      ;; Test7: Set glob pattern: files
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test7"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-files-dir
+                                                                   :files ("axi_if_converter/rtl/*.vhd"
+                                                                           "axi_if_converter/tb/*.vhd"
+                                                                           "common/*.vhd"
+                                                                           "common/*.vhdl")
+                                                                   :ignore-files ("common/axi_*.vhd"
+                                                                                  "common/tb_*.vhd")))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test7"))))
+      ;; Test8: Set glob pattern: directories
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test8"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-files-dir
+                                                                   :dirs ("axi_if_converter/*" ; axi_if_converter rtl/tb
+                                                                          "comm*n/*")))   ; common/subblocks
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test8"))))
+      ;; Test9: Set glob pattern: recursive directories and ignoring
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test9"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-vhdl-files-dir
+                                                                   :dirs ("-r comm*n"       ; common/subblocks
+                                                                          "-r *xi_if_converter") ; axi_if_converter rtl/tb
+                                                                   :ignore-dirs ("*xi_if_converter/tb"))) ; ignore axi_if_converter/tb
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test9"))))
+      ;; Test10: Set globstar pattern
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "files.test10"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-vhdl-ext-proj-files-fn
+                                                           :args `(:root ,test-hdl-test-dir
+                                                                   :dirs ("vhdl/files/**/vhdl-ext/ref"
+                                                                          "**/vhdl-ts-mode/ref"
+                                                                          "vhdl/**/common")))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "files.test10")))))))
 
 
 (provide 'test-hdl-vhdl-ext-utils)
