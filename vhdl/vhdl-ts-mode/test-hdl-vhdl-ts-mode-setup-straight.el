@@ -1,6 +1,6 @@
 ;;; test-hdl-vhdl-ts-mode-setup-straight.el --- vhdl-ts-mode ERT Tests Setup with straight.el -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022-2023 Gonzalo Larumbe
+;; Copyright (C) 2022-2024 Gonzalo Larumbe
 
 ;; Author: Gonzalo Larumbe <gonzalomlarumbe@gmail.com>
 ;; URL: https://github.com/gmlarumbe/test-hdl

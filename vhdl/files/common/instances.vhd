@@ -6,13 +6,13 @@
 -- Author     : Gonzalo Larumbe  <gonzalomlarumbe@gmail.com>
 -- Company    : gmlarumbe
 -- Created    : 2023-01-28
--- Last update: 2023-12-21
+-- Last update: 2024-03-29
 -- Platform   : Debian
 -- Standard   : VHDL'08
 -------------------------------------------------------------------------------
 -- Description:
 -------------------------------------------------------------------------------
--- Copyright (c) 2023 Ericsson
+-- Copyright (c) 2024 Ericsson
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description

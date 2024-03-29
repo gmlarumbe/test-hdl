@@ -1,6 +1,6 @@
 ;;; test-hdl-verilog-ext-hierarchy.el --- Verilog-Ext ERT hierarchy tests  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022-2023 Gonzalo Larumbe
+;; Copyright (C) 2022-2024 Gonzalo Larumbe
 
 ;; Author: Gonzalo Larumbe <gonzalomlarumbe@gmail.com>
 ;; URL: https://github.com/gmlarumbe/test-hdl

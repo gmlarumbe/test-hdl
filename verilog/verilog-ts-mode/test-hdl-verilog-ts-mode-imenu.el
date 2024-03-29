@@ -1,6 +1,6 @@
 ;;; test-hdl-verilog-ts-mode-imenu.el --- verilog-ts-mode ERT imenu tests  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022-2023 Gonzalo Larumbe
+;; Copyright (C) 2022-2024 Gonzalo Larumbe
 
 ;; Author: Gonzalo Larumbe <gonzalomlarumbe@gmail.com>
 ;; URL: https://github.com/gmlarumbe/test-hdl
