@@ -2051,7 +2051,7 @@ package axi_test;
 
 		for (int unsigned i = 0; i <= ar_beat.ax_len; i++) begin
 		    wait (this.r_sample[id].size() > 0);
-			r_beat = this.r_sample[id].pop_front();
+		    r_beat = this.r_sample[id].pop_front();
 		    beat_address = axi_pkg::beat_addr(ar_beat.ax_addr, ar_beat.ax_size, ar_beat.ax_len,
 		    ar_beat.ax_burst, i);
 		    beat_address = axi_pkg::aligned_addr(beat_address, ar_beat.ax_size);

@@ -222,7 +222,6 @@
    ("cycle_end (task)" . #<marker at 64512 in axi_test.sv>)
    ("handle_write (task)" . #<marker at 64654 in axi_test.sv>)
    ("handle_write_resp (task)" . #<marker at 66822 in axi_test.sv>)
-   ("handle_read (task)" . #<marker at 68071 in axi_test.sv>)
    ("mon_aw (task)" . #<marker at 70620 in axi_test.sv>)
    ("mon_w (task)" . #<marker at 71532 in axi_test.sv>)
    ("mon_b (task)" . #<marker at 72028 in axi_test.sv>)
