@@ -47,6 +47,7 @@
   :hook ((vhdl-mode . vhdl-ext-mode))
   :config
   (setq vhdl-ext-cache-enable nil)
+  (setq vhdl-ext-feature-list (remove 'lsp-bridge vhdl-ext-feature-list)) ; Do not autosetup since `lsp-bridge' is not available on MELPA
   (vhdl-ext-mode-setup)
   (setq treesit-font-lock-level 4))
 

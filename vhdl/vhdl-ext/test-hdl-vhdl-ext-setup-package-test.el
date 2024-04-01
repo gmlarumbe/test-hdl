@@ -46,6 +46,7 @@
 (message "Installing and setting up vhdl-ext")
 (package-install 'vhdl-ext)
 (require 'vhdl-ext)
+(setq vhdl-ext-feature-list (remove 'lsp-bridge vhdl-ext-feature-list)) ; Do not autosetup since `lsp-bridge' is not available on MELPA
 (vhdl-ext-mode-setup)
 (add-hook 'vhdl-mode-hook #'vhdl-ext-mode)
 
