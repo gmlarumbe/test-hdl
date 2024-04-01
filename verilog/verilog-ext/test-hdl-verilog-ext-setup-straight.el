@@ -75,6 +75,7 @@
   :hook ((verilog-mode . verilog-ext-mode))
   :config
   (setq verilog-ext-feature-list (remove 'typedefs verilog-ext-feature-list)) ; Do not override `verilog-align-typedef-regexp'
+  (setq verilog-ext-feature-list (remove 'lsp-bridge verilog-ext-feature-list)) ; Do not autosetup since `lsp-bridge' is not available on MELPA
   (setq verilog-ext-cache-enable nil)
   (verilog-ext-mode-setup))
 
