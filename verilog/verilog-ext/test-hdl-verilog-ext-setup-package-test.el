@@ -47,6 +47,7 @@
 (package-install 'verilog-ext)
 (require 'verilog-ext)
 (setq verilog-ext-feature-list (remove 'lsp-bridge verilog-ext-feature-list)) ; Do not autosetup since `lsp-bridge' is not available on MELPA
+(setq verilog-ext-feature-list (remove 'lspce verilog-ext-feature-list)) ; Do not autosetup since `lsp-bridge' is not available on MELPA
 (verilog-ext-mode-setup)
 (add-hook 'verilog-mode-hook #'verilog-ext-mode)
 
