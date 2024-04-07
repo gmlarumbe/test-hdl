@@ -122,6 +122,18 @@
                                    :args `(:mode vhdl-mode
                                            :fn vhdl-ext-point-inside-block
                                            :pos-and-match-alist ,pos-and-match-alist))))
+  ;; Point inside block (ts-mode)
+  (dolist (file-pos-and-match test-hdl-vhdl-utils-point-inside-block-file-pos-and-match)
+    (let ((file (car file-pos-and-match))
+          (pos-and-match-alist (cadr file-pos-and-match)))
+      (test-hdl-gen-expected-files :file-list `(,file)
+                                   :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
+                                   :out-file-ext "ts.point.inside.block.el"
+                                   :process-fn 'eval
+                                   :fn #'test-hdl-pos-and-match-alist-fn
+                                   :args `(:mode vhdl-ts-mode
+                                           :fn vhdl-ext-point-inside-block
+                                           :pos-and-match-alist ,pos-and-match-alist))))
   ;; Block at point
   (dolist (file-and-pos test-hdl-vhdl-utils-block-at-point-file-and-pos)
     (let ((file (car file-and-pos))
@@ -296,6 +308,20 @@
                                                                    :fn vhdl-ext-point-inside-block
                                                                    :pos-and-match-alist ,pos-and-match-alist))
                                     (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "point.inside.block.el")))))))
+
+
+(ert-deftest vhdl-ext::utils::point-inside-block-ts-mode ()
+  (dolist (file-pos-and-match test-hdl-vhdl-utils-point-inside-block-file-pos-and-match)
+    (let ((file (car file-pos-and-match))
+          (pos-and-match-alist (cadr file-pos-and-match)))
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "ts.point.inside.block.el"))
+                                                           :process-fn 'eval
+                                                           :fn #'test-hdl-pos-and-match-alist-fn
+                                                           :args `(:mode vhdl-ts-mode
+                                                                   :fn vhdl-ext-point-inside-block
+                                                                   :pos-and-match-alist ,pos-and-match-alist))
+                                    (file-name-concat test-hdl-vhdl-ext-utils-dir "ref" (test-hdl-basename file "ts.point.inside.block.el")))))))
 
 
 (ert-deftest vhdl-ext::utils::block-at-point ()
