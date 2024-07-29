@@ -1,4 +1,5 @@
 verilog/files/common/axi_demux.sv
 verilog/files/common/axi_test.sv
+verilog/files/common/misc.sv
 verilog/files/common/tb_program.sv
 verilog/files/common/uvm_component.svh

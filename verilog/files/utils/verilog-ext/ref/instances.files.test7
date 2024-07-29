@@ -27,4 +27,5 @@ verilog/files/ucontroller/tb/tb_ram.sv
 verilog/files/ucontroller/tb/tb_top.sv
 verilog/files/ucontroller/tb/tb_uart.sv
 verilog/files/common/instances.sv
+verilog/files/common/misc.sv
 verilog/files/common/ucontroller.sv

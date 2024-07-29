@@ -126,6 +126,7 @@ verilog/files/indent/verilog-ext/ref/indent_uvm.v
 verilog/files/indent/verilog-ext/ref/indent_virtual_class.sv
 verilog/files/indent/verilog-ext/ref/indent_warren.v
 verilog/files/indent/verilog-ext/ref/instances.sv
+verilog/files/indent/verilog-ext/ref/misc.sv
 verilog/files/indent/verilog-ext/ref/tb_program.sv
 verilog/files/indent/verilog-ext/ref/ucontroller.sv
 verilog/files/indent/verilog-ext/ref/uvm_component.svh
@@ -252,6 +253,7 @@ verilog/files/indent/verilog-ts-mode/ref/indent_uvm.v
 verilog/files/indent/verilog-ts-mode/ref/indent_virtual_class.sv
 verilog/files/indent/verilog-ts-mode/ref/indent_warren.v
 verilog/files/indent/verilog-ts-mode/ref/instances.sv
+verilog/files/indent/verilog-ts-mode/ref/misc.sv
 verilog/files/indent/verilog-ts-mode/ref/tb_program.sv
 verilog/files/indent/verilog-ts-mode/ref/ucontroller.sv
 verilog/files/indent/verilog-ts-mode/ref/uvm_component.svh
@@ -269,6 +271,7 @@ verilog/files/common/subblocks/test_if_params_empty.sv
 verilog/files/common/axi_demux.sv
 verilog/files/common/axi_test.sv
 verilog/files/common/instances.sv
+verilog/files/common/misc.sv
 verilog/files/common/tb_program.sv
 verilog/files/common/ucontroller.sv
 verilog/files/common/uvm_component.svh
