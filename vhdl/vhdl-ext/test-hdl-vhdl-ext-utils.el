@@ -153,7 +153,7 @@
       (test-hdl-gen-expected-files :file-list `(,file)
                                    :dest-dir (file-name-concat test-hdl-vhdl-ext-utils-dir "ref")
                                    :out-file-ext "ts.block.at.point.el"
-                                   :process-fn 'eval
+                                   :process-fn 'eval-ff
                                    :fn #'test-hdl-pos-list-fn
                                    :args `(:mode vhdl-ts-mode
                                            :fn vhdl-ext-block-at-point
@@ -344,7 +344,7 @@
           (pos-list (cdr file-and-pos)))
       (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                            :dump-file (file-name-concat test-hdl-vhdl-ext-utils-dir "dump" (test-hdl-basename file "ts.block.at.point.el"))
-                                                           :process-fn 'eval
+                                                           :process-fn 'eval-ff
                                                            :fn #'test-hdl-pos-list-fn
                                                            :args `(:mode vhdl-ts-mode
                                                                    :fn vhdl-ext-block-at-point
