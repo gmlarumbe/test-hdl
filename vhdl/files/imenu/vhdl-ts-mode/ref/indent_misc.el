@@ -12,4 +12,8 @@
  ("block_test (ent)" . #<marker at 2612 in indent_misc.vhd>)
  ("arch (arch)..."
   ("*architecture declaration*" . #<marker at 2649 in indent_misc.vhd>)
-  ("LEVEL1 (blk)" . #<marker at 2836 in indent_misc.vhd>)))
+  ("LEVEL1 (blk)" . #<marker at 2836 in indent_misc.vhd>))
+ ("traffic_light_fsm (ent)" . #<marker at 3502 in indent_misc.vhd>)
+ ("rtl (arch)..."
+  ("*architecture declaration*" . #<marker at 3697 in indent_misc.vhd>)
+  ("REG (proc)" . #<marker at 3868 in indent_misc.vhd>)))

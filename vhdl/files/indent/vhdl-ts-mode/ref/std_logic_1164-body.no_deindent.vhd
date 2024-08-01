@@ -1106,7 +1106,7 @@ package body std_logic_1164 is
 
     -- purpose: Skips white space
     procedure skip_whitespace (
-                              L : inout LINE) is
+        L : inout LINE) is
         variable c : CHARACTER;
         variable left : positive;
     begin
@@ -1122,7 +1122,7 @@ package body std_logic_1164 is
     end procedure skip_whitespace;
 
     procedure READ (L    : inout LINE; VALUE : out STD_ULOGIC;
-                   GOOD : out   BOOLEAN) is
+        GOOD : out   BOOLEAN) is
         variable c      : CHARACTER;
         variable readOk : BOOLEAN;
     begin
@@ -1142,7 +1142,7 @@ package body std_logic_1164 is
     end procedure READ;
 
     procedure READ (L    : inout LINE; VALUE : out STD_ULOGIC_VECTOR;
-                   GOOD : out   BOOLEAN) is
+        GOOD : out   BOOLEAN) is
         variable c      : CHARACTER;
         variable mv     : STD_ULOGIC_VECTOR(0 to VALUE'length-1);
         variable readOk : BOOLEAN;
@@ -1279,8 +1279,8 @@ package body std_logic_1164 is
     end procedure WRITE;
 
     procedure Char2TriBits (C           : in  CHARACTER;
-                           RESULT      : out STD_ULOGIC_VECTOR(2 downto 0);
-                           GOOD        : out BOOLEAN;
+        RESULT      : out STD_ULOGIC_VECTOR(2 downto 0);
+        GOOD        : out BOOLEAN;
         ISSUE_ERROR : in  BOOLEAN) is
     begin
         case C is
@@ -1305,7 +1305,7 @@ package body std_logic_1164 is
     end procedure Char2TriBits;
 
     procedure OREAD (L    : inout LINE; VALUE : out STD_ULOGIC_VECTOR;
-                    GOOD : out   BOOLEAN) is
+        GOOD : out   BOOLEAN) is
         variable ok  : BOOLEAN;
         variable c   : CHARACTER;
         constant ne  : INTEGER := (VALUE'length+2)/3;
@@ -1414,8 +1414,8 @@ package body std_logic_1164 is
     end procedure OREAD;
 
     procedure Char2QuadBits (C           :     CHARACTER;
-                            RESULT      : out STD_ULOGIC_VECTOR(3 downto 0);
-                            GOOD        : out BOOLEAN;
+        RESULT      : out STD_ULOGIC_VECTOR(3 downto 0);
+        GOOD        : out BOOLEAN;
         ISSUE_ERROR : in  BOOLEAN) is
     begin
         case C is
@@ -1448,7 +1448,7 @@ package body std_logic_1164 is
     end procedure Char2QuadBits;
 
     procedure HREAD (L    : inout LINE; VALUE : out STD_ULOGIC_VECTOR;
-                    GOOD : out   BOOLEAN) is
+        GOOD : out   BOOLEAN) is
         variable ok  : BOOLEAN;
         variable c   : CHARACTER;
         constant ne  : INTEGER := (VALUE'length+3)/4;

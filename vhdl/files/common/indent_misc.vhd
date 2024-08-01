@@ -144,3 +144,60 @@ S1 <= PB1 after Delay;
 PB2 <= S1 after GB1, P1 after GB2;
 end block LEVEL1;
 end architecture arch;
+
+
+-- 6) Issue #6: Conditional signal assignment and selected signal assignment
+-- (https://github.com/gmlarumbe/vhdl-ts-mode/issues/6)
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity traffic_light_fsm is
+  port (
+    clock, reset, button : in  std_logic;
+    leds                 : out std_logic_vector(2 downto 0));  -- red, yellow, green
+end entity traffic_light_fsm;
+
+architecture rtl of traffic_light_fsm is
+  type state_type is (RED, YELLOW, GREEN, RED_YELLOW);
+  signal state_reg, state_next : state_type;
+begin  -- architecture rtl
+
+  REG : process (clock, reset) is
+  begin  -- process REG
+    if reset = '1' then                 -- asynchronous reset (active low)
+      state_reg <= RED;
+    elsif rising_edge(clock) then       -- rising clock edge
+      state_reg <= state_next;
+    end if;
+  end process REG;
+
+  NSL : state_next <= RED_YELLOW when state_reg = RED and button = '1' else
+                      GREEN  when state_reg = RED_YELLOW else
+                      YELLOW when state_reg = GREEN and button = '1' else
+                      RED    when state_reg = YELLOW else
+                      state_reg;
+
+  OL : with state_reg select
+    leds <=
+    "100" when RED,
+    "110" when RED_YELLOW,
+    "001" when GREEN,
+    "010" when YELLOW,
+    "---" when others;
+
+  -- INFO: Not present in #6, added for testing
+  with state_reg select
+    leds <= "100" when RED,
+            "110" when RED_YELLOW,
+            "001" when GREEN,
+            "010" when YELLOW,
+            "---" when others;
+
+  -- INFO: Not present in #6, added for testing
+  with state_reg select leds <= "100" when RED,
+                                "110" when RED_YELLOW,
+                                "001" when GREEN,
+                                "010" when YELLOW,
+                                "---" when others;
+
+end architecture rtl;

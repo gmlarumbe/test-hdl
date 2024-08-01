@@ -45,17 +45,17 @@ begin  -- architecture RTL
 
     -- Component instantiation
     I_BLOCK0_0 : block0
-    port map (
-        Port0 => Port0,
-        Port1 => Port1,
-        Port2 => Port2
-    );
+        port map (
+            Port0 => Port0,
+            Port1 => Port1,
+            Port2 => Port2
+        );
 
     I_BLOCK0_1 : block0
-    port map (
-        Port0 => Port0,
-        Port1 => Port1,
-        Port2 => Port2);
+        port map (
+            Port0 => Port0,
+            Port1 => Port1,
+            Port2 => Port2);
 
     I_BLOCK0_2 : block0 generic map (
         Generic0 => 0,
@@ -68,18 +68,18 @@ begin  -- architecture RTL
 
     -- Entity instantiation
     I_BLOCK1_0 : entity work.block1
-    port map (
-        Port0 => Port0,
-        Port1 => Port1,
-        Port2 => Port2
-    );
+        port map (
+            Port0 => Port0,
+            Port1 => Port1,
+            Port2 => Port2
+        );
 
     I_BLOCK1_1 : entity work.block1
-    port map (
-        Port0 => Port0,
-        Port1 => Port1,
-        Port2 => Port2
-    );
+        port map (
+            Port0 => Port0,
+            Port1 => Port1,
+            Port2 => Port2
+        );
 
     I_BLOCK1_2 : entity work.block1 generic map (
         Generic0 => 0,
@@ -91,15 +91,15 @@ begin  -- architecture RTL
         Port2 => Port2);
 
     I_BLOCK1_3 : entity work.block1
-    generic map (
-        Generic0 => 0,
-        Generic1 => 0,
-        Generic2 => 0
-    ) port map (
-        Port0 => Port0,
-        Port1 => Port1,
-        Port2 => Port2
-    );
+        generic map (
+            Generic0 => 0,
+            Generic1 => 0,
+            Generic2 => 0
+        ) port map (
+            Port0 => Port0,
+            Port1 => Port1,
+            Port2 => Port2
+        );
 
     -- Generate
     GEN_BLOCK1 :

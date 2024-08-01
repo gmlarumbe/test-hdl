@@ -324,484 +324,484 @@ begin
 
     -- Instances
     I_AXI_LITE_REGS : entity xil_defaultlib.axi_lite_regs
-    generic map (
-        C_S_AXI_DATA_WIDTH => C_S_AXI_DATA_WIDTH,
-        C_S_AXI_ADDR_WIDTH => C_S_AXI_ADDR_WIDTH
-    )
-    port map (
-        soft_reset => soft_reset,
+        generic map (
+            C_S_AXI_DATA_WIDTH => C_S_AXI_DATA_WIDTH,
+            C_S_AXI_ADDR_WIDTH => C_S_AXI_ADDR_WIDTH
+        )
+        port map (
+            soft_reset => soft_reset,
 
-        -- To FSM
-        system_enable  => system_enable,
-        system_running => system_running,
-        conv_op_lch    => conv_op_lch,
-        conv_op_rch    => conv_op_rch,
-        read_size_l    => read_size_l,
-        read_size_r    => read_size_r,
+            -- To FSM
+            system_enable  => system_enable,
+            system_running => system_running,
+            conv_op_lch    => conv_op_lch,
+            conv_op_rch    => conv_op_rch,
+            read_size_l    => read_size_l,
+            read_size_r    => read_size_r,
 
-        -- To axi-lite master
-        write_request => write_request,
-        write_data    => write_data,
-        write_address => write_address,
-        write_done    => write_done,
+            -- To axi-lite master
+            write_request => write_request,
+            write_data    => write_data,
+            write_address => write_address,
+            write_done    => write_done,
 
-        read_request    => read_request,
-        read_address    => read_address,
-        read_data       => read_data,
-        read_data_valid => read_data_valid,
+            read_request    => read_request,
+            read_address    => read_address,
+            read_data       => read_data,
+            read_data_valid => read_data_valid,
 
-        transaction_error => transaction_error,
+            transaction_error => transaction_error,
 
-        -- From pattern counters
-        count_lch         => count_lch,
-        pattern_count_lch => pattern_count_lch,
-        count_rch         => count_rch,
-        pattern_count_rch => pattern_count_rch,
+            -- From pattern counters
+            count_lch         => count_lch,
+            pattern_count_lch => pattern_count_lch,
+            count_rch         => count_rch,
+            pattern_count_rch => pattern_count_rch,
 
-        -- Input buffer error checking
-        bram_overflow_error       => bram_overflow_error,
-        out_reg_underflow_error_l => out_reg_underflow_error_l,
-        out_reg_overflow_error_l  => out_reg_overflow_error_l,
-        out_reg_underflow_error_r => out_reg_underflow_error_r,
-        out_reg_overflow_error_r  => out_reg_overflow_error_r,
+            -- Input buffer error checking
+            bram_overflow_error       => bram_overflow_error,
+            out_reg_underflow_error_l => out_reg_underflow_error_l,
+            out_reg_overflow_error_l  => out_reg_overflow_error_l,
+            out_reg_underflow_error_r => out_reg_underflow_error_r,
+            out_reg_overflow_error_r  => out_reg_overflow_error_r,
 
-        s_axi_aclk    => s_axi_aclk,
-        s_axi_aresetn => s_axi_aresetn,
-        s_axi_awaddr  => s_axi_awaddr,
-        s_axi_awprot  => s_axi_awprot,
-        s_axi_awvalid => s_axi_awvalid,
-        s_axi_awready => s_axi_awready,
-        s_axi_wdata   => s_axi_wdata,
-        s_axi_wstrb   => s_axi_wstrb,
-        s_axi_wvalid  => s_axi_wvalid,
-        s_axi_wready  => s_axi_wready,
-        s_axi_bresp   => s_axi_bresp,
-        s_axi_bvalid  => s_axi_bvalid,
-        s_axi_bready  => s_axi_bready,
-        s_axi_araddr  => s_axi_araddr,
-        s_axi_arprot  => s_axi_arprot,
-        s_axi_arvalid => s_axi_arvalid,
-        s_axi_arready => s_axi_arready,
-        s_axi_rdata   => s_axi_rdata,
-        s_axi_rresp   => s_axi_rresp,
-        s_axi_rvalid  => s_axi_rvalid,
-        s_axi_rready  => s_axi_rready
-    );
+            s_axi_aclk    => s_axi_aclk,
+            s_axi_aresetn => s_axi_aresetn,
+            s_axi_awaddr  => s_axi_awaddr,
+            s_axi_awprot  => s_axi_awprot,
+            s_axi_awvalid => s_axi_awvalid,
+            s_axi_awready => s_axi_awready,
+            s_axi_wdata   => s_axi_wdata,
+            s_axi_wstrb   => s_axi_wstrb,
+            s_axi_wvalid  => s_axi_wvalid,
+            s_axi_wready  => s_axi_wready,
+            s_axi_bresp   => s_axi_bresp,
+            s_axi_bvalid  => s_axi_bvalid,
+            s_axi_bready  => s_axi_bready,
+            s_axi_araddr  => s_axi_araddr,
+            s_axi_arprot  => s_axi_arprot,
+            s_axi_arvalid => s_axi_arvalid,
+            s_axi_arready => s_axi_arready,
+            s_axi_rdata   => s_axi_rdata,
+            s_axi_rresp   => s_axi_rresp,
+            s_axi_rvalid  => s_axi_rvalid,
+            s_axi_rready  => s_axi_rready
+        );
 
 
     I_INPUT_BUFFER : entity xil_defaultlib.input_buffer
-    generic map (
-        C_M_AXI_BURST_LEN     => C_M_AXI_BURST_LEN,
-        LEFT_CH_BASE_ADDRESS  => LEFT_CH_ST_BASE_ADDRESS,
-        RIGHT_CH_BASE_ADDRESS => RIGHT_CH_ST_BASE_ADDRESS
-    )
-    port map (
-        soft_reset => soft_reset,
+        generic map (
+            C_M_AXI_BURST_LEN     => C_M_AXI_BURST_LEN,
+            LEFT_CH_BASE_ADDRESS  => LEFT_CH_ST_BASE_ADDRESS,
+            RIGHT_CH_BASE_ADDRESS => RIGHT_CH_ST_BASE_ADDRESS
+        )
+        port map (
+            soft_reset => soft_reset,
 
-        -- Feedback from converters
-        inputs.start_burst_master_l => fb_wr_burst_start_lch,
-        inputs.bw_counter_l         => fb_bw_counter_lch,
-        inputs.wlast_l              => fb_wlast_lch,
-        inputs.short_burst_l        => fb_reduced_burst_lch,
-        inputs.write_done_l         => fb_burst_done_lch,
-        inputs.send_size_l          => fb_send_size_l,
+            -- Feedback from converters
+            inputs.start_burst_master_l => fb_wr_burst_start_lch,
+            inputs.bw_counter_l         => fb_bw_counter_lch,
+            inputs.wlast_l              => fb_wlast_lch,
+            inputs.short_burst_l        => fb_reduced_burst_lch,
+            inputs.write_done_l         => fb_burst_done_lch,
+            inputs.send_size_l          => fb_send_size_l,
 
-        inputs.start_burst_master_r => fb_wr_burst_start_rch,
-        inputs.bw_counter_r         => fb_bw_counter_rch,
-        inputs.wlast_r              => fb_wlast_rch,
-        inputs.short_burst_r        => fb_reduced_burst_rch,
-        inputs.write_done_r         => fb_burst_done_rch,
-        inputs.send_size_r          => fb_send_size_r,
+            inputs.start_burst_master_r => fb_wr_burst_start_rch,
+            inputs.bw_counter_r         => fb_bw_counter_rch,
+            inputs.wlast_r              => fb_wlast_rch,
+            inputs.short_burst_r        => fb_reduced_burst_rch,
+            inputs.write_done_r         => fb_burst_done_rch,
+            inputs.send_size_r          => fb_send_size_r,
 
-        outputs.buffer_size_l => buffer_size_l,
-        outputs.bram_ptr_l    => bram_ptr_l,
-        outputs.buffer_size_r => buffer_size_r,
-        outputs.bram_ptr_r    => bram_ptr_r,
+            outputs.buffer_size_l => buffer_size_l,
+            outputs.bram_ptr_l    => bram_ptr_l,
+            outputs.buffer_size_r => buffer_size_r,
+            outputs.bram_ptr_r    => bram_ptr_r,
 
-        s_axis_lch_aclk    => s_axis_lch_aclk,
-        s_axis_lch_aresetn => s_axis_lch_aresetn,
-        s_axis_lch_tdata   => s_axis_lch_tdata,
-        s_axis_lch_tvalid  => s_axis_lch_tvalid,
-        s_axis_lch_tkeep   => s_axis_lch_tkeep,
-        s_axis_lch_tlast   => s_axis_lch_tlast,
-        s_axis_lch_tready  => s_axis_lch_tready,
+            s_axis_lch_aclk    => s_axis_lch_aclk,
+            s_axis_lch_aresetn => s_axis_lch_aresetn,
+            s_axis_lch_tdata   => s_axis_lch_tdata,
+            s_axis_lch_tvalid  => s_axis_lch_tvalid,
+            s_axis_lch_tkeep   => s_axis_lch_tkeep,
+            s_axis_lch_tlast   => s_axis_lch_tlast,
+            s_axis_lch_tready  => s_axis_lch_tready,
 
-        s_axis_rch_aclk    => s_axis_rch_aclk,
-        s_axis_rch_aresetn => s_axis_rch_aresetn,
-        s_axis_rch_tdata   => s_axis_rch_tdata,
-        s_axis_rch_tvalid  => s_axis_rch_tvalid,
-        s_axis_rch_tkeep   => s_axis_rch_tkeep,
-        s_axis_rch_tlast   => s_axis_rch_tlast,
-        s_axis_rch_tready  => s_axis_rch_tready,
+            s_axis_rch_aclk    => s_axis_rch_aclk,
+            s_axis_rch_aresetn => s_axis_rch_aresetn,
+            s_axis_rch_tdata   => s_axis_rch_tdata,
+            s_axis_rch_tvalid  => s_axis_rch_tvalid,
+            s_axis_rch_tkeep   => s_axis_rch_tkeep,
+            s_axis_rch_tlast   => s_axis_rch_tlast,
+            s_axis_rch_tready  => s_axis_rch_tready,
 
-        m_axis_lch_aclk    => m_axis_lch_inbuf_aclk,
-        m_axis_lch_aresetn => m_axis_lch_inbuf_aresetn,
-        m_axis_lch_tdata   => m_axis_lch_inbuf_tdata,
-        m_axis_lch_tvalid  => m_axis_lch_inbuf_tvalid,
-        m_axis_lch_tkeep   => m_axis_lch_inbuf_tkeep,
-        m_axis_lch_tlast   => m_axis_lch_inbuf_tlast,
-        m_axis_lch_tready  => m_axis_lch_inbuf_tready,
+            m_axis_lch_aclk    => m_axis_lch_inbuf_aclk,
+            m_axis_lch_aresetn => m_axis_lch_inbuf_aresetn,
+            m_axis_lch_tdata   => m_axis_lch_inbuf_tdata,
+            m_axis_lch_tvalid  => m_axis_lch_inbuf_tvalid,
+            m_axis_lch_tkeep   => m_axis_lch_inbuf_tkeep,
+            m_axis_lch_tlast   => m_axis_lch_inbuf_tlast,
+            m_axis_lch_tready  => m_axis_lch_inbuf_tready,
 
-        m_axis_rch_aclk    => m_axis_rch_inbuf_aclk,
-        m_axis_rch_aresetn => m_axis_rch_inbuf_aresetn,
-        m_axis_rch_tdata   => m_axis_rch_inbuf_tdata,
-        m_axis_rch_tvalid  => m_axis_rch_inbuf_tvalid,
-        m_axis_rch_tkeep   => m_axis_rch_inbuf_tkeep,
-        m_axis_rch_tlast   => m_axis_rch_inbuf_tlast,
-        m_axis_rch_tready  => m_axis_rch_inbuf_tready,
+            m_axis_rch_aclk    => m_axis_rch_inbuf_aclk,
+            m_axis_rch_aresetn => m_axis_rch_inbuf_aresetn,
+            m_axis_rch_tdata   => m_axis_rch_inbuf_tdata,
+            m_axis_rch_tvalid  => m_axis_rch_inbuf_tvalid,
+            m_axis_rch_tkeep   => m_axis_rch_inbuf_tkeep,
+            m_axis_rch_tlast   => m_axis_rch_inbuf_tlast,
+            m_axis_rch_tready  => m_axis_rch_inbuf_tready,
 
-        bram_overflow_error       => bram_overflow_error,
-        out_reg_underflow_error_l => out_reg_underflow_error_l,
-        out_reg_overflow_error_l  => out_reg_overflow_error_l,
-        out_reg_underflow_error_r => out_reg_underflow_error_r,
-        out_reg_overflow_error_r  => out_reg_overflow_error_r
-    );
+            bram_overflow_error       => bram_overflow_error,
+            out_reg_underflow_error_l => out_reg_underflow_error_l,
+            out_reg_overflow_error_l  => out_reg_overflow_error_l,
+            out_reg_underflow_error_r => out_reg_underflow_error_r,
+            out_reg_overflow_error_r  => out_reg_overflow_error_r
+        );
 
 
 
     I_CORE_CONVERTER_L : entity xil_defaultlib.core_converter
-    generic map (
-        C_M_AXI_BURST_LEN    => C_M_AXI_BURST_LEN,
-        C_M_AXI_ID_WIDTH     => C_M_AXI_ID_WIDTH,
-        C_M_AXI_ADDR_WIDTH   => C_M_AXI_ADDR_WIDTH,
-        C_M_AXI_DATA_WIDTH   => C_M_AXI_DATA_WIDTH,
-        C_M_AXI_AWUSER_WIDTH => C_M_AXI_AWUSER_WIDTH,
-        C_M_AXI_ARUSER_WIDTH => C_M_AXI_ARUSER_WIDTH,
-        C_M_AXI_WUSER_WIDTH  => C_M_AXI_WUSER_WIDTH,
-        C_M_AXI_RUSER_WIDTH  => C_M_AXI_RUSER_WIDTH,
-        C_M_AXI_BUSER_WIDTH  => C_M_AXI_BUSER_WIDTH
-    )
-    port map (
-        soft_reset => soft_reset,
+        generic map (
+            C_M_AXI_BURST_LEN    => C_M_AXI_BURST_LEN,
+            C_M_AXI_ID_WIDTH     => C_M_AXI_ID_WIDTH,
+            C_M_AXI_ADDR_WIDTH   => C_M_AXI_ADDR_WIDTH,
+            C_M_AXI_DATA_WIDTH   => C_M_AXI_DATA_WIDTH,
+            C_M_AXI_AWUSER_WIDTH => C_M_AXI_AWUSER_WIDTH,
+            C_M_AXI_ARUSER_WIDTH => C_M_AXI_ARUSER_WIDTH,
+            C_M_AXI_WUSER_WIDTH  => C_M_AXI_WUSER_WIDTH,
+            C_M_AXI_RUSER_WIDTH  => C_M_AXI_RUSER_WIDTH,
+            C_M_AXI_BUSER_WIDTH  => C_M_AXI_BUSER_WIDTH
+        )
+        port map (
+            soft_reset => soft_reset,
 
-        conv_req       => conv_req_lch,
-        conv_rsp       => conv_rsp_lch,
-        internal_error => internal_error_lch,
+            conv_req       => conv_req_lch,
+            conv_rsp       => conv_rsp_lch,
+            internal_error => internal_error_lch,
 
-        fb_wr_burst_start => fb_wr_burst_start_lch,
-        fb_bw_counter     => fb_bw_counter_lch,
-        fb_wlast          => fb_wlast_lch,
-        fb_reduced_burst  => fb_reduced_burst_lch,
-        fb_awlen          => fb_awlen_lch,
-        fb_burst_done     => fb_burst_done_lch,
+            fb_wr_burst_start => fb_wr_burst_start_lch,
+            fb_bw_counter     => fb_bw_counter_lch,
+            fb_wlast          => fb_wlast_lch,
+            fb_reduced_burst  => fb_reduced_burst_lch,
+            fb_awlen          => fb_awlen_lch,
+            fb_burst_done     => fb_burst_done_lch,
 
-        pattern_req      => pattern_req_lch,
-        pattern_len      => pattern_len_lch,
-        pattern_finished => pattern_finished_lch,
-        pattern_tlast    => pattern_tlast_lch,
+            pattern_req      => pattern_req_lch,
+            pattern_len      => pattern_len_lch,
+            pattern_finished => pattern_finished_lch,
+            pattern_tlast    => pattern_tlast_lch,
 
-        s_axis_aclk    => m_axis_lch_inbuf_aclk,
-        s_axis_aresetn => m_axis_lch_inbuf_aresetn,
-        s_axis_tready  => m_axis_lch_inbuf_tready,
-        s_axis_tdata   => m_axis_lch_inbuf_tdata,
-        s_axis_tvalid  => m_axis_lch_inbuf_tvalid,
-        s_axis_tkeep   => m_axis_lch_inbuf_tkeep,
-        s_axis_tlast   => m_axis_lch_inbuf_tlast,
+            s_axis_aclk    => m_axis_lch_inbuf_aclk,
+            s_axis_aresetn => m_axis_lch_inbuf_aresetn,
+            s_axis_tready  => m_axis_lch_inbuf_tready,
+            s_axis_tdata   => m_axis_lch_inbuf_tdata,
+            s_axis_tvalid  => m_axis_lch_inbuf_tvalid,
+            s_axis_tkeep   => m_axis_lch_inbuf_tkeep,
+            s_axis_tlast   => m_axis_lch_inbuf_tlast,
 
-        m_axis_aclk    => m_axis_lch_aclk,
-        m_axis_aresetn => m_axis_lch_aresetn,
-        m_axis_tdata   => m_axis_lch_tdata,
-        m_axis_tvalid  => m_axis_lch_tvalid,
-        m_axis_tkeep   => m_axis_lch_tkeep,
-        m_axis_tlast   => m_axis_lch_tlast,
-        m_axis_tready  => m_axis_lch_tready,
-        m_axis_tdest   => m_axis_lch_tdest,
+            m_axis_aclk    => m_axis_lch_aclk,
+            m_axis_aresetn => m_axis_lch_aresetn,
+            m_axis_tdata   => m_axis_lch_tdata,
+            m_axis_tvalid  => m_axis_lch_tvalid,
+            m_axis_tkeep   => m_axis_lch_tkeep,
+            m_axis_tlast   => m_axis_lch_tlast,
+            m_axis_tready  => m_axis_lch_tready,
+            m_axis_tdest   => m_axis_lch_tdest,
 
-        m_axi_aclk    => m_axi_lch_aclk,
-        m_axi_aresetn => m_axi_lch_aresetn,
-        m_axi_awid    => m_axi_lch_awid,
-        m_axi_awaddr  => m_axi_lch_awaddr,
-        m_axi_awlen   => m_axi_lch_awlen,
-        m_axi_awsize  => m_axi_lch_awsize,
-        m_axi_awburst => m_axi_lch_awburst,
-        m_axi_awlock  => m_axi_lch_awlock,
-        m_axi_awcache => m_axi_lch_awcache,
-        m_axi_awprot  => m_axi_lch_awprot,
-        m_axi_awqos   => m_axi_lch_awqos,
-        m_axi_awuser  => m_axi_lch_awuser,
-        m_axi_awvalid => m_axi_lch_awvalid,
-        m_axi_awready => m_axi_lch_awready,
-        m_axi_wdata   => m_axi_lch_wdata,
-        m_axi_wstrb   => m_axi_lch_wstrb,
-        m_axi_wlast   => m_axi_lch_wlast,
-        m_axi_wuser   => m_axi_lch_wuser,
-        m_axi_wvalid  => m_axi_lch_wvalid,
-        m_axi_wready  => m_axi_lch_wready,
-        m_axi_bid     => m_axi_lch_bid,
-        m_axi_bresp   => m_axi_lch_bresp,
-        m_axi_buser   => m_axi_lch_buser,
-        m_axi_bvalid  => m_axi_lch_bvalid,
-        m_axi_bready  => m_axi_lch_bready,
-        m_axi_arid    => m_axi_lch_arid,
-        m_axi_araddr  => m_axi_lch_araddr,
-        m_axi_arlen   => m_axi_lch_arlen,
-        m_axi_arsize  => m_axi_lch_arsize,
-        m_axi_arburst => m_axi_lch_arburst,
-        m_axi_arlock  => m_axi_lch_arlock,
-        m_axi_arcache => m_axi_lch_arcache,
-        m_axi_arprot  => m_axi_lch_arprot,
-        m_axi_arqos   => m_axi_lch_arqos,
-        m_axi_aruser  => m_axi_lch_aruser,
-        m_axi_arvalid => m_axi_lch_arvalid,
-        m_axi_arready => m_axi_lch_arready,
-        m_axi_rid     => m_axi_lch_rid,
-        m_axi_rdata   => m_axi_lch_rdata,
-        m_axi_rresp   => m_axi_lch_rresp,
-        m_axi_rlast   => m_axi_lch_rlast,
-        m_axi_ruser   => m_axi_lch_ruser,
-        m_axi_rvalid  => m_axi_lch_rvalid,
-        m_axi_rready  => m_axi_lch_rready
-    );
+            m_axi_aclk    => m_axi_lch_aclk,
+            m_axi_aresetn => m_axi_lch_aresetn,
+            m_axi_awid    => m_axi_lch_awid,
+            m_axi_awaddr  => m_axi_lch_awaddr,
+            m_axi_awlen   => m_axi_lch_awlen,
+            m_axi_awsize  => m_axi_lch_awsize,
+            m_axi_awburst => m_axi_lch_awburst,
+            m_axi_awlock  => m_axi_lch_awlock,
+            m_axi_awcache => m_axi_lch_awcache,
+            m_axi_awprot  => m_axi_lch_awprot,
+            m_axi_awqos   => m_axi_lch_awqos,
+            m_axi_awuser  => m_axi_lch_awuser,
+            m_axi_awvalid => m_axi_lch_awvalid,
+            m_axi_awready => m_axi_lch_awready,
+            m_axi_wdata   => m_axi_lch_wdata,
+            m_axi_wstrb   => m_axi_lch_wstrb,
+            m_axi_wlast   => m_axi_lch_wlast,
+            m_axi_wuser   => m_axi_lch_wuser,
+            m_axi_wvalid  => m_axi_lch_wvalid,
+            m_axi_wready  => m_axi_lch_wready,
+            m_axi_bid     => m_axi_lch_bid,
+            m_axi_bresp   => m_axi_lch_bresp,
+            m_axi_buser   => m_axi_lch_buser,
+            m_axi_bvalid  => m_axi_lch_bvalid,
+            m_axi_bready  => m_axi_lch_bready,
+            m_axi_arid    => m_axi_lch_arid,
+            m_axi_araddr  => m_axi_lch_araddr,
+            m_axi_arlen   => m_axi_lch_arlen,
+            m_axi_arsize  => m_axi_lch_arsize,
+            m_axi_arburst => m_axi_lch_arburst,
+            m_axi_arlock  => m_axi_lch_arlock,
+            m_axi_arcache => m_axi_lch_arcache,
+            m_axi_arprot  => m_axi_lch_arprot,
+            m_axi_arqos   => m_axi_lch_arqos,
+            m_axi_aruser  => m_axi_lch_aruser,
+            m_axi_arvalid => m_axi_lch_arvalid,
+            m_axi_arready => m_axi_lch_arready,
+            m_axi_rid     => m_axi_lch_rid,
+            m_axi_rdata   => m_axi_lch_rdata,
+            m_axi_rresp   => m_axi_lch_rresp,
+            m_axi_rlast   => m_axi_lch_rlast,
+            m_axi_ruser   => m_axi_lch_ruser,
+            m_axi_rvalid  => m_axi_lch_rvalid,
+            m_axi_rready  => m_axi_lch_rready
+        );
 
 
     I_CORE_CONVERTER_R : entity xil_defaultlib.core_converter
-    generic map (
-        C_M_AXI_BURST_LEN    => C_M_AXI_BURST_LEN,
-        C_M_AXI_ID_WIDTH     => C_M_AXI_ID_WIDTH,
-        C_M_AXI_ADDR_WIDTH   => C_M_AXI_ADDR_WIDTH,
-        C_M_AXI_DATA_WIDTH   => C_M_AXI_DATA_WIDTH,
-        C_M_AXI_AWUSER_WIDTH => C_M_AXI_AWUSER_WIDTH,
-        C_M_AXI_ARUSER_WIDTH => C_M_AXI_ARUSER_WIDTH,
-        C_M_AXI_WUSER_WIDTH  => C_M_AXI_WUSER_WIDTH,
-        C_M_AXI_RUSER_WIDTH  => C_M_AXI_RUSER_WIDTH,
-        C_M_AXI_BUSER_WIDTH  => C_M_AXI_BUSER_WIDTH
-    )
-    port map (
-        soft_reset => soft_reset,
+        generic map (
+            C_M_AXI_BURST_LEN    => C_M_AXI_BURST_LEN,
+            C_M_AXI_ID_WIDTH     => C_M_AXI_ID_WIDTH,
+            C_M_AXI_ADDR_WIDTH   => C_M_AXI_ADDR_WIDTH,
+            C_M_AXI_DATA_WIDTH   => C_M_AXI_DATA_WIDTH,
+            C_M_AXI_AWUSER_WIDTH => C_M_AXI_AWUSER_WIDTH,
+            C_M_AXI_ARUSER_WIDTH => C_M_AXI_ARUSER_WIDTH,
+            C_M_AXI_WUSER_WIDTH  => C_M_AXI_WUSER_WIDTH,
+            C_M_AXI_RUSER_WIDTH  => C_M_AXI_RUSER_WIDTH,
+            C_M_AXI_BUSER_WIDTH  => C_M_AXI_BUSER_WIDTH
+        )
+        port map (
+            soft_reset => soft_reset,
 
-        conv_req       => conv_req_rch,
-        conv_rsp       => conv_rsp_rch,
-        internal_error => internal_error_rch,
+            conv_req       => conv_req_rch,
+            conv_rsp       => conv_rsp_rch,
+            internal_error => internal_error_rch,
 
-        fb_wr_burst_start => fb_wr_burst_start_rch,
-        fb_bw_counter     => fb_bw_counter_rch,
-        fb_wlast          => fb_wlast_rch,
-        fb_reduced_burst  => fb_reduced_burst_rch,
-        fb_awlen          => fb_awlen_rch,
-        fb_burst_done     => fb_burst_done_rch,
+            fb_wr_burst_start => fb_wr_burst_start_rch,
+            fb_bw_counter     => fb_bw_counter_rch,
+            fb_wlast          => fb_wlast_rch,
+            fb_reduced_burst  => fb_reduced_burst_rch,
+            fb_awlen          => fb_awlen_rch,
+            fb_burst_done     => fb_burst_done_rch,
 
-        pattern_req      => pattern_req_rch,
-        pattern_len      => pattern_len_rch,
-        pattern_finished => pattern_finished_rch,
-        pattern_tlast    => pattern_tlast_rch,
+            pattern_req      => pattern_req_rch,
+            pattern_len      => pattern_len_rch,
+            pattern_finished => pattern_finished_rch,
+            pattern_tlast    => pattern_tlast_rch,
 
-        s_axis_aclk    => m_axis_rch_inbuf_aclk,
-        s_axis_aresetn => m_axis_rch_inbuf_aresetn,
-        s_axis_tready  => m_axis_rch_inbuf_tready,
-        s_axis_tdata   => m_axis_rch_inbuf_tdata,
-        s_axis_tvalid  => m_axis_rch_inbuf_tvalid,
-        s_axis_tkeep   => m_axis_rch_inbuf_tkeep,
-        s_axis_tlast   => m_axis_rch_inbuf_tlast,
+            s_axis_aclk    => m_axis_rch_inbuf_aclk,
+            s_axis_aresetn => m_axis_rch_inbuf_aresetn,
+            s_axis_tready  => m_axis_rch_inbuf_tready,
+            s_axis_tdata   => m_axis_rch_inbuf_tdata,
+            s_axis_tvalid  => m_axis_rch_inbuf_tvalid,
+            s_axis_tkeep   => m_axis_rch_inbuf_tkeep,
+            s_axis_tlast   => m_axis_rch_inbuf_tlast,
 
-        m_axis_aclk    => m_axis_rch_aclk,
-        m_axis_aresetn => m_axis_rch_aresetn,
-        m_axis_tdata   => m_axis_rch_tdata,
-        m_axis_tvalid  => m_axis_rch_tvalid,
-        m_axis_tkeep   => m_axis_rch_tkeep,
-        m_axis_tlast   => m_axis_rch_tlast,
-        m_axis_tready  => m_axis_rch_tready,
-        m_axis_tdest   => m_axis_rch_tdest,
+            m_axis_aclk    => m_axis_rch_aclk,
+            m_axis_aresetn => m_axis_rch_aresetn,
+            m_axis_tdata   => m_axis_rch_tdata,
+            m_axis_tvalid  => m_axis_rch_tvalid,
+            m_axis_tkeep   => m_axis_rch_tkeep,
+            m_axis_tlast   => m_axis_rch_tlast,
+            m_axis_tready  => m_axis_rch_tready,
+            m_axis_tdest   => m_axis_rch_tdest,
 
-        m_axi_aclk    => m_axi_rch_aclk,
-        m_axi_aresetn => m_axi_rch_aresetn,
-        m_axi_awid    => m_axi_rch_awid,
-        m_axi_awaddr  => m_axi_rch_awaddr,
-        m_axi_awlen   => m_axi_rch_awlen,
-        m_axi_awsize  => m_axi_rch_awsize,
-        m_axi_awburst => m_axi_rch_awburst,
-        m_axi_awlock  => m_axi_rch_awlock,
-        m_axi_awcache => m_axi_rch_awcache,
-        m_axi_awprot  => m_axi_rch_awprot,
-        m_axi_awqos   => m_axi_rch_awqos,
-        m_axi_awuser  => m_axi_rch_awuser,
-        m_axi_awvalid => m_axi_rch_awvalid,
-        m_axi_awready => m_axi_rch_awready,
-        m_axi_wdata   => m_axi_rch_wdata,
-        m_axi_wstrb   => m_axi_rch_wstrb,
-        m_axi_wlast   => m_axi_rch_wlast,
-        m_axi_wuser   => m_axi_rch_wuser,
-        m_axi_wvalid  => m_axi_rch_wvalid,
-        m_axi_wready  => m_axi_rch_wready,
-        m_axi_bid     => m_axi_rch_bid,
-        m_axi_bresp   => m_axi_rch_bresp,
-        m_axi_buser   => m_axi_rch_buser,
-        m_axi_bvalid  => m_axi_rch_bvalid,
-        m_axi_bready  => m_axi_rch_bready,
-        m_axi_arid    => m_axi_rch_arid,
-        m_axi_araddr  => m_axi_rch_araddr,
-        m_axi_arlen   => m_axi_rch_arlen,
-        m_axi_arsize  => m_axi_rch_arsize,
-        m_axi_arburst => m_axi_rch_arburst,
-        m_axi_arlock  => m_axi_rch_arlock,
-        m_axi_arcache => m_axi_rch_arcache,
-        m_axi_arprot  => m_axi_rch_arprot,
-        m_axi_arqos   => m_axi_rch_arqos,
-        m_axi_aruser  => m_axi_rch_aruser,
-        m_axi_arvalid => m_axi_rch_arvalid,
-        m_axi_arready => m_axi_rch_arready,
-        m_axi_rid     => m_axi_rch_rid,
-        m_axi_rdata   => m_axi_rch_rdata,
-        m_axi_rresp   => m_axi_rch_rresp,
-        m_axi_rlast   => m_axi_rch_rlast,
-        m_axi_ruser   => m_axi_rch_ruser,
-        m_axi_rvalid  => m_axi_rch_rvalid,
-        m_axi_rready  => m_axi_rch_rready
-    );
+            m_axi_aclk    => m_axi_rch_aclk,
+            m_axi_aresetn => m_axi_rch_aresetn,
+            m_axi_awid    => m_axi_rch_awid,
+            m_axi_awaddr  => m_axi_rch_awaddr,
+            m_axi_awlen   => m_axi_rch_awlen,
+            m_axi_awsize  => m_axi_rch_awsize,
+            m_axi_awburst => m_axi_rch_awburst,
+            m_axi_awlock  => m_axi_rch_awlock,
+            m_axi_awcache => m_axi_rch_awcache,
+            m_axi_awprot  => m_axi_rch_awprot,
+            m_axi_awqos   => m_axi_rch_awqos,
+            m_axi_awuser  => m_axi_rch_awuser,
+            m_axi_awvalid => m_axi_rch_awvalid,
+            m_axi_awready => m_axi_rch_awready,
+            m_axi_wdata   => m_axi_rch_wdata,
+            m_axi_wstrb   => m_axi_rch_wstrb,
+            m_axi_wlast   => m_axi_rch_wlast,
+            m_axi_wuser   => m_axi_rch_wuser,
+            m_axi_wvalid  => m_axi_rch_wvalid,
+            m_axi_wready  => m_axi_rch_wready,
+            m_axi_bid     => m_axi_rch_bid,
+            m_axi_bresp   => m_axi_rch_bresp,
+            m_axi_buser   => m_axi_rch_buser,
+            m_axi_bvalid  => m_axi_rch_bvalid,
+            m_axi_bready  => m_axi_rch_bready,
+            m_axi_arid    => m_axi_rch_arid,
+            m_axi_araddr  => m_axi_rch_araddr,
+            m_axi_arlen   => m_axi_rch_arlen,
+            m_axi_arsize  => m_axi_rch_arsize,
+            m_axi_arburst => m_axi_rch_arburst,
+            m_axi_arlock  => m_axi_rch_arlock,
+            m_axi_arcache => m_axi_rch_arcache,
+            m_axi_arprot  => m_axi_rch_arprot,
+            m_axi_arqos   => m_axi_rch_arqos,
+            m_axi_aruser  => m_axi_rch_aruser,
+            m_axi_arvalid => m_axi_rch_arvalid,
+            m_axi_arready => m_axi_rch_arready,
+            m_axi_rid     => m_axi_rch_rid,
+            m_axi_rdata   => m_axi_rch_rdata,
+            m_axi_rresp   => m_axi_rch_rresp,
+            m_axi_rlast   => m_axi_rch_rlast,
+            m_axi_ruser   => m_axi_rch_ruser,
+            m_axi_rvalid  => m_axi_rch_rvalid,
+            m_axi_rready  => m_axi_rch_rready
+        );
 
 
 
     I_AXI_LITE_MASTER : entity xil_defaultlib.axi_lite_master
-    generic map (
-        C_M_AXIL_MASTER_TARGET_BASE_ADDR => C_M_AXIL_MASTER_TARGET_BASE_ADDR,
-        C_M_AXIL_MASTER_ADDR_WIDTH       => C_M_AXIL_MASTER_ADDR_WIDTH,
-        C_M_AXIL_MASTER_DATA_WIDTH       => C_M_AXIL_MASTER_DATA_WIDTH
-    )
-    port map (
-        soft_reset        => soft_reset,
-        transaction_error => transaction_error,
+        generic map (
+            C_M_AXIL_MASTER_TARGET_BASE_ADDR => C_M_AXIL_MASTER_TARGET_BASE_ADDR,
+            C_M_AXIL_MASTER_ADDR_WIDTH       => C_M_AXIL_MASTER_ADDR_WIDTH,
+            C_M_AXIL_MASTER_DATA_WIDTH       => C_M_AXIL_MASTER_DATA_WIDTH
+        )
+        port map (
+            soft_reset        => soft_reset,
+            transaction_error => transaction_error,
 
-        -- From register interface
-        write_request => write_request,
-        write_data    => write_data,
-        write_address => write_address,
-        write_done    => write_done,
+            -- From register interface
+            write_request => write_request,
+            write_data    => write_data,
+            write_address => write_address,
+            write_done    => write_done,
 
-        -- From register interface
-        read_request    => read_request,
-        read_address    => read_address,
-        read_data       => read_data,
-        read_data_valid => read_data_valid,
+            -- From register interface
+            read_request    => read_request,
+            read_address    => read_address,
+            read_data       => read_data,
+            read_data_valid => read_data_valid,
 
-        m_axi_aclk    => m_axi_conf_aclk,
-        m_axi_aresetn => m_axi_conf_aresetn,
-        m_axi_awaddr  => m_axi_conf_awaddr,
-        m_axi_awprot  => m_axi_conf_awprot,
-        m_axi_awvalid => m_axi_conf_awvalid,
-        m_axi_awready => m_axi_conf_awready,
-        m_axi_wdata   => m_axi_conf_wdata,
-        m_axi_wstrb   => m_axi_conf_wstrb,
-        m_axi_wvalid  => m_axi_conf_wvalid,
-        m_axi_wready  => m_axi_conf_wready,
-        m_axi_bresp   => m_axi_conf_bresp,
-        m_axi_bvalid  => m_axi_conf_bvalid,
-        m_axi_bready  => m_axi_conf_bready,
-        m_axi_araddr  => m_axi_conf_araddr,
-        m_axi_arprot  => m_axi_conf_arprot,
-        m_axi_arvalid => m_axi_conf_arvalid,
-        m_axi_arready => m_axi_conf_arready,
-        m_axi_rdata   => m_axi_conf_rdata,
-        m_axi_rresp   => m_axi_conf_rresp,
-        m_axi_rvalid  => m_axi_conf_rvalid,
-        m_axi_rready  => m_axi_conf_rready
-    );
+            m_axi_aclk    => m_axi_conf_aclk,
+            m_axi_aresetn => m_axi_conf_aresetn,
+            m_axi_awaddr  => m_axi_conf_awaddr,
+            m_axi_awprot  => m_axi_conf_awprot,
+            m_axi_awvalid => m_axi_conf_awvalid,
+            m_axi_awready => m_axi_conf_awready,
+            m_axi_wdata   => m_axi_conf_wdata,
+            m_axi_wstrb   => m_axi_conf_wstrb,
+            m_axi_wvalid  => m_axi_conf_wvalid,
+            m_axi_wready  => m_axi_conf_wready,
+            m_axi_bresp   => m_axi_conf_bresp,
+            m_axi_bvalid  => m_axi_conf_bvalid,
+            m_axi_bready  => m_axi_conf_bready,
+            m_axi_araddr  => m_axi_conf_araddr,
+            m_axi_arprot  => m_axi_conf_arprot,
+            m_axi_arvalid => m_axi_conf_arvalid,
+            m_axi_arready => m_axi_conf_arready,
+            m_axi_rdata   => m_axi_conf_rdata,
+            m_axi_rresp   => m_axi_conf_rresp,
+            m_axi_rvalid  => m_axi_conf_rvalid,
+            m_axi_rready  => m_axi_conf_rready
+        );
 
 
     I_CLK_DIV : entity xil_defaultlib.clk_div
-    generic map (
-        DIV_FACTOR => DIV_FACTOR
-    )
-    port map (
-        clk        => clk_fs_ext,
-        resetn     => resetn,
-        soft_reset => soft_reset,
-        clk_out    => clk_fs
-    );
+        generic map (
+            DIV_FACTOR => DIV_FACTOR
+        )
+        port map (
+            clk        => clk_fs_ext,
+            resetn     => resetn,
+            soft_reset => soft_reset,
+            clk_out    => clk_fs
+        );
 
 
     I_CLK_FS_SYNC : entity xil_defaultlib.clk_sync
-    port map (
-        clk         => '0',
-        resetn      => '0',
-        soft_reset  => '0',
-        clk_fs      => '0',
-        clk_fs_sync => clk_fs_sync
-    );
+        port map (
+            clk         => '0',
+            resetn      => '0',
+            soft_reset  => '0',
+            clk_fs      => '0',
+            clk_fs_sync => clk_fs_sync
+        );
 
     I_PATTERN_COUNTER_L : entity xil_defaultlib.pattern_counter
-    generic map (
-        DATA_WIDTH => PATTERN_COUNTER_DATA_WIDTH,
-        PATTERN    => PATTERN
-    )
-    port map (
-        soft_reset    => soft_reset,
-        count         => count_lch,
-        pattern_count => pattern_count_lch,
+        generic map (
+            DATA_WIDTH => PATTERN_COUNTER_DATA_WIDTH,
+            PATTERN    => PATTERN
+        )
+        port map (
+            soft_reset    => soft_reset,
+            count         => count_lch,
+            pattern_count => pattern_count_lch,
 
-        axis_clk    => s_axis_lch_aclk,
-        axis_resetn => s_axis_lch_aresetn,
-        axis_tvalid => s_axis_lch_tvalid,
-        axis_tdata  => s_axis_lch_tdata,
-        axis_tready => s_axis_lch_tready
-    );
+            axis_clk    => s_axis_lch_aclk,
+            axis_resetn => s_axis_lch_aresetn,
+            axis_tvalid => s_axis_lch_tvalid,
+            axis_tdata  => s_axis_lch_tdata,
+            axis_tready => s_axis_lch_tready
+        );
 
 
     I_PATTERN_COUNTER_R : entity xil_defaultlib.pattern_counter
-    generic map (
-        DATA_WIDTH => PATTERN_COUNTER_DATA_WIDTH,
-        PATTERN    => PATTERN
-    )
-    port map (
-        soft_reset    => soft_reset,
-        count         => count_rch,
-        pattern_count => pattern_count_rch,
+        generic map (
+            DATA_WIDTH => PATTERN_COUNTER_DATA_WIDTH,
+            PATTERN    => PATTERN
+        )
+        port map (
+            soft_reset    => soft_reset,
+            count         => count_rch,
+            pattern_count => pattern_count_rch,
 
-        axis_clk    => s_axis_rch_aclk,
-        axis_resetn => s_axis_rch_aresetn,
-        axis_tvalid => s_axis_rch_tvalid,
-        axis_tdata  => s_axis_rch_tdata,
-        axis_tready => s_axis_rch_tready
-    );
+            axis_clk    => s_axis_rch_aclk,
+            axis_resetn => s_axis_rch_aresetn,
+            axis_tvalid => s_axis_rch_tvalid,
+            axis_tdata  => s_axis_rch_tdata,
+            axis_tready => s_axis_rch_tready
+        );
 
 
     I_CORE_FSM_L : entity xil_defaultlib.core_fsm
-    port map (
-        clk           => clk,
-        resetn        => resetn,
-        clk_fs        => clk_fs_sync,
-        soft_reset    => soft_reset,
-        system_enable => system_enable,
+        port map (
+            clk           => clk,
+            resetn        => resetn,
+            clk_fs        => clk_fs_sync,
+            soft_reset    => soft_reset,
+            system_enable => system_enable,
 
-        conv_op  => conv_op_lch,
-        conv_req => conv_req_lch,
-        conv_rsp => conv_rsp_lch,
+            conv_op  => conv_op_lch,
+            conv_req => conv_req_lch,
+            conv_rsp => conv_rsp_lch,
 
-        pattern_req      => pattern_req_lch,
-        pattern_len      => pattern_len_lch,
-        pattern_finished => pattern_finished_lch,
-        pattern_tlast    => pattern_tlast_lch,
+            pattern_req      => pattern_req_lch,
+            pattern_len      => pattern_len_lch,
+            pattern_finished => pattern_finished_lch,
+            pattern_tlast    => pattern_tlast_lch,
 
-        buffer_size => buffer_size_l,
-        bram_ptr    => bram_ptr_l,
-        read_size   => read_size_l,
+            buffer_size => buffer_size_l,
+            bram_ptr    => bram_ptr_l,
+            read_size   => read_size_l,
 
-        internal_error => internal_error_lch,
-        system_running => system_running_lch
-    );
+            internal_error => internal_error_lch,
+            system_running => system_running_lch
+        );
 
 
     I_CORE_FSM_R : entity xil_defaultlib.core_fsm
-    port map (
-        clk           => clk,
-        resetn        => resetn,
-        clk_fs        => clk_fs_sync,
-        soft_reset    => soft_reset,
-        system_enable => system_enable,
+        port map (
+            clk           => clk,
+            resetn        => resetn,
+            clk_fs        => clk_fs_sync,
+            soft_reset    => soft_reset,
+            system_enable => system_enable,
 
-        conv_op          => conv_op_rch,
-        conv_req         => conv_req_rch,
-        conv_rsp         => conv_rsp_rch,
-        pattern_req      => pattern_req_rch,
-        pattern_len      => pattern_len_rch,
-        pattern_finished => pattern_finished_rch,
-        pattern_tlast    => pattern_tlast_rch,
+            conv_op          => conv_op_rch,
+            conv_req         => conv_req_rch,
+            conv_rsp         => conv_rsp_rch,
+            pattern_req      => pattern_req_rch,
+            pattern_len      => pattern_len_rch,
+            pattern_finished => pattern_finished_rch,
+            pattern_tlast    => pattern_tlast_rch,
 
-        buffer_size => buffer_size_r,
-        bram_ptr    => bram_ptr_r,
-        read_size   => read_size_r,
+            buffer_size => buffer_size_r,
+            bram_ptr    => bram_ptr_r,
+            read_size   => read_size_r,
 
-        internal_error => internal_error_rch,
-        system_running => system_running_rch
-    );
+            internal_error => internal_error_rch,
+            system_running => system_running_rch
+        );
 
 
 
@@ -908,10 +908,10 @@ begin
 
 
     BUFG_inst : BUFG
-    port map (
-        O => clk_out,
-        I => clk_div
-    );
+        port map (
+            O => clk_out,
+            I => clk_div
+        );
 
 end RTL;
 
@@ -1235,35 +1235,35 @@ begin
     reset_bram_r <= not s_axis_rch_aresetn;
 
     input_buffer_l : blk_mem_gen_0
-    port map (
-        clka  => s_axis_lch_aclk,
-        ena   => bram_pointer_l.ena,
-        wea   => bram_pointer_l.wea,
-        addra => address_write_d_l,
-        dina  => bram_pointer_l.dina,
+        port map (
+            clka  => s_axis_lch_aclk,
+            ena   => bram_pointer_l.ena,
+            wea   => bram_pointer_l.wea,
+            addra => address_write_d_l,
+            dina  => bram_pointer_l.dina,
 
-        clkb  => s_axis_lch_aclk,
-        rstb  => reset_bram_l,
-        enb   => read_bram_enb_l,
-        addrb => bram_a_addrb,
-        doutb => bram_to_buffer_l
-    );
+            clkb  => s_axis_lch_aclk,
+            rstb  => reset_bram_l,
+            enb   => read_bram_enb_l,
+            addrb => bram_a_addrb,
+            doutb => bram_to_buffer_l
+        );
 
 
     input_buffer_r : blk_mem_gen_0
-    port map (
-        clka  => s_axis_rch_aclk,
-        ena   => bram_pointer_r.ena,
-        wea   => bram_pointer_r.wea,
-        addra => address_write_d_r,
-        dina  => bram_pointer_r.dina,
+        port map (
+            clka  => s_axis_rch_aclk,
+            ena   => bram_pointer_r.ena,
+            wea   => bram_pointer_r.wea,
+            addra => address_write_d_r,
+            dina  => bram_pointer_r.dina,
 
-        clkb  => s_axis_rch_aclk,
-        rstb  => reset_bram_r,
-        enb   => read_bram_enb_r,
-        addrb => bram_b_addrb,
-        doutb => bram_to_buffer_r
-    );
+            clkb  => s_axis_rch_aclk,
+            rstb  => reset_bram_r,
+            enb   => read_bram_enb_r,
+            addrb => bram_b_addrb,
+            doutb => bram_to_buffer_r
+        );
 
 
     ----------------
@@ -1890,20 +1890,20 @@ begin
     -- Master stream interface -
     ----------------------------
     m_axis_tdata <= (others => '0') when pattern_req = '1' else
-                                                           m_axi_rdata when (axi_rready = '1' and m_axi_rvalid = '1' and (unsigned(transaction_rd_size)-1) >= unsigned(transaction_rd_counter)) else
-                                                                                                                                                                                                (others => '0');
+                    m_axi_rdata when (axi_rready = '1' and m_axi_rvalid = '1' and (unsigned(transaction_rd_size)-1) >= unsigned(transaction_rd_counter)) else
+                    (others => '0');
 
     m_axis_tvalid <= '1' when (pattern_req = '1' and pattern_finished_i = '0') else
-                                                                               m_axi_rvalid when (axi_rready = '1' and (unsigned(transaction_rd_size)-1) >= unsigned(transaction_rd_counter)) else
-                                                                                                                                                                                              '0';
+                     m_axi_rvalid when (axi_rready = '1' and (unsigned(transaction_rd_size)-1) >= unsigned(transaction_rd_counter)) else
+                     '0';
 
     m_axis_tlast <= '1' when (pattern_tlast = '1' and m_axi_rvalid = '1' and axi_rready = '1' and (unsigned(transaction_rd_size)-1) = unsigned(transaction_rd_counter)) else
-                                                                                                                                                                        '0';
+                    '0';
 
     axi_rready <=
     m_axis_tready when (read_start = '1' and (unsigned(transaction_rd_size)-1) >= unsigned(transaction_rd_counter)) else
-                                                                                                                    '1'           when (read_start = '1' and (unsigned(burst_read_counter) <= C_M_AXI_BURST_LEN-1)) else
-                                                                                                                                                                                                                    '0';
+    '1'           when (read_start = '1' and (unsigned(burst_read_counter) <= C_M_AXI_BURST_LEN-1)) else
+    '0';
 
     m_axis_tdest <= '0';
     m_axis_tkeep <= x"FF";
@@ -1913,15 +1913,15 @@ begin
     -- Slave stream interface --
     ----------------------------
     axi_wdata <= s_axis_tdata when ((axi_wvalid = '1') and ((unsigned(transaction_wr_size)-1) >= unsigned(transaction_wr_counter))) else
-                                                                                                                                    (others => '0');
+                 (others => '0');
 
     axi_wvalid <=
     s_axis_tvalid when ((m_axi_wready = '1') and ((unsigned(transaction_wr_size)-1) >= unsigned(transaction_wr_counter))) else
-                                                                                                                          '1'           when ((write_start = '1') and (unsigned(burst_write_counter) <= C_M_AXI_BURST_LEN-1)) else
-                                                                                                                                                                                                                              '0';
+    '1'           when ((write_start = '1') and (unsigned(burst_write_counter) <= C_M_AXI_BURST_LEN-1)) else
+    '0';
 
     s_axis_tready <= m_axi_wready when ((m_axi_wready = '1') and ((unsigned(transaction_wr_size)-1) >= unsigned(transaction_wr_counter))) else
-                                                                                                                                          '0';
+                     '0';
 
 
     -- Feedback to input buffer
@@ -3164,7 +3164,7 @@ begin
     m_axi_arprot  <= "001";
 
     read_data <= m_axi_rdata when (m_axi_rvalid = '1' and axi_rready = '1') else
-                                                                            (others => '0');
+                 (others => '0');
     read_data_valid <= axi_rready and m_axi_rvalid;
     write_done      <= axi_bready and m_axi_bvalid;
 

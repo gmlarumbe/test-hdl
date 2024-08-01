@@ -30,11 +30,11 @@ architecture RTL of misc is
 begin  -- architecture RTL
 
     I_BLOCK1_0 : entity block1
-    port map (
-        Port0 => Port0,
-        Port1 => Port1,
-        Port2 => Port2
-    );
+        port map (
+            Port0 => Port0,
+            Port1 => Port1,
+            Port2 => Port2
+        );
 
 end architecture RTL;
 
@@ -47,17 +47,17 @@ architecture port_bit_select of misc is
 begin  -- architecture port_bit_select
 
     I_BLOCK1_0 : entity block1
-    port map (
-        Port0(0) => Port0(0),
-        Port1(1) => Port1(1),
-        Port2(i) => Port2(i)
-    );
+        port map (
+            Port0(0) => Port0(0),
+            Port1(1) => Port1(1),
+            Port2(i) => Port2(i)
+        );
 
     I_BLOCK1_1 : entity block1
-    port map (
-        Port0(3 downto 0) => Port0,
-        Port1(5 downto 1) => Port1,
-        Port2(0 to 5) => Port2
-    );
+        port map (
+            Port0(3 downto 0) => Port0,
+            Port1(5 downto 1) => Port1,
+            Port2(0 to 5) => Port2
+        );
 
 end architecture port_bit_select;
