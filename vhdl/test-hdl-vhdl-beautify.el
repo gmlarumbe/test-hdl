@@ -38,9 +38,18 @@
   (test-hdl-no-messages
     (funcall mode))
   ;; Deindent
-  (vhdl-ext-replace-regexp-whole-buffer "^\\s-+" "")
+  (let ((blank-re "^\\s-+"))
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward blank-re nil t)
+        (replace-match ""))))
   ;; Remove spaces in port connections
-  (vhdl-ext-replace-regexp-whole-buffer (concat "\\(?1:^\\s-*" vhdl-ext-identifier-re "\\)\\(?2:\\s-*\\)=>") "\\1=>")
+  (let* ((identifier-re "[a-zA-Z_][a-zA-Z0-9_-]*")
+         (port-conn-re (concat "\\(?1:^\\s-*" identifier-re "\\)\\(?2:\\s-*\\)=>")))
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward port-conn-re nil t)
+        (replace-match "\\1=>"))))
   (test-hdl-no-messages
     (funcall fn)))
 

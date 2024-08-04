@@ -27,92 +27,45 @@
 (require 'test-hdl-vhdl-ts-mode-common)
 
 
-;; TODO: At some point replace with `test-hdl-vhdl-common-file-list'
-;; - When axi_test.sv does not give errors
-(defconst test-hdl-vhdl-ts-mode-prettify-file-list (mapcar (lambda (file)
-                                                             (file-name-concat test-hdl-vhdl-common-dir file))
-                                                           '("axi_demux.sv" "instances.sv" "ucontroller.sv" "tb_program.sv")))
+(defconst test-hdl-vhdl-beautify-file-list test-hdl-vhdl-common-file-list)
 
-
-(defun test-hdl-vhdl-ts-mode-prettify--remove ()
-  (let ((debug nil)
-        node)
-    ;; Declarations
-    (save-excursion
-      (goto-char (point-min))
-      (while (setq node (treesit-search-forward (vhdl-ts--node-at-point) vhdl-ts-pretty-declarations-node-re))
-        (goto-char (treesit-node-start node))
-        (when debug
-          (message "Removing decl @ line %s" (line-number-at-pos (point))))
-        (just-one-space)
-        ;; Move to next declaration
-        (goto-char (treesit-node-end (vhdl-ts--node-has-parent-recursive (vhdl-ts--node-at-point) "\\_<\\(net\\|data\\)_declaration\\_>")))))
-    ;; Expressions
-    (save-excursion
-      (goto-char (point-min))
-      (while (setq node (treesit-search-forward (vhdl-ts--node-at-point) vhdl-ts-pretty-expr-node-re))
-        (goto-char (treesit-node-end (vhdl-ts--node-has-child-recursive node "\\_<variable_lvalue\\_>")))
-        (when debug
-          (message "Removing expr @ line %s" (line-number-at-pos (point))))
-        (just-one-space)
-        ;; Move to next expression
-        (goto-char (treesit-node-end (vhdl-ts--node-has-parent-recursive (vhdl-ts--node-at-point) "\\(statement_or_null\\|\\(non\\)?blocking_assignment\\)")))))))
-
-(defun test-hdl-vhdl-ts-mode-prettify-file ()
-  (let ((debug nil)
-        node)
-    (vhdl-ts-mode)
-    (test-hdl-vhdl-ts-mode-prettify--remove)
-    ;; Declarations
-    (save-excursion
-      (goto-char (point-min))
-      (while (setq node (treesit-search-forward (vhdl-ts--node-at-point) vhdl-ts-pretty-declarations-node-re))
-        (goto-char (treesit-node-start node))
-        (when debug
-          (message "Prettifying decl @ line %s" (line-number-at-pos (point))))
-        (vhdl-ts-pretty-declarations)
-        ;; Move to next declaration
-        (goto-char (treesit-node-end (vhdl-ts--node-has-parent-recursive (vhdl-ts--node-at-point) "\\_<\\(net\\|data\\)_declaration\\_>")))))
-    ;; Expressions
-    (save-excursion
-      (goto-char (point-min))
-      (while (setq node (treesit-search-forward (vhdl-ts--node-at-point) vhdl-ts-pretty-expr-node-re))
-        (goto-char (treesit-node-start node))
-        (when debug
-          (message "Prettifying expr @ line %s" (line-number-at-pos (point))))
-        (vhdl-ts-pretty-expr)
-        ;; Move to next expression
-        (goto-char (treesit-node-end (vhdl-ts--node-has-parent-recursive (vhdl-ts--node-at-point) "\\(statement_or_null\\|\\(non\\)?blocking_assignment\\)")))))))
-
+(defun test-hdl-vhdl-ts-beautify-block-at-point-fn ()
+  (test-hdl-no-messages
+   (vhdl-ts-mode)
+   (goto-char (point-min))
+   (while (vhdl-ts-find-block-fwd)
+     (vhdl-ts-beautify-block-at-point))))
 
 (defun test-hdl-vhdl-ts-mode-beautify-gen-expected-files ()
-  ;; Beautify
+  ;; Beautify buffer
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-beautify-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref")
-                               :out-file-ext "beauty.sv"
+                               :out-file-ext "beauty.vhd"
                                :fn #'test-hdl-vhdl-beautify-file
-                               :args '(vhdl-ts-mode vhdl-ts-beautify-current-buffer))
-  ;; Prettify
-  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-ts-mode-prettify-file-list
+                               :args '(vhdl-ts-mode vhdl-ts-beautify-buffer))
+  ;; Beautify block at point
+  (test-hdl-gen-expected-files :file-list test-hdl-vhdl-beautify-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref")
-                               :out-file-ext "pretty.sv"
-                               :fn #'test-hdl-vhdl-ts-mode-prettify-file))
+                               :out-file-ext "beauty.block.vhd"
+                               :fn #'test-hdl-vhdl-ts-beautify-block-at-point-fn))
 
 
-(ert-deftest vhdl-ts-mode::beautify ()
+(ert-deftest vhdl-ts-mode::beautify-buffer ()
   (dolist (file test-hdl-vhdl-beautify-file-list)
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "dump" (test-hdl-basename file "beauty.sv"))
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "dump" (test-hdl-basename file "beauty.vhd"))
                                                          :fn #'test-hdl-vhdl-beautify-file
-                                                         :args '(vhdl-ts-mode vhdl-ts-beautify-current-buffer))
-                                  (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.sv"))))))
+                                                         :args '(vhdl-ts-mode vhdl-ts-beautify-buffer))
+                                  (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.vhd"))))))
 
-(ert-deftest vhdl-ts-mode::prettify ()
-  (dolist (file test-hdl-vhdl-ts-mode-prettify-file-list)
+(ert-deftest vhdl-ts-mode::beautify-block-at-point ()
+  (dolist (file test-hdl-vhdl-beautify-file-list)
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
-                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "dump" (test-hdl-basename file "pretty.sv"))
-                                                         :fn #'test-hdl-vhdl-ts-mode-prettify-file)
-                                  (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref" (test-hdl-basename file "pretty.sv"))))))
+                                                         :dump-file (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "dump" (test-hdl-basename file "beauty.block.vhd"))
+                                                         :fn #'test-hdl-vhdl-ts-beautify-block-at-point-fn)
+                                  (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.block.vhd"))))))
+
+
 
 
 (provide 'test-hdl-vhdl-ts-mode-beautify)

@@ -34,7 +34,7 @@
 (require 'test-hdl-vhdl-ts-mode-imenu)
 (require 'test-hdl-vhdl-ts-mode-navigation)
 (require 'test-hdl-vhdl-ts-mode-utils)
-;; (require 'test-hdl-vhdl-ts-mode-beautify)
+(require 'test-hdl-vhdl-ts-mode-beautify)
 
 
 ;;;; Aux funcs
@@ -44,8 +44,7 @@
   (test-hdl-vhdl-ts-mode-imenu-gen-expected-files)
   (test-hdl-vhdl-ts-mode-navigation-gen-expected-files)
   (test-hdl-vhdl-ts-mode-utils-gen-expected-files)
-  ;; (test-hdl-vhdl-ts-mode-beautify-gen-expected-files)
-  )
+  (test-hdl-vhdl-ts-mode-beautify-gen-expected-files))
 
 
 (provide 'test-hdl-vhdl-ts-mode)
