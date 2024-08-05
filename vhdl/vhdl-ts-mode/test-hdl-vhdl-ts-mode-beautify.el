@@ -43,11 +43,24 @@
                                :out-file-ext "beauty.vhd"
                                :fn #'test-hdl-vhdl-beautify-file
                                :args '(vhdl-ts-mode vhdl-ts-beautify-buffer))
+  ;; Beautify buffer (`vhdl-ts-beautify-align-ports-and-params' t)
+  (let ((vhdl-ts-beautify-align-ports-and-params t))
+    (test-hdl-gen-expected-files :file-list test-hdl-vhdl-beautify-file-list
+                                 :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref")
+                                 :out-file-ext "beauty.app.vhd"
+                                 :fn #'test-hdl-vhdl-beautify-file
+                                 :args '(vhdl-ts-mode vhdl-ts-beautify-buffer)))
   ;; Beautify block at point
   (test-hdl-gen-expected-files :file-list test-hdl-vhdl-beautify-file-list
                                :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref")
                                :out-file-ext "beauty.block.vhd"
-                               :fn #'test-hdl-vhdl-ts-beautify-block-at-point-fn))
+                               :fn #'test-hdl-vhdl-ts-beautify-block-at-point-fn)
+  ;; Beautify block at point (`vhdl-ts-beautify-align-ports-and-params' t)
+  (let ((vhdl-ts-beautify-align-ports-and-params t))
+    (test-hdl-gen-expected-files :file-list test-hdl-vhdl-beautify-file-list
+                                 :dest-dir (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref")
+                                 :out-file-ext "beauty.block.app.vhd"
+                                 :fn #'test-hdl-vhdl-ts-beautify-block-at-point-fn)))
 
 
 (ert-deftest vhdl-ts-mode::beautify-buffer ()
@@ -58,12 +71,29 @@
                                                          :args '(vhdl-ts-mode vhdl-ts-beautify-buffer))
                                   (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.vhd"))))))
 
+(ert-deftest vhdl-ts-mode::beautify-buffer-align-ports-params ()
+  (let ((vhdl-ts-beautify-align-ports-and-params t))
+    (dolist (file test-hdl-vhdl-beautify-file-list)
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "dump" (test-hdl-basename file "beauty.app.vhd"))
+                                                           :fn #'test-hdl-vhdl-beautify-file
+                                                           :args '(vhdl-ts-mode vhdl-ts-beautify-buffer))
+                                    (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.app.vhd")))))))
+
 (ert-deftest vhdl-ts-mode::beautify-block-at-point ()
   (dolist (file test-hdl-vhdl-beautify-file-list)
     (should (test-hdl-files-equal (test-hdl-process-file :test-file file
                                                          :dump-file (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "dump" (test-hdl-basename file "beauty.block.vhd"))
                                                          :fn #'test-hdl-vhdl-ts-beautify-block-at-point-fn)
                                   (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.block.vhd"))))))
+
+(ert-deftest vhdl-ts-mode::beautify-block-at-point-align-ports-params ()
+  (let ((vhdl-ts-beautify-align-ports-and-params t))
+    (dolist (file test-hdl-vhdl-beautify-file-list)
+      (should (test-hdl-files-equal (test-hdl-process-file :test-file file
+                                                           :dump-file (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "dump" (test-hdl-basename file "beauty.block.app.vhd"))
+                                                           :fn #'test-hdl-vhdl-ts-beautify-block-at-point-fn)
+                                    (file-name-concat test-hdl-vhdl-ts-mode-beautify-dir "ref" (test-hdl-basename file "beauty.block.app.vhd")))))))
 
 
 
