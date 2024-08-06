@@ -83,7 +83,8 @@ Byte-compile otherwise."
 (defvar test-hdl-dump-diff-on-error t)
 
 (cl-defun test-hdl-process-file-fn (&key file out-file process-fn fn args)
-  (let (ret-val)
+  (let ((ret-val)
+        (pp-default-function #'pp-29)) ; INFO: Added to unify `pp' output in Emacs 29 and 30 (Emacs 30 starts using `pp-fill')
     (pcase process-fn
       ;; Insert the evaluated value of FN into DUMP-FILE
       ('eval
