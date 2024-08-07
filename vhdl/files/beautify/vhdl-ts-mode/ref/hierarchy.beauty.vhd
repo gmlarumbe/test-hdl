@@ -1902,7 +1902,7 @@ begin
 
     axi_rready <=
     m_axis_tready when (read_start = '1' and (unsigned(transaction_rd_size)-1) >= unsigned(transaction_rd_counter)) else
-    '1'           when (read_start = '1' and (unsigned(burst_read_counter) <= C_M_AXI_BURST_LEN-1)) else
+    '1' when (read_start = '1' and (unsigned(burst_read_counter) <= C_M_AXI_BURST_LEN-1)) else
     '0';
 
     m_axis_tdest <= '0';
@@ -1917,7 +1917,7 @@ begin
 
     axi_wvalid <=
     s_axis_tvalid when ((m_axi_wready = '1') and ((unsigned(transaction_wr_size)-1) >= unsigned(transaction_wr_counter))) else
-    '1'           when ((write_start = '1') and (unsigned(burst_write_counter) <= C_M_AXI_BURST_LEN-1)) else
+    '1' when ((write_start = '1') and (unsigned(burst_write_counter) <= C_M_AXI_BURST_LEN-1)) else
     '0';
 
     s_axis_tready <= m_axi_wready when ((m_axi_wready = '1') and ((unsigned(transaction_wr_size)-1) >= unsigned(transaction_wr_counter))) else
