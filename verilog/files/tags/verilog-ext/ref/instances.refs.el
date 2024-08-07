@@ -1,4 +1,4 @@
-#s(hash-table size 97 test equal data
+#s(hash-table test equal data
 	      (("instances" :file "verilog/files/common/instances.sv" :line 20)
 	       (:desc "module instances;" :col 16)
 	       ("block0" :file "verilog/files/common/instances.sv" :line 23)

@@ -1,4 +1,4 @@
-#s(hash-table size 1642 test equal data
+#s(hash-table test equal data
 	      (("QUESTA" :file "verilog/files/common/axi_demux.sv" :line 18)
 	       (:desc "`ifdef QUESTA" :col 13)
 	       ("TARGET_VSIM" :file "verilog/files/common/axi_demux.sv" :line 21)

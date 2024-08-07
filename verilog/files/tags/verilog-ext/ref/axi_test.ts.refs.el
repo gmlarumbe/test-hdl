@@ -1,4 +1,4 @@
-#s(hash-table size 5541 test equal data
+#s(hash-table test equal data
 	      (("axi_test" :file "verilog/files/common/axi_test.sv" :line 20)
 	       (:desc "package axi_test;" :col 8)
 	       ("axi_pkg" :file "verilog/files/common/axi_test.sv" :line 22)

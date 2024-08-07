@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("ucontroller" :file "verilog/files/common/ucontroller.sv" :line 21)
 	       (:type "module" :desc "module ucontroller # (" :col 18)
 	       ("FREQ_CLK" :file "verilog/files/common/ucontroller.sv" :line 22)

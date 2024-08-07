@@ -1,4 +1,4 @@
-#s(hash-table size 145 test equal data
+#s(hash-table test equal data
 	      (("axi_demux" :file "verilog/files/common/axi_demux.sv" :line 40)
 	       (:type "module" :desc "module axi_demux #(" :col 16)
 	       ("AxiIdWidth" :file "verilog/files/common/axi_demux.sv" :line 41)

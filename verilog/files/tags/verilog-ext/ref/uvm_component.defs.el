@@ -1,4 +1,4 @@
-#s(hash-table size 145 test equal data
+#s(hash-table test equal data
 	      (("uvm_component" :file "verilog/files/common/uvm_component.svh" :line 49)
 	       (:type "class" :desc "virtual class uvm_component extends uvm_report_object;" :col 27 :parent nil)
 	       ("get_full_name" :file "verilog/files/common/uvm_component.svh" :line 93)

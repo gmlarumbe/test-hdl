@@ -1,4 +1,4 @@
-#s(hash-table size 2463 test equal data
+#s(hash-table test equal data
 	      (("uvm_objection" :file "verilog/files/common/uvm_component.svh" :line 32)
 	       (:desc "typedef class uvm_objection;" :col 27)
 	       ("uvm_sequence_base" :file "verilog/files/common/uvm_component.svh" :line 33)

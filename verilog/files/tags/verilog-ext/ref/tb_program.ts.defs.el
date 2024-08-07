@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("Clk" :file "verilog/files/common/tb_program.sv" :line 24)
 	       (:type "input logic" :desc "    input logic         Clk," :col 4 :parent "tb_program")
 	       ("Rst_n" :file "verilog/files/common/tb_program.sv" :line 25)

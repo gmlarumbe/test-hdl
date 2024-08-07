@@ -99,7 +99,8 @@ Byte-compile otherwise."
                 (pp ret-val (current-buffer))
                 (goto-char (point-min))
                 (kill-line)
-                (insert (format "#s(hash-table size %s test %s data" (hash-table-size ret-val) (hash-table-test ret-val))))
+                ;; INFO: Do not print size since Emacs 29 and 30 handle hash-tables differently
+                (insert (format "#s(hash-table test %s data" (hash-table-test ret-val))))
                (t
                 (pp ret-val (current-buffer))))))
       ;; Insert the evaluated value of FN into DUMP-FILE without temp buffers (ff = find-file)
@@ -115,7 +116,8 @@ Byte-compile otherwise."
                 (pp ret-val (current-buffer))
                 (goto-char (point-min))
                 (kill-line)
-                (insert (format "#s(hash-table size %s test %s data" (hash-table-size ret-val) (hash-table-test ret-val))))
+                ;; INFO: Do not print size since Emacs 29 and 30 handle hash-tables differently
+                (insert (format "#s(hash-table test %s data" (hash-table-test ret-val))))
                (t
                 (pp ret-val (current-buffer)))))
        (kill-buffer (get-file-buffer file)))

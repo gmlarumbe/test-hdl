@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("foo" :file "verilog/files/common/misc.sv" :line 2)
 	       (:desc "module foo" :col 7)
 	       ("bar_pkg" :file "verilog/files/common/misc.sv" :line 3)

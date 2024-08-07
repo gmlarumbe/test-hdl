@@ -1,4 +1,4 @@
-#s(hash-table size 730 test equal data
+#s(hash-table test equal data
 	      (("name" :file "verilog/files/common/uvm_component.svh" :line 66)
 	       (:type "string" :desc "  extern function new (string name, uvm_component parent);" :col 23 :parent "new")
 	       ("parent" :file "verilog/files/common/uvm_component.svh" :line 66)

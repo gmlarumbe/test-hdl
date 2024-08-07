@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("tb_program" :file "verilog/files/common/tb_program.sv" :line 23)
 	       (:type "module" :desc "module automatic tb_program (" :col 27)
 	       ("Clk" :file "verilog/files/common/tb_program.sv" :line 24)

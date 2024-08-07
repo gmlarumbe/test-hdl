@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("clk" :file "verilog/files/common/misc.sv" :line 6)
 	       (:type "input wire" :desc "  input wire clk," :col 2 :parent "foo")
 	       ("rst" :file "verilog/files/common/misc.sv" :line 7)

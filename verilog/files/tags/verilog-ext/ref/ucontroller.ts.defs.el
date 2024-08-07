@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("FREQ_CLK" :file "verilog/files/common/ucontroller.sv" :line 22)
 	       (:type "parameter_declaration" :desc "    parameter logic [31:0] FREQ_CLK = 100000000," :col 4 :parent "ucontroller")
 	       ("TX_SPEED" :file "verilog/files/common/ucontroller.sv" :line 23)

@@ -1,4 +1,4 @@
-#s(hash-table size 730 test equal data
+#s(hash-table test equal data
 	      (("AW" :file "verilog/files/common/axi_test.sv" :line 26)
 	       (:type "parameter_declaration" :desc "    parameter int  AW = 32  ," :col 4 :parent "axi_lite_driver")
 	       ("DW" :file "verilog/files/common/axi_test.sv" :line 27)
