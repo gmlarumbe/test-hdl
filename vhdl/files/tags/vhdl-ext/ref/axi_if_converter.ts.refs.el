@@ -1,4 +1,4 @@
-#s(hash-table size 1642 test equal data
+#s(hash-table test equal data
 	      (("ieee" :file "vhdl/files/common/axi_if_converter.vhd" :line 1)
 	       (:desc "library ieee;" :col 8)
 	       ("xil_defaultlib" :file "vhdl/files/common/axi_if_converter.vhd" :line 2)

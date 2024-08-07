@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("clk" :file "vhdl/files/common/sexp.vhd" :line 28)
 	       (:type "signal_interface_declaration" :desc "        clk    : in std_logic;" :col 8 :parent "foo")
 	       ("resetn" :file "vhdl/files/common/sexp.vhd" :line 29)

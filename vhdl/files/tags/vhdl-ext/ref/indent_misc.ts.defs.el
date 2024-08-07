@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("foo" :file "vhdl/files/common/indent_misc.vhd" :line 14)
 	       (:type "entity_declaration" :desc "entity foo is" :col 0 :parent nil)
 	       ("indent" :file "vhdl/files/common/indent_misc.vhd" :line 21)

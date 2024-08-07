@@ -1,4 +1,4 @@
-#s(hash-table size 325 test equal data
+#s(hash-table test equal data
 	      (("ieee" :file "vhdl/files/common/indent_misc.vhd" :line 7)
 	       (:desc "library ieee, work;" :col 8)
 	       ("work" :file "vhdl/files/common/indent_misc.vhd" :line 7)

@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("conversion_op" :file "vhdl/files/common/global_pkg.vhd" :line 11)
 	       (:type "full_type_declaration" :desc "    type conversion_op is (S2MM, MM2S);" :col 4 :parent "global")
 	       ("op_type" :file "vhdl/files/common/global_pkg.vhd" :line 14)

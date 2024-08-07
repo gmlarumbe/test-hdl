@@ -1,4 +1,4 @@
-#s(hash-table size 487 test equal data
+#s(hash-table test equal data
 	      (("STD" :file "vhdl/files/common/std_logic_1164.vhdl" :line 54)
 	       (:desc "use STD.TEXTIO.all;" :col 4)
 	       ("TEXTIO" :file "vhdl/files/common/std_logic_1164.vhdl" :line 54)

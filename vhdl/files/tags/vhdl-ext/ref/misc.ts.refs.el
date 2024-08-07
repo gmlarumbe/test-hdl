@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("misc" :file "vhdl/files/common/misc.vhd" :line 25)
 	       (:desc "entity misc is" :col 7)
 	       ("misc" :file "vhdl/files/common/misc.vhd" :line 26)

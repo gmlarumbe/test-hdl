@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal data
+#s(hash-table test equal data
 	      (("instances" :file "vhdl/files/common/instances.vhd" :line 26)
 	       (:type "entity_declaration" :desc "entity instances is" :col 0 :parent nil)
 	       ("Generic0" :file "vhdl/files/common/instances.vhd" :line 32)
