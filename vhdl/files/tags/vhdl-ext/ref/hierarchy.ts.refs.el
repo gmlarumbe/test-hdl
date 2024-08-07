@@ -1,4 +1,4 @@
-#s(hash-table size 5541 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 5541 test equal data
 	      (("ieee" :file "vhdl/files/common/hierarchy.vhd" :line 22)
 	       (:desc "library ieee;" :col 8)
 	       ("xil_defaultlib" :file "vhdl/files/common/hierarchy.vhd" :line 23)

@@ -1,4 +1,4 @@
-#s(hash-table size 217 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 217 test equal data
 	      (("STD_ULOGIC" :file "vhdl/files/common/std_logic_1164.vhdl" :line 61)
 	       (:type "full_type_declaration" :desc "  type STD_ULOGIC is ( 'U',             -- Uninitialized" :col 2 :parent "std_logic_1164")
 	       ("STD_ULOGIC_VECTOR" :file "vhdl/files/common/std_logic_1164.vhdl" :line 75)

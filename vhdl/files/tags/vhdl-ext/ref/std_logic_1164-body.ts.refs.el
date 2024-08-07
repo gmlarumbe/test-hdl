@@ -1,4 +1,4 @@
-#s(hash-table size 2463 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 2463 test equal data
 	      (("std_logic_1164" :file "vhdl/files/common/std_logic_1164-body.vhdl" :line 54)
 	       (:desc "package body std_logic_1164 is" :col 13)
 	       ("stdlogic_1d" :file "vhdl/files/common/std_logic_1164-body.vhdl" :line 58)

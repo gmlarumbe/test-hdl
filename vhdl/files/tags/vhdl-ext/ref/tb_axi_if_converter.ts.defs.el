@@ -1,4 +1,4 @@
-#s(hash-table size 217 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 217 test equal data
 	      (("tb_axi_if_converter" :file "vhdl/files/common/tb_axi_if_converter.vhd" :line 13)
 	       (:type "entity_declaration" :desc "entity tb_axi_if_converter is" :col 0 :parent nil)
 	       ("C_S_AXI_DATA_WIDTH" :file "vhdl/files/common/tb_axi_if_converter.vhd" :line 20)

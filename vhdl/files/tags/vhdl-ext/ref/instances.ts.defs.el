@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 65 test equal data
 	      (("instances" :file "vhdl/files/common/instances.vhd" :line 26)
 	       (:type "entity_declaration" :desc "entity instances is" :col 0 :parent nil)
 	       ("Generic0" :file "vhdl/files/common/instances.vhd" :line 32)

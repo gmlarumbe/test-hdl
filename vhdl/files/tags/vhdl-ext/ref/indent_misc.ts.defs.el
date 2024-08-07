@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 65 test equal data
 	      (("foo" :file "vhdl/files/common/indent_misc.vhd" :line 14)
 	       (:type "entity_declaration" :desc "entity foo is" :col 0 :parent nil)
 	       ("indent" :file "vhdl/files/common/indent_misc.vhd" :line 21)
@@ -54,4 +54,16 @@
 	       ("S1" :file "vhdl/files/common/indent_misc.vhd" :line 141)
 	       (:type "signal_declaration" :desc "signal S1 : BIT;" :col 0 :parent "arch")
 	       ("arch" :file "vhdl/files/common/indent_misc.vhd" :line 122)
-	       (:type "architecture_body" :desc "architecture arch of block_test is" :col 0 :parent nil)))
+	       (:type "architecture_body" :desc "architecture arch of block_test is" :col 0 :parent nil)
+	       ("clock, reset, button" :file "vhdl/files/common/indent_misc.vhd" :line 156)
+	       (:type "signal_interface_declaration" :desc "    clock, reset, button : in  std_logic;" :col 4 :parent "traffic_light_fsm")
+	       ("leds" :file "vhdl/files/common/indent_misc.vhd" :line 157)
+	       (:type "signal_interface_declaration" :desc "    leds                 : out std_logic_vector(2 downto 0));  -- red, yellow, green" :col 4 :parent "traffic_light_fsm")
+	       ("traffic_light_fsm" :file "vhdl/files/common/indent_misc.vhd" :line 154)
+	       (:type "entity_declaration" :desc "entity traffic_light_fsm is" :col 0 :parent nil)
+	       ("state_type" :file "vhdl/files/common/indent_misc.vhd" :line 161)
+	       (:type "full_type_declaration" :desc "  type state_type is (RED, YELLOW, GREEN, RED_YELLOW);" :col 2 :parent "rtl")
+	       ("state_reg, state_next" :file "vhdl/files/common/indent_misc.vhd" :line 162)
+	       (:type "signal_declaration" :desc "  signal state_reg, state_next : state_type;" :col 2 :parent "rtl")
+	       ("rtl" :file "vhdl/files/common/indent_misc.vhd" :line 160)
+	       (:type "architecture_body" :desc "architecture rtl of traffic_light_fsm is" :col 0 :parent nil)))

@@ -144,3 +144,60 @@ S1 «:vhdl-ext-font-lock-punctuation-face:<=» PB1 «k:after» Delay«:vhdl-ext-
 PB2 «:vhdl-ext-font-lock-punctuation-face:<=» S1 «k:after» GB1«:vhdl-ext-font-lock-punctuation-face:,» P1 «k:after» GB2«:vhdl-ext-font-lock-punctuation-face:;»
 «k:end» «k:block» «f:LEVEL1»«:vhdl-ext-font-lock-punctuation-face:;»
 «k:end» «k:architecture» «f:arch»«:vhdl-ext-font-lock-punctuation-face:;»
+
+
+«m:-- »«x:6) Issue #6: Conditional signal assignment and selected signal assignment
+»«m:-- »«x:(https://github.com/gmlarumbe/vhdl-ts-mode/issues/6)
+»«k:library» «b:ieee»«:vhdl-ext-font-lock-punctuation-face:;»
+«k:use» «b:ieee»«:vhdl-ext-font-lock-operator-face:.»«b:std_logic_1164»«:vhdl-ext-font-lock-operator-face:.»«k:all»«:vhdl-ext-font-lock-punctuation-face:;»
+
+«k:entity» «f:traffic_light_fsm» «k:is»
+  «k:port» «:vhdl-ext-font-lock-parenthesis-face:(»
+    clock«:vhdl-ext-font-lock-punctuation-face:,» reset«:vhdl-ext-font-lock-punctuation-face:,» button «:vhdl-ext-font-lock-punctuation-face::» «k:in»  «t:std_logic»«:vhdl-ext-font-lock-punctuation-face:;»
+    leds                 «:vhdl-ext-font-lock-punctuation-face::» «k:out» «t:std_logic_vector»«:vhdl-ext-font-lock-parenthesis-face:(»«:vhdl-ext-font-lock-brackets-content-face:2» «:vhdl-ext-font-lock-instance-lib-face:downto» «:vhdl-ext-font-lock-brackets-content-face:0»«:vhdl-ext-font-lock-parenthesis-face:))»«:vhdl-ext-font-lock-punctuation-face:;»  «m:-- »«x:red, yellow, green
+»«k:end» «k:entity» «f:traffic_light_fsm»«:vhdl-ext-font-lock-punctuation-face:;»
+
+«k:architecture» «f:rtl» «k:of» «f:traffic_light_fsm» «k:is»
+  «k:type» «t:state_type» «k:is» «:vhdl-ext-font-lock-parenthesis-face:(»RED«:vhdl-ext-font-lock-punctuation-face:,» YELLOW«:vhdl-ext-font-lock-punctuation-face:,» GREEN«:vhdl-ext-font-lock-punctuation-face:,» RED_YELLOW«:vhdl-ext-font-lock-parenthesis-face:)»«:vhdl-ext-font-lock-punctuation-face:;»
+  «k:signal» state_reg«:vhdl-ext-font-lock-punctuation-face:,» state_next «:vhdl-ext-font-lock-punctuation-face::» state_type«:vhdl-ext-font-lock-punctuation-face:;»
+«k:begin»  «m:-- »«x:architecture rtl
+»
+  REG «:vhdl-ext-font-lock-punctuation-face::» «k:process» «:vhdl-ext-font-lock-parenthesis-face:(»clock«:vhdl-ext-font-lock-punctuation-face:,» reset«:vhdl-ext-font-lock-parenthesis-face:)» «k:is»
+  «k:begin»  «m:-- »«x:process REG
+»    «k:if» reset «:vhdl-ext-font-lock-punctuation-face:=» «s:'1'» «:vhdl-ext-font-lock-then-face:then»                 «m:-- »«x:asynchronous reset (active low)
+»      state_reg «:vhdl-ext-font-lock-punctuation-face:<=» RED«:vhdl-ext-font-lock-punctuation-face:;»
+    «k:elsif» «b:rising_edge»«:vhdl-ext-font-lock-parenthesis-face:(»clock«:vhdl-ext-font-lock-parenthesis-face:)» «:vhdl-ext-font-lock-then-face:then»       «m:-- »«x:rising clock edge
+»      state_reg «:vhdl-ext-font-lock-punctuation-face:<=» state_next«:vhdl-ext-font-lock-punctuation-face:;»
+    «k:end» «k:if»«:vhdl-ext-font-lock-punctuation-face:;»
+  «k:end» «k:process» «f:REG»«:vhdl-ext-font-lock-punctuation-face:;»
+
+  NSL «:vhdl-ext-font-lock-punctuation-face::» state_next «:vhdl-ext-font-lock-punctuation-face:<=» RED_YELLOW «k:when» state_reg «:vhdl-ext-font-lock-punctuation-face:=» RED «k:and» button «:vhdl-ext-font-lock-punctuation-face:=» «s:'1'» «k:else»
+                      GREEN  «k:when» state_reg «:vhdl-ext-font-lock-punctuation-face:=» RED_YELLOW «k:else»
+                      YELLOW «k:when» state_reg «:vhdl-ext-font-lock-punctuation-face:=» GREEN «k:and» button «:vhdl-ext-font-lock-punctuation-face:=» «s:'1'» «k:else»
+                      RED    «k:when» state_reg «:vhdl-ext-font-lock-punctuation-face:=» YELLOW «k:else»
+                      state_reg«:vhdl-ext-font-lock-punctuation-face:;»
+
+  OL «:vhdl-ext-font-lock-punctuation-face::» «k:with» state_reg «k:select»
+    leds «:vhdl-ext-font-lock-punctuation-face:<=»
+    «s:"100"» «k:when» RED«:vhdl-ext-font-lock-punctuation-face:,»
+    «s:"110"» «k:when» RED_YELLOW«:vhdl-ext-font-lock-punctuation-face:,»
+    «s:"001"» «k:when» GREEN«:vhdl-ext-font-lock-punctuation-face:,»
+    «s:"010"» «k:when» YELLOW«:vhdl-ext-font-lock-punctuation-face:,»
+    «s:"---"» «k:when» «k:others»«:vhdl-ext-font-lock-punctuation-face:;»
+
+  «m:-- »«x:INFO: Not present in #6, added for testing
+»  «k:with» state_reg «k:select»
+    leds «:vhdl-ext-font-lock-punctuation-face:<=» «s:"100"» «k:when» RED«:vhdl-ext-font-lock-punctuation-face:,»
+            «s:"110"» «k:when» RED_YELLOW«:vhdl-ext-font-lock-punctuation-face:,»
+            «s:"001"» «k:when» GREEN«:vhdl-ext-font-lock-punctuation-face:,»
+            «s:"010"» «k:when» YELLOW«:vhdl-ext-font-lock-punctuation-face:,»
+            «s:"---"» «k:when» «k:others»«:vhdl-ext-font-lock-punctuation-face:;»
+
+  «m:-- »«x:INFO: Not present in #6, added for testing
+»  «k:with» state_reg «k:select» leds «:vhdl-ext-font-lock-punctuation-face:<=» «s:"100"» «k:when» RED«:vhdl-ext-font-lock-punctuation-face:,»
+                                «s:"110"» «k:when» RED_YELLOW«:vhdl-ext-font-lock-punctuation-face:,»
+                                «s:"001"» «k:when» GREEN«:vhdl-ext-font-lock-punctuation-face:,»
+                                «s:"010"» «k:when» YELLOW«:vhdl-ext-font-lock-punctuation-face:,»
+                                «s:"---"» «k:when» «k:others»«:vhdl-ext-font-lock-punctuation-face:;»
+
+«k:end» «k:architecture» «f:rtl»«:vhdl-ext-font-lock-punctuation-face:;»

@@ -479,6 +479,26 @@
 	 (face font-lock-keyword-face fontified nil))
        #s(xref-file-location "hierarchy.vhd" 3134 0))
     #s(xref-item
+       #("architecture RTL of traffic_light_fsm is" 0 12
+	 (face font-lock-keyword-face fontified nil)
+	 12 13
+	 (fontified nil)
+	 13 16
+	 (face vhdl-ext-xref-match-face)
+	 16 17
+	 (fontified nil)
+	 17 19
+	 (face font-lock-keyword-face fontified nil)
+	 19 20
+	 (fontified nil)
+	 20 37
+	 (face font-lock-function-name-face fontified nil)
+	 37 38
+	 (fontified nil)
+	 38 40
+	 (face font-lock-keyword-face fontified nil))
+       #s(xref-file-location "indent_misc.vhd" 160 0))
+    #s(xref-item
        #("architecture RTL of instances is" 0 12
 	 (face font-lock-keyword-face fontified nil)
 	 12 13

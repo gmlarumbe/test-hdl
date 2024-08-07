@@ -1,4 +1,4 @@
-#s(hash-table size 730 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 730 test equal data
 	      (("clk" :file "vhdl/files/common/hierarchy.vhd" :line 33)
 	       (:type "signal_interface_declaration" :desc "        clk        : in std_logic;" :col 8 :parent "axi_if_converter")
 	       ("resetn" :file "vhdl/files/common/hierarchy.vhd" :line 34)

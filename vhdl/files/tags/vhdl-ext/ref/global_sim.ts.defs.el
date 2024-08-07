@@ -1,4 +1,4 @@
-#s(hash-table size 217 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 217 test equal data
 	      (("AXI_CLK_T" :file "vhdl/files/common/global_sim.vhd" :line 12)
 	       (:type "constant_declaration" :desc "    constant AXI_CLK_T : time := 6.4 ns;" :col 4 :parent "global_sim")
 	       ("FS_CLK_T" :file "vhdl/files/common/global_sim.vhd" :line 13)

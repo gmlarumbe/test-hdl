@@ -1,4 +1,4 @@
-#s(hash-table size 487 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 487 test equal data
 	      (("IEEE" :file "vhdl/files/common/global_sim.vhd" :line 1)
 	       (:desc "library IEEE;" :col 8)
 	       ("IEEE" :file "vhdl/files/common/global_sim.vhd" :line 2)
