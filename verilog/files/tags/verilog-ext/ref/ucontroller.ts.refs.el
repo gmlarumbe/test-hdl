@@ -1,4 +1,4 @@
-#s(hash-table size 217 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 217 test equal data
 	      (("ucontroller" :file "verilog/files/common/ucontroller.sv" :line 21)
 	       (:desc "module ucontroller # (" :col 7)
 	       ("FREQ_CLK" :file "verilog/files/common/ucontroller.sv" :line 22)

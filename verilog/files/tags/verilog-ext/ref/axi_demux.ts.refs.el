@@ -1,4 +1,4 @@
-#s(hash-table size 1642 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 1642 test equal data
 	      (("QUESTA" :file "verilog/files/common/axi_demux.sv" :line 18)
 	       (:desc "`ifdef QUESTA" :col 7)
 	       ("TARGET_VSIM" :file "verilog/files/common/axi_demux.sv" :line 21)

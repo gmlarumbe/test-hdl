@@ -1,4 +1,4 @@
-#s(hash-table size 145 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 145 test equal data
 	      (("global_pkg" :file "verilog/files/common/tb_program.sv" :line 21)
 	       (:desc "import global_pkg::*;" :col 7)
 	       ("tb_program" :file "verilog/files/common/tb_program.sv" :line 23)

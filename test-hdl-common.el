@@ -92,18 +92,32 @@ Byte-compile otherwise."
          (insert-file-contents file)
          (setq ret-val (apply fn args)))
        (with-temp-file out-file
-         (if (stringp ret-val)
-             (insert ret-val)
-           (pp ret-val (current-buffer)))))
+         (cond ((stringp ret-val)
+                (insert ret-val))
+               ((hash-table-p ret-val)
+                ;; INFO: Unify hash-table representation between princ of Emacs 29 and Emacs 30 (needed for CI)
+                (pp ret-val (current-buffer))
+                (goto-char (point-min))
+                (kill-line)
+                (insert (format "#s(hash-table size %s test %s data" (hash-table-size ret-val) (hash-table-test ret-val))))
+               (t
+                (pp ret-val (current-buffer))))))
       ;; Insert the evaluated value of FN into DUMP-FILE without temp buffers (ff = find-file)
       ('eval-ff
        (test-hdl-no-messages
-         (find-file file))
+        (find-file file))
        (setq ret-val (apply fn args))
        (with-temp-file out-file
-         (if (stringp ret-val)
-             (insert ret-val)
-           (pp ret-val (current-buffer))))
+         (cond ((stringp ret-val)
+                (insert ret-val))
+               ((hash-table-p ret-val)
+                ;; INFO: Unify hash-table representation between princ of Emacs 29 and Emacs 30 (needed for CI)
+                (pp ret-val (current-buffer))
+                (goto-char (point-min))
+                (kill-line)
+                (insert (format "#s(hash-table size %s test %s data" (hash-table-size ret-val) (hash-table-test ret-val))))
+               (t
+                (pp ret-val (current-buffer)))))
        (kill-buffer (get-file-buffer file)))
       ;; Save buffer after running FN, for buffer-modifier functions without temp buffers
       ('modify-ff

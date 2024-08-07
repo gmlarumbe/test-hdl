@@ -1,4 +1,4 @@
-#s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 65 test equal data
 	      (("tb_program" :file "verilog/files/common/tb_program.sv" :line 23)
 	       (:type "module" :desc "module automatic tb_program (" :col 27)
 	       ("Clk" :file "verilog/files/common/tb_program.sv" :line 24)

@@ -1,4 +1,4 @@
-#s(hash-table size 217 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 217 test equal data
 	      (("TARGET_VSIM" :file "verilog/files/common/axi_demux.sv" :line 21)
 	       (:type "text_macro_definition" :desc "`define TARGET_VSIM" :col 0 :parent nil)
 	       ("AxiIdWidth" :file "verilog/files/common/axi_demux.sv" :line 41)

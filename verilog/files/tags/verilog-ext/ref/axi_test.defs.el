@@ -1,4 +1,4 @@
-#s(hash-table size 730 test equal rehash-size 1.5 rehash-threshold 0.8125 data
+#s(hash-table size 730 test equal data
 	      (("axi_test" :file "verilog/files/common/axi_test.sv" :line 20)
 	       (:type "package" :desc "package axi_test;" :col 16)
 	       ("AW" :file "verilog/files/common/axi_test.sv" :line 26)
