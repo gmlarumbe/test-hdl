@@ -27,10 +27,10 @@ module m;
 
     // bug1169
     assign a = t ?
-    m :
-    n;
+	       m :
+	       n;
     assign a = z ?
-    m :
-    n;
+	       m :
+	       n;
 
 endmodule

@@ -9,7 +9,7 @@ class temp;
 	foo = 1;
     endfunction // foo
     extern function test3();
-    reg [31:0] b;
+	reg [31:0] b;
 endclass // temp
 
 class short extends temp;

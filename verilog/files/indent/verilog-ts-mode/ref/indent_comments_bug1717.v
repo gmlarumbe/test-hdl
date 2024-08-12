@@ -1,6 +1,6 @@
 // Bug 1717
 module test
-(input wire test5 // bla
+    (input wire test5 // bla
     /*AUTOARG*/);
 
     `include "bla.vh"

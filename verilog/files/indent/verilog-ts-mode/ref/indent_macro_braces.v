@@ -4,6 +4,6 @@
 module m;
     if(x)
 	`ovm_do_with(my,
-	{ y == 1;
-	z == 2; });
+		     { y == 1;
+			 z == 2; });
 endmodule

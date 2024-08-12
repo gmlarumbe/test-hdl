@@ -7,20 +7,20 @@ module foo (
 		       output b);
 
 	if (some_long_name * some_other_long_name &&
-	something_here < something_else &&
-	something_here < something_else) begin
-	    b = a;
-	end
+	    something_here < something_else &&
+	    something_here < something_else) begin
+		b = a;
+	    end
 
 	if ((some_long_name * some_other_long_name &&
-	something_here < something_else &&
-	something_here < something_else)) begin
-	    b = a;
-	end
+	    something_here < something_else &&
+	    something_here < something_else)) begin
+		b = a;
+	    end
 
 	if ((      some_long_name * some_other_long_name &&
-	something_here < something_else &&
-	something_here < something_else
+	    something_here < something_else &&
+	    something_here < something_else
 	)) begin
 	    b = a;
 	end

@@ -6,7 +6,7 @@
  ("generate_region" . 1627)
  ("generate_region" . 1634)
  ("generate_region" . 1635)
- ("interface_instantiation" . 1764)
+ ("module_instantiation" . 1764)
  ("generate_region" . 1984)
  ("generate_region" . 1995)
  ("generate_region" . 1996)

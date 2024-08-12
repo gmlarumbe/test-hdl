@@ -57,7 +57,7 @@
 
     «x:// Generate»
     «k:generate»
-        «k:for» «:verilog-ts-font-lock-parenthesis-face:(»«k:genvar» i«:verilog-ts-font-lock-punctuation-face:=»0«:verilog-ts-font-lock-punctuation-face:;» i«:verilog-ts-font-lock-punctuation-face:<»VALUE«:verilog-ts-font-lock-punctuation-face:;» i«:verilog-ts-font-lock-punctuation-face:++»«:verilog-ts-font-lock-parenthesis-face:)» «:verilog-ts-font-lock-grouping-keywords-face:begin» «:verilog-ts-font-lock-punctuation-face::» gen_test
+        «k:for» «:verilog-ts-font-lock-parenthesis-face:(»«k:genvar» i«:verilog-ts-font-lock-punctuation-face:=»0«:verilog-ts-font-lock-punctuation-face:;» i«:verilog-ts-font-lock-punctuation-face:<»VALUE«:verilog-ts-font-lock-punctuation-face:;» i«:verilog-ts-font-lock-operator-face:++»«:verilog-ts-font-lock-parenthesis-face:)» «:verilog-ts-font-lock-grouping-keywords-face:begin» «:verilog-ts-font-lock-punctuation-face::» gen_test
 
             «:verilog-ts-font-lock-module-face:block_gen» «:verilog-ts-font-lock-time-event-face:#»«:verilog-ts-font-lock-parenthesis-face:(»
                 «:verilog-ts-font-lock-operator-face:.»«:verilog-ts-font-lock-port-connection-face:Param0» «:verilog-ts-font-lock-parenthesis-face:(»Param0«:verilog-ts-font-lock-parenthesis-face:)»«:verilog-ts-font-lock-punctuation-face:,»

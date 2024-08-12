@@ -6,7 +6,7 @@
   ("block3 (inst)" . #<marker at 1427 in instances.sv>)
   ("i (gen)..."
    ("gen" . #<marker at 1627 in instances.sv>)
-   ("block_gen (nil)" . #<marker at 1705 in instances.sv>))
+   ("block_gen (inst)" . #<marker at 1705 in instances.sv>))
   ("test_if (inst)" . #<marker at 2021 in instances.sv>)
   ("test_if_params (inst)" . #<marker at 2072 in instances.sv>)
   ("test_if_params_array (inst)" . #<marker at 2173 in instances.sv>)

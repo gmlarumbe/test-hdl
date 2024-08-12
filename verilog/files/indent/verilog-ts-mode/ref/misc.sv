@@ -2,9 +2,9 @@
 module foo
     import bar_pkg::*;
     import baz_pkg::*;
-	(
+    (
     input wire clk,
     input wire rst
-	);
+    );
 
 endmodule // foo

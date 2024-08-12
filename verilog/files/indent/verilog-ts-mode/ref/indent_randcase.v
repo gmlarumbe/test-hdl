@@ -7,12 +7,12 @@ module aa;
 	    10 : begin
 		a = 1;
 	    end
-		15 : begin
-	b = 0;
-	c = 5;
-    end
-    endcase // randcase
+	    15 : begin
+		b = 0;
+		c = 5;
+	    end
+	endcase // randcase
 
-	end // initial begin
+    end // initial begin
 
 endmodule // a

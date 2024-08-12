@@ -13,7 +13,7 @@ module foo();
 	    d     <= 89;
 	    sdf    = sdf;
 	    adada  => asda;
-	    d     ->> g;
+		d     ->> g;
 	    aasd  <<<= 3;
 	    ccc   %= 6;
 	    d     *= b;
