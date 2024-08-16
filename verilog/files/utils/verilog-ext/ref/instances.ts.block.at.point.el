@@ -38,7 +38,7 @@
    (beg-point . 1627)
    (end-point . 1996))
   . 1635)
- (((type . "interface_instantiation")
+ (((type . "module_instantiation")
    (name . "block_gen")
    (beg-point . 1705)
    (end-point . 1956))

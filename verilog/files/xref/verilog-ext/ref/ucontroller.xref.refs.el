@@ -331,9 +331,7 @@
        (fontified nil)
        14 15
        (face verilog-ts-font-lock-width-num-face fontified nil)
-       15 16
-       (face verilog-ts-font-lock-punctuation-face fontified nil)
-       16 17
+       15 17
        (face verilog-ts-font-lock-width-type-face fontified nil)
        17 18
        (fontified nil)
@@ -353,9 +351,7 @@
 	 (fontified nil)
 	 14 15
 	 (face verilog-ts-font-lock-width-num-face fontified nil)
-	 15 16
-	 (face verilog-ts-font-lock-punctuation-face fontified nil)
-	 16 17
+	 15 17
 	 (face verilog-ts-font-lock-width-type-face fontified nil)
 	 17 18
 	 (fontified nil)
@@ -395,9 +391,7 @@
 	 (fontified nil)
 	 14 15
 	 (face verilog-ts-font-lock-width-num-face fontified nil)
-	 15 16
-	 (face verilog-ts-font-lock-punctuation-face fontified nil)
-	 16 17
+	 15 17
 	 (face verilog-ts-font-lock-width-type-face fontified nil)
 	 17 18
 	 (fontified nil)

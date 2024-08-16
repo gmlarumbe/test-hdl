@@ -287,30 +287,30 @@ module axi_demux #(
                 // requires an R response can be handled if additionally `i_ar_id_counter` is not full (this
                 // only applies if ATOPs are supported at all).
                 if (!aw_id_cnt_full && (w_open != {IdCounterWidth{1'b1}}) &&
-                (!(ar_id_cnt_full && slv_aw_chan.atop[axi_pkg::ATOP_R_RESP]) ||
-                !AtopSupport)) begin
-                    // There is a valid AW vector make the id lookup and go further, if it passes.
-                    // Also stall if previous transmitted AWs still have active W's in flight.
-                    // This prevents deadlocking of the W channel. The counters are there for the
-                    // Handling of the B responses.
-                    if (slv_aw_valid &&
-                    ((w_open == '0) || (w_select == slv_aw_select)) &&
-                    (!aw_select_occupied || (slv_aw_select == lookup_aw_select))) begin
-                        // connect the handshake
-                        aw_valid     = 1'b1;
-                        // push arbitration to the W FIFO regardless, do not wait for the AW transaction
-                        w_cnt_up     = 1'b1;
-                        // on AW transaction
-                        if (aw_ready) begin
-                            slv_aw_ready = 1'b1;
-                            atop_inject  = slv_aw_chan.atop[axi_pkg::ATOP_R_RESP] & AtopSupport;
-                            // no AW transaction this cycle, lock the decision
-                        end else begin
-                            lock_aw_valid_d = 1'b1;
-                            load_aw_lock    = 1'b1;
-                        end
+                    (!(ar_id_cnt_full && slv_aw_chan.atop[axi_pkg::ATOP_R_RESP]) ||
+                    !AtopSupport)) begin
+                        // There is a valid AW vector make the id lookup and go further, if it passes.
+                        // Also stall if previous transmitted AWs still have active W's in flight.
+                        // This prevents deadlocking of the W channel. The counters are there for the
+                        // Handling of the B responses.
+                        if (slv_aw_valid &&
+                            ((w_open == '0) || (w_select == slv_aw_select)) &&
+                            (!aw_select_occupied || (slv_aw_select == lookup_aw_select))) begin
+                                // connect the handshake
+                                aw_valid     = 1'b1;
+                                // push arbitration to the W FIFO regardless, do not wait for the AW transaction
+                                w_cnt_up     = 1'b1;
+                                // on AW transaction
+                                if (aw_ready) begin
+                                    slv_aw_ready = 1'b1;
+                                    atop_inject  = slv_aw_chan.atop[axi_pkg::ATOP_R_RESP] & AtopSupport;
+                                    // no AW transaction this cycle, lock the decision
+                                end else begin
+                                    lock_aw_valid_d = 1'b1;
+                                    load_aw_lock    = 1'b1;
+                                end
+                            end
                     end
-                end
             end
         end
 
@@ -491,19 +491,19 @@ module axi_demux #(
                 if (!ar_id_cnt_full) begin
                     // There is a valid AR, so look the ID up.
                     if (slv_ar_valid && (!ar_select_occupied ||
-                    (slv_ar_select == lookup_ar_select))) begin
-                        // connect the AR handshake
-                        ar_valid     = 1'b1;
-                        // on transaction
-                        if (ar_ready) begin
-                            slv_ar_ready = 1'b1;
-                            ar_push      = 1'b1;
-                            // no transaction this cycle, lock the valid decision!
-                        end else begin
-                            lock_ar_valid_d = 1'b1;
-                            load_ar_lock    = 1'b1;
+                        (slv_ar_select == lookup_ar_select))) begin
+                            // connect the AR handshake
+                            ar_valid     = 1'b1;
+                            // on transaction
+                            if (ar_ready) begin
+                                slv_ar_ready = 1'b1;
+                                ar_push      = 1'b1;
+                                // no transaction this cycle, lock the valid decision!
+                            end else begin
+                                lock_ar_valid_d = 1'b1;
+                                load_ar_lock    = 1'b1;
+                            end
                         end
-                    end
                 end
             end
         end
@@ -645,11 +645,11 @@ module axi_demux #(
         aw_select: assume property( @(posedge clk_i) (slv_req_i.aw_valid |->
             (slv_aw_select_i < NoMstPorts))) else
                 $fatal(1, "slv_aw_select_i is %d: AW has selected a slave that is not defined.\
-                    NoMstPorts: %d", slv_aw_select_i, NoMstPorts);
+                           NoMstPorts: %d", slv_aw_select_i, NoMstPorts);
         ar_select: assume property( @(posedge clk_i) (slv_req_i.ar_valid |->
             (slv_ar_select_i < NoMstPorts))) else
                 $fatal(1, "slv_ar_select_i is %d: AR has selected a slave that is not defined.\
-                    NoMstPorts: %d", slv_ar_select_i, NoMstPorts);
+                           NoMstPorts: %d", slv_ar_select_i, NoMstPorts);
         aw_valid_stable: assert property( @(posedge clk_i) (aw_valid && !aw_ready) |=> aw_valid) else
             $fatal(1, "aw_valid was deasserted, when aw_ready = 0 in last cycle.");
         ar_valid_stable: assert property( @(posedge clk_i)
@@ -797,7 +797,7 @@ module axi_demux_id_counters #(
         cnt_underflow: assert property(
             @(posedge clk_i) disable iff (~rst_ni) (pop_en[i] |=> !overflow)) else
                 $fatal(1, "axi_demux_id_counters > Counter: %0d underflowed.\
-                    The reason is probably a faulty AXI response.", i);
+                           The reason is probably a faulty AXI response.", i);
         `endif
         `endif
         // pragma translate_on

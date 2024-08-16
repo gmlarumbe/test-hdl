@@ -3295,6 +3295,46 @@
 	 (face verilog-ts-font-lock-punctuation-face fontified nil))
        #s(xref-file-location "axi_test.sv" 781 21))
     #s(xref-item
+       #("      automatic ax_beat_t ax_beat = new;" 0 6
+	 (fontified nil)
+	 6 15
+	 (face font-lock-keyword-face fontified nil)
+	 15 16
+	 (fontified nil)
+	 16 25
+	 (face font-lock-type-face fontified nil)
+	 25 34
+	 (fontified nil)
+	 34 35
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 35 36
+	 (fontified nil)
+	 36 39
+	 (face verilog-ext-xref-match-face)
+	 39 40
+	 (face verilog-ts-font-lock-punctuation-face fontified nil))
+       #s(xref-file-location "axi_test.sv" 820 36))
+    #s(xref-item
+       #("          automatic w_beat_t w_beat = new;" 0 10
+	 (fontified nil)
+	 10 19
+	 (face font-lock-keyword-face fontified nil)
+	 19 20
+	 (fontified nil)
+	 20 28
+	 (face font-lock-type-face fontified nil)
+	 28 36
+	 (fontified nil)
+	 36 37
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 37 38
+	 (fontified nil)
+	 38 41
+	 (face verilog-ext-xref-match-face)
+	 41 42
+	 (face verilog-ts-font-lock-punctuation-face fontified nil))
+       #s(xref-file-location "axi_test.sv" 1193 38))
+    #s(xref-item
        #("      this.drv = new(axi);" 0 6
 	 (fontified nil)
 	 6 10
@@ -3336,6 +3376,46 @@
 	 25 26
 	 (face verilog-ts-font-lock-punctuation-face fontified nil))
        #s(xref-file-location "axi_test.sv" 1314 22))
+    #s(xref-item
+       #("        automatic r_beat_t  r_beat = new;" 0 8
+	 (fontified nil)
+	 8 17
+	 (face font-lock-keyword-face fontified nil)
+	 17 18
+	 (fontified nil)
+	 18 26
+	 (face font-lock-type-face fontified nil)
+	 26 35
+	 (fontified nil)
+	 35 36
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 36 37
+	 (fontified nil)
+	 37 40
+	 (face verilog-ext-xref-match-face)
+	 40 41
+	 (face verilog-ts-font-lock-punctuation-face fontified nil))
+       #s(xref-file-location "axi_test.sv" 1353 37))
+    #s(xref-item
+       #("        automatic b_beat_t b_beat = new;" 0 8
+	 (fontified nil)
+	 8 17
+	 (face font-lock-keyword-face fontified nil)
+	 17 18
+	 (fontified nil)
+	 18 26
+	 (face font-lock-type-face fontified nil)
+	 26 34
+	 (fontified nil)
+	 34 35
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 35 36
+	 (fontified nil)
+	 36 39
+	 (face verilog-ext-xref-match-face)
+	 39 40
+	 (face verilog-ts-font-lock-punctuation-face fontified nil))
+       #s(xref-file-location "axi_test.sv" 1454 36))
     #s(xref-item
        #("      this.drv  = new(axi);" 0 6
 	 (fontified nil)
@@ -3385,6 +3465,64 @@
 	 (face verilog-ts-font-lock-punctuation-face fontified nil))
        #s(xref-file-location "axi_test.sv" 1698 17))
     #s(xref-item
+       #("    mailbox aw_mbx = new, w_mbx = new, b_mbx = new," 0 4
+	 (fontified nil)
+	 4 11
+	 (face font-lock-type-face fontified nil)
+	 11 19
+	 (fontified nil)
+	 19 20
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 20 21
+	 (fontified nil)
+	 21 24
+	 (face verilog-ext-xref-match-face)
+	 24 25
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 25 32
+	 (fontified nil)
+	 32 33
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 33 34
+	 (fontified nil)
+	 34 37
+	 (face verilog-ext-xref-match-face)
+	 37 38
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 38 45
+	 (fontified nil)
+	 45 46
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 46 47
+	 (fontified nil)
+	 47 50
+	 (face verilog-ext-xref-match-face)
+	 50 51
+	 (face verilog-ts-font-lock-punctuation-face fontified nil))
+       #s(xref-file-location "axi_test.sv" 1816 47))
+    #s(xref-item
+       #("            ar_mbx = new, r_mbx = new;" 0 19
+	 (fontified nil)
+	 19 20
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 20 21
+	 (fontified nil)
+	 21 24
+	 (face verilog-ext-xref-match-face)
+	 24 25
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 25 32
+	 (fontified nil)
+	 32 33
+	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 33 34
+	 (fontified nil)
+	 34 37
+	 (face verilog-ext-xref-match-face)
+	 37 38
+	 (face verilog-ts-font-lock-punctuation-face fontified nil))
+       #s(xref-file-location "axi_test.sv" 1817 34))
+    #s(xref-item
        #("      this.drv = new(axi);" 0 6
 	 (fontified nil)
 	 6 10
@@ -3419,8 +3557,16 @@
 	 (face verilog-ext-xref-match-face)
 	 28 29
 	 (face verilog-ts-font-lock-brackets-face fontified nil)
-	 29 47
-	 (face verilog-ts-font-lock-brackets-content-face fontified nil)
+	 29 36
+	 (face verilog-ts-font-lock-dot-name-face fontified nil)
+	 36 37
+	 (face verilog-ts-font-lock-operator-face fontified nil)
+	 37 44
+	 (fontified nil)
+	 44 45
+	 (face verilog-ts-font-lock-operator-face fontified nil)
+	 45 47
+	 (fontified nil)
 	 47 48
 	 (face verilog-ts-font-lock-brackets-face fontified nil)
 	 48 49
@@ -3486,6 +3632,24 @@
 	 29 30
 	 (face verilog-ts-font-lock-punctuation-face fontified nil))
        #s(xref-file-location "axi_test.sv" 2182 26))
+    #s(xref-item
+       #("  super.new(name);" 0 2
+	 (fontified nil)
+	 2 7
+	 (face font-lock-keyword-face fontified nil)
+	 7 8
+	 (face verilog-ts-font-lock-operator-face fontified nil)
+	 8 11
+	 (face verilog-ext-xref-match-face)
+	 11 12
+	 (face verilog-ts-font-lock-parenthesis-face fontified nil)
+	 12 16
+	 (fontified nil)
+	 16 17
+	 (face verilog-ts-font-lock-parenthesis-face fontified nil)
+	 17 18
+	 (face verilog-ts-font-lock-punctuation-face fontified nil))
+       #s(xref-file-location "uvm_component.svh" 1485 8))
     #s(xref-item
        #("  event_pool = new(\"event_pool\");" 0 13
 	 (fontified nil)
@@ -3717,7 +3881,7 @@
 	 24 25
 	 (fontified nil)
 	 25 27
-	 (face verilog-ts-font-lock-punctuation-face fontified nil)
+	 (face verilog-ts-font-lock-operator-face fontified nil)
 	 27 36
 	 (fontified nil)
 	 36 37
@@ -3886,8 +4050,10 @@
 	 (face verilog-ts-font-lock-punctuation-face fontified nil))
        #s(xref-file-location "uvm_component.svh" 2951 2)))
  (#s(xref-item
-     #("    m_children[i].m_do_pre_abort();" 0 14
+     #("    m_children[i].m_do_pre_abort();" 0 4
        (fontified nil)
+       4 14
+       (face verilog-ts-font-lock-dot-name-face fontified nil)
        14 15
        (face verilog-ts-font-lock-brackets-face fontified nil)
        15 16
