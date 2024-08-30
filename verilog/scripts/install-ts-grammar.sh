@@ -13,13 +13,13 @@ fi
 
 echo "Building tree-sitter verilog grammar"
 # Using forked version
-URL="https://github.com/gmlarumbe/tree-sitter-verilog.git"
+URL="https://github.com/gmlarumbe/tree-sitter-systemverilog.git"
 echo "Cloning $URL"
 git clone $URL --depth 1 --quiet
 
 ### Build
 echo "Building Verilog grammar..."
-cd tree-sitter-verilog/src
+cd tree-sitter-systemverilog/src
 cc -fPIC -c -I. parser.c
 cc -fPIC -shared *.o -o "libtree-sitter-verilog.${soext}"
 
@@ -30,5 +30,5 @@ mkdir -p $DESTDIR
 cp -v "libtree-sitter-verilog.${soext}" $DESTDIR
 ls -al $DESTDIR | grep libtree-sitter-verilog
 cd ../..
-rm -rf tree-sitter-verilog
+rm -rf tree-sitter-systemverilog
 
