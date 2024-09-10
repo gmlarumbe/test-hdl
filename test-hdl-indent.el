@@ -42,8 +42,9 @@
       (delete-horizontal-space)
       (forward-line 1)))
   ;; Re-indent with proper funcion
-  (test-hdl-no-messages
-    (funcall indent-fn)))
+  (let ((indent-tabs-mode nil))
+    (test-hdl-no-messages
+     (funcall indent-fn))))
 
 
 (provide 'test-hdl-indent)
