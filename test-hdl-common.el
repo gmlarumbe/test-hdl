@@ -24,7 +24,6 @@
 
 ;;; Code:
 
-
 ;;;; Performance utils
 (require 'profiler)
 
@@ -45,7 +44,7 @@
 ;;;; Utils
 (defmacro test-hdl-no-messages (&rest body)
   (declare (indent 0) (debug t))
-  `(let ((inhibit-message test-hdl-silence-tests))
+  `(let ((inhibit-message (not (getenv "TESTS_VERBOSE"))))
      ,@body))
 
 (defun test-hdl-directory-files (dir regex)
@@ -144,6 +143,8 @@ PROCESS-FN sets the function to be used for processing of the file. See
 Process them with FN and ARGS."
   (dolist (file file-list)
     (let ((out-file (file-name-concat dest-dir (test-hdl-basename file (or out-file-ext (file-name-extension file))))))
+      (unless (file-directory-p dest-dir)
+        (make-directory dest-dir :parents))
       (message "Processing %s" file)
       (test-hdl-process-file-fn :file file
                                 :out-file out-file
@@ -158,11 +159,16 @@ Process them with FN and ARGS."
   (let ((dump-dir (file-name-directory dump-file)))
     (unless (file-directory-p dump-dir)
       (make-directory dump-dir :parents))
+    (test-hdl-no-messages
+      (message "Processing %s" test-file))
     (test-hdl-process-file-fn :file test-file
                               :out-file dump-file
                               :process-fn process-fn
                               :fn fn
                               :args args)
+
+    (test-hdl-no-messages
+      (message "Dumped file %s" dump-file))
     dump-file))
 
 (defun test-hdl-files-equal (test-file ref-file &optional clean-fn)
@@ -176,7 +182,8 @@ Call CLEAN-FN after comparison if arg is provided."
                (insert-file-contents ref-file)
                (buffer-substring-no-properties (point-min) (point-max))))
       (progn
-        (delete-file test-file)
+        (unless (getenv "TESTS_KEEP_DUMP")
+          (delete-file test-file))
         (when clean-fn
           (funcall clean-fn))
         t)

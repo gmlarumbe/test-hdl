@@ -7,17 +7,15 @@
 # * Utils
 run_elisp_cmd() {
     local CMD=$1
-    local LANGUAGE=$2
-    local PACKAGE=$3
-    local PKG_MANAGER=$4
+    local PACKAGE=$2
+    local PKG_MANAGER=$3
 
     args=(-Q -nw -batch
-          -L $PWD/test-hdl
-          -L $PWD/test-hdl/$LANGUAGE
-          -L $PWD/test-hdl/$LANGUAGE/$PACKAGE
+          -L "${TEST_HDL_PATH}"
+          -L test/src
           -l ert
-          -l test-hdl-"${PACKAGE}"-setup-"${PKG_MANAGER}"
-          -l test-hdl-"${PACKAGE}"
+          -l "${PACKAGE}"-test-setup-"${PKG_MANAGER}"
+          -l "${PACKAGE}"-test
           --eval "$CMD")
 
     emacs "${args[@]}"
@@ -28,15 +26,10 @@ run_tests () {
     local RC=
     local CMD=
 
-    local LANGUAGE=$1
-    local PACKAGE=$2
-    local PKG_MANAGER=$3
-    local SELECTOR=$4
+    local PACKAGE=$1
+    local PKG_MANAGER=$2
+    local SELECTOR=$3
 
-    if [[ -z "$LANGUAGE" ]]; then
-        echo "run_tests: LANGUAGE not provided"
-        exit 1
-    fi
     if [[ -z "$PACKAGE" ]]; then
         echo "run_tests: PACKAGE not provided"
         exit 1
@@ -61,7 +54,7 @@ run_tests () {
         CMD="(ert-run-tests-batch-and-exit)"
     fi
 
-    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE" "$PKG_MANAGER"
+    run_elisp_cmd "$CMD" "$PACKAGE" "$PKG_MANAGER"
     RC=$?
     echo "Exiting with return code $RC"
     return $RC
@@ -71,16 +64,16 @@ run_tests () {
 check_package_el() {
     local RC=
 
-    local LANGUAGE=$1
-    local PACKAGE=$2
+    local PACKAGE=$1
 
     args=(-Q -nw -batch
-          -L $PWD/test-hdl
-          -L $PWD/test-hdl/$LANGUAGE
-          -L $PWD/test-hdl/$LANGUAGE/$PACKAGE
-          -l test-hdl-"${LANGUAGE}"-common
-          -l test-hdl-"${PACKAGE}"-setup-package-test
-          --eval "(test-hdl-${PACKAGE}-setup-package-test-basic)")
+          -L "${TEST_HDL_PATH}"
+          -L test/src
+          -l ert
+          -l "${PACKAGE}"-test-setup-package
+          -l "${PACKAGE}"-test
+          -l "${PACKAGE}"-test-setup-package-test
+          --eval "(${PACKAGE}-test-setup-package-test-basic)")
 
     emacs "${args[@]}"
     RC=$?
@@ -106,52 +99,48 @@ clean() {
 compile() {
     local CMD="(test-hdl-compile-dir \"$PWD\")"
 
-    local LANGUAGE=$1
-    local PACKAGE=$2
+    local PACKAGE=$1
 
     echo "###############"
     echo "## Compiling ##"
     echo "###############"
     echo ""
 
-    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE" "straight"
+    run_elisp_cmd "$CMD" "$PACKAGE" "straight"
     echo ""
 }
 
 
 recompile() {
-    local LANGUAGE=$1
-    local PACKAGE=$2
+    local PACKAGE=$1
 
     clean "$PACKAGE"
-    compile "$LANGUAGE" "$PACKAGE"
+    compile "$PACKAGE"
 }
 
 
 recompile_run () {
-    local LANGUAGE=$1
-    local PACKAGE=$2
-    local SELECTOR=$3
+    local PACKAGE=$1
+    local SELECTOR=$2
 
-    recompile "$LANGUAGE" "$PACKAGE"
-    run_tests "$LANGUAGE" "$PACKAGE" "straight" "$SELECTOR"
+    recompile "$PACKAGE"
+    run_tests "$PACKAGE" "straight" "$SELECTOR"
 }
 
 
 gen_expected () {
     local CMD=
 
-    local LANGUAGE=$1
-    local PACKAGE=$2
-    local SELECTOR=$3
+    local PACKAGE=$1
+    local SELECTOR=$2
 
     if [[ -z "$SELECTOR" ]]; then
-        CMD="(test-hdl-${PACKAGE}-gen-expected-files)"
+        CMD="(${PACKAGE}-test-gen-expected-files)"
     else
-        CMD="(test-hdl-${PACKAGE}-${SELECTOR}-gen-expected-files)"
+        CMD="(${PACKAGE}-test-${SELECTOR}-gen-expected-files)"
     fi
 
-    run_elisp_cmd "$CMD" "$LANGUAGE" "$PACKAGE" "straight"
+    run_elisp_cmd "$CMD" "$PACKAGE" "straight"
 }
 
 
