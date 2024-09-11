@@ -27,6 +27,11 @@
 
 (require 'test-hdl-vhdl-ts-mode-common)
 
+(defconst vhdl-ext-test-utils-entity-at-point-file-and-pos
+  `((,(file-name-concat vhdl-ext-test-files-common-dir "axi_if_converter.vhd") 125 196 4140 9448 9814 10009 12471 31729 33623)
+    (,(file-name-concat vhdl-ext-test-files-common-dir "hierarchy.vhd") 982 1084 7344 13224 15718 34721 36257 36878 37309 37661 38873 40751 60098 60294 61027 61137 62271 65216 79521 98573 101108 104204 123511 123629 125243 125535 126135 131406 131681)
+    (,(file-name-concat vhdl-ext-test-files-common-dir "sexp.vhd") 892 963 1046 1063 1064 1079 1151 1163 1172 1173 1271 2223 4101 4155 4190 4224)))
+
 
 (defun test-hdl-vhdl-ts-mode-utils-block-at-point-fn ()
   (treesit-node-type (vhdl-ts-block-at-point)))

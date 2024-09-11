@@ -1,9 +1,0 @@
-vhdl/files/common/global_pkg.vhd
-vhdl/files/common/global_sim.vhd
-vhdl/files/common/hierarchy.vhd
-vhdl/files/common/indent_misc.vhd
-vhdl/files/common/misc.vhd
-vhdl/files/common/sexp.vhd
-vhdl/files/common/std_logic_1164-body.vhdl
-vhdl/files/common/std_logic_1164.vhdl
-vhdl/files/common/tb_axi_if_converter.vhd

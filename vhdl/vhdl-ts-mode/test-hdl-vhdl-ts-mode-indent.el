@@ -26,6 +26,8 @@
 
 (require 'test-hdl-vhdl-ts-mode-common)
 
+(defconst test-hdl-vhdl-indent-file-list test-hdl-vhdl-common-file-list)
+
 
 (defun test-hdl-vhdl-ts-mode-indent-fn ()
   (indent-region (point-min) (point-max)))
