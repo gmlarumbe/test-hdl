@@ -3,7 +3,7 @@
 # Copyright (c) 2022-2024 Gonzalo Larumbe
 # All rights reserved.
 
-PKGS_TO_INSTALL=(global universal-ctags python3-pygments silversearcher-ag libgnat-10)
+PKGS_TO_INSTALL=(global universal-ctags python3-pygments silversearcher-ag libgnat-10 llvm-14)
 EXPECTED_INSTALLED_BINARIES=(python global gtags ctags ag)
 
 sudo apt-get update
