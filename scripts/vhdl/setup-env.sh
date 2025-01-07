@@ -36,7 +36,7 @@ rm ripgrep_13.0.0_amd64.deb  # Set a clean Git worktree
 
 # Setup GHDL (get latest release)
 GHDL_GITHUB_URL=https://github.com/ghdl/ghdl
-LATEST_RELEASE_URL=releases/download/nightly
+LATEST_RELEASE_URL=releases/latest/download
 LATEST_RELEASE_FILE=ghdl-gha-ubuntu-22.04-llvm.tgz
 echo ""
 echo "Setting up GHDL..."
