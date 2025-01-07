@@ -27,9 +27,10 @@
 
 (defun test-hdl-imenu-test-file (mode)
   "Test Imenu index for current buffer with major-mode MODE."
-  (test-hdl-no-messages
-    (funcall mode))
-  (funcall imenu-create-index-function))
+  (let ((imenu-use-markers nil)) ; INFO: At some point the snapshot CI build started adding a "(moves after insertion)" extra string with `pp'
+    (test-hdl-no-messages
+     (funcall mode))
+    (funcall imenu-create-index-function)))
 
 
 
