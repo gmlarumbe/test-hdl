@@ -3,7 +3,7 @@
 # Copyright (c) 2022-2024 Gonzalo Larumbe
 # All rights reserved.
 
-PKGS_TO_INSTALL=(global universal-ctags python3-pygments silversearcher-ag libgnat-10 llvm-14)
+PKGS_TO_INSTALL=(global universal-ctags python3-pygments silversearcher-ag libgnat-13 llvm-19)
 EXPECTED_INSTALLED_BINARIES=(python global gtags ctags ag)
 
 sudo apt-get update
@@ -36,12 +36,13 @@ rm ripgrep_13.0.0_amd64.deb  # Set a clean Git worktree
 
 # Setup GHDL (get latest release)
 GHDL_GITHUB_URL=https://github.com/ghdl/ghdl
-LATEST_RELEASE_URL=releases/latest/download
-LATEST_RELEASE_FILE=ghdl-gha-ubuntu-22.04-llvm.tgz
+LATEST_RELEASE_URL=releases/download/v5.0.1 # Cannot use 'releases/latest/download' since naming depends on current release version
+LATEST_RELEASE_FILE=ghdl-llvm-5.0.1-ubuntu24.04-x86_64.tar.gz
 echo ""
 echo "Setting up GHDL..."
 curl -L -o $LATEST_RELEASE_FILE $GHDL_GITHUB_URL/$LATEST_RELEASE_URL/$LATEST_RELEASE_FILE
-sudo tar xvzf $LATEST_RELEASE_FILE --directory /usr
+sudo tar xvzf $LATEST_RELEASE_FILE
+sudo cp -r $(basename $LATEST_RELEASE_FILE .tar.gz)/* /usr/
 rm $LATEST_RELEASE_FILE # Set a clean Git worktree
 echo ""
 echo "$(which ghdl)"
