@@ -67,8 +67,11 @@ echo ""
 echo "Setting up tree-sitter"
 git clone https://github.com/tree-sitter/tree-sitter.git
 cd tree-sitter
+git fetch --tags
+latestTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
+git checkout $latestTag
 echo ""
-echo "Building tree-sitter..."
+echo "Building tree-sitter $latestTag ..."
 make all
 echo ""
 echo "Installing tree-sitter..."
