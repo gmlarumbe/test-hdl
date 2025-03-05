@@ -63,23 +63,3 @@ npm install -g @imc-trading/svlangserver
 echo "svlangserver path: $(which svlangserver)"
 echo "svlangserver version: $(svlangserver --version)"
 
-echo ""
-echo "Setting up tree-sitter"
-git clone https://github.com/tree-sitter/tree-sitter.git
-cd tree-sitter
-git fetch --tags
-latestTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
-git checkout $latestTag
-echo ""
-echo "Building tree-sitter $latestTag ..."
-make all
-echo ""
-echo "Installing tree-sitter..."
-sudo make install
-sudo ldconfig # Update ldconfig cache to find libtree-sitter
-echo ""
-echo "tree-sitter lib path: "
-echo "$(sudo ldconfig -p | grep libtree-sitter)"
-cd ..
-rm -rf tree-sitter # Set a clean Git worktree
-

@@ -48,22 +48,3 @@ echo ""
 echo "$(which ghdl)"
 echo "ghdl version: $(ghdl --version)"
 
-
-echo ""
-echo "Setting up tree-sitter"
-git clone https://github.com/tree-sitter/tree-sitter.git
-cd tree-sitter
-echo ""
-echo "Building tree-sitter..."
-make all
-echo ""
-echo "Installing tree-sitter..."
-sudo make install
-sudo ldconfig # Update ldconfig cache to find libtree-sitter
-echo ""
-echo "tree-sitter lib path: "
-echo "$(sudo ldconfig -p | grep libtree-sitter)"
-cd ..
-rm -rf tree-sitter # Set a clean Git worktree
-
-
