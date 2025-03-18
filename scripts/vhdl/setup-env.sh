@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2022-2024 Gonzalo Larumbe
+# Copyright (c) 2022-2025 Gonzalo Larumbe
 # All rights reserved.
 
 PKGS_TO_INSTALL=(global universal-ctags python3-pygments silversearcher-ag libgnat-13 llvm-19)
