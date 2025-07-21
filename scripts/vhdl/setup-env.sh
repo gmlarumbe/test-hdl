@@ -38,12 +38,18 @@ rm ripgrep_13.0.0_amd64.deb  # Set a clean Git worktree
 GHDL_GITHUB_URL=https://github.com/ghdl/ghdl
 LATEST_RELEASE_URL=releases/download/v5.0.1 # Cannot use 'releases/latest/download' since naming depends on current release version
 LATEST_RELEASE_FILE=ghdl-llvm-5.0.1-ubuntu24.04-x86_64.tar.gz
+GHDL_DIR=$(basename $LATEST_RELEASE_FILE .tar.gz)
 echo ""
 echo "Setting up GHDL..."
 curl -L -o $LATEST_RELEASE_FILE $GHDL_GITHUB_URL/$LATEST_RELEASE_URL/$LATEST_RELEASE_FILE
-sudo tar xvzf $LATEST_RELEASE_FILE
-sudo cp -r $(basename $LATEST_RELEASE_FILE .tar.gz)/* /usr/
-rm $LATEST_RELEASE_FILE # Set a clean Git worktree
+tar xvzf $LATEST_RELEASE_FILE
+sudo cp -r ${GHDL_DIR}/* /usr/
+# Set a clean Git worktree
+rm $LATEST_RELEASE_FILE
+rm -rf ${GHDL_DIR}
+# Test version and clean env
+echo ""
+echo "$(git status)"
 echo ""
 echo "$(which ghdl)"
 echo "ghdl version: $(ghdl --version)"
