@@ -70,9 +70,8 @@ check_package_el() {
           -L "${TEST_HDL_PATH}"
           -L test/src
           -l ert
-          -l "${PACKAGE}"-test-setup-package
-          -l "${PACKAGE}"-test
           -l "${PACKAGE}"-test-setup-package-test
+          -l "${PACKAGE}"-test
           --eval "(${PACKAGE}-test-setup-package-test-basic)")
 
     emacs "${args[@]}"
