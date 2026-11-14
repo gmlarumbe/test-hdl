@@ -36,8 +36,8 @@ rm ripgrep_13.0.0_amd64.deb  # Set a clean Git worktree
 
 # Setup GHDL (get latest release)
 GHDL_GITHUB_URL=https://github.com/ghdl/ghdl
-LATEST_RELEASE_URL=releases/download/v5.0.1 # Cannot use 'releases/latest/download' since naming depends on current release version
-LATEST_RELEASE_FILE=ghdl-llvm-5.0.1-ubuntu24.04-x86_64.tar.gz
+LATEST_RELEASE_URL=releases/download/v6.0.0-rc2 # Cannot use 'releases/latest/download' since naming depends on current release version
+LATEST_RELEASE_FILE=ghdl-llvm-6.0.0-rc2-ubuntu24.04-x86_64.tar.gz
 GHDL_DIR=$(basename $LATEST_RELEASE_FILE .tar.gz)
 echo ""
 echo "Setting up GHDL..."
