@@ -12,7 +12,7 @@ else
 fi
 
 echo "Building tree-sitter VHDL grammar"
-URL="https://github.com/alemuller/tree-sitter-vhdl.git"
+URL="https://github.com/jpt13653903/tree-sitter-vhdl.git"
 echo "Cloning $URL"
 git clone $URL --depth 1 --quiet
 
@@ -20,6 +20,7 @@ git clone $URL --depth 1 --quiet
 echo "Building VHDL grammar..."
 cd tree-sitter-vhdl/src
 cc -fPIC -c -I. parser.c
+cc -fPIC -c -I. scanner.c
 cc -fPIC -shared *.o -o "libtree-sitter-vhdl.${soext}"
 
 ### Copy out
